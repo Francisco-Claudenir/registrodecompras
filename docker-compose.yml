@@ -1,80 +1,94 @@
 version: '3'
-
-#Rede
-networks:
-  uema_networks:
-    driver: bridge
-
 services:
 
-
-
+  #PHP Service
   app:
-    build:
-      args:
-        user: uema
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: uema_app
-    restart: unless-stopped
-    working_dir: /var/www/
-    volumes:
-      - ./:/var/www/
-    networks:
-      - uema_networks
-
-
-  nginx:
-    image: nginx:stable-alpine
-    restart: unless-stopped
-    container_name: uema_nginx
-    volumes:
-      - ./:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "8000:80"
-    networks:
-      - uema_networks
-
-  db:
-    image: postgres:14
-    restart: unless-stopped
-    container_name: uema_db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: base_uema
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - uema_networks
-
-  php:
     build:
       context: .
       dockerfile: Dockerfile
+    image: laravel/app
+    container_name: uema_app
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
     volumes:
-      - ./:/var/www/html
-    container_name: uema_php
-    ports:
-      - "9004:9004"
+      - ./:/var/www:delegated
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini:delegated
+      - ~/.composer/docker-cache/:/root/.composer:cached
     networks:
-      - uema_networks
+      - app-network
 
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: uema_webserver
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www:delegated
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:delegated
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+      - app
+
+  #Postgres Service
+  postgres:
+    container_name: uema_postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /data/postgrest
+    volumes:
+        - postgres:/data/postgres:delegated
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  #PgAdmin
+  pgadmin:
+    container_name: uema_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@uema.br
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+        - pgadmin:/root/.pgadmin
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+    #composer
   composer:
     image: composer:latest
     container_name: uema_composer
     volumes:
-      - ./:/var/www/html
-    working_dir: /var/www/html
+      - ./:/var/www/
+    working_dir: /var/www/
     depends_on:
-      - db
-      - php
       - app
     networks:
-      - uema_networks    
+      - app-network
 
+  #npm
+  npm:
+    image: node:13.7
+    container_name: uema_npm
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    entrypoint: ['npm']
+
+  #artisan
   artisan:
     build:
       context: .
@@ -88,3 +102,15 @@ services:
     entrypoint: ['php', '/var/www/artisan']
     networks:
       - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  postgres:
+  pgadmin:
