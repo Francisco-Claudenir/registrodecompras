@@ -87,6 +87,8 @@ services:
       - ./:/var/www/
     working_dir: /var/www/
     entrypoint: ['npm']
+    networks:
+      - app-network
 
   #artisan
   artisan:
