@@ -69,7 +69,7 @@ services:
 
     #composer
   composer:
-    image: composer:latest
+    image: composer:2.3.5
     container_name: uema_composer
     volumes:
       - ./:/var/www/
