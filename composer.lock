@@ -7641,7 +7641,11 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
+<<<<<<< HEAD
         "php": "^7.4"
+=======
+        "php": "^7.3"
+>>>>>>> 13a640ba1cf8ade64b96cf4f71f3cc688b327012
     },
     "platform-dev": [],
     "platform-overrides": {
