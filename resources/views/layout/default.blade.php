@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
-    <meta property="og:title" content="Zenix - Crypto Laravel Admin Dashboard" />
+    <meta property="og:title" content="UEMA - Universidade Estadual do Maranhão" />
     <meta property="og:description" content="{{ config('dz.name') }} | @yield('title', $page_title ?? '')" />
     <meta property="og:image" content="https://zenix.dexignzone.com/laravel/social-image.png" />
     <meta name="format-detection" content="telephone=no">
