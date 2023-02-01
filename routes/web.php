@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ZenixadminController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +18,8 @@ use App\Http\Controllers\ZenixadminController;
 // });
 
 
-    Route::get('/',             [ZenixadminController::class,'dashboard_1']);
+    Route::get('/',             [LoginController::class,'page_login']);
+
     Route::get('/index',        [ZenixadminController::class,'dashboard_1']);
     Route::get('/index-2',      [ZenixadminController::class,'dashboard_2']);
     Route::get('/coin-details', [ZenixadminController::class,'coin_details']);
