@@ -5,5 +5,20 @@
 ## Base Uema - 2023
 
 
+### Configurações Iniciais
 
+- `cp .env.example .env` **( Copia e cria o arquivo de configuracao do laravel )**
 
+### ACESSO AO BANCO LOCAL
+
+* DB_CONNECTION=pgsql
+* DB_HOST=postgres
+* DB_PORT=5432
+* DB_DATABASE=postgres
+* DB_USERNAME=postgres
+* DB_PASSWORD=postgres
+
+- `docker-compose up -d`    **( Cria o container do docker )**
+- `docker-compose run composer update` **( Atualiza a dependecia do php via composer )**
+- `docker-compose run composer install` **( Instala a dependecia do php via composer )**
+- `docker-compose run artisan key:generate` **( Gera a chave do sistema )**
