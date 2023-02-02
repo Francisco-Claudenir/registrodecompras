@@ -36,3 +36,5 @@ DB_HOST=postgres
 ---
 
 Se ocorrer tudo certo a aplicação irá rodar em [http://localhost](http://localhost)
+
+Acessar o PGAdmin [http://localhost:8080](http://localhost:8080)
