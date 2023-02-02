@@ -1,24 +1,42 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/ctic_logo.png" width="400"></a></p>
 
 ---
 
-## Base Uema - 2023
+# Base CTIC - 2023
 
 
-### Configurações Iniciais
+## Configurações Iniciais para rodar com Docker + Postgres + Nginx
+---
 
-- `cp .env.example .env` **( Copia e cria o arquivo de configuracao do laravel )**
+`cp .env.example .env` 
 
-### ACESSO AO BANCO LOCAL
+### Mudar o DB_HOST para o mesmo a seguir
 
-* DB_CONNECTION=pgsql
-* DB_HOST=postgres
-* DB_PORT=5432
-* DB_DATABASE=postgres
-* DB_USERNAME=postgres
-* DB_PASSWORD=postgres
+````
+DB_HOST=postgres
+````
+> Obs: As outras configurações do banco de dados fica a critério do desenvolvedor.
+---
+## Usar os comandos a seguir:
 
-- `docker-compose up -d`    **( Cria o container do docker )**
-- `docker-compose run composer update` **( Atualiza a dependecia do php via composer )**
-- `docker-compose run composer install` **( Instala a dependecia do php via composer )**
-- `docker-compose run artisan key:generate` **( Gera a chave do sistema )**
+- `docker-compose up -d --build` 
+
+- `docker-compose run --rm composer install`
+
+- `docker-compose run --rm artisan key:generate` 
+
+- `docker-compose run --rm artisan migrate` 
+
+- `docker-compose run --rm npm install`
+
+- `docker-compose run --rm npm run dev`
+
+- `docker exec -it uema-app chown -R www-data:www-data /var/www/storage`
+
+> Obs: Por padrão o container da aplicação será "uema-app", caso mude no docker-compose.yml mude no comando acima também. 
+
+
+
+---
+
+Se ocorrer tudo certo a aplicação irá rodar em [http://localhost](http://localhost)
