@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/ctic_logo.png" width="400"></a></p>
+<p align="center"><img src="public/images/ctic_logo.png" width="400"></a></p>
 
 ---
 
