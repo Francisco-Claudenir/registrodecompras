@@ -18,11 +18,11 @@
                         <h4 class="text-center mb-4">Entre com seu login siguema</h4>
                         <form action="{!! url('/index') !!}">
                             <div class="form-group">
-                                <label class="mb-1"><strong>Email</strong></label>
-                                <input type="email" class="form-control" value="hello@example.com">
+                                <label class="mb-1"><strong>Usuário</strong></label>
+                                <input type="text" class="form-control" placeholder="Digite aqui.">
                             </div>
                             <div class="form-group">
-                                <label class="mb-1"><strong>Password</strong></label>
+                                <label class="mb-1"><strong>Senha</strong></label>
                                 <input type="password" class="form-control" value="Password">
                             </div>
                             <div class="form-row d-flex justify-content-between mt-4 mb-2">
