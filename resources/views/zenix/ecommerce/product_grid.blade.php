@@ -60,7 +60,7 @@
                                 <img class="img-fluid" src="images/product/1.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">Bonorum et Malorum</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Bonorum et Malorum</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -82,7 +82,7 @@
                                 <img class="img-fluid" src="images/product/2.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">Striped Dress</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Striped Dress</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -104,7 +104,7 @@
                                 <img class="img-fluid" src="images/product/3.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">BBow polka-dot</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">BBow polka-dot</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -126,7 +126,7 @@
                                 <img class="img-fluid" src="images/product/4.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">Z Product 360</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Z Product 360</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -148,7 +148,7 @@
                                 <img class="img-fluid" src="images/product/5.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">Chair Grey</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Chair Grey</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -170,7 +170,7 @@
                                 <img class="img-fluid" src="images/product/6.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">fox sake withe</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">fox sake withe</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -192,7 +192,7 @@
                                 <img class="img-fluid" src="images/product/7.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">Back Bag</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Back Bag</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
@@ -214,7 +214,7 @@
                                 <img class="img-fluid" src="images/product/1.jpg" alt="">
                             </div>
                             <div class="new-arrival-content text-center mt-3">
-                                <h4><a href="{!! url('/ecom-product-detail'); !!}">FLARE DRESS</a></h4>
+                                <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">FLARE DRESS</a></h4>
                                 <ul class="star-rating">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>

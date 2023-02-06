@@ -14,7 +14,7 @@
 							<img src="images/logo-full-black.png" alt="">
 						</div>
                         <h4 class="text-center mb-4">Account Locked</h4>
-                        <form action="{!! url('/index'); !!}">
+                        <form action="{!! url('/tema/index'); !!}">
                             <div class="form-group">
                                 <label><strong>Password</strong></label>
                                 <input type="password" class="form-control" value="Password">

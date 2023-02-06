@@ -14,7 +14,7 @@
 							<img src="images/logo-full-black.png" alt="">
 						</div>
                         <h4 class="text-center mb-4">Sign up your account</h4>
-                        <form action="{!! url('/index'); !!}">
+                        <form action="{!! url('/tema/index'); !!}">
                             <div class="form-group">
                                 <label class="mb-1"><strong>Username</strong></label>
                                 <input type="text" class="form-control" placeholder="username">
@@ -32,7 +32,7 @@
                             </div>
                         </form>
                         <div class="new-account mt-3">
-                            <p>Already have an account? <a class="text-primary" href="{!! url('/page-login'); !!}">Sign in</a></p>
+                            <p>Already have an account? <a class="text-primary" href="{!! url('/tema/page-login'); !!}">Sign in</a></p>
                         </div>
                     </div>
                 </div>

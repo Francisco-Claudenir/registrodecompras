@@ -14,7 +14,7 @@
 							<img src="images/logo-full.png" alt="">
 						</div>
                         <h4 class="text-center mb-4">Forgot Password</h4>
-                        <form action="{!! url('/index'); !!}">
+                        <form action="{!! url('/tema/index'); !!}">
                             <div class="form-group">
                                 <label><strong>Email</strong></label>
                                 <input type="email" class="form-control" value="hello@example.com">

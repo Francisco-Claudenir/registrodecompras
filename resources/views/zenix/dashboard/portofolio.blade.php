@@ -655,7 +655,7 @@
 								</div>
 							</div>
 							<div class="card-footer border-0 p-0 caret mt-1">
-								<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</div>
 						</div>	
 					</div>

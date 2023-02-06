@@ -87,7 +87,7 @@
 								<p class="fs-14">Dash is an open source cryptocurrency. It is an altcoin that was forked from the Bitcoin protocol. It is also a decentralized autonomous organization (DAO) run by a subset of its users, which are called "masternodes". The currency permits transactions that can be untraceable.</p>
 							</div>
 							<div class="card-footer border-0 p-0 caret">
-								<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -298,7 +298,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -376,7 +376,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -420,7 +420,7 @@
 								<p class="fs-14">Dash is an open source cryptocurrency. It is an altcoin that was forked from the Bitcoin protocol. It is also a decentralized autonomous organization (DAO) run by a subset of its users, which are called "masternodes". The currency permits transactions that can be untraceable.</p>
 							</div>
 							<div class="card-footer border-0 p-0 caret">
-								<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -632,7 +632,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -710,7 +710,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -754,7 +754,7 @@
 								<p class="fs-14">Dash is an open source cryptocurrency. It is an altcoin that was forked from the Bitcoin protocol. It is also a decentralized autonomous organization (DAO) run by a subset of its users, which are called "masternodes". The currency permits transactions that can be untraceable.</p>
 							</div>
 							<div class="card-footer border-0 p-0 caret">
-								<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -967,7 +967,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -1045,7 +1045,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -1089,7 +1089,7 @@
 								<p class="fs-14">Dash is an open source cryptocurrency. It is an altcoin that was forked from the Bitcoin protocol. It is also a decentralized autonomous organization (DAO) run by a subset of its users, which are called "masternodes". The currency permits transactions that can be untraceable.</p>
 							</div>
 							<div class="card-footer border-0 p-0 caret">
-								<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -1294,7 +1294,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -1372,7 +1372,7 @@
 										</div>
 									</div>
 									<div class="card-footer border-0 p-0 caret">
-										<a href="{!! url('/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<a href="{!! url('/tema/coin-details'); !!}" class="btn-link"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>

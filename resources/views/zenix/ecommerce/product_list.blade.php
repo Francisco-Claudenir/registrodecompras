@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
                                     <div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
 									<div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -135,7 +135,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
                                     <div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -170,7 +170,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
                                     <div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -205,7 +205,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
                                     <div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -240,7 +240,7 @@
                             </div>
                             <div class="col-md-7 col-xxl-12">
                                 <div class="new-arrival-content position-relative">
-                                    <h4><a href="{!! url('/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
+                                    <h4><a href="{!! url('/tema/ecom-product-detail'); !!}">Solid Women's V-neck Dark T-Shirt</a></h4>
                                     <div class="comment-review star-rating">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
