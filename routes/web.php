@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ZenixadminController;
+use App\Http\Controllers\DashController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,8 @@ use App\Http\Controllers\ZenixadminController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/', [DashController::class, 'index']);
 
 Route::prefix('tema')->group(function () {
     Route::get('/',             [ZenixadminController::class,'page_login']);

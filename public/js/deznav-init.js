@@ -24,12 +24,13 @@ function getUrlParams(dParam)
 	var direction =  getUrlParams('dir');
 	
 	dezSettingsOptions = {
-		typography: "poppins",
+			typography: "poppins",
 			version: "light",
 			layout: "vertical",
-			headerBg: "color_1",
-			navheaderBg: "color_1",
-			sidebarBg: "color_1",
+			primary: "color_2",
+			headerBg: "color_14",
+			navheaderBg: "color_14",
+			sidebarBg: "color_13",
 			sidebarStyle: "full",
 			sidebarPosition: "fixed",
 			headerPosition: "fixed",
