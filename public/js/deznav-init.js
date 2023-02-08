@@ -34,6 +34,7 @@ function getUrlParams(dParam)
 			sidebarPosition: "fixed",
 			headerPosition: "fixed",
 			containerLayout: "full",
+			primary: "color_1",
 			direction: direction
 		};
 
