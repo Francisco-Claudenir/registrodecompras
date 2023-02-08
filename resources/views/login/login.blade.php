@@ -12,7 +12,7 @@
                     <div class="auth-form">
                         <div class="text-center mb-3">
                             <a href="https://www.uema.br/" target="_blank">
-                                <img src="images/uema/logo_uema.png" class="img-fluid" alt="">
+                                <img src="images/uema/svg/logo_uema.svg" class="img-fluid" alt="">
                             </a>
                         </div>
                         <h4 class="text-center mb-4">Entre com seu login siguema</h4>
