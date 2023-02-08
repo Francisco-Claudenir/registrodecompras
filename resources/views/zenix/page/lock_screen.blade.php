@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.fullwidth')
+@extends('zenix.layout.fullwidth')
 
 
 
