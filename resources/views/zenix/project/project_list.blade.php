@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -62,7 +62,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Redesign Kripton Mobile App</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Redesign Kripton Mobile App</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -122,7 +122,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -182,7 +182,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -242,7 +242,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Reduce Website Page Size Omah</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Reduce Website Page Size Omah</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -302,7 +302,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -362,7 +362,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -441,7 +441,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -501,7 +501,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -563,7 +563,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -623,7 +623,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Manage SEO for Eclan Company P..</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -683,7 +683,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Reduce Website Page Size Omah</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Reduce Website Page Size Omah</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -743,7 +743,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
@@ -805,7 +805,7 @@
 					<div class="project-info">
 						<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
 							<p class="text-primary mb-1">#P-000441425</p>
-							<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
+							<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Build Branding Persona for Etza.id</a></h5>
 							<div class="text-dark"><i class="far fa-calendar me-3" aria-hidden="true"></i>Created on Sep 8th, 2020</div>
 						</div>
 						<div class="col-xl-2 my-2 col-lg-4 col-sm-6">

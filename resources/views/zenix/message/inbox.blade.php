@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -29,10 +29,10 @@
 							<div class="col-lg-3">
 								<div class="email-left-box">
 									<div class="p-0">
-										<a href="{!! url('/email-compose'); !!}" class="btn btn-primary btn-block">Compose</a>
+										<a href="{!! url('/tema/email-compose'); !!}" class="btn btn-primary btn-block">Compose</a>
 									</div>
 									<div class="mail-list rounded mt-4">
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item active"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item active"><i
 												class="fa fa-inbox font-18 align-middle me-2"></i> Inbox <span
 												class="badge badge-primary badge-sm float-end">198</span> </a>
 										<a href="javascript:void()" class="list-group-item"><i
@@ -49,16 +49,16 @@
 											<h5>Categories</h5>
 											<i class="icon-arrow-down" aria-hidden="true"></i>
 										</div>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-warning"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-warning"><i
 													class="fa fa-circle" aria-hidden="true"></i></span>
 											Work </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-primary"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-primary"><i
 													class="fa fa-circle" aria-hidden="true"></i></span>
 											Private </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-success"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-success"><i
 													class="fa fa-circle" aria-hidden="true"></i></span>
 											Support </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-dpink"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-dpink"><i
 													class="fa fa-circle" aria-hidden="true"></i></span>
 											Social </a>
 									</div>
@@ -101,7 +101,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -121,7 +121,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -141,7 +141,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -161,7 +161,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -181,7 +181,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -201,7 +201,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -221,7 +221,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -241,7 +241,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -261,7 +261,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -281,7 +281,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -301,7 +301,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -321,7 +321,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -341,7 +341,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -361,7 +361,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -381,7 +381,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -401,7 +401,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -421,7 +421,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -441,7 +441,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -461,7 +461,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>
@@ -481,7 +481,7 @@
 																class="fa fa-star" aria-hidden="true"></i></button>
 													</div>
 												</div>
-												<a href="{!! url('/email-read'); !!}" class="col-mail col-mail-2">
+												<a href="{!! url('/tema/email-read'); !!}" class="col-mail col-mail-2">
 													<div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
 													<div class="date">11:49 am</div>
 												</a>

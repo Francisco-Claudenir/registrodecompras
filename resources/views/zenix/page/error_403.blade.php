@@ -1,6 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.fullwidth')
-
+@extends('zenix.layout.fullwidth')
 
 
 {{-- Content --}}
@@ -11,7 +10,7 @@
             <h4><i class="fa fa-times-circle text-danger"></i> Forbidden Error!</h4>
             <p>You do not have permission to view this resource.</p>
 			<div>
-                <a class="btn btn-primary" href="{!! url('/index'); !!}">Back to Home</a>
+                <a class="btn btn-primary" href="{!! url('/tema/index'); !!}">Back to Home</a>
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
-
+@extends('zenix.layout.default')
 
 
 {{-- Content --}}

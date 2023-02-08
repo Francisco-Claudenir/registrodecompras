@@ -18,9 +18,8 @@ use App\Http\Controllers\ZenixadminController;
 //     return view('welcome');
 // });
 
-
-    Route::get('/',             [LoginController::class,'page_login']);
-
+Route::prefix('tema')->group(function () {
+    Route::get('/',             [ZenixadminController::class,'page_login']);
     Route::get('/index',        [ZenixadminController::class,'dashboard_1']);
     Route::get('/index-2',      [ZenixadminController::class,'dashboard_2']);
     Route::get('/coin-details', [ZenixadminController::class,'coin_details']);
@@ -93,3 +92,6 @@ use App\Http\Controllers\ZenixadminController;
     Route::get('/page-lock-screen', [ZenixadminController::class,'page_lock_screen']);
     Route::get('/page-login',   [ZenixadminController::class,'page_login']);
     Route::get('/page-register',[ZenixadminController::class,'page_register']);
+    
+});
+    

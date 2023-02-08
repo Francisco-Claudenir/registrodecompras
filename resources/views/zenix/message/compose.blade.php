@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -29,10 +29,10 @@
 							<div class="col-lg-3">
 								<div class="email-left-box">
 									<div class="p-0">
-										<a href="{!! url('/email-compose'); !!}" class="btn btn-primary btn-block">Compose</a>
+										<a href="{!! url('/tema/email-compose'); !!}" class="btn btn-primary btn-block">Compose</a>
 									</div>
 									<div class="mail-list rounded mt-4">
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item active"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item active"><i
 												class="fa fa-inbox font-18 align-middle me-2"></i> Inbox <span
 												class="badge badge-primary badge-sm float-end">198</span> </a>
 										<a href="javascript:void()" class="list-group-item"><i
@@ -49,16 +49,16 @@
 											<h5>Categories</h5>
 											<i class="fa fa-chevron-down"></i>
 										</div>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-warning"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-warning"><i
 													class="fa fa-circle"></i></span>
 											Work </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-primary"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-primary"><i
 													class="fa fa-circle"></i></span>
 											Private </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-success"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-success"><i
 													class="fa fa-circle"></i></span>
 											Support </a>
-										<a href="{!! url('/email-inbox'); !!}" class="list-group-item"><span class="icon-dpink"><i
+										<a href="{!! url('/tema/email-inbox'); !!}" class="list-group-item"><span class="icon-dpink"><i
 													class="fa fa-circle"></i></span>
 											Social </a>
 									</div>

@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.fullwidth')
+@extends('zenix.layout.fullwidth')
 
 
 
@@ -11,7 +11,7 @@
             <h4><i class="fa fa-thumbs-down text-danger"></i> Bad Request</h4>
             <p>Your Request resulted in an error</p>
 			<div>
-                <a class="btn btn-primary" href="{!! url('/index'); !!}">Back to Home</a>
+                <a class="btn btn-primary" href="{!! url('/tema/index'); !!}">Back to Home</a>
             </div>
         </div>
     </div>

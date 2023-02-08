@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -106,7 +106,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Alan Green">Alan Green</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Alan Green">Alan Green</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">UI Designer</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -144,7 +144,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Angela Moss">Angela Moss</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Angela Moss">Angela Moss</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Redblue Studios">Redblue Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -180,7 +180,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Brian Samuel">Brian Samuel</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Brian Samuel">Brian Samuel</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Team Management">Team Management</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -216,7 +216,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Benny Chagur">Benny Chagur</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Benny Chagur">Benny Chagur</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Highspeed Inc.">Highspeed Inc.</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -252,7 +252,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Chyntia Lawra">Chyntia Lawra</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Chyntia Lawra">Chyntia Lawra</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -288,7 +288,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Cloe Simatupang">Cloe Simatupang</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Cloe Simatupang">Cloe Simatupang</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -324,7 +324,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Engeline O’conner">Engeline O’conner</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Engeline O’conner">Engeline O’conner</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">Beep Beep Inc.</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -360,7 +360,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Franklin Jr.">Franklin Jr.</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Franklin Jr.">Franklin Jr.</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -396,7 +396,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Geovanny">Geovanny</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Geovanny">Geovanny</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">UI Designer</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -432,7 +432,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Henry Charlotte">Henry Charlotte</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Henry Charlotte">Henry Charlotte</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">UI Designer</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -468,7 +468,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Ivankov Shee">Ivankov Shee</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Ivankov Shee">Ivankov Shee</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">UI Designer</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -504,7 +504,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Nindy Leeacovic">Nindy Leeacovic</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Nindy Leeacovic">Nindy Leeacovic</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">UI Designer</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -551,7 +551,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Brian Samuel">Brian Samuel</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Brian Samuel">Brian Samuel</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Team Management">Team Management</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -587,7 +587,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Benny Chagur">Benny Chagur</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Benny Chagur">Benny Chagur</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Highspeed Inc.">Highspeed Inc.</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -623,7 +623,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Chyntia Lawra">Chyntia Lawra</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Chyntia Lawra">Chyntia Lawra</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -659,7 +659,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Cloe Simatupang">Cloe Simatupang</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Cloe Simatupang">Cloe Simatupang</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -695,7 +695,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Engeline O’conner">Engeline O’conner</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Engeline O’conner">Engeline O’conner</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="UI Designer">Beep Beep Inc.</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
@@ -731,7 +731,7 @@
 									<span class="active"></span>
 								</div>
 								<div class="media-body user-meta-info">
-									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/app-profile'); !!}" class="text-black user-name" data-name="Franklin Jr.">Franklin Jr.</a></h6>
+									<h6 class="fs-20 font-w500 my-1"><a href="{!! url('/tema/app-profile'); !!}" class="text-black user-name" data-name="Franklin Jr.">Franklin Jr.</a></h6>
 									<p class="fs-14 mb-3 user-work" data-occupation="Zero Two Studios">Zero Two Studios</p>
 									<ul>
 										<li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i></a></li>

@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.fullwidth')
+@extends('zenix.layout.fullwidth')
 
 
 
@@ -14,7 +14,7 @@
     						<img src="images/logo-full-black.png" alt="">
     					</div>
                         <h4 class="text-center mb-4">Sign in your account</h4>
-                        <form action="{!! url('/index'); !!}">
+                        <form action="{!! url('/tema/index'); !!}">
                             <div class="form-group">
                                 <label class="mb-1"><strong>Email</strong></label>
                                 <input type="email" class="form-control" value="hello@example.com">
@@ -31,7 +31,7 @@
     								</div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="{!! url('/page-forgot-password'); !!}">Forgot Password?</a>
+                                    <a href="{!! url('/tema/page-forgot-password'); !!}">Forgot Password?</a>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -39,7 +39,7 @@
                             </div>
                         </form>
                         <div class="new-account mt-3">
-                            <p>Don't have an account? <a class="text-primary" href="{!! url('/page-register'); !!}">Sign up</a></p>
+                            <p>Don't have an account? <a class="text-primary" href="{!! url('/tema/page-register'); !!}">Sign up</a></p>
                         </div>
                     </div>
                 </div>

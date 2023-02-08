@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -130,7 +130,7 @@
 								<div class="profile-blog">
 									<h5 class="text-primary d-inline">Today Highlights</h5>
 									<img src="{{ asset('images/profile/1.jpg') }}" alt="" class="img-fluid mt-4 mb-4 w-100">
-									<h4><a href="{!! url('/post-details'); !!}" class="text-black">Darwin Creative Agency Theme</a></h4>
+									<h4><a href="{!! url('/tema/post-details'); !!}" class="text-black">Darwin Creative Agency Theme</a></h4>
 									<p class="mb-0">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 								</div>
 							</div>
@@ -173,21 +173,21 @@
 									<div class="media pt-3 pb-3">
 										<img src="{{ asset('images/profile/5.jpg') }}" alt="image" class="me-3 rounded" width="75">
 										<div class="media-body">
-											<h5 class="m-b-5"><a href="{!! url('/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
+											<h5 class="m-b-5"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
 											<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
 										</div>
 									</div>
 									<div class="media pt-3 pb-3">
 										<img src="{{ asset('images/profile/6.jpg') }}" alt="image" class="me-3 rounded" width="75">
 										<div class="media-body">
-											<h5 class="m-b-5"><a href="{!! url('/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
+											<h5 class="m-b-5"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
 											<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
 										</div>
 									</div>
 									<div class="media pt-3 pb-3">
 										<img src="{{ asset('images/profile/7.jpg') }}" alt="image" class="me-3 rounded" width="75">
 										<div class="media-body">
-											<h5 class="m-b-5"><a href="{!! url('/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
+											<h5 class="m-b-5"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Collection of textile samples</a></h5>
 											<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
 										</div>
 									</div>

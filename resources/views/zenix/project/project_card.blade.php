@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.default')
+@extends('zenix.layout.default')
 
 
 
@@ -16,7 +16,7 @@
 							</div>
 							<div class="me-auto">
 								<p class="text-primary mb-1">#P-000441425</p>
-								<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
+								<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
 								<span>We Create Your Dream</span>
 							</div>
 							<span class="badge badge-success d-sm-inline-block d-none">Compeleted</span>
@@ -97,7 +97,7 @@
 							</div>
 							<div class="me-auto">
 								<p class="text-primary mb-1">#P-000441425</p>
-								<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
+								<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
 								<span>We Create Your Dream</span>
 							</div>
 							<span class="badge badge-info d-sm-inline-block d-none">Compeleted</span>
@@ -178,7 +178,7 @@
 							</div>
 							<div class="me-auto">
 								<p class="text-primary mb-1">#P-000441425</p>
-								<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
+								<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
 								<span>We Create Your Dream</span>
 							</div>
 							<span class="badge badge-danger d-sm-inline-block d-none">Compeleted</span>
@@ -259,7 +259,7 @@
 							</div>
 							<div class="me-auto">
 								<p class="text-primary mb-1">#P-000441425</p>
-								<h5 class="title font-w600 mb-2"><a href="{!! url('/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
+								<h5 class="title font-w600 mb-2"><a href="{!! url('/tema/post-details'); !!}" class="text-black">Redesign Zenix Mobile App</a></h5>
 								<span>We Create Your Dream</span>
 							</div>
 							<span class="badge badge-secondary d-sm-inline-block d-none">Compeleted</span>
