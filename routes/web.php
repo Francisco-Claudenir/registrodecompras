@@ -22,7 +22,7 @@ use App\Http\Controllers\DashController;
 Route::get('/', [DashController::class, 'index']);
 
 Route::prefix('tema')->group(function () {
-    Route::get('/',             [ZenixadminController::class,'page_login']);
+    Route::get('/',             [ZenixadminController::class,'page_login'])->name('teste');
     Route::get('/index',        [ZenixadminController::class,'dashboard_1']);
     Route::get('/index-2',      [ZenixadminController::class,'dashboard_2']);
     Route::get('/coin-details', [ZenixadminController::class,'coin_details']);
