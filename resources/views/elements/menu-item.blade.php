@@ -12,7 +12,7 @@
             @isset($menu['submenu'])
                 <ul aria-expanded="false">
                     @foreach ($menu['submenu'] as $submenu)
-                        <li><a href="{{ route($submenu['route']) }}">{{ $submenu['title'] }}</a></li>
+                        <li><a href="{{ route($submenu['route']) }}"><i class="{{ $submenu['icon'] }}"></i>{{ $submenu['title'] }}</a></li>
                     @endforeach
                 </ul>
             @endisset
