@@ -22,22 +22,20 @@ function getUrlParams(dParam)
 	"use strict"
 	
 	var direction =  getUrlParams('dir');
-	
 	dezSettingsOptions = {
-		typography: "poppins",
-			version: "light",
-			layout: "vertical",
-			headerBg: "color_1",
-			navheaderBg: "color_1",
-			sidebarBg: "color_1",
-			sidebarStyle: "full",
-			sidebarPosition: "fixed",
-			headerPosition: "fixed",
-			containerLayout: "full",
-			primary: "color_1",
+			typography: typography.trim(),
+			version: version.trim(),
+			layout: layout.trim(),
+			primary: primary.trim(),
+			headerBg: headerBg.trim(),
+			navheaderBg: navheaderBg.trim(),
+			sidebarBg: sidebarBg.trim(),
+			sidebarStyle: sidebarStyle.trim(),
+			sidebarPosition: sidebarPosition.trim(),
+			headerPosition: headerPosition.trim(),
+			containerLayout: containerLayout.trim(),
 			direction: direction
 		};
-
 	
 	if(direction == 'rtl')
 	{

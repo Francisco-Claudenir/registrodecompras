@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class DashController extends Controller
 {
-    public function dash()
+    public function index()
     {
-       
+        return view('dash.index');
     }
-
 }
