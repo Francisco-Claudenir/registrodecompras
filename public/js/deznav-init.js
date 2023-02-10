@@ -23,17 +23,17 @@ function getUrlParams(dParam)
 	
 	var direction =  getUrlParams('dir');
 	dezSettingsOptions = {
-			typography: typography.trim(),
-			version: version.trim(),
-			layout: layout.trim(),
-			primary: primary.trim(),
-			headerBg: headerBg.trim(),
-			navheaderBg: navheaderBg.trim(),
-			sidebarBg: sidebarBg.trim(),
-			sidebarStyle: sidebarStyle.trim(),
-			sidebarPosition: sidebarPosition.trim(),
-			headerPosition: headerPosition.trim(),
-			containerLayout: containerLayout.trim(),
+			typography: typography,
+			version: version,
+			layout: layout,
+			primary: primary,
+			headerBg: headerBg,
+			navheaderBg: navheaderBg,
+			sidebarBg: sidebarBg,
+			sidebarStyle: sidebarStyle,
+			sidebarPosition: sidebarPosition,
+			headerPosition: headerPosition,
+			containerLayout: containerLayout,
 			direction: direction
 		};
 	
