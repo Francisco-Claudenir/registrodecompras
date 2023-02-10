@@ -13,10 +13,10 @@
     <meta property="og:description" content="UEMA - Universidade Estadual do Maranhão" />
     <meta property="og:image" content="https://zenix.dexignzone.com/xhtml/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-    <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
+    <title>{{ config('temauema.PageTitle') }} | @yield('title', $page_title ?? '')</title>
     <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/svg" sizes="16x16" href="{{ asset('images/uema/svg/icon_uema.svg') }}">
+    <link rel="icon" type="image/svg" sizes="16x16" href="{{ config('temauema.DashboardIcon') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     

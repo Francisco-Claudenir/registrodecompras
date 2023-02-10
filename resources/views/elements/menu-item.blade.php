@@ -2,7 +2,6 @@
     {{-- <li class="nav-label first">Main Menu</li> --}}
 
     @foreach (config('temauema.menu') as $menu)
-        {{-- {{ Log::info($menu) }} --}}
         @isset($menu['header'])
             <li class="nav-label @if($loop->first) first @endif">{{ $menu['header'] }}</li>
         @endisset

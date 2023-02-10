@@ -62,5 +62,15 @@ return [
 		'sidebarPosition' => 'fixed',           //More Options => ["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
 		'headerPosition' => 'fixed',            //More Options => ["static" , "fixed"]
 		'containerLayout' => 'full',            //More Options => ["full" , "wide" , "wide-box"]
-    ]
+    ],
+
+    'DashboardTitle' => 'Dashboard',
+    'DashboardIcon' => asset('images/uema/svg/icon_uema.svg'),
+    'DashboardIconWidth' => '40',
+    'DashboardIconHeight' => '40',
+
+    'PageTitle' => 'UEMA',
+    'PageIcon' => asset('images/uema/svg/icon_uema.svg'),
+
+    'HomePage' => 'home'
 ];
