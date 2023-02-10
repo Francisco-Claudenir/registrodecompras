@@ -13,10 +13,12 @@
 		</div>
 		<ul class="metismenu" id="menu">
 			<li class="nav-label first">Main Menu</li>
+			<li><a href="{!! url('/tema/doc'); !!}">Documentação</a></li>
             <li>
             	<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 					<i class="flaticon-144-layout"></i>
 					<span class="nav-text">Dashboard</span>
+					
 				</a>
                 <ul aria-expanded="false">
 					<li><a href="{!! url('/tema/index'); !!}">Dashboard Light</a></li>
