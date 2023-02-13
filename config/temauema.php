@@ -58,8 +58,8 @@ return [
 		'headerBg' => 'color_14',               //More Options => ["color_1," , "color_2," ..... "color_15"]
 		'navheaderBg' => 'color_14',            //More Options => ["color_1," , "color_2," ..... "color_15"]
 		'sidebarBg' => 'color_13',              //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'sidebarStyle' => 'full',               //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'sidebarPosition' => 'fixed',           //More Options => ["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
+		'sidebarStyle' => 'full',               //More Options => ["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
+		'sidebarPosition' => 'fixed',           //More Options => ["static" , "fixed"]
 		'headerPosition' => 'fixed',            //More Options => ["static" , "fixed"]
 		'containerLayout' => 'full',            //More Options => ["full" , "wide" , "wide-box"]
     ],

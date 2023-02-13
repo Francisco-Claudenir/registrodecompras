@@ -266,10 +266,10 @@
 						</div>
 						<div class="card-body p-3 pb-0 sell-order">
 							<select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-								<option data-thumbnail="images/svg/lit3.svg">Litecoin</option>
-								<option data-thumbnail="images/svg/btc.svg">Ripple</option>
-								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="/images/svg/lit3.svg">Litecoin</option>
+								<option data-thumbnail="/images/svg/btc.svg">Ripple</option>
+								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
 							</select>
 							<div class="table-responsive">
 								<table class="table text-center bg-info-hover tr-rounded order-tbl">
@@ -350,10 +350,10 @@
 						</div>
 						<div class="card-body p-3 pb-0">
 							<select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-								<option data-thumbnail="images/svg/monero.svg">Monero</option>
-								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
-								<option data-thumbnail="images/svg/ltc.svg">Litecoin</option>
+								<option data-thumbnail="/images/svg/monero.svg">Monero</option>
+								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="/images/svg/ltc.svg">Litecoin</option>
 							</select>
 							<div class="table-responsive">
 								<table class="table text-center bg-warning-hover tr-rounded order-tbl">
@@ -422,9 +422,9 @@
 								<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
 							</div>
 							<select class="form-control custom-image-select image-select mt-3 mt-sm-0">
-								<option data-thumbnail="images/svg/ltc.svg">Yearly (2021)</option>
-								<option data-thumbnail="images/svg/eth.svg">Weekly (2021)</option>
-								<option data-thumbnail="images/svg/btc.svg">Daily (2021)</option>
+								<option data-thumbnail="/images/svg/ltc.svg">Yearly (2021)</option>
+								<option data-thumbnail="/images/svg/eth.svg">Weekly (2021)</option>
+								<option data-thumbnail="/images/svg/btc.svg">Daily (2021)</option>
 							</select>
 						</div>
 						<div class="card-body">
@@ -1129,10 +1129,10 @@
 								<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
 							</div>
 							<select class="form-control custom-image-select image-select mt-3 mt-sm-0">
-								<option data-thumbnail="images/svg/btc.svg">Ripple</option>
-								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
-								<option data-thumbnail="images/svg/ltc.svg">Litecoin</option>
+								<option data-thumbnail="/images/svg/btc.svg">Ripple</option>
+								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="/images/svg/ltc.svg">Litecoin</option>
 							</select>
 						</div>
 						<div class="card-body">
