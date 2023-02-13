@@ -11,51 +11,50 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('page_description', $page_description ?? '')" />
     <meta property="og:title" content="UEMA - Universidade Estadual do Maranhão" />
-    <meta property="og:description" content="{{ config('dz.name') }} | @yield('title', $page_title ?? '')" />
+    @php
+        $title = config('lubbuck.prefix_name') . ' ' . config('lubbuck.name') . ' ' . config('lubbuck.sufix_name');
+    @endphp
+    <meta property="og:description" content="{{ $title }}" />
     <meta property="og:image" content="https://zenix.dexignzone.com/laravel/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-    <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
-    <link rel="icon" type="image/ico" sizes="16x16" href="{{ asset('images/favicon.ico') }}">
+    <title>{{ $title }}</title>
+    <link rel="icon" type="image/ico" sizes="16x16"
+        href="{{ asset(config('lubbuck.importations.base.favicon')) }}">
 
     @php
-        $action = isset($action) ? 'ZenixadminController_' . $action : 'dashboard_1';
+        $importations = isset($importations) ? $importations : [];
     @endphp
-    @if (!empty(config('dz.public.pagelevel.css.' . $action)))
-        @foreach (config('dz.public.pagelevel.css.' . $action) as $style)
-            <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
-        @endforeach
-    @endif
 
-    {{-- Global Theme Styles (used by all pages) --}}
-    @if (!empty(config('dz.public.global.css')))
-        @foreach (config('dz.public.global.css') as $style)
+    @foreach ($importations as $importation)
+        @foreach (config('lubbuck.importations.plugins.' . $importation . '.css') as $style)
             <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
         @endforeach
-    @endif
+    @endforeach
+
+    {{-- css para todas as blades --}}
+    @foreach (config('lubbuck.importations.base.css') as $style)
+        <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
+    @endforeach
 </head>
 
 <body>
     @yield('body')
 
-    @if (!empty(config('dz.public.global.js.top')))
-        @foreach (config('dz.public.global.js.top') as $script)
+    {{-- js para todas as blades --}}
+    @foreach (config('lubbuck.importations.base.js.top') as $script)
+        <script src="{{ asset($script) }}" type="text/javascript"></script>
+    @endforeach
+
+    @foreach ($importations as $importation)
+        @foreach (config('lubbuck.importations.plugins.' . $importation . '.js') as $script)
             <script src="{{ asset($script) }}" type="text/javascript"></script>
         @endforeach
-    @endif
-    @php
-        // $action = $controller.'_'.$action;
-        $action = isset($action) ? $action : '';
-    @endphp
-    @if (!empty(config('dz.public.pagelevel.js.' . $action)))
-        @foreach (config('dz.public.pagelevel.js.' . $action) as $script)
-            <script src="{{ asset($script) }}" type="text/javascript"></script>
-        @endforeach
-    @endif
-    @if (!empty(config('dz.public.global.js.bottom')))
-        @foreach (config('dz.public.global.js.bottom') as $script)
-            <script src="{{ asset($script) }}" type="text/javascript"></script>
-        @endforeach
-    @endif
+    @endforeach
+
+    {{-- js para todas as blades --}}
+    @foreach (config('lubbuck.importations.base.js.bottom') as $script)
+        <script src="{{ asset($script) }}" type="text/javascript"></script>
+    @endforeach
     @yield('scripts')
 </body>
 
