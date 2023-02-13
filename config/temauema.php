@@ -42,7 +42,7 @@ return [
             'submenu' => [
                 [
                     'title' => 'Sub Item 1',
-                    'icon' => 'flaticon-381-key',
+                    'icon' => 'flaticon-381-knob',
                     'route' => 'teste'
 
                 ]

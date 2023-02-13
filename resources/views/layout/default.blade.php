@@ -18,6 +18,7 @@
     <!-- Favicon icon -->
     {{-- <link rel="icon" type="image/ico" sizes="16x16" href="{{ asset('images/favicon.ico') }}"> --}}
     <link rel="icon" type="image/svg" sizes="16x16" href="{{ config('temauema.PageIcon') }}">
+    <link rel="stylesheet" href="{{ asset('css/Ultis.css') }}">
 
     @php
         $action = isset($action) ? 'ZenixadminController_' . $action : 'dashboard_1';

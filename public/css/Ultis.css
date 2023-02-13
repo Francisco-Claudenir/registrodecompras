@@ -1,0 +1,3 @@
+.deznav .metismenu ul a:before{
+    content: none !important;
+}

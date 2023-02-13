@@ -1,5 +1,4 @@
 <ul class="metismenu" id="menu">
-    {{-- <li class="nav-label first">Main Menu</li> --}}
 
     @foreach (config('temauema.menu') as $menu)
         @isset($menu['header'])
@@ -7,15 +6,13 @@
         @endisset
         @isset($menu['title'])
             <li>
-                <a href="{{ route($menu['route']) }}" class="@isset($menu['submenu']) has-arrow @endisset ai-icon"
-                    aria-expanded="false">
-                    <i class="{{ $menu['icon'] }}"></i>
+                <a href="{{ route($menu['route']) }}" class="@isset($menu['submenu']) has-arrow @endisset ai-icon" aria-expanded="false"><i class="{{ $menu['icon'] }}"></i>
                     <span class="nav-text">{{ $menu['title'] }}</span>
                 </a>
                 @isset($menu['submenu'])
                     <ul aria-expanded="false">
                         @foreach ($menu['submenu'] as $submenu)
-                            <li><a href="{{ route($submenu['route']) }}">{{ $submenu['title'] }}</a></li>
+                            <li><a href="{{ route($submenu['route']) }}"><i class="{{ $submenu['icon'] }}"></i>{{ $submenu['title'] }}</a></li>
                         @endforeach
                     </ul>
                 @endisset
