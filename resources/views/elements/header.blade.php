@@ -6,16 +6,18 @@
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
-					<div class="input-group search-area right d-lg-inline-flex d-none">
-						<input type="text" class="form-control" placeholder="Find something here...">
-						<div class="input-group-append">
-							<span class="input-group-text">
-								<a href="javascript:void(0)">
-									<i class="flaticon-381-search-2"></i>
-								</a>
-							</span>
-						</div>
-					</div>
+                    @if (config('temauema.StyleLayout.topnavSearchbar') == true)
+                        <div class="input-group search-area right d-lg-inline-flex d-none">
+                            <input type="text" class="form-control" placeholder="Find something here...">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <a href="javascript:void(0)">
+                                        <i class="flaticon-381-search-2"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <ul class="navbar-nav header-right main-notification">
 					<li class="nav-item dropdown notification_dropdown">

@@ -77,11 +77,13 @@
                 </svg>
             </a>
 
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
+            @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == false)
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
         <!--**********************************
             Nav header end
@@ -101,12 +103,8 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == true)
-        {
-
-        } @else {
+        @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == false)
             @include('elements.sidebar')
-        }
         @endif
         <!--**********************************
             Sidebar end
@@ -118,17 +116,15 @@
             Content body start
         ***********************************-->
         @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == true)
-        {
-            <div class="container">
+            <div class="container pt-5 mt-5">
                 <!-- row -->
                 @yield('content')
             </div> 
-        } @else {
+        @else 
             <div class="content-body">
                 <!-- row -->
                 @yield('content')
             </div> 
-        }
         @endif
         <!--**********************************
             Content body end
