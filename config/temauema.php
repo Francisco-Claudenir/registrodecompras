@@ -62,6 +62,7 @@ return [
 		'sidebarPosition' => 'fixed',           //More Options => ["static" , "fixed"]
 		'headerPosition' => 'fixed',            //More Options => ["static" , "fixed"]
 		'containerLayout' => 'full',            //More Options => ["full" , "wide" , "wide-box"]
+        'AdminSidebarUserWithoutSidebar' => true       //More Options => [true, false] NÃO USAR SE LAYOUT FOR HORIZONTAL
     ],
 
     'DashboardTitle' => 'Dashboard',

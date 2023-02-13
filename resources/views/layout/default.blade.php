@@ -101,7 +101,13 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('elements.sidebar')
+        @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == true)
+        {
+
+        } @else {
+            @include('elements.sidebar')
+        }
+        @endif
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -111,10 +117,19 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <!-- row -->
-            @yield('content')
-        </div>
+        @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == true)
+        {
+            <div class="container">
+                <!-- row -->
+                @yield('content')
+            </div> 
+        } @else {
+            <div class="content-body">
+                <!-- row -->
+                @yield('content')
+            </div> 
+        }
+        @endif
         <!--**********************************
             Content body end
         ***********************************-->
