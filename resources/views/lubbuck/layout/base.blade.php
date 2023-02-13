@@ -22,11 +22,11 @@
         href="{{ asset(config('lubbuck.importations.base.favicon')) }}">
 
     @php
-        $importations = isset($importations) ? $importations : [];
+        $plugins = isset($plugins) ? $plugins : [];
     @endphp
 
-    @foreach ($importations as $importation)
-        @foreach (config('lubbuck.importations.plugins.' . $importation . '.css') as $style)
+    @foreach ($plugins as $plugin)
+        @foreach (config('lubbuck.importations.plugins.' . $plugin . '.css') as $style)
             <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
         @endforeach
     @endforeach
@@ -45,8 +45,8 @@
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
 
-    @foreach ($importations as $importation)
-        @foreach (config('lubbuck.importations.plugins.' . $importation . '.js') as $script)
+    @foreach ($plugins as $plugin)
+        @foreach (config('lubbuck.importations.plugins.' . $plugin . '.js') as $script)
             <script src="{{ asset($script) }}" type="text/javascript"></script>
         @endforeach
     @endforeach

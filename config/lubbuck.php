@@ -49,7 +49,54 @@ return [
 					'vendor/sweetalert2/dist/sweetalert2.min.js',
 					'js/plugins-init/sweetalert.init.js',
 				]
-			]
+			],
+			'select2' => [
+				'css' => [
+					'vendor/select2/css/select2.min.css'
+				],
+				'js' => [
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
+				],
+			],
+			'nouislider' => [
+				'css' => [
+					'vendor/nouislider/nouislider.min.css'
+				],
+				'js' => [
+					'vendor/nouislider/nouislider.min.js',
+					'vendor/wnumb/wNumb.js',
+					'js/plugins-init/nouislider-init.js',
+				],
+			],
+			'map_jqvmap' => [
+				'css' => [
+					'vendor/jqvmap/css/jqvmap.min.css'
+				],
+				'js' => [
+					'vendor/jqvmap/js/jquery.vmap.min.js',
+					'vendor/jqvmap/js/jquery.vmap.world.js',
+					'vendor/jqvmap/js/jquery.vmap.usa.js',
+					'js/plugins-init/jqvmap-init.js',
+				],
+			],
+			'lightgallery' => [
+				'css' => [
+					'vendor/lightgallery/css/lightgallery.min.css'
+				],
+				'js' => [
+					'vendor/lightgallery/js/lightgallery-all.min.js',
+				],
+			],
+			'nestable' => [
+				'css' => [
+					'vendor/nestable2/css/jquery.nestable.min.css'
+				],
+				'js' => [
+					'vendor/nestable2/js/jquery.nestable.min.js',
+					'js/plugins-init/nestable-init.js',
+				],
+			],
 		]
 	],
 
