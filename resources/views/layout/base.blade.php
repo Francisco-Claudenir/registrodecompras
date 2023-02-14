@@ -12,27 +12,27 @@
     <meta name="description" content="@yield('page_description', $page_description ?? '')" />
     <meta property="og:title" content="UEMA - Universidade Estadual do Maranhão" />
     @php
-        $title = config('lubbuck.prefix_name') . ' ' . config('lubbuck.name') . ' ' . config('lubbuck.sufix_name');
+        $title = config('temauema.prefix_name') . ' ' . config('temauema.name') . ' ' . config('temauema.sufix_name');
     @endphp
     <meta property="og:description" content="{{ $title }}" />
     <meta property="og:image" content="https://zenix.dexignzone.com/laravel/social-image.png" />
     <meta name="format-detection" content="telephone=no">
     <title>{{ $title }}</title>
     <link rel="icon" type="image/ico" sizes="16x16"
-        href="{{ asset(config('lubbuck.importations.base.favicon')) }}">
+        href="{{ asset(config('importations.base.favicon')) }}">
 
     @php
         $plugins = isset($plugins) ? $plugins : [];
     @endphp
 
     @foreach ($plugins as $plugin)
-        @foreach (config('lubbuck.importations.plugins.' . $plugin . '.css') as $style)
+        @foreach (config('temauema.importations.plugins.' . $plugin . '.css') as $style)
             <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
         @endforeach
     @endforeach
 
     {{-- css para todas as blades --}}
-    @foreach (config('lubbuck.importations.base.css') as $style)
+    @foreach (config('temauema.importations.base.css') as $style)
         <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
     @endforeach
 </head>
@@ -41,18 +41,18 @@
     @yield('body')
 
     {{-- js para todas as blades --}}
-    @foreach (config('lubbuck.importations.base.js.top') as $script)
+    @foreach (config('temauema.importations.base.js.top') as $script)
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
 
     @foreach ($plugins as $plugin)
-        @foreach (config('lubbuck.importations.plugins.' . $plugin . '.js') as $script)
+        @foreach (config('temauema.importations.plugins.' . $plugin . '.js') as $script)
             <script src="{{ asset($script) }}" type="text/javascript"></script>
         @endforeach
     @endforeach
 
     {{-- js para todas as blades --}}
-    @foreach (config('lubbuck.importations.base.js.bottom') as $script)
+    @foreach (config('temauema.importations.base.js.bottom') as $script)
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
     @yield('scripts')
