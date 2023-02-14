@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ZenixadminController;
 use App\Http\Controllers\DashController;
 /*
@@ -18,6 +19,7 @@ use App\Http\Controllers\DashController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/home', [HomeController::class,'index'])->name('home');
 
 Route::get('/', [DashController::class, 'index']);
 
@@ -95,6 +97,5 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-lock-screen', [ZenixadminController::class,'page_lock_screen']);
     Route::get('/page-login',   [ZenixadminController::class,'page_login']);
     Route::get('/page-register',[ZenixadminController::class,'page_register']);
-    Route::get('/teste', [DashController::class, 'index'])->name('home');
-});
     
+});
