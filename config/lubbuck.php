@@ -2,7 +2,7 @@
 
 return [
 
-	'prefix_name' => 'teste',
+	'prefix_name' => 'BASE',
 	'name' => 'UEMA',
 	'sufix_name' => '',
 
@@ -32,6 +32,45 @@ return [
 			]
 		],
 		'plugins' => [
+			//Dashboard
+			'carousel' => [
+				'css' => [
+					'vendor/chartist/css/chartist.min.css',
+					'vendor/owl-carousel/owl.carousel.css',
+				],
+				'js' => [
+					'vendor/chart.js/Chart.bundle.min.js',
+					'vendor/peity/jquery.peity.min.js',
+					'vendor/apexchart/apexchart.js',
+					'vendor/owl-carousel/owl.carousel.js',
+					'js/dashboard/dashboard-1.js',
+				],
+			],
+			'portofolio' => [
+				'css' => [
+					'vendor/chartist/css/chartist.min.css',
+				],
+				'js' => [
+					'vendor/chart.js/Chart.bundle.min.js',
+					'vendor/apexchart/apexchart.js',
+					'js/dashboard/portofolio.js',
+				]
+			],
+			'market' => [
+				'css' => [
+					'vendor/chartist/css/chartist.min.css',
+					'vendor/datatables/css/jquery.dataTables.min.css',
+				],
+				'js' => [
+					'vendor/chart.js/Chart.bundle.min.js',
+					'vendor/peity/jquery.peity.min.js',
+					'vendor/apexchart/apexchart.js',
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
+					'js/dashboard/market-capital.js',
+				],
+			],
+			//Plugins
 			'toast' => [
 				'css' => [
 					'vendor/toastr/css/toastr.min.css'
@@ -97,30 +136,83 @@ return [
 					'js/plugins-init/nestable-init.js',
 				],
 			],
+
+			//Forms
+			'wizard' => [
+				'css' => [
+					'vendor/jquery-smartwizard/dist/css/smart_wizard.min.css'
+				],
+				'js' => [
+					'vendor/jquery-steps/build/jquery.steps.min.js',
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
+					'vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js',
+				],
+			],
+			'summernote' => [
+				'css' => [
+					'vendor/summernote/summernote.css'
+				],
+				'js' => [
+					'vendor/ckeditor/ckeditor.js',
+				],
+			],
+			'pickers' => [
+				'css' => [
+					'vendor/bootstrap-daterangepicker/daterangepicker.css',
+					'vendor/clockpicker/css/bootstrap-clockpicker.min.css',
+					'vendor/jquery-asColorPicker/css/asColorPicker.min.css',
+					'vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
+					'vendor/pickadate/themes/default.css',
+					'vendor/pickadate/themes/default.date.css',
+					'https://fonts.googleapis.com/icon?family=Material+Icons',
+				],
+				'js' => [
+					'vendor/moment/moment.min.js',
+					'vendor/bootstrap-daterangepicker/daterangepicker.js',
+					'vendor/clockpicker/js/bootstrap-clockpicker.min.js',
+					'vendor/jquery-asColor/jquery-asColor.min.js',
+					'vendor/jquery-asGradient/jquery-asGradient.min.js',
+					'vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js',
+					'vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js',
+					'vendor/pickadate/picker.js',
+					'vendor/pickadate/picker.time.js',
+					'vendor/pickadate/picker.date.js',
+					'js/plugins-init/bs-daterange-picker-init.js',
+					'js/plugins-init/clock-picker-init.js',
+					'js/plugins-init/jquery-asColorPicker.init.js',
+					'js/plugins-init/material-date-picker-init.js',
+					'js/plugins-init/pickadate-init.js',
+				],
+			],
+			'validation_jquery' => [
+				'css' => [
+					''
+				],
+				'js' => [
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
+				],
+			],
+			//Table
+			'datatable' => [
+				'css' => [
+					'vendor/datatables/css/jquery.dataTables.min.css'
+				],
+				'js' => [
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
+				],
+			],
 		]
 	],
 
 	'public' => [
 		'pagelevel' => [
 			'css' => [
-				'ZenixadminController_dashboard_1' => [
-					'vendor/chartist/css/chartist.min.css',
-					'vendor/owl-carousel/owl.carousel.css',
-				],
-				'ZenixadminController_dashboard_2' => [
-					'vendor/chartist/css/chartist.min.css',
-					'vendor/owl-carousel/owl.carousel.css',
-				],
 				'ZenixadminController_coin_details' => [
 					'vendor/chartist/css/chartist.min.css',
 					'vendor/bootstrap-daterangepicker/daterangepicker.css',
-				],
-				'ZenixadminController_portofolio' => [
-					'vendor/chartist/css/chartist.min.css',
-				],
-				'ZenixadminController_market_capital' => [
-					'vendor/chartist/css/chartist.min.css',
-					'vendor/datatables/css/jquery.dataTables.min.css',
 				],
 				'ZenixadminController_tranasactions' => [
 					'vendor/datatables/css/jquery.dataTables.min.css',
@@ -161,44 +253,12 @@ return [
 				'ZenixadminController_email_compose' => [
 					'vendor/dropzone/dist/dropzone.css',
 				],
-				'ZenixadminController_form_editor_summernote' => [
-					'vendor/summernote/summernote.css',
-				],
-				'ZenixadminController_form_pickers' => [
-					'vendor/bootstrap-daterangepicker/daterangepicker.css',
-					'vendor/clockpicker/css/bootstrap-clockpicker.min.css',
-					'vendor/jquery-asColorPicker/css/asColorPicker.min.css',
-					'vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
-					'vendor/pickadate/themes/default.css',
-					'vendor/pickadate/themes/default.date.css',
-					'https://fonts.googleapis.com/icon?family=Material+Icons',
-				],
-				'ZenixadminController_form_wizard' => [
-					'vendor/jquery-smartwizard/dist/css/smart_wizard.min.css',
-				],
-				'ZenixadminController_table_datatable_basic' => [
-					'vendor/datatables/css/jquery.dataTables.min.css',
-				],
+
 				'ZenixadminController_widget_basic' => [
 					'vendor/chartist/css/chartist.min.css',
 				],
 			],
 			'js' => [
-				'ZenixadminController_dashboard_1' => [
-					'vendor/chart.js/Chart.bundle.min.js',
-					'vendor/peity/jquery.peity.min.js',
-					'vendor/apexchart/apexchart.js',
-					'vendor/owl-carousel/owl.carousel.js',
-					'js/dashboard/dashboard-1.js',
-				],
-				'ZenixadminController_dashboard_2' => [
-					'vendor/chart.js/Chart.bundle.min.js',
-					'vendor/peity/jquery.peity.min.js',
-					'vendor/apexchart/apexchart.js',
-					'vendor/webticker/jquery.webticker.min.js',
-					'js/dashboard/dashboard-2.js',
-					'vendor/owl-carousel/owl.carousel.js',
-				],
 				'ZenixadminController_coin_details' => [
 					'vendor/chart.js/Chart.bundle.min.js',
 					'vendor/apexchart/apexchart.js',
@@ -217,19 +277,6 @@ return [
 				'ZenixadminController_tranasactions' => [
 					'vendor/datatables/js/jquery.dataTables.min.js',
 					'js/plugins-init/datatables.init.js',
-				],
-				'ZenixadminController_portofolio' => [
-					'vendor/chart.js/Chart.bundle.min.js',
-					'vendor/apexchart/apexchart.js',
-					'js/dashboard/portofolio.js',
-				],
-				'ZenixadminController_market_capital' => [
-					'vendor/chart.js/Chart.bundle.min.js',
-					'vendor/peity/jquery.peity.min.js',
-					'vendor/apexchart/apexchart.js',
-					'vendor/datatables/js/jquery.dataTables.min.js',
-					'js/plugins-init/datatables.init.js',
-					'js/dashboard/market-capital.js',
 				],
 				'ZenixadminController_app_calender' => [
 					'vendor/moment/moment.min.js',
@@ -285,36 +332,6 @@ return [
 				'ZenixadminController_email_compose' => [
 					'vendor/dropzone/dist/dropzone.js',
 				],
-				'ZenixadminController_form_editor_summernote' => [
-					'vendor/ckeditor/ckeditor.js',
-				],
-				'ZenixadminController_form_pickers' => [
-					'vendor/moment/moment.min.js',
-					'vendor/bootstrap-daterangepicker/daterangepicker.js',
-					'vendor/clockpicker/js/bootstrap-clockpicker.min.js',
-					'vendor/jquery-asColor/jquery-asColor.min.js',
-					'vendor/jquery-asGradient/jquery-asGradient.min.js',
-					'vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js',
-					'vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js',
-					'vendor/pickadate/picker.js',
-					'vendor/pickadate/picker.time.js',
-					'vendor/pickadate/picker.date.js',
-					'js/plugins-init/bs-daterange-picker-init.js',
-					'js/plugins-init/clock-picker-init.js',
-					'js/plugins-init/jquery-asColorPicker.init.js',
-					'js/plugins-init/material-date-picker-init.js',
-					'js/plugins-init/pickadate-init.js',
-				],
-				'ZenixadminController_form_validation_jquery' => [
-					'vendor/jquery-validation/jquery.validate.min.js',
-					'js/plugins-init/jquery.validate-init.js',
-				],
-				'ZenixadminController_form_wizard' => [
-					'vendor/jquery-steps/build/jquery.steps.min.js',
-					'vendor/jquery-validation/jquery.validate.min.js',
-					'js/plugins-init/jquery.validate-init.js',
-					'vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js',
-				],
 				'ZenixadminController_page_chat' => [
 					'vendor/chart.js/Chart.bundle.min.js',
 					'vendor/peity/jquery.peity.min.js',
@@ -324,10 +341,6 @@ return [
 				],
 				'ZenixadminController_page_lock_screen' => [
 					'vendor/deznav/deznav.min.js',
-				],
-				'ZenixadminController_table_datatable_basic' => [
-					'vendor/datatables/js/jquery.dataTables.min.js',
-					'js/plugins-init/datatables.init.js',
 				],
 				'ZenixadminController_widget_basic' => [
 					'vendor/chart.js/Chart.bundle.min.js',
