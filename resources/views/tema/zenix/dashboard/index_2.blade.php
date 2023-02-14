@@ -1,11 +1,27 @@
 {{-- Extends layout --}}
-@extends('tema.layout.default')
+@extends('tema.zenix.layout.default')
 
 
 
 {{-- Content --}}
 @section('content')
 
+<!-- 
+<div class="form-head" style="background-image:url('images/background/bg3.jpg');background-position: bottom; ">
+	<div class="container max d-flex align-items-center mt-0">
+		<h2 class="font-w600 title text-white mb-2 me-auto ">Dashboard</h2>
+		<div class="weather-btn mb-2">
+			<span class="me-3 font-w600 text-black"><i class="fa fa-cloud me-2"></i>21</span>
+			<select class="form-control style-1 default-select  me-3 ">
+				<option>Medan, IDN</option>
+				<option>Jakarta, IDN</option>
+				<option>Surabaya, IDN</option>
+			</select>
+		</div>
+		<a href="javascript:void(0);" class="btn white-transparent mb-2"><i class="las la-calendar scale5 me-3"></i>Filter Periode</a>
+	</div>
+</div> 
+-->
 <div class="container-fluid">
 	<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
 		<h2 class="font-w600 title mb-2 me-auto ">Dashboard</h2>
@@ -264,12 +280,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-body p-3 pb-0 sell-order">
+						<div class="card-body p-3 pb-0">
 							<select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-								<option data-thumbnail="/images/svg/lit3.svg">Litecoin</option>
-								<option data-thumbnail="/images/svg/btc.svg">Ripple</option>
-								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="images/svg/lit3.svg">Litecoin</option>
+								<option data-thumbnail="images/svg/btc.svg">Ripple</option>
+								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
 							</select>
 							<div class="table-responsive">
 								<table class="table text-center bg-info-hover tr-rounded order-tbl">
@@ -277,49 +293,49 @@
 										<tr>
 											<th class="text-left">Price</th>
 											<th class="text-center">Amount</th>
-											<th class="text-right">Total</th>
+											<th class="text-end">Total</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td class="text-left">82.3</td>
 											<td>0.15</td>
-											<td class="text-right">$134,12</td>
+											<td class="text-end">$134,12</td>
 										</tr>
 										<tr>
 											<td class="text-left">83.9</td>
 											<td>0.18</td>
-											<td class="text-right">$237,31</td>
+											<td class="text-end">$237,31</td>
 										</tr>
 										<tr>
 											<td class="text-left">84.2</td>
 											<td>0.25</td>
-											<td class="text-right">$252,58</td>
+											<td class="text-end">$252,58</td>
 										</tr>
 										<tr>
 											<td class="text-left">86.2</td>
 											<td>0.35</td>
-											<td class="text-right">$126,26</td>
+											<td class="text-end">$126,26</td>
 										</tr>
 										<tr>
 											<td class="text-left">91.6</td>
 											<td>0.75</td>
-											<td class="text-right">$46,92</td>
+											<td class="text-end">$46,92</td>
 										</tr>
 										<tr>
 											<td class="text-left">92.6</td>
 											<td>0.21</td>
-											<td class="text-right">$123,27</td>
+											<td class="text-end">$123,27</td>
 										</tr>
 										<tr>
 											<td class="text-left">93.9</td>
 											<td>0.55</td>
-											<td class="text-right">$212,56</td>
+											<td class="text-end">$212,56</td>
 										</tr>
 										<tr>
 											<td class="text-left">94.2</td>
 											<td>0.18</td>
-											<td class="text-right">$129,26</td>
+											<td class="text-end">$129,26</td>
 										</tr>
 									</tbody>
 								</table>
@@ -350,10 +366,10 @@
 						</div>
 						<div class="card-body p-3 pb-0">
 							<select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-								<option data-thumbnail="/images/svg/monero.svg">Monero</option>
-								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
-								<option data-thumbnail="/images/svg/ltc.svg">Litecoin</option>
+								<option data-thumbnail="images/svg/monero.svg">Monero</option>
+								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="images/svg/ltc.svg">Litecoin</option>
 							</select>
 							<div class="table-responsive">
 								<table class="table text-center bg-warning-hover tr-rounded order-tbl">
@@ -361,49 +377,49 @@
 										<tr>
 											<th class="text-left">Price</th>
 											<th class="text-center">Amount</th>
-											<th class="text-right">Total</th>
+											<th class="text-end">Total</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td class="text-left">82.3</td>
 											<td>0.15</td>
-											<td class="text-right">$134,12</td>
+											<td class="text-end">$134,12</td>
 										</tr>
 										<tr>
 											<td class="text-left">83.9</td>
 											<td>0.18</td>
-											<td class="text-right">$237,31</td>
+											<td class="text-end">$237,31</td>
 										</tr>
 										<tr>
 											<td class="text-left">84.2</td>
 											<td>0.25</td>
-											<td class="text-right">$252,58</td>
+											<td class="text-end">$252,58</td>
 										</tr>
 										<tr>
 											<td class="text-left">86.2</td>
 											<td>0.35</td>
-											<td class="text-right">$126,26</td>
+											<td class="text-end">$126,26</td>
 										</tr>
 										<tr>
 											<td class="text-left">91.6</td>
 											<td>0.75</td>
-											<td class="text-right">$46,92</td>
+											<td class="text-end">$46,92</td>
 										</tr>
 										<tr>
 											<td class="text-left">92.6</td>
 											<td>0.21</td>
-											<td class="text-right">$123,27</td>
+											<td class="text-end">$123,27</td>
 										</tr>
 										<tr>
 											<td class="text-left">93.9</td>
 											<td>0.55</td>
-											<td class="text-right">$212,56</td>
+											<td class="text-end">$212,56</td>
 										</tr>
 										<tr>
 											<td class="text-left">94.2</td>
 											<td>0.18</td>
-											<td class="text-right">$129,26</td>
+											<td class="text-end">$129,26</td>
 										</tr>
 									</tbody>
 								</table>
@@ -422,9 +438,9 @@
 								<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
 							</div>
 							<select class="form-control custom-image-select image-select mt-3 mt-sm-0">
-								<option data-thumbnail="/images/svg/ltc.svg">Yearly (2021)</option>
-								<option data-thumbnail="/images/svg/eth.svg">Weekly (2021)</option>
-								<option data-thumbnail="/images/svg/btc.svg">Daily (2021)</option>
+								<option data-thumbnail="images/svg/ltc.svg">Yearly (2021)</option>
+								<option data-thumbnail="images/svg/eth.svg">Weekly (2021)</option>
+								<option data-thumbnail="images/svg/btc.svg">Daily (2021)</option>
 							</select>
 						</div>
 						<div class="card-body">
@@ -496,7 +512,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card-bx stacked card">
-						<img src="{{ asset('images/card/card1.jpg') }}" alt="">
+						<img src="images/card/card1.jpg" alt="">
 						<div class="card-info">
 							<p class="mb-1 text-white fs-14">Main Balance</p>
 							<div class="d-flex justify-content-between">
@@ -522,7 +538,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="card-bx stacked card">
-						<img src="{{ asset('images/card/card2.jpg') }}" alt="">
+						<img src="images/card/card2.jpg" alt="">
 						<div class="card-info">
 							<p class="fs-14 mb-1 text-white">Main Balance</p>
 							<div class="d-flex justify-content-between">
@@ -547,7 +563,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="card-bx stacked card">
-						<img src="{{ asset('images/card/card3.jpg') }}" alt="">
+						<img src="images/card/card3.jpg" alt="">
 						<div class="card-info">
 							<p class="mb-1 text-white fs-14">Main Balance</p>
 							<div class="d-flex justify-content-between">
@@ -572,7 +588,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="card-bx stacked card">
-						<img src="{{ asset('images/card/card4.jpg') }}" alt="">
+						<img src="images/card/card4.jpg" alt="">
 						<div class="card-info">
 							<p class="mb-1 text-white fs-14">Main Balance</p>
 							<div class="d-flex justify-content-between">
@@ -650,7 +666,7 @@
 												<td>
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
-												<td><a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a></td>
+												<td><a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -676,7 +692,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-dark float-end" href="javascript:void(0);">Pending</a>
+													<a class="btn btn-outline-light float-right" href="javascript:void(0);">Pending</a>
 												</td>
 											</tr>
 											<tr>
@@ -702,7 +718,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 											<tr>
@@ -727,7 +743,7 @@
 													<span class="font-w600 text-black">+$7,762</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -754,7 +770,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -780,7 +796,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 										</tbody>
@@ -814,7 +830,7 @@
 												<td>
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
-												<td><a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a></td>
+												<td><a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -840,7 +856,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-dark float-end" href="javascript:void(0);">Pending</a>
+													<a class="btn btn-outline-light float-right" href="javascript:void(0);">Pending</a>
 												</td>
 											</tr>
 											<tr>
@@ -866,7 +882,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 											<tr>
@@ -891,7 +907,7 @@
 													<span class="font-w600 text-black">+$7,762</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -918,7 +934,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -944,7 +960,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 										</tbody>
@@ -978,7 +994,7 @@
 												<td>
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
-												<td><a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a></td>
+												<td><a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -1004,7 +1020,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-dark float-end" href="javascript:void(0);">Pending</a>
+													<a class="btn btn-outline-light float-right" href="javascript:void(0);">Pending</a>
 												</td>
 											</tr>
 											<tr>
@@ -1030,7 +1046,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 											<tr>
@@ -1055,7 +1071,7 @@
 													<span class="font-w600 text-black">+$7,762</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -1082,7 +1098,7 @@
 													<span class="font-w600 text-black">+$5,553</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-success float-end" href="javascript:void(0);">Completed</a>
+													<a class="btn btn-outline-success float-right" href="javascript:void(0);">Completed</a>
 												</td>
 											</tr>
 											<tr>
@@ -1108,7 +1124,7 @@
 													<span class="font-w600 text-black">-$912</span>
 												</td>
 												<td>
-													<a class="btn btn-outline-danger float-end" href="javascript:void(0);">Canceled</a>
+													<a class="btn btn-outline-danger float-right" href="javascript:void(0);">Canceled</a>
 												</td>
 											</tr>
 										</tbody>
@@ -1129,10 +1145,10 @@
 								<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
 							</div>
 							<select class="form-control custom-image-select image-select mt-3 mt-sm-0">
-								<option data-thumbnail="/images/svg/btc.svg">Ripple</option>
-								<option data-thumbnail="/images/svg/eth.svg">Ethereum</option>
-								<option data-thumbnail="/images/svg/btc.svg">Bitcoin</option>
-								<option data-thumbnail="/images/svg/ltc.svg">Litecoin</option>
+								<option data-thumbnail="images/svg/eth.svg">Ethereum</option>
+								<option data-thumbnail="images/svg/btc.svg">Ripple</option>
+								<option data-thumbnail="images/svg/btc.svg">Bitcoin</option>
+								<option data-thumbnail="images/svg/ltc.svg">Litecoin</option>
 							</select>
 						</div>
 						<div class="card-body">
@@ -1153,35 +1169,35 @@
 							<div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
 								<div class="items">
 									<div class="text-center">
-										<img class="mb-3 rounded" src="{{ asset('images/contacts/Untitled-1.jpg') }}" alt="">
+										<img class="mb-3 rounded" src="images/contacts/Untitled-1.jpg" alt="">
 										<h5 class="mb-0"><a class="text-black" href="javascript:void(0);">Samuel</a></h5>
 										<span class="fs-12">@sam224</span>
 									</div>
 								</div>
 								<div class="items">
 									<div class="text-center">
-										<img class="mb-3 rounded" src="{{ asset('images/contacts/Untitled-2.jpg') }}" alt="">
+										<img class="mb-3 rounded" src="images/contacts/Untitled-2.jpg" alt="">
 										<h5 class="mb-0"><a class="text-black" href="javascript:void(0);">Cindy</a></h5>
 										<span class="fs-12">@cindyss</span>
 									</div>
 								</div>
 								<div class="items">
 									<div class="text-center">
-										<img class="mb-3 rounded" src="{{ asset('images/contacts/Untitled-3.jpg') }}" alt="">
+										<img class="mb-3 rounded" src="images/contacts/Untitled-3.jpg" alt="">
 										<h5 class="mb-0"><a class="text-black" href="javascript:void(0);">David</a></h5>
 										<span class="fs-12">@davidxc</span>
 									</div>
 								</div>
 								<div class="items">
 									<div class="text-center">
-										<img class="mb-3 rounded" src="{{ asset('images/contacts/Untitled-4.jpg') }}" alt="">
+										<img class="mb-3 rounded" src="images/contacts/Untitled-4.jpg" alt="">
 										<h5 class="mb-0"><a class="text-black" href="javascript:void(0);">Martha</a></h5>
 										<span class="fs-12">@marthaa</span>
 									</div>
 								</div>
 								<div class="items">
 									<div class="text-center">
-										<img class="mb-3 rounded" src="{{ asset('images/contacts/Untitled-5.jpg') }}" alt="">
+										<img class="mb-3 rounded" src="images/contacts/Untitled-5.jpg" alt="">
 										<h5 class="mb-0"><a class="text-black" href="javascript:void(0);">Olivia</a></h5>
 										<span class="fs-12">@oliv62</span>
 									</div>
@@ -1202,4 +1218,18 @@
 		</div>
 	</div>
 </div>
+
+@endsection	
+
+{{-- Scripts --}}
+@section('scripts')
+	<script>
+		jQuery(document).ready(function(){
+			dezSettingsOptions.version = 'dark';
+			setTimeout(function() {
+				dezSettingsOptions.version = 'dark';
+				new dezSettings(dezSettingsOptions);
+			}, 1500)
+		});
+	</script>
 @endsection	

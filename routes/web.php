@@ -96,6 +96,7 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-forgot-password', [ZenixadminController::class,'page_forgot_password']);
     Route::get('/page-lock-screen', [ZenixadminController::class,'page_lock_screen']);
     Route::get('/page-login',   [ZenixadminController::class,'page_login']);
+    
     Route::get('/page-register',[ZenixadminController::class,'page_register']);
     
 });
