@@ -1,5 +1,6 @@
 @extends('layout.page', ['plugins' => ['market']])
+@section('title',' - Cadastro de alunno')
 
-@section('conteudo')
+@section('content')
 
 @endsection

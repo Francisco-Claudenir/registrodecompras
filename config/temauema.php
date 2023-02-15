@@ -2,9 +2,19 @@
 
 return [
 
-    'prefix_name' => 'BASE',
-	'name' => 'UEMA',
-	'sufix_name' => '',
+
+    'systemNamePrefix' => 'UEMA',
+	'systemName' => 'Dashboard',
+	'systemNameSufix' => '',
+
+    'brandIcon' =>'images/uema/svg/icon_uema.svg',
+    'brandIconWidth' => '40',
+    'brandIconHeight' => '40',
+
+    'favIcon' => 'images/uema/svg/icon_uema.svg',
+
+    'homePage' => 'home',
+
 
     'menu' => [
 
@@ -70,26 +80,8 @@ return [
         'topnavSearchbar' => false              //more Options => [true, false]
     ],
 
-    'DashboardTitle' => 'Dashboard',
-    'DashboardIcon' => asset('images/uema/svg/icon_uema.svg'),
-    'DashboardIconWidth' => '40',
-    'DashboardIconHeight' => '40',
-
-    'PageTitle' => 'UEMA',
-    'PageIcon' => asset('images/uema/svg/icon_uema.svg'),
-
-    'HomePage' => 'home',
-
     'importations' => [
 		'base' => [
-			'favicon' => 'images/favicon.ico',
-			'fonts' => [
-				'google' => [
-					'families' => [
-						'Poppins:300,400,500,600,700',
-					]
-				]
-			],
 			'css' => [
 				'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				'css/style.css',

@@ -1,3 +1,3 @@
 <div class="content-body">
-    @yield('conteudo')
+    @yield('content')
 </div>

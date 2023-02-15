@@ -1,1 +1,3 @@
-@include('layout.partials.loader.dots')
+<div id="preloader">
+    @include('layout.partials.loader.dots')
+</div>

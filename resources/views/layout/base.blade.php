@@ -9,17 +9,14 @@
     <meta name="author" content="" />
     <meta name="robots" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('page_description', $page_description ?? '')" />
-    <meta property="og:title" content="UEMA - Universidade Estadual do Maranhão" />
-    @php
-        $title = config('temauema.prefix_name') . ' ' . config('temauema.name') . ' ' . config('temauema.sufix_name');
-    @endphp
-    <meta property="og:description" content="{{ $title }}" />
-    <meta property="og:image" content="https://zenix.dexignzone.com/laravel/social-image.png" />
+    <meta name="description" content="@yield('page_description')" />
+    <meta property="og:title" content="{{ config('temauema.systemNamePrefix'). ' - ' . config('temauema.systemName')  }}" />
+    <meta property="og:description" content="{{ config('temauema.systemNamePrefix') }}  @yield('title')" />
+    <meta property="og:image" content="{{ asset(config('temauema.')) }}" />
     <meta name="format-detection" content="telephone=no">
-    <title>{{ $title }}</title>
-    <link rel="icon" type="image/ico" sizes="16x16"
-        href="{{ asset(config('importations.base.favicon')) }}">
+    <title>{{ config('temauema.systemName')  }} @yield('title')</title>
+    <link rel="icon" type="image/svg" sizes="16x16" href="{{ asset(config('temauema.favIcon')) }}">
+    <link rel="stylesheet" href="{{ asset('css/Ultis.css') }}">
 
     @php
         $plugins = isset($plugins) ? $plugins : [];
