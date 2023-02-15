@@ -10,11 +10,12 @@
     <meta name="robots" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('page_description')" />
-    <meta property="og:title" content="{{ config('temauema.systemNamePrefix'). ' - ' . config('temauema.systemName')  }}" />
+    <meta property="og:title"
+        content="{{ config('temauema.systemNamePrefix') . ' - ' . config('temauema.systemName') }}" />
     <meta property="og:description" content="{{ config('temauema.systemNamePrefix') }}  @yield('title')" />
     <meta property="og:image" content="{{ asset(config('temauema.')) }}" />
     <meta name="format-detection" content="telephone=no">
-    <title>{{ config('temauema.systemName')  }} @yield('title')</title>
+    <title>{{ config('temauema.systemName') }} @yield('title')</title>
     <link rel="icon" type="image/svg" sizes="16x16" href="{{ asset(config('temauema.favIcon')) }}">
     <link rel="stylesheet" href="{{ asset('css/Ultis.css') }}">
 
@@ -49,9 +50,26 @@
     @endforeach
 
     {{-- js para todas as blades --}}
+    <script>
+        const typography = "{{ config('temauema.StyleLayout.typography') }}"
+        const version = "{{ config('temauema.StyleLayout.version') }}"
+        const layout = "{{ config('temauema.StyleLayout.layout') }}"
+        const primary = "{{ config('temauema.StyleLayout.primary') }}"
+        const headerBg = "{{ config('temauema.StyleLayout.headerBg') }}"
+        const navheaderBg = "{{ config('temauema.StyleLayout.navheaderBg') }}"
+        const sidebarBg = "{{ config('temauema.StyleLayout.sidebarBg') }}"
+        const sidebarStyle = "{{ config('temauema.StyleLayout.sidebarStyle') }}"
+        const sidebarPosition = "{{ config('temauema.StyleLayout.sidebarPosition') }}"
+        const headerPosition = "{{ config('temauema.StyleLayout.headerPosition') }}"
+        const containerLayout = "{{ config('temauema.StyleLayout.containerLayout') }}"
+    </script>
     @foreach (config('temauema.importations.base.js.bottom') as $script)
+        
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
+    
+
+
     @yield('scripts')
 </body>
 

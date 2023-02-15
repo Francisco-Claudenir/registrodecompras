@@ -22,7 +22,7 @@ return [
         [
             'title' => 'Home',
             'icon' => 'flaticon-381-user',
-            'route' => 'teste'
+            'route' => 'home'
         ],
         [
             'title' => 'Perfil',
@@ -76,8 +76,9 @@ return [
 		'sidebarPosition' => 'fixed',           //More Options => ["static" , "fixed"]
 		'headerPosition' => 'fixed',            //More Options => ["static" , "fixed"]
 		'containerLayout' => 'full',            //More Options => ["full" , "wide" , "wide-box"]
-        'AdminSidebarUserWithoutSidebar' => false,       //More Options => [true, false]
-        'topnavSearchbar' => false              //more Options => [true, false]
+        'hasSideBar' => false,       			//More Options => [true, false]
+        'topnavSearchbar' => false,
+		'hasSubHeader' => false             //more Options => [true, false]
     ],
 
     'importations' => [

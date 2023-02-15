@@ -13,7 +13,7 @@
         </svg>
     </a>
 
-    @if (config('temauema.StyleLayout.AdminSidebarUserWithoutSidebar') == false)
+    @if (config('temauema.StyleLayout.hasSideBar') == false)
         <div class="nav-control">
             <div class="hamburger">
                 <span class="line"></span><span class="line"></span><span class="line"></span>
