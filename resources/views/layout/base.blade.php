@@ -24,27 +24,27 @@
     @endphp
 
     @foreach ($plugins as $plugin)
-        @foreach (config('temauema.importations.plugins.' . $plugin . '.css') as $style)
+        @foreach (config('temauema.plugins.' . $plugin . '.css') as $style)
             <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
         @endforeach
     @endforeach
 
     {{-- css para todas as blades --}}
-    @foreach (config('temauema.importations.base.css') as $style)
+    @foreach (config('temauema.css') as $style)
         <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
     @endforeach
 </head>
 
-<body>
+<body class="vh-100">
     @yield('body')
 
     {{-- js para todas as blades --}}
-    @foreach (config('temauema.importations.base.js.top') as $script)
+    @foreach (config('temauema.jsTop') as $script)
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
 
     @foreach ($plugins as $plugin)
-        @foreach (config('temauema.importations.plugins.' . $plugin . '.js') as $script)
+        @foreach (config('temauema.plugins.' . $plugin . '.js') as $script)
             <script src="{{ asset($script) }}" type="text/javascript"></script>
         @endforeach
     @endforeach
@@ -63,11 +63,10 @@
         const headerPosition = "{{ config('temauema.StyleLayout.headerPosition') }}"
         const containerLayout = "{{ config('temauema.StyleLayout.containerLayout') }}"
     </script>
-    @foreach (config('temauema.importations.base.js.bottom') as $script)
-        
+    @foreach (config('temauema.jsBottom') as $script)
         <script src="{{ asset($script) }}" type="text/javascript"></script>
     @endforeach
-    
+
 
 
     @yield('scripts')

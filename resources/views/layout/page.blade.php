@@ -5,7 +5,10 @@
     <div id="main-wrapper">
         @include('layout.partials.brand.index')
         @include('layout.partials.header.index')
-        @include('layout.partials.left-sidebar.index')
+
+        @if (config('temauema.StyleLayout.hasSideBar'))
+            @include('layout.partials.left-sidebar.index')
+        @endif
         @include('layout.partials.right-sidebar.index')
         @include('layout.partials.content.index')
         @include('layout.partials.footer.index')

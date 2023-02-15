@@ -1,3 +1,14 @@
-<div class="content-body">
+@if (config('temauema.StyleLayout.hasSideBar'))
+    <div class="content-body">
+        @yield('content')
+    </div>
+@else
+        <div class="content-body " style="margin-left: 0 !important">
+                @yield('content')
+        </div>
+    {{-- <div class="content-body ">
+    
     @yield('content')
-</div>
+    
+</div> --}}
+@endif
