@@ -2,5 +2,4 @@
 @section('title',' - Cadastro de alunno')
 
 @section('content')
-
 @endsection
