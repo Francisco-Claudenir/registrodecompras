@@ -26,25 +26,71 @@ return [
 		'home' => 'home',
 	],
 
-	// config de layout do projeto
+	// Opções de configuração do layout do projeto
+	// typography 			fonte do texto			[poppins, roboto, Open Sans, Helventivca ]
+	// version				cor do tema				[light, dark]
+	// layout 				orientação				[horizontal, vertical]
+	// primary 				cor da class 			[color_1,, color_2, .;. color_15]
+	// headerBg 			cor do header			[color_1,, color_2, ... color_15]
+	// navheaderBg 			cor da brand			[color_1,, color_2, ... color_15]
+	// sidebarBg 			cor da sidebar			[color_1,, color_2, ... color_15]
+	// sidebarStyle 		layout da sidebar		[full, mini, compact, modern, overlay, icon-hover]
+	// sidebarPosition		posicao da sidear		[static, fixed]
+	// headerPosition		posicao da header		[static, fixed]
+	// containerLayout		layout do container		[full, wide, wide-box]
+	// hasSideBar			sidebar visivel			boolean
+	// topnavSearchbar		tem search no header	boolean
+	// hasSubHeader			tem subheader			boolean
+
 	'layouts' => [
 		'default' => [
-			'typography' => 'poppins',		//["poppins" , "roboto" , "Open Sans" , "Helventivca" ]
-			'version' => 'light',			//["light" , "dark"]
-			'layout' => 'vertical',			//["horizontal" , "vertical"]
-			'primary' => 'color_14',		//["color_1," , "color_2," ..... "color_15"]
-			'headerBg' => 'color_14',		//["color_1," , "color_2," ..... "color_15"]
-			'navheaderBg' => 'color_14',	//["color_1," , "color_2," ..... "color_15"]
-			'sidebarBg' => 'color_13',		//["color_1," , "color_2," ..... "color_15"]
-			'sidebarStyle' => 'full',		//["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
-			'sidebarPosition' => 'fixed',	//["static" , "fixed"]
-			'headerPosition' => 'fixed',	//["static" , "fixed"]
-			'containerLayout' => 'full',	//["full" , "wide" , "wide-box"]
-			'hasSideBar' => true,			//[true, false]
+			'typography' => 'poppins',
+			'version' => 'light',
+			'layout' => 'vertical',
+			'primary' => 'color_14',
+			'headerBg' => 'color_14',
+			'navheaderBg' => 'color_14',
+			'sidebarBg' => 'color_13',
+			'sidebarStyle' => 'full',
+			'sidebarPosition' => 'fixed',
+			'headerPosition' => 'fixed',
+			'containerLayout' => 'full',
+			'hasSideBar' => true,
 			'topnavSearchbar' => false,
-			'hasSubHeader' => false			//[true, false]
+			'hasSubHeader' => false
 		],
-		'admin'
+		'admin' => [
+			'typography' => 'poppins',
+			'version' => 'light',
+			'layout' => 'horizontal',
+			'primary' => 'color_15',
+			'headerBg' => 'color_14',
+			'navheaderBg' => 'color_14',
+			'sidebarBg' => 'color_13',
+			'sidebarStyle' => 'full',
+			'sidebarPosition' => 'fixed',
+			'headerPosition' => 'fixed',
+			'containerLayout' => 'full',
+			'hasSideBar' => true,
+			'topnavSearchbar' => false,
+			'hasSubHeader' => false
+		],
+		'user' => [
+			'typography' => 'poppins',
+			'version' => 'light',
+			'layout' => 'horizontal',
+			'primary' => 'color_14',
+			'headerBg' => 'color_14',
+			'navheaderBg' => 'color_14',
+			'sidebarBg' => 'color_13',
+			'sidebarStyle' => 'full',
+			'sidebarPosition' => 'fixed',
+			'headerPosition' => 'fixed',
+			'containerLayout' => 'full',
+			'hasSideBar' => true,
+			'topnavSearchbar' => false,
+			'hasSubHeader' => false
+		],
 	],
 
 	'menu' => [

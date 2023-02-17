@@ -1,4 +1,4 @@
-@if (config('temauema.layouts.default.hasSideBar'))
+@if (config($layout . '.hasSideBar'))
     <div class="deznav">
         <div class="deznav-scroll">
             @include('layout.partials.left-sidebar.side-header')

@@ -1,5 +1,9 @@
 @extends('layout.base')
 
+@php
+    $layout = isset($layout) ? 'temauema.layouts.' . $layout : 'temauema.layouts.default';
+@endphp
+
 @section('body')
     @include('layout.partials.loader.index')
     <div id="main-wrapper">
@@ -10,7 +14,4 @@
         @include('layout.partials.content.index')
         @include('layout.partials.footer.index')
     </div>
-@endsection
-
-@section('scripts')
 @endsection

@@ -1,8 +1,8 @@
 <div class="nav-header">
     <a href="{{ route(config('temauema.routes.home')) }}" class="brand-logo">
         <img src="{{ asset(config('temauema.system.brand.icon')) }}" class="img-fluid"
-            width="{{ config('temauema.system.brand.iconWidth') }}" height="{{ config('temauema.system.brand.iconHeight') }}"
-            alt="">
+            width="{{ config('temauema.system.brand.iconWidth') }}"
+            height="{{ config('temauema.system.brand.iconHeight') }}" alt="">
 
 
         <svg class="brand-title" viewBox="0 0 105 22" width="90" height="22" fill="none"
@@ -13,7 +13,7 @@
         </svg>
     </a>
 
-    @if (config('temauema.layouts.default.hasSideBar'))
+    @if (config($layout . '.hasSideBar'))
         <div class="nav-control">
             <div class="hamburger">
                 <span class="line"></span><span class="line"></span><span class="line"></span>

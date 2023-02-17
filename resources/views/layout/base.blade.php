@@ -51,17 +51,17 @@
 
     {{-- js para todas as blades --}}
     <script>
-        const typography = "{{ config('temauema.layouts.default.typography') }}"
-        const version = "{{ config('temauema.layouts.default.version') }}"
-        const layout = "{{ config('temauema.layouts.default.layout') }}"
-        const primary = "{{ config('temauema.layouts.default.primary') }}"
-        const headerBg = "{{ config('temauema.layouts.default.headerBg') }}"
-        const navheaderBg = "{{ config('temauema.layouts.default.navheaderBg') }}"
-        const sidebarBg = "{{ config('temauema.layouts.default.sidebarBg') }}"
-        const sidebarStyle = "{{ config('temauema.layouts.default.sidebarStyle') }}"
-        const sidebarPosition = "{{ config('temauema.layouts.default.sidebarPosition') }}"
-        const headerPosition = "{{ config('temauema.layouts.default.headerPosition') }}"
-        const containerLayout = "{{ config('temauema.layouts.default.containerLayout') }}"
+        const typography = "{{ config($layout . '.typography') }}"
+        const version = "{{ config($layout . '.version') }}"
+        const layout = "{{ config($layout . '.layout') }}"
+        const primary = "{{ config($layout . '.primary') }}"
+        const headerBg = "{{ config($layout . '.headerBg') }}"
+        const navheaderBg = "{{ config($layout . '.navheaderBg') }}"
+        const sidebarBg = "{{ config($layout . '.sidebarBg') }}"
+        const sidebarStyle = "{{ config($layout . '.sidebarStyle') }}"
+        const sidebarPosition = "{{ config($layout . '.sidebarPosition') }}"
+        const headerPosition = "{{ config($layout . '.headerPosition') }}"
+        const containerLayout = "{{ config($layout . '.containerLayout') }}"
     </script>
 
     @foreach (config('temauema.jsBottom') as $script)
