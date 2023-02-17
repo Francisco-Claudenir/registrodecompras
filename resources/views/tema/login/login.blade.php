@@ -1,5 +1,5 @@
 {{-- Extends layout --}}
-@extends('layout.fullwidth')
+@extends('tema.layout.fullwidth')
 
 
 
@@ -17,14 +17,32 @@
                         </div>
                         <h4 class="text-center mb-4">Entre com seu login siguema</h4>
                         <form action="{!! url('/index') !!}">
+                            @csrf
                             <div class="form-group">
                                 <label class="mb-1"><strong>Usuário</strong></label>
-                                <input type="text" class="form-control" placeholder="Digite aqui.">
+                                <div class="input-group">
+                                    <input type="text" name="user"
+                                        class="form-control @error('user') is-invalid @enderror" value="{{ old('user') }}"
+                                        placeholder="Login SigUema" autofocus>
+                                    <div class="input-group-text">
+                                        <span class="flaticon-381-user"></span>
+                                    </div>
+                                </div>
                             </div>
+                            {!! $errors->first('user', '<span style="color:red" class="form-text">:message</span>') !!}
+
                             <div class="form-group">
                                 <label class="mb-1"><strong>Senha</strong></label>
-                                <input type="password" class="form-control" value="Password">
+                                <div class="input-group">
+                                    <input type="password" name="password"
+                                        class="form-control @error('password') is-invalid @enderror" placeholder="Senha">
+                                    <div class="input-group-text">
+                                        <span class="flaticon-381-key"></span>
+                                    </div>
+                                </div>
                             </div>
+                            {!! $errors->first('password', '<span style="color:red" class="help-block">:message</span>') !!}
+
                             <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox ms-1">
