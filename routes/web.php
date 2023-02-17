@@ -83,3 +83,11 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-register',[ZenixadminController::class,'page_register']);
     
 });
+
+Auth::routes();
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+

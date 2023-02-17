@@ -29,7 +29,7 @@
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="flaticon-028-user-1 text-white " style="font-size: 20px"></i>
                                 <div class="header-info">
-                                    <span>{{ Auth::user() - name }}</span>
+                                    <span>{{ Auth::user()->name }}</span>
                                     <small>Super Admin</small>
                                 </div>
                             </a>
@@ -56,7 +56,7 @@
                                     </svg>
                                     <span class="ms-2">Inbox </span>
                                 </a>
-                                <a href="{!! url('/page-login') !!}" class="dropdown-item ai-icon">
+                                <a href="{{ route('logout') }}" class="dropdown-item ai-icon" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
                                         width="18" height="18" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -67,6 +67,10 @@
                                     </svg>
                                     <span class="ms-2">Logout </span>
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+
                             </div>
                         </li>
                     @else

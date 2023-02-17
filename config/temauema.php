@@ -75,7 +75,7 @@ return [
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
-		'user' => [
+		'auth' => [
 			'typography' => 'poppins',
 			'version' => 'light',
 			'layout' => 'horizontal',
@@ -87,7 +87,7 @@ return [
 			'sidebarPosition' => 'fixed',
 			'headerPosition' => 'fixed',
 			'containerLayout' => 'full',
-			'hasSideBar' => true,
+			'hasSideBar' => false,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
