@@ -1,99 +1,106 @@
 <?php
 
+// arquivo de configuração do tema do projeto
 return [
-
-
-    'systemNamePrefix' => 'UEMA',
+	// config nome do projeto
+	'systemNamePrefix' => 'UEMA',
 	'systemName' => 'Dashboard',
 	'systemNameSufix' => '',
 
-    'brandIcon' =>'images/uema/svg/icon_uema.svg',
-    'brandIconWidth' => '40',
-    'brandIconHeight' => '40',
+	// config da brand do projeto
+	'brandIcon' => 'images/uema/svg/icon_uema.svg',
+	'brandIconWidth' => '40',
+	'brandIconHeight' => '40',
 
-    'favIcon' => 'images/uema/svg/icon_uema.svg',
+	'favIcon' => 'images/uema/svg/icon_uema.svg',
 
-    'homePage' => 'home',
+	'homePage' => 'home',
 
+	// config de layout do projeto
+	'layouts' => [
+		'default' => [
+			'typography' => 'poppins',		//["poppins" , "roboto" , "Open Sans" , "Helventivca" ]
+			'version' => 'light',			//["light" , "dark"]
+			'layout' => 'vertical',			//["horizontal" , "vertical"]
+			'primary' => 'color_14',			//["color_1," , "color_2," ..... "color_15"]
+			'headerBg' => 'color_14',		//["color_1," , "color_2," ..... "color_15"]
+			'navheaderBg' => 'color_14',	//["color_1," , "color_2," ..... "color_15"]
+			'sidebarBg' => 'color_13',		//["color_1," , "color_2," ..... "color_15"]
+			'sidebarStyle' => 'full',		//["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
+			'sidebarPosition' => 'fixed',	//["static" , "fixed"]
+			'headerPosition' => 'fixed',	//["static" , "fixed"]
+			'containerLayout' => 'full',	//["full" , "wide" , "wide-box"]
+			'hasSideBar' => true,			//[true, false]
+			'topnavSearchbar' => false,
+			'hasSubHeader' => false			//[true, false]
+		]
+	],
 
-    'menu' => [
+	'menu' => [
 
-        ['header' => 'Main Menu'],
-        [
-            'title' => 'Home',
-            'icon' => 'flaticon-381-user',
-            'route' => 'home'
-        ],
-        [
-            'title' => 'Perfil',
-            'icon' => 'flaticon-381-trash',
-            'route' => 'teste',
-            'submenu' => [
-                [
-                    'title' => 'Alterar Senha',
-                    'icon' => 'flaticon-381-key',
-                    'route' => 'teste'
+		['header' => 'Main Menu'],
+		[
+			'title' => 'Home',
+			'icon' => 'flaticon-381-user',
+			'route' => 'home'
+		],
+		[
+			'title' => 'Perfil',
+			'icon' => 'flaticon-381-trash',
+			'route' => 'teste',
+			'submenu' => [
+				[
+					'title' => 'Alterar Senha',
+					'icon' => 'flaticon-381-key',
+					'route' => 'teste'
 
-                ]
-            ],
-        ],
-        ['header' => 'Segundo Menu'],
-        [
-            'title' => 'Item 1',
-            'icon' => 'flaticon-381-user',
-            'route' => 'teste'
-        ],
-        ['header' => 'Terceiro Menu'],
-        [
-            'title' => 'Item 1',
-            'icon' => 'flaticon-381-user',
-            'route' => 'teste'
-        ],
-        [
-            'title' => 'Item 2',
-            'icon' => 'flaticon-381-user',
-            'route' => 'teste',
-            'submenu' => [
-                [
-                    'title' => 'Sub Item 1',
-                    'icon' => 'flaticon-381-knob',
-                    'route' => 'teste'
+				]
+			],
+		],
+		['header' => 'Segundo Menu'],
+		[
+			'title' => 'Item 1',
+			'icon' => 'flaticon-381-user',
+			'route' => 'teste'
+		],
+		['header' => 'Terceiro Menu'],
+		[
+			'title' => 'Item 1',
+			'icon' => 'flaticon-381-user',
+			'route' => 'teste'
+		],
+		[
+			'title' => 'Item 2',
+			'icon' => 'flaticon-381-user',
+			'route' => 'teste',
+			'submenu' => [
+				[
+					'title' => 'Sub Item 1',
+					'icon' => 'flaticon-381-knob',
+					'route' => 'teste'
 
-                ]
-            ]
-        ]
-    ],
+				]
+			]
+		]
+	],
 
-    'StyleLayout' => [ 
-        'typography' => 'poppins',              //More Options => ["poppins" , "roboto" , "Open Sans" , "Helventivca" ]
-		'version' => 'light',                   //More Options => ["light" , "dark"]
-		'layout' => 'vertical',                 //More Options => ["horizontal" , "vertical"]
-		'primary' => 'color_2',                 //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'headerBg' => 'color_14',               //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'navheaderBg' => 'color_14',            //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'sidebarBg' => 'color_13',              //More Options => ["color_1," , "color_2," ..... "color_15"]
-		'sidebarStyle' => 'full',               //More Options => ["full" , "mini" , "compact" , "modern" , "overlay" , "icon-hover"]
-		'sidebarPosition' => 'fixed',           //More Options => ["static" , "fixed"]
-		'headerPosition' => 'fixed',            //More Options => ["static" , "fixed"]
-		'containerLayout' => 'full',            //More Options => ["full" , "wide" , "wide-box"]
-        'hasSideBar' => true,       			//More Options => [true, false]
-        'topnavSearchbar' => false,
-		'hasSubHeader' => false             //more Options => [true, false]
-    ],
-
+	// importações base
 	'css' => [
 		'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 		'css/style.css',
 	],
+
 	'jsTop' => [
 		'vendor/global/global.min.js',
 		'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 	],
+
 	'jsBottom' => [
 		'js/custom.js',
 		'js/deznav-init.js',
 	],
 
+	// importações opcionais
 	'plugins' => [
 		//Dashboard
 		'carousel' => [

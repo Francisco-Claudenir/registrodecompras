@@ -77,7 +77,7 @@
                 </svg>
             </a>
 
-            @if (config('temauema.StyleLayout.hasSideBar') == false)
+            @if (config('temauema.layouts.default.hasSideBar') == false)
                 <div class="nav-control">
                     <div class="hamburger">
                         <span class="line"></span><span class="line"></span><span class="line"></span>
@@ -103,7 +103,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @if (config('temauema.StyleLayout.hasSideBar') == false)
+        @if (config('temauema.layouts.default.hasSideBar') == false)
             @include('tema.elements.sidebar')
         @endif
         <!--**********************************
@@ -115,7 +115,7 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        @if (config('temauema.StyleLayout.hasSideBar') == true)
+        @if (config('temauema.layouts.default.hasSideBar') == true)
             <div class="container pt-5 mt-5">
                 <!-- row -->
                 @yield('content')

@@ -15,17 +15,17 @@
 @if(!empty(config('dz.public.global.js.bottom')))
 	@foreach(config('dz.public.global.js.bottom') as $script)
 		<script>
-			const typography = "{{ config('temauema.StyleLayout.typography') }}"
-			const version = "{{ config('temauema.StyleLayout.version') }}"
-			const layout = "{{ config('temauema.StyleLayout.layout') }}"
-			const primary = "{{ config('temauema.StyleLayout.primary') }}"
-			const headerBg = "{{ config('temauema.StyleLayout.headerBg') }}"
-			const navheaderBg = "{{ config('temauema.StyleLayout.navheaderBg') }}"
-			const sidebarBg = "{{ config('temauema.StyleLayout.sidebarBg') }}"
-			const sidebarStyle = "{{ config('temauema.StyleLayout.sidebarStyle') }}"
-			const sidebarPosition = "{{ config('temauema.StyleLayout.sidebarPosition') }}"
-			const headerPosition = "{{ config('temauema.StyleLayout.headerPosition') }}"
-			const containerLayout = "{{ config('temauema.StyleLayout.containerLayout') }}"
+			const typography = "{{ config('temauema.layouts.default.typography') }}"
+			const version = "{{ config('temauema.layouts.default.version') }}"
+			const layout = "{{ config('temauema.layouts.default.layout') }}"
+			const primary = "{{ config('temauema.layouts.default.primary') }}"
+			const headerBg = "{{ config('temauema.layouts.default.headerBg') }}"
+			const navheaderBg = "{{ config('temauema.layouts.default.navheaderBg') }}"
+			const sidebarBg = "{{ config('temauema.layouts.default.sidebarBg') }}"
+			const sidebarStyle = "{{ config('temauema.layouts.default.sidebarStyle') }}"
+			const sidebarPosition = "{{ config('temauema.layouts.default.sidebarPosition') }}"
+			const headerPosition = "{{ config('temauema.layouts.default.headerPosition') }}"
+			const containerLayout = "{{ config('temauema.layouts.default.containerLayout') }}"
 		</script>
 		<script src="{{ asset($script) }}" type="text/javascript"></script>
 	@endforeach

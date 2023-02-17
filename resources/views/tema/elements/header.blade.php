@@ -6,7 +6,7 @@
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
-                    @if (config('temauema.StyleLayout.topnavSearchbar') == true)
+                    @if (config('temauema.layouts.default.topnavSearchbar') == true)
                         <div class="input-group search-area right d-lg-inline-flex d-none">
                             <input type="text" class="form-control" placeholder="Find something here...">
                             <div class="input-group-append">

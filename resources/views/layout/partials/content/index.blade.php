@@ -1,4 +1,4 @@
-@if (config('temauema.StyleLayout.hasSideBar'))
+@if (config('temauema.layouts.default.hasSideBar'))
     <div class="content-body">
         @yield('content')
     </div>

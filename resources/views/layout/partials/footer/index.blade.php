@@ -1,4 +1,4 @@
-<div class="@if (config('temauema.StyleLayout.hasSideBar')) footer @else footerfullwidth   @endif">
+<div class="@if (config('temauema.layouts.default.hasSideBar')) footer @else footerfullwidth   @endif">
     <div class="copyright">
         <p>Todos os direitos reservados Universidade Estadual do Maranhão - <a href="https://www.uema.br/"
                 target="_blank">UEMA</a> {{ now()->year }}</p>
