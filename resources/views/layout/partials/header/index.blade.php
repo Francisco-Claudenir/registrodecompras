@@ -83,7 +83,7 @@
             <div class="sub-header">
                 <div class="d-flex align-items-center flex-wrap me-auto">
                     <h5 class="dashboard_bar">
-                        {{ config('temauema.systemName') }}
+                        {{ config('temauema.system.name.name') }}
                         @yield('title', $page_title ?? '')
                     </h5>
                 </div>

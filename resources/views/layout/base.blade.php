@@ -11,12 +11,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('page_description')" />
     <meta property="og:title"
-        content="{{ config('temauema.systemNamePrefix') . ' - ' . config('temauema.systemName') }}" />
-    <meta property="og:description" content="{{ config('temauema.systemNamePrefix') }}  @yield('title')" />
+        content="{{ config('temauema.system.name.prefix') . ' - ' . config('temauema.system.name.name') }}" />
+    <meta property="og:description" content="{{ config('temauema.system.name.prefix') }}  @yield('title')" />
     <meta property="og:image" content="{{ asset(config('temauema.')) }}" />
     <meta name="format-detection" content="telephone=no">
-    <title>{{ config('temauema.systemName') }} @yield('title')</title>
-    <link rel="icon" type="image/svg" sizes="16x16" href="{{ asset(config('temauema.favIcon')) }}">
+    <title>{{ config('temauema.system.name.name') }} @yield('title')</title>
+    <link rel="icon" type="image/svg" sizes="16x16" href="{{ asset(config('temauema.system.favIcon')) }}">
     <link rel="stylesheet" href="{{ asset('css/Ultis.css') }}">
 
     @php

@@ -16,7 +16,7 @@
     <title>{{ config('temauema.PageTitle') }} | @yield('title', $page_title ?? '')</title>
     <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/svg" sizes="16x16" href="{{ config('temauema.brandIcon') }}">
+    <link rel="icon" type="image/svg" sizes="16x16" href="{{ config('temauema.system.brand.icon') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     

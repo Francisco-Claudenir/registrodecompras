@@ -3,18 +3,28 @@
 // arquivo de configuração do tema do projeto
 return [
 	// config nome do projeto
-	'systemNamePrefix' => 'UEMA',
-	'systemName' => 'Dashboard',
-	'systemNameSufix' => '',
+	'system' => [
+		'favIcon' => 'images/uema/svg/icon_uema.svg',
 
-	// config da brand do projeto
-	'brandIcon' => 'images/uema/svg/icon_uema.svg',
-	'brandIconWidth' => '40',
-	'brandIconHeight' => '40',
+		// config nome do projeto
+		'name' => [
+			'prefix' => 'UEMA',
+			'name' => 'Dashboard',
+			'sufix' => '',
+		],
 
-	'favIcon' => 'images/uema/svg/icon_uema.svg',
+		// config da brand do projeto
+		'brand' => [
+			'icon' => 'images/uema/svg/icon_uema.svg',
+			'iconWidth' => '40',
+			'iconHeight' => '40',
+		],
+	],
 
-	'homePage' => 'home',
+	// config de rotas base
+	'routes' => [
+		'home' => 'home',
+	],
 
 	// config de layout do projeto
 	'layouts' => [
@@ -22,7 +32,7 @@ return [
 			'typography' => 'poppins',		//["poppins" , "roboto" , "Open Sans" , "Helventivca" ]
 			'version' => 'light',			//["light" , "dark"]
 			'layout' => 'vertical',			//["horizontal" , "vertical"]
-			'primary' => 'color_14',			//["color_1," , "color_2," ..... "color_15"]
+			'primary' => 'color_14',		//["color_1," , "color_2," ..... "color_15"]
 			'headerBg' => 'color_14',		//["color_1," , "color_2," ..... "color_15"]
 			'navheaderBg' => 'color_14',	//["color_1," , "color_2," ..... "color_15"]
 			'sidebarBg' => 'color_13',		//["color_1," , "color_2," ..... "color_15"]
@@ -33,7 +43,8 @@ return [
 			'hasSideBar' => true,			//[true, false]
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false			//[true, false]
-		]
+		],
+		'admin'
 	],
 
 	'menu' => [
