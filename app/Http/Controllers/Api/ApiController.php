@@ -36,7 +36,6 @@ class ApiController extends Controller
 
             $login = json_decode($result->getBody()->getContents());
 
-            //20695799304
             //BUSCA DADOS DO SERVIDOR
             $response2 = $this->client->get('/api/servidores?cpf=' . $request->login);
 
