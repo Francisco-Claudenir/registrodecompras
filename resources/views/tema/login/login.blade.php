@@ -16,20 +16,21 @@
                             </a>
                         </div>
                         <h4 class="text-center mb-4">Entre com seu login siguema</h4>
-                        <form action="{!! url('/index') !!}">
+                        <form action="{{ route('login-professor') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label class="mb-1"><strong>Usuário</strong></label>
                                 <div class="input-group">
-                                    <input type="text" name="user"
-                                        class="form-control @error('user') is-invalid @enderror" value="{{ old('user') }}"
+                                    <input type="text" name="login"
+                                        class="form-control @error('login') is-invalid @enderror" value="{{ old('login') }}"
                                         placeholder="Login SigUema" autofocus>
                                     <div class="input-group-text">
                                         <span class="flaticon-381-user"></span>
                                     </div>
                                 </div>
                             </div>
-                            {!! $errors->first('user', '<span style="color:red" class="form-text">:message</span>') !!}
+                            {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
+                            {!! $errors->default->first('login', '<span style="color:red" class="form-text">:message</span>') !!}
 
                             <div class="form-group">
                                 <label class="mb-1"><strong>Senha</strong></label>

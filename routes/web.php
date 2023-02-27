@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ZenixadminController;
@@ -89,5 +90,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
+
+Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
 
