@@ -141,6 +141,23 @@ return [
 		]
 	],
 
+	'msg' => [
+        'register' => [
+            'general_error' => 'Erro ao tentar salvar. Caso o problema persista, entre em contato com o suporte.',
+            'success' => [
+                'create' => 'Item criado com sucesso',
+                'update' => 'Item atualizado com sucesso',
+                'delete' => 'Item removido com sucesso',
+            ],
+            'error' => [
+                'create' => 'Erro ao tentar salvar',
+                'update' => 'Erro ao tentar atualizar',
+                'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
+                'notfound' => 'Item não existe'
+            ],
+        ]
+    ],
+
 	// importações base
 	'css' => [
 		'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
