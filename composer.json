@@ -40,8 +40,12 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Database\\Seeders\\": "database/seeders/",
+            "Plugins\\SweetAlert\\": "public/js/plugins/Sweetalert/Src"
+        },
+        "files": [
+            "public/js/plugins/Sweetalert/Src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
