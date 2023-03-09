@@ -13,7 +13,7 @@ class SubArea extends Model
 
     public function grandeArea()
     {
-        return $this->belongsTo(GrandeArea::class)
+        return $this->belongsTo(GrandeArea::class);
     }
 
 }
