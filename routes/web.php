@@ -93,4 +93,5 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
-
+//Semic
+Route::resource('semic', HomeController::class);

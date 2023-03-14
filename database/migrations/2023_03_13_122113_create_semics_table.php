@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubAreasTable extends Migration
+class CreateSemicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSubAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_areas', function (Blueprint $table) {
-            $table->bigIncrements('areaconhecimento_id')->autoIncrement()->unique();
-            $table->unsignedBigInteger('area_id');
+        Schema::create('semics', function (Blueprint $table) {
+            $table->bigIncrements('semic_id')->autoIncrement()->unique();
             $table->string('nome');
+            $table->string('descricao');
+            $table->dateTime('data_inicio');
+            $table->dateTime('data_fim');
             $table->timestamps();
-
-            $table->foreign('area_id')->references('area_id')->on('grande_areas')
-            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateSubAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_areas');
+        Schema::dropIfExists('semics');
     }
 }
