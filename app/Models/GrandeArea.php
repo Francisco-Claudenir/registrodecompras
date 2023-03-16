@@ -16,6 +16,8 @@ class GrandeArea extends Model
 
     protected $primaryKey = 'area_id';
 
+    protected $dates = ['deleted_at'];
+
     //Relacionamento com a tabela SubArea
     public function grandeArea_subArea(){
         return $this->hasMany(SubArea::class, 'area_id')->withTrashed();

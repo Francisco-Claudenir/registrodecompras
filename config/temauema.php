@@ -62,7 +62,7 @@ return [
 		'admin' => [
 			'typography' => 'poppins',
 			'version' => 'light',
-			'layout' => 'horizontal',
+			'layout' => 'vertical',
 			'primary' => 'color_15',
 			'headerBg' => 'color_14',
 			'navheaderBg' => 'color_14',

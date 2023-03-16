@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SemicRequest;
 use App\Models\Semic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SemicController extends Controller
 {
+    protected $bag = [
+        'view' => '',
+        'route' => '',
+        'Title' => '',
+        'subtitle' => '',
+        'msg' => 'temauema.msg.register'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +34,7 @@ class SemicController extends Controller
      */
     public function create()
     {
-        //
+        return view('semic.create');
     }
 
     /**
@@ -33,9 +43,22 @@ class SemicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SemicRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+
+            Semic::create($request->validated());
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->back();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
+
     }
 
     /**
