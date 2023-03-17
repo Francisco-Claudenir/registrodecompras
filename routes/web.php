@@ -91,6 +91,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
+Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
+Route::post('/', [App\Http\Controllers\LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [App\Http\Controllers\LoginController::class, 'destroy'])->name('login.destroy');
+
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
 
