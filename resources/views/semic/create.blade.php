@@ -3,7 +3,7 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Cadastro de alunno')
+@section('title', ' - Cadastro de Programa Semic')
 
 @section('content')
     <div class="container-fluid">

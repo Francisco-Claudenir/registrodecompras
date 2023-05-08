@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class SemicController extends Controller
 {
+    protected $semic;
     protected $bag = [
         'view' => '',
         'route' => '',
@@ -17,6 +18,12 @@ class SemicController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
+    public function __construct(Semic $semic)
+    {
+        $this->semic = $semic;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,8 @@ class SemicController extends Controller
      */
     public function index()
     {
-        //
+        $programasSemic = $this->semic->paginate(20);
+        return view('semic.index', compact('programasSemic'));
     }
 
     /**
@@ -49,10 +57,10 @@ class SemicController extends Controller
 
         try {
 
-            Semic::create($request->validated());
+            $this->semic->create($request->validated());
+            DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->back();
-            DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
