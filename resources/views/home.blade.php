@@ -1,6 +1,6 @@
 @extends('layout.page', [
     'layout' => 'admin',
-    'plugins' => ['market'],
+    'plugins' => ['wizard'],
 ])
 
 @section('title', ' - Cadastro de alunno')
