@@ -7,11 +7,17 @@
 @section('body')
     @include('layout.partials.loader.index')
     <div id="main-wrapper">
-        @include('layout.partials.brand.index')
-        @include('layout.partials.header.index')
-        @include('layout.partials.left-sidebar.index')
+        @if (config($layout . '.hasHeader'))
+            @include('layout.partials.brand.index')
+            @include('layout.partials.header.index')
+        @endif
+        @if (config($layout . '.hasSideBar'))
+            @include('layout.partials.left-sidebar.index')
+        @endif
         @include('layout.partials.right-sidebar.index')
         @include('layout.partials.content.index')
-        @include('layout.partials.footer.index')
+        @if (config($layout . '.hasFooter'))
+            @include('layout.partials.footer.index')
+        @endif
     </div>
 @endsection

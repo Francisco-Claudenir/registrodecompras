@@ -1,75 +1,74 @@
 @extends('layout.page', [
-    "layout" => "auth"
+    'layout' => 'auth',
 ])
 
+@section('title', ' - Login')
+
 @section('content')
-<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Login</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">CPF</label>
-
-                            <div class="col-md-6">
-                                <input id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        <div class="col-md-4">
+            <div class="authincation-content">
+                <div class="row no-gutters">
+                    <div class="col-xl-12">
+                        <div class="auth-form">
+                            <div class="text-center mb-3">
+                                <a href="https://www.uema.br/" target="_blank">
+                                    <img src="images/uema/svg/logo_uema.svg" class="img-fluid" alt="">
+                                </a>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">Senha</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                            <h4 class="text-center mb-4">Entre com seu login siguema</h4>
+                            <form action="{{ route('login') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Usuário</strong></label>
+                                    <div class="input-group">
+                                        <input type="text" name="login"
+                                            class="form-control @error('login') is-invalid @enderror"
+                                            value="{{ old('login') }}" placeholder="Login SigUema" autofocus>
+                                        <div class="input-group-text">
+                                            <span class="flaticon-381-user"></span>
+                                        </div>
+                                    </div>
                                 </div>
+                                {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
+                                {!! $errors->default->first('login', '<span style="color:red" class="form-text">:message</span>') !!}
+                                <div class="form-group">
+                                    <label class="mb-1"><strong>Senha</strong></label>
+                                    <div class="input-group">
+                                        <input type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            placeholder="Senha">
+                                        <div class="input-group-text">
+                                            <span class="flaticon-381-key"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {!! $errors->first('password', '<span style="color:red" class="form-text">:message</span>') !!}
+                                <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox ms-1">
+                                            <input type="checkbox" class="form-check-input" id="basic_checkbox_1">
+                                            <label class="form-check-label" for="basic_checkbox_1">Lembrar-me</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="{!! url('/page-forgot-password') !!}">Esqueci minha senha</a>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                                </div>
+                            </form>
+                            <div class="new-account mt-3">
+                                <p>
+                                    Não possui cadastro?
+                                    <a class="text-primary" href="{!! url('/page-register') !!}">Cadastre-se</a>
+                                </p>
                             </div>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

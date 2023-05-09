@@ -56,6 +56,9 @@ return [
 			'headerPosition' => 'fixed',
 			'containerLayout' => 'full',
 			'hasSideBar' => true,
+			'hasHeader' => true,
+			'hasFooter' => true,
+			'hasRightSidebar' => true,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
@@ -72,6 +75,9 @@ return [
 			'headerPosition' => 'fixed',
 			'containerLayout' => 'full',
 			'hasSideBar' => true,
+			'hasHeader' => true,
+			'hasFooter' => true,
+			'hasRightSidebar' => true,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
@@ -79,7 +85,7 @@ return [
 			'typography' => 'poppins',
 			'version' => 'light',
 			'layout' => 'horizontal',
-			'primary' => 'color_14',
+			'primary' => 'color_15',
 			'headerBg' => 'color_14',
 			'navheaderBg' => 'color_14',
 			'sidebarBg' => 'color_13',
@@ -88,6 +94,9 @@ return [
 			'headerPosition' => 'fixed',
 			'containerLayout' => 'full',
 			'hasSideBar' => false,
+			'hasHeader' => false,
+			'hasFooter' => false,
+			'hasRightSidebar' => false,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
@@ -106,20 +115,20 @@ return [
 			'icon' => 'flaticon-381-trash',
 			'route' => 'teste',
 			'submenu' => [
-				[
+		[
 					'title' => 'Alterar Senha',
 					'icon' => 'flaticon-381-key',
 					'route' => 'teste'
 
 				]
-			],
+		],
 		],
 		['header' => 'Segundo Menu'],
 		[
 			'title' => 'Item 1',
 			'icon' => 'flaticon-381-user',
 			'route' => 'teste'
-		],
+				],
 		['header' => 'Terceiro Menu'],
 		[
 			'title' => 'Item 1',
@@ -141,6 +150,7 @@ return [
 		]
 	],
 
+	// Mensagens padrão
 	'msg' => [
         'register' => [
             'general_error' => 'Erro ao tentar salvar. Caso o problema persista, entre em contato com o suporte.',

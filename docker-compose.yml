@@ -86,6 +86,8 @@ services:
       - ./:/var/www/
     working_dir: /var/www/
     entrypoint: ['npm']
+    networks:
+      - uema-networks
 
   #artisan
   artisan:
