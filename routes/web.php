@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ZenixadminController;
@@ -80,9 +81,9 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-forgot-password', [ZenixadminController::class,'page_forgot_password']);
     Route::get('/page-lock-screen', [ZenixadminController::class,'page_lock_screen']);
     Route::get('/page-login',   [ZenixadminController::class,'page_login']);
-    
+
     Route::get('/page-register',[ZenixadminController::class,'page_register']);
-    
+
 });
 
 Auth::routes();
@@ -91,9 +92,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
-Route::post('/', [App\Http\Controllers\LoginController::class, 'store'])->name('login.store');
-Route::post('/logout', [App\Http\Controllers\LoginController::class, 'destroy'])->name('login.destroy');
+// Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
+// Route::post('/', [App\Http\Controllers\LoginController::class, 'store'])->name('login.store');
+// Route::post('/logout', [App\Http\Controllers\LoginController::class, 'destroy'])->name('login.destroy');
 
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
