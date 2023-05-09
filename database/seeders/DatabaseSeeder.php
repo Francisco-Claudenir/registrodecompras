@@ -10,11 +10,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $user = new User();
-        $user->name = 'Administrador';
-        $user->usuario = 'admin@email.com';
-        $user->password = Hash::make('ctic@uema');
-
-        User::create(['name' => 'Administrador', 'usuario' => 'admin@email.com', 'password' => Hash::make('ctic@uema')]);
+        User::create([
+            'nome' => 'Administrador',
+            'usuario' => 'admin@email.com',
+            'password' => Hash::make('ctic@uema'),
+            'cpf' => 'admin@email.com',
+            'telefone' => 'admin@email.com',
+            'email' => 'admin@email.com',
+            'endereco' => '{ "enderecos": [{"rua": "Rua A","cidade": "São Paulo"}]}'
+        ]);
     }
 }

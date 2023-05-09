@@ -17,6 +17,7 @@ class CreateGrandeAreasTable extends Migration
             $table->bigIncrements('area_id')->autoIncrement()->unique();
             $table->string('nome')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

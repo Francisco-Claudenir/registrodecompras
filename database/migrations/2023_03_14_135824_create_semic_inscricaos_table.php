@@ -26,6 +26,7 @@ class CreateSemicInscricaosTable extends Migration
             $table->string('titulocapitulo');
             $table->string('capitulo');
             $table->timestamps();
+            $table->softDeletes();
 
 
             ////Relacionando com a tabela semics

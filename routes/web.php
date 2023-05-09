@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SemicController;
+use App\Http\Controllers\PrimeiroPassoController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class,'index'])->name('home');
@@ -94,4 +95,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
+//Semic
 Route::resource('semic', SemicController::class);
+
+//PrimeiroPassos
+Route::resource('primeiropasso', PrimeiroPassoController::class);

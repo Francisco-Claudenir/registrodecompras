@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SemicRequest;
-use App\Models\Semic;
+use App\Http\Requests\PrimeiroPassoRequest;
+use App\Models\PrimeiroPasso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SemicController extends Controller
+class PrimeiroPassoController extends Controller
 {
-    protected $semic;
+    protected $primeiropasso;
     protected $bag = [
         'view' => '',
         'route' => '',
@@ -18,9 +18,9 @@ class SemicController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(Semic $semic)
+    public function __construct(PrimeiroPasso $primeiropasso)
     {
-        $this->semic = $semic;
+        $this->primeiropasso = $primeiropasso;
     }
 
 
@@ -31,18 +31,18 @@ class SemicController extends Controller
      */
     public function index()
     {
-        $programasSemic = $this->semic->paginate(20);
-        return view('semic.index', compact('programasSemic'));
+        $primeiropasso = $this->primeiropasso->paginate(20);
+        return view('primeiropasso.index', compact('primeiropasso'));
     }
 
-    /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('semic.create');
+        return view('primeiropasso.create');
     }
 
     /**
@@ -51,13 +51,17 @@ class SemicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SemicRequest $request)
+    public function store(PrimeiroPassoRequest $request)
     {
         DB::beginTransaction();
 
         try {
 
-            $this->semic->create($request->validated());
+            $dados = $request->validated();
+            $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
+            $dados['status'] = 'Aberto';
+            $this->primeiropasso->create($dados);
+
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->back();
@@ -72,10 +76,10 @@ class SemicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Semic  $semic
+     * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function show(Semic $semic)
+    public function show(PrimeiroPasso $primeiropasso)
     {
         //
     }
@@ -83,10 +87,10 @@ class SemicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Semic  $semic
+     * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Semic $semic)
+    public function edit(PrimeiroPasso $primeiropasso)
     {
         //
     }
@@ -95,10 +99,10 @@ class SemicController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Semic  $semic
+     * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Semic $semic)
+    public function update(Request $request, PrimeiroPasso $primeiropasso)
     {
         //
     }
@@ -106,10 +110,10 @@ class SemicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Semic  $semic
+     * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Semic $semic)
+    public function destroy(PrimeiroPasso $primeiropasso)
     {
         //
     }

@@ -3,7 +3,7 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Cadastro de Programa Semic')
+@section('title', ' - Cadastro de Primeiros Passos')
 
 @section('content')
     <div class="container-fluid">
@@ -11,11 +11,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Cadastro Programa Semic</h4>
+                    <h4 class="card-title">Cadastro Programa Primeiros Passos</h4>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('semic.store') }}" method="post">
+                        <form action="{{ route('primeiropasso.store') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="mb-4 col-md-4">
