@@ -4,7 +4,7 @@ namespace App\Http\Requests\Semic;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SemicRequest extends FormRequest
+class StoreSemicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

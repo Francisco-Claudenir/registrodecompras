@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Semic;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Semic\SemicRequest;
+use App\Http\Requests\Semic\StoreSemicRequest;
 use App\Models\Semic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +52,7 @@ class SemicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SemicRequest $request)
+    public function store(StoreSemicRequest $request)
     {
         DB::beginTransaction();
 
@@ -63,6 +63,7 @@ class SemicController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->back();
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\GrandeAreaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -105,3 +106,6 @@ Route::resource('semic', SemicController::class);
 
 //PrimeiroPassos
 Route::resource('primeiropasso', PrimeiroPassoController::class);
+
+
+Route::resource('grandearea', GrandeAreaController::class);
