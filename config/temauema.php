@@ -111,24 +111,49 @@ return [
 			'route' => 'home'
 		],
 		[
-			'title' => 'Perfil',
+			'title' => 'Semic',
 			'icon' => 'flaticon-381-trash',
-			'route' => 'teste',
 			'submenu' => [
-		[
-					'title' => 'Alterar Senha',
+				[
+					'title' => 'Lista',
 					'icon' => 'flaticon-381-key',
-					'route' => 'teste'
+					'route' => 'semic.index'
+
+				],
+				[
+					'title' => 'Adcionar',
+					'icon' => 'flaticon-381-key',
+					'route' => 'semic.create'
 
 				]
+
+			],
 		],
+		[
+			'title' => 'Primeiros Passos',
+			'icon' => 'flaticon-381-trash',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-key',
+					'route' => 'primeiropasso.index'
+
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-key',
+					'route' => 'primeiropasso.create'
+
+				]
+
+			],
 		],
 		['header' => 'Segundo Menu'],
 		[
 			'title' => 'Item 1',
 			'icon' => 'flaticon-381-user',
 			'route' => 'teste'
-				],
+		],
 		['header' => 'Terceiro Menu'],
 		[
 			'title' => 'Item 1',
@@ -152,21 +177,21 @@ return [
 
 	// Mensagens padrão
 	'msg' => [
-        'register' => [
-            'general_error' => 'Erro ao tentar salvar. Caso o problema persista, entre em contato com o suporte.',
-            'success' => [
-                'create' => 'Item criado com sucesso',
-                'update' => 'Item atualizado com sucesso',
-                'delete' => 'Item removido com sucesso',
-            ],
-            'error' => [
-                'create' => 'Erro ao tentar salvar',
-                'update' => 'Erro ao tentar atualizar',
-                'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
-                'notfound' => 'Item não existe'
-            ],
-        ]
-    ],
+		'register' => [
+			'general_error' => 'Erro ao tentar salvar. Caso o problema persista, entre em contato com o suporte.',
+			'success' => [
+				'create' => 'Item criado com sucesso',
+				'update' => 'Item atualizado com sucesso',
+				'delete' => 'Item removido com sucesso',
+			],
+			'error' => [
+				'create' => 'Erro ao tentar salvar',
+				'update' => 'Erro ao tentar atualizar',
+				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
+				'notfound' => 'Item não existe'
+			],
+		]
+	],
 
 	// importações base
 	'css' => [

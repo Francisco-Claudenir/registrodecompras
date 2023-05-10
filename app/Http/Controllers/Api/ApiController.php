@@ -26,6 +26,7 @@ class ApiController extends Controller
 
     public function login(Request $request)
     {
+
         try {
             $result = $this->client->post('/api/login', [
                 'body' => json_encode([
@@ -40,12 +41,8 @@ class ApiController extends Controller
             $response2 = $this->client->get('/api/servidores?cpf=' . $request->login);
 
             $dados = json_decode($response2->getBody()->getContents());
-            // $dados->eleicao = $request->eleicao;
 
-            // foreach ($dados->servidor as $servidor){
-            //     if ($servidor->id_situacao == 1)
-            //         $dados->servidor = $servidor;
-            // }
+            
 
             if ($result) {
                 session()->put($this::SESSAO, $dados);

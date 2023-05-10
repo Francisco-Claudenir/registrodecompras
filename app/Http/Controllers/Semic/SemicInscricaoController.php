@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Semic;
 
+use App\Http\Controllers\Controller;
 use App\Models\SemicInscricao;
 use Illuminate\Http\Request;
 

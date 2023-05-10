@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Semic;
 
-use App\Http\Requests\SemicRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Semic\SemicRequest;
 use App\Models\Semic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class SemicController extends Controller
     public function index()
     {
         $programasSemic = $this->semic->paginate(20);
-        return view('semic.index', compact('programasSemic'));
+        return view('admin.semic.index', compact('programasSemic'));
     }
 
     /**
@@ -42,7 +43,7 @@ class SemicController extends Controller
      */
     public function create()
     {
-        return view('semic.create');
+        return view('admin.semic.create');
     }
 
     /**
@@ -66,7 +67,6 @@ class SemicController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();
         }
-
     }
 
     /**

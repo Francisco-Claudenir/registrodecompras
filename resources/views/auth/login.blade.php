@@ -17,7 +17,7 @@
                                 </a>
                             </div>
                             <h4 class="text-center mb-4">Entre com seu login siguema</h4>
-                            <form action="{{ route('login') }}" method="post">
+                            <form action="{{ route('login-professor') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label class="mb-1"><strong>Usuário</strong></label>

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PrimeirosPassos;
 
-use App\Http\Requests\PrimeiroPassoRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PrimeirosPassos\PrimeiroPassoRequest;
 use App\Models\PrimeiroPasso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,17 +33,17 @@ class PrimeiroPassoController extends Controller
     public function index()
     {
         $primeiropasso = $this->primeiropasso->paginate(20);
-        return view('primeiropasso.index', compact('primeiropasso'));
+        return view('admin.primeirospassos.index', compact('primeiropasso'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('primeiropasso.create');
+        return view('admin.primeirospassos.create');
     }
 
     /**
@@ -70,7 +71,6 @@ class PrimeiroPassoController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();
         }
-
     }
 
     /**
