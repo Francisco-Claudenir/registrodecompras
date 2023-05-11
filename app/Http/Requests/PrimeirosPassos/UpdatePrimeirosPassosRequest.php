@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\PrimeirosPassos\Requests;
+namespace App\Http\Requests\PrimeirosPassos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PrimeiroPassoRequest extends FormRequest
+class UpdatePrimeirosPassosRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,6 +28,7 @@ class PrimeiroPassoRequest extends FormRequest
             'descricao' => ['required', 'string', 'min:2', 'max:255'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],
+            'status' => ['required','string']
         ];
     }
 }

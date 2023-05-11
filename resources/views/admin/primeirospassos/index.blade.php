@@ -17,11 +17,16 @@
                                     <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
-                                    <h5 class="title font-w600 mb-2"><a href="post-details.html"
-                                            class="text-black">{{ $dados->nome }}</a></h5>
-                                    <span>We Create Your Dream</span>
+                                    <h4 class="title mb-2 mt-1">{{ $dados->nome }}</h4>
+                                    @if ($dados->status == 'Aberto')
+                                        <span
+                                            class="badge badge-sm badge-success d-sm-inline-block d-none mt-2">Aberto</span>
+                                    @else
+                                        <span
+                                            class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
+                                    @endif
                                 </div>
-                                <span class="badge badge-success d-sm-inline-block d-none">Status</span>
+                                <a href="{{ route('primeiropasso.edit', $dados->primeiropasso_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
                             <p class="mb-4">{{ $dados->descricao }}</p>
                             <div class="row mb-4">
@@ -39,7 +44,8 @@
                                     </div>
                                     <div>
                                         <span>Data de Inicio</span>
-                                        <p class="mb-0 pt-1 font-w500 text-black">{{ date('d/m/Y', strtotime($dados->data_inicio)) }}</p>
+                                        <p class="mb-0 pt-1 font-w500 text-black">
+                                            {{ date('d/m/Y', strtotime($dados->data_inicio)) }}</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 d-flex">
@@ -53,7 +59,8 @@
                                     </div>
                                     <div>
                                         <span>Data do Fim</span>
-                                        <p class="mb-0 pt-1 font-w500 text-black">{{ date('d/m/Y', strtotime($dados->data_fim)) }}</p>
+                                        <p class="mb-0 pt-1 font-w500 text-black">
+                                            {{ date('d/m/Y', strtotime($dados->data_fim)) }}</p>
                                     </div>
                                 </div>
                             </div>
