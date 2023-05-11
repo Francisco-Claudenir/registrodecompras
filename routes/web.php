@@ -105,3 +105,7 @@ Route::resource('semic', SemicController::class);
 
 //PrimeiroPassos
 Route::resource('primeiropasso', PrimeiroPassoController::class);
+
+Route::get('teste', function () {
+    return view('teste');
+});
