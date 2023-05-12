@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\PrimeirosPassos;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PrimeirosPassos\PrimeiroPassoRequest;
+use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosRequest;
+use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosRequest;
 use App\Models\PrimeiroPasso;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PrimeiroPassoController extends Controller
@@ -52,7 +52,7 @@ class PrimeiroPassoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PrimeiroPassoRequest $request)
+    public function store(StorePrimeirosPassosRequest $request)
     {
         DB::beginTransaction();
 
@@ -65,7 +65,7 @@ class PrimeiroPassoController extends Controller
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->back();
+            return redirect()->route('primeiropasso.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
@@ -90,9 +90,11 @@ class PrimeiroPassoController extends Controller
      * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function edit(PrimeiroPasso $primeiropasso)
+    public function edit($id)
     {
-        //
+        $primeiropasso = $this->primeiropasso->findOrfail($id);
+
+        return view('admin.primeirospassos.edit', compact('primeiropasso'));
     }
 
     /**
@@ -102,9 +104,25 @@ class PrimeiroPassoController extends Controller
      * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PrimeiroPasso $primeiropasso)
+    public function update(UpdatePrimeirosPassosRequest $request, $id)
     {
-        //
+        try {
+
+            $primeiropasso = $this->primeiropasso->findOrfail($id);
+
+            $dados = $request->validated();
+            $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
+
+            $primeiropasso->update($dados);
+
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.update'));
+            return redirect()->route('primeiropasso.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\PrimeirosPassos\Requests;
+namespace App\Http\Requests\PrimeirosPassos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PrimeiroPassoRequest extends FormRequest
+class StorePrimeirosPassosRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

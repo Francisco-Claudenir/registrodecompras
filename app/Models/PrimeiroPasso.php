@@ -12,7 +12,7 @@ class PrimeiroPasso extends Model
 
     protected $table = 'primeirospassos';
     
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim'];
+    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
 
     protected $primaryKey = 'primeiropasso_id';
 
