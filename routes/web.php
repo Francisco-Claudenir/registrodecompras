@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
+use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -101,14 +102,27 @@ Route::middleware(['auth'])->group(function () {
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
-//Semic
-Route::resource('semic', SemicController::class);
 
-//PrimeiroPassos
-Route::resource('primeiropasso', PrimeiroPassoController::class);
 
-Route::get('teste', function () {
-    return view('teste');
+Route::prefix('admin')->group(function () {
+
+    //Semic
+    Route::resource('semic', SemicController::class);
+
+    //PrimeiroPassos
+    Route::resource('primeiropasso', PrimeiroPassoController::class);
+
+    //GrandeArea
+    Route::resource('grandearea', GrandeAreaController::class);
 });
 
-Route::resource('grandearea', GrandeAreaController::class);
+//Inscrições de Eventos -  VIEW CANDIDATOS
+Route::prefix('primeirospassos')->group(function () {
+    Route::get('/home', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.home');
+    Route::resource('primeirospassos', PrimeirosPassosInscricaoController::class);
+    Route::resource('semic', PrimeirosPassosInscricaoController::class);
+});
+
+Route::get('teste', function () {
+    return view('inscricao');
+});

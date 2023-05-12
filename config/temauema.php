@@ -111,7 +111,7 @@ return [
 			'sidebarStyle' => 'full',
 			'sidebarPosition' => 'fixed',
 			'headerPosition' => 'static',
-			'containerLayout' => 'wide-box',
+			'containerLayout' => 'full',
 			'hasSideBar' => false,
 			'hasHeader' => false,
 			'hasFooter' => false,
