@@ -8,7 +8,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            @foreach ($primeiropasso as $dados)
+            @forelse($primeiropasso as $dados)
                 <div class="col-xl-6 col-lg-12">
                     <div class="card project-card">
                         <div class="card-body">
@@ -26,7 +26,8 @@
                                             class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                     @endif
                                 </div>
-                                <a href="{{ route('primeiropasso.edit', $dados->primeiropasso_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
+                                <a href="{{ route('primeiropasso.edit', $dados->primeiropasso_id) }}"><i
+                                        class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
                             <p class="mb-4">{{ $dados->descricao }}</p>
                             <div class="row mb-4">
@@ -72,18 +73,21 @@
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress
-                                        <span class="pull-right">75%</span>
+                                        <span class="pull-right">{{ number_format($dados->percentual(), 2) }}%</span>
                                     </h6>
                                     <div class="progress ">
-                                        <div class="progress-bar bg-info progress-animated" style="width: 75%; height:6px;"
-                                            role="progressbar"></div>
+                                        <div class="progress-bar bg-info progress-animated"
+                                            style="width: {{ $dados->percentual() }}%; height:6px;" role="progressbar">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                Ainda nao tem programa criado.
+            @endforelse
         </div>
     </div>
 

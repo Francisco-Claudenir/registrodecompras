@@ -7,23 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PrimeiroPasso extends Model
+class PP_IndicacaoBolsistas extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'primeirospassos';
+    protected $table = 'pp_indicacao_bolsistas';
     
     protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
 
-    protected $primaryKey = 'primeiropasso_id';
+    protected $primaryKey = 'pp_i_bolsista_id';
 
     protected $dates = ['deleted_at'];
 
-    // //Relacionamento com a tabela PrimeiroPassoInscricao
-    // public function semic_semicInscricao()
-    // {
-    //     return $this->hasMany(PrimeiroPassoInscricao::class, 'primeiropasso_id')->withTrashed();
-    // }
 
     public function percentual()
     {
@@ -37,4 +32,5 @@ class PrimeiroPasso extends Model
         $total_dias = $fim->diffInDays($inicio) + 1;
         return ($quanto_passou / $total_dias) * 100;
     }
+
 }

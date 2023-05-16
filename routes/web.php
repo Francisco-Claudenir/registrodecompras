@@ -5,6 +5,7 @@ use App\Http\Controllers\GrandeAreaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
@@ -114,6 +115,9 @@ Route::prefix('admin')->group(function () {
 
     //GrandeArea
     Route::resource('grandearea', GrandeAreaController::class);
+
+    //PrimeirosPassos Indicacao Bolsistas
+    Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS

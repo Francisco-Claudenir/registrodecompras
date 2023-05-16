@@ -2,13 +2,13 @@
     'layout' => 'admin',
 ])
 
-@section('title', ' - Index Semic')
+@section('title', ' - Index Primeiros Passos Indicacao Bolsistas')
 
 @section('content')
 
     <div class="container-fluid">
         <div class="row">
-            @foreach ($programasSemic as $semic)
+            @forelse($pp_indicacao_bolsistas as $dados)
                 <div class="col-xl-6 col-lg-12">
                     <div class="card project-card">
                         <div class="card-body">
@@ -17,14 +17,18 @@
                                     <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
-                                    <h5 class="title font-w600 mb-2"><a href="post-details.html"
-                                            class="text-black">{{ $semic->nome }}</a></h5>
-                                    <span>We Create Your Dream</span>
+                                    <h4 class="title mb-2 mt-1">{{ $dados->nome }}</h4>
+                                    @if ($dados->status == 'Aberto')
+                                        <span
+                                            class="badge badge-sm badge-success d-sm-inline-block d-none mt-2">Aberto</span>
+                                    @else
+                                        <span
+                                            class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
+                                    @endif
                                 </div>
-                                <span class="badge badge-success d-sm-inline-block d-none">Status</span>
+                                <a href="{{ route('pp-indicacao-bolsistas.edit', $dados->pp_i_bolsista_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
-                            <p class="mb-4">It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout.</p>
+                            <p class="mb-4">{{ $dados->descricao }}</p>
                             <div class="row mb-4">
                                 <div class="col-sm-6 mb-sm-0 mb-3 d-flex">
                                     <div class="dt-icon bgl-info me-3">
@@ -40,7 +44,8 @@
                                     </div>
                                     <div>
                                         <span>Data de Inicio</span>
-                                        <p class="mb-0 pt-1 font-w500 text-black">{{ date('d/m/Y', strtotime($semic->data_inicio)) }}</p>
+                                        <p class="mb-0 pt-1 font-w500 text-black">
+                                            {{ date('d/m/Y', strtotime($dados->data_inicio)) }}</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 d-flex">
@@ -54,7 +59,8 @@
                                     </div>
                                     <div>
                                         <span>Data do Fim</span>
-                                        <p class="mb-0 pt-1 font-w500 text-black">{{ date('d/m/Y', strtotime($semic->data_fim)) }}</p>
+                                        <p class="mb-0 pt-1 font-w500 text-black">
+                                            {{ date('d/m/Y', strtotime($dados->data_fim)) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +75,7 @@
                                         <span class="pull-right">{{ number_format($dados->percentual(), 2)}}%</span>
                                     </h6>
                                     <div class="progress ">
-                                        <div class="progress-bar bg-info progress-animated" style="width: {{$dados->percentual()}}%; height:6px;"
+                                        <div class="progress-bar bg-info progress-animated" style="width: {{ $dados->percentual()}}%; height:6px;"
                                             role="progressbar"></div>
                                     </div>
                                 </div>
@@ -77,7 +83,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                Ainda nao tem programa criado.    
+            @endforelse
         </div>
     </div>
 

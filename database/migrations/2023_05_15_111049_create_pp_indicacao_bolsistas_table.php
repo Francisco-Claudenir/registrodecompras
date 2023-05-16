@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSemicsTable extends Migration
+class CreatePpIndicacaoBolsistasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateSemicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('semics', function (Blueprint $table) {
-            $table->bigIncrements('semic_id')->autoIncrement()->unique();
+        Schema::create('pp_indicacao_bolsistas', function (Blueprint $table) {
+            $table->bigIncrements('pp_i_bolsista_id')->autoIncrement()->unique();
             $table->string('nome');
             $table->string('descricao');
             $table->dateTime('data_inicio');
@@ -32,6 +32,6 @@ class CreateSemicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semics');
+        Schema::dropIfExists('pp_indicacao_bolsistas');
     }
 }
