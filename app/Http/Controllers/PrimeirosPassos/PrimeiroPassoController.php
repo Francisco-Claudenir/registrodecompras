@@ -12,10 +12,8 @@ class PrimeiroPassoController extends Controller
 {
     protected $primeiropasso;
     protected $bag = [
-        'view' => '',
-        'route' => '',
-        'Title' => '',
-        'subtitle' => '',
+        'view' => 'admin.primeirospassos',
+        'route' => 'primeiropasso',
         'msg' => 'temauema.msg.register'
     ];
 
@@ -33,7 +31,7 @@ class PrimeiroPassoController extends Controller
     public function index()
     {
         $primeiropasso = $this->primeiropasso->paginate(20);
-        return view('admin.primeirospassos.index', compact('primeiropasso'));
+        return view($this->bag['view'] . '.index', compact('primeiropasso'));
     }
 
     /**
@@ -43,7 +41,7 @@ class PrimeiroPassoController extends Controller
      */
     public function create()
     {
-        return view('admin.primeirospassos.create');
+        return view($this->bag['view'] . '.create');
     }
 
     public function site(PrimeiroPasso $primeiropasso)
@@ -59,10 +57,8 @@ class PrimeiroPassoController extends Controller
      */
     public function store(StorePrimeirosPassosRequest $request)
     {
-        DB::beginTransaction();
-
         try {
-
+            DB::beginTransaction();
             $dados = $request->validated();
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $dados['status'] = 'Aberto';
@@ -70,7 +66,7 @@ class PrimeiroPassoController extends Controller
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->route('primeiropasso.index');
+            return redirect()->route($this->bag['route'] . '.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
@@ -98,8 +94,7 @@ class PrimeiroPassoController extends Controller
     public function edit($id)
     {
         $primeiropasso = $this->primeiropasso->findOrfail($id);
-
-        return view('admin.primeirospassos.edit', compact('primeiropasso'));
+        return view($this->bag['view'] . '.edit', compact('primeiropasso'));
     }
 
     /**
@@ -113,16 +108,15 @@ class PrimeiroPassoController extends Controller
     {
         try {
 
+            DB::beginTransaction();
             $primeiropasso = $this->primeiropasso->findOrfail($id);
-
             $dados = $request->validated();
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
-
             $primeiropasso->update($dados);
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.update'));
-            return redirect()->route('primeiropasso.index');
+            return redirect()->route($this->bag['route'] . '.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.update'));

@@ -167,6 +167,25 @@ return [
 
 			],
 		],
+		[
+			'title' => 'PP-Indicacao Bolsistas',
+			'icon' => 'flaticon-381-trash',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-key',
+					'route' => 'pp-indicacao-bolsistas.index'
+
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-key',
+					'route' => 'pp-indicacao-bolsistas.create'
+
+				]
+
+			],
+		],
 		['header' => 'Segundo Menu'],
 		[
 			'title' => 'Item 1',
