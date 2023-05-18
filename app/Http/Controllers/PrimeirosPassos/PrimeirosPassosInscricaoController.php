@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\PrimeirosPassos;
 
+use App\Models\SubArea;
+use App\Models\GrandeArea;
+use App\Models\PrimeiroPasso;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
-use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
 use App\Models\PrimeirosPassosInscricao;
+use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
+use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
 
 class PrimeirosPassosInscricaoController extends Controller
 {
@@ -18,9 +21,12 @@ class PrimeirosPassosInscricaoController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PrimeirosPassosInscricao $ppinscricao)
+    public function __construct(PrimeirosPassosInscricao $ppinscricao, GrandeArea $grandearea, SubArea $subarea, PrimeiroPasso $primeiropasso)
     {
         $this->ppinscricao = $ppinscricao;
+        $this->primeiropasso = $primeiropasso;
+        $this->grandearea = $grandearea;
+        $this->subarea = $subarea;
     }
 
     /**
@@ -30,7 +36,7 @@ class PrimeirosPassosInscricaoController extends Controller
      */
     public function index()
     {
-        return view('teste');
+        return view('page.primeirospassos.index');
     }
 
     /**
@@ -38,8 +44,11 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PrimeiroPasso $primeiropasso)
     {
+        $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+
+        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso'));
     }
 
     /**
@@ -50,7 +59,6 @@ class PrimeirosPassosInscricaoController extends Controller
      */
     public function store(StorePrimeirosPassosInscricaoRequest $request)
     {
-        //
     }
 
     /**

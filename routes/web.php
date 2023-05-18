@@ -122,9 +122,9 @@ Route::prefix('admin')->group(function () {
 
 //Inscrições de Eventos -  VIEW CANDIDATOS
 Route::prefix('primeirospassos')->group(function () {
-    Route::get('/home', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.home');
-    Route::resource('primeirospassos', PrimeirosPassosInscricaoController::class);
-    Route::resource('semic', PrimeirosPassosInscricaoController::class);
+    Route::get('/{primeiropasso}', [PrimeiroPassoController::class, 'site'])->name('primeirospassos.index');
+    Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
+    Route::post('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
 });
 
 Route::get('teste', function () {

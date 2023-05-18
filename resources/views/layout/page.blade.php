@@ -6,7 +6,7 @@
 
 @section('body')
     @include('layout.partials.loader.index')
-    <div id="main-wrapper">
+    <div id="main-wrapper vh-100">
         @if (config($layout . '.hasHeader'))
             @include('layout.partials.brand.index')
             @include('layout.partials.header.index')

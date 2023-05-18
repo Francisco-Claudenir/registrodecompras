@@ -16,22 +16,21 @@
                                     <img src="images/uema/svg/logo_uema.svg" class="img-fluid" alt="">
                                 </a>
                             </div>
-                            <h4 class="text-center mb-4">Entre com seu login siguema</h4>
-                            <form action="{{ route('login-professor') }}" method="post">
+                            <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="mb-1"><strong>Usuário</strong></label>
+                                    <label class="mb-1"><strong>Cpf</strong></label>
                                     <div class="input-group">
-                                        <input type="text" name="login"
-                                            class="form-control @error('login') is-invalid @enderror"
-                                            value="{{ old('login') }}" placeholder="Login SigUema" autofocus>
+                                        <input type="text" name="cpf"
+                                            class="form-control @error('cpf') is-invalid @enderror"
+                                            value="{{ old('cpf') }}" placeholder="cpf" autofocus>
                                         <div class="input-group-text">
                                             <span class="flaticon-381-user"></span>
                                         </div>
                                     </div>
                                 </div>
                                 {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
-                                {!! $errors->default->first('login', '<span style="color:red" class="form-text">:message</span>') !!}
+                                {!! $errors->default->first('cpf', '<span style="color:red" class="form-text">:message</span>') !!}
                                 <div class="form-group">
                                     <label class="mb-1"><strong>Senha</strong></label>
                                     <div class="input-group">
@@ -62,7 +61,7 @@
                             <div class="new-account mt-3">
                                 <p>
                                     Não possui cadastro?
-                                    <a class="text-primary" href="{!! url('/page-register') !!}">Cadastre-se</a>
+                                    <a class="text-primary" href="{!! url('/register') !!}">Cadastre-se</a>
                                 </p>
                             </div>
                         </div>

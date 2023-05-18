@@ -49,10 +49,29 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'nome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cpf' => ['required', 'string', 'cpf', 'unique:users', 'size:11'],
+            'telefone' => ['required', 'string', 'min:2', 'max:45'],
+            'password' => ['required', 'confirmed', 'string', 'min:8', 'max:255'],
+            'endereco' => ['required', 'array'],
+            'endereco.cep' => ['required', 'digits:8'],
+            'endereco.endereco' => ['required'],
+            'endereco.numero' => ['required'],
+            'endereco.bairro' => ['required']
+
+        ], [
+            //cep
+            'endereco.cep.required' => 'O cep é obrigatório',
+            'endereco.cep.digits' => 'O cep deve conter 8 dígitos',
+            //numero
+            'endereco.numero.required' => 'O numero é obrigatório',
+            //endereco
+            'endereco.endereco.required' => 'O endereco é obrigatório',
+            //Bairro
+            'endereco.bairro.required' => 'O bairro é obrigatório',
         ]);
     }
 
@@ -65,8 +84,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nome' => $data['nome'],
             'email' => $data['email'],
+            'cpf' => $data['cpf'],
+            'telefone' => $data['telefone'],
+            'endereco' => $data['endereco'],
             'password' => Hash::make($data['password']),
         ]);
     }
