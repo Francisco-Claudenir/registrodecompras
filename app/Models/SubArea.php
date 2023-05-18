@@ -10,7 +10,8 @@ class SubArea extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'sub_areas';
-    protected $fillable = ['area_id','nome'];
+    
+    protected $fillable = ['area_id', 'nome'];
 
     protected $primaryKey = 'areaconhecimento_id';
 
@@ -22,4 +23,9 @@ class SubArea extends Model
         return $this->belongsTo(GrandeArea::class, 'area_id')->withTrashed();
     }
 
+    //Relacionamento de SubArea para PP_IndicacaoBolsistasInscricao
+    public function subArea_pp_i_b_inscricao()
+    {
+        return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'areaconhecimento_id')->withTrashed();
+    }
 }

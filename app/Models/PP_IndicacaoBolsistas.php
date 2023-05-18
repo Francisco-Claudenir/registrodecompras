@@ -19,6 +19,11 @@ class PP_IndicacaoBolsistas extends Model
 
     protected $dates = ['deleted_at'];
 
+    //Relacionamento de PP_IndicacaoBolsistas para PP_IndicacaoBolsistasInscricao
+    public function pp_i_bolsista_pp_i_b_inscricao()
+    {
+        return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'pp_i_bolsista_id')->withTrashed();
+    }
 
     public function percentual()
     {
