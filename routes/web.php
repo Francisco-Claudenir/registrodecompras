@@ -127,6 +127,13 @@ Route::prefix('primeirospassos')->group(function () {
     Route::post('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
 });
 
+//Inscrições de Eventos -  VIEW CANDIDATOS
+Route::prefix('pp-indicacao-bolsistas')->group(function () {
+    Route::get('/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'site'])->name('pp-indicacao-bolsistas.index');
+    Route::get('/inscricao/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'create'])->name('pp-indicacao-bolsistas.inscricao.create');
+    Route::post('/inscricao/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'store'])->name('pp-indicacao-bolsistas.inscricao.store');
+});
+
 Route::get('teste', function () {
     return view('inscricao');
 });
