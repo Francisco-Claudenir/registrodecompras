@@ -24,7 +24,7 @@ class UpdateGrandeAreaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => ['required', 'string', 'min:2', 'max:150'],
         ];
     }
 }
