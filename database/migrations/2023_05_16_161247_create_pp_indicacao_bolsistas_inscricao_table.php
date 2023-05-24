@@ -17,7 +17,6 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->bigIncrements('pp_i_bolsista_inscricao_id')->autoIncrement()->unique();
             $table->unsignedBigInteger('pp_i_bolsista_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('areaconhecimento_id');
             $table->string('curso');
             $table->string('centro');
             $table->string('numero_identidade');
@@ -33,13 +32,19 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->string('termo_compromisso_bolsista');
             $table->string('declaracao_negativa_vinculo');
             $table->string('curriculo');
-            $table->string('declaracao_conjuta_estagio');
+            $table->string('declaracao_conjuta_estagio')->nullable();
             $table->string('agencia_banco');
             $table->string('numero_conta_corrente');
             $table->string('comprovante_conta_corrente');
             $table->string('termo_compromisso_orientador');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('pp_i_bolsista_id')->references('pp_i_bolsista_id')->on('pp_indicacao_bolsistas')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -221,12 +221,14 @@ return [
 				'create' => 'Item criado com sucesso',
 				'update' => 'Item atualizado com sucesso',
 				'delete' => 'Item removido com sucesso',
+				'inscricao' => 'Inscrição feita com sucesso'
 			],
 			'error' => [
 				'create' => 'Erro ao tentar salvar',
 				'update' => 'Erro ao tentar atualizar',
 				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
-				'notfound' => 'Item não existe'
+				'notfound' => 'Item não existe',
+				'inscricao' => 'Erro ao tentar de inscrever'
 			],
 		]
 	],
