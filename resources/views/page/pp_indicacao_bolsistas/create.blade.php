@@ -9,163 +9,280 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-
                     <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
-                        <span class="mt-4"><strong>{{ $primeiropasso->nome }}</strong></span>
+                        <span class="mt-4"><strong>{{ $pp_indicacao_bolsista->nome }}</strong></span>
+                        @if (Auth::user() != null)
+                            > Logado
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="card">
-            <div class="col-xl-12 p-lg-4 ">
-                <span>{{ Auth::user() }}</span>
-                <div class="row justify-content-center">
-                    <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
-                    <div class="col-lg-8 col-md-11 col-sm-11">
-                        <div class="card border shadow-sm">
-                            <div class="card-body">
-                                <form
-                                    action="{{ route('primeirospassos.inscricao.store', $primeiropasso->primeiropasso_id) }}"
-                                    method="post" enctype="multipart/form-data">
-                                    @csrf
+            <form action="{{ route('pp-i-bolsistas-inscricao.store', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}" method="post">
+                @csrf
+                <div class="col-xl-12 p-lg-4 ">
+                    <div class="row justify-content-center">
+                        <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <h4 class=" text-muted d-inline text-center px-4 pb-2">Identificação do Bolsista
+                                        </h4>
+                                    </div>
+                                    <hr class="mt-3 mb-3">
                                     <div class="basic-form">
-                                        <div class="row">
+                                        <div class="row mt-3">
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Identidade</label>
+                                                <label class="form-label fw-normal">Curso</label>
                                                 <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Identidade" name="identidade">
+                                                    placeholder="Curso" required name="curso">
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Matricula</label>
+                                                <label class="form-label fw-normal">Centro</label>
                                                 <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Matricula" name="matricula">
+                                                    placeholder="Centro" required name="centro">
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">centro</label>
-                                                <input type="text" class="form-control" placeholder="Centro"
-                                                    name="centro">
+                                                <label class="form-label fw-normal">Numero de Identidade</label>
+                                                <input type="text" class="form-control" placeholder="Identidade" required
+                                                    name="numero_identidade">
                                             </div>
-                                            <div class="mb-3 col-md-12 col-sm-12">
-                                                <label class="form-label fw-normal">Cópia do Contrato</label>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Documento de Identidade</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control" required
+                                                            name="documento_identidade">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Documento CPF</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control" required
+                                                            name="documento_cpf">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <h4 class=" text-muted d-inline text-center px-4 pb-2">Identificação do
+                                            Orientador(a)
+                                        </h4>
+                                    </div>
+                                    <hr class="mt-3 mb-3">
+                                    <div class="basic-form">
+                                        <div class="row mt-3">
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Nome Completo</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Nome" required name="nome_orientador">
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Telefone</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Telefone" required name="telefone_orientador">
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">E-mail</label>
+                                                <input type="text" class="form-control" placeholder="E-mail" required
+                                                    name="email_orientador">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label fw-normal">Título do Projeto do
+                                                    Orientador(a)</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Título do Projeto do Orientador(a)" required
+                                                    name="titulo_projeto_orientador">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label fw-normal">Título do Plano de Trabalho
+                                                    Bolsista</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Título do Plano de Trabalho Bolsista" required
+                                                    name="titulo_plano_orientador">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <h4 class=" text-muted d-inline text-center px-4 pb-2">Dados Acadêmicos
+                                        </h4>
+                                    </div>
+                                    <hr class="mt-3 mb-3">
+                                    <div class="basic-form">
+                                        <div class="row mt-2">
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Histórico Escolar atualizado,
+                                                    disponível do
+                                                    SIGUEMA (formato PDF)</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
                                                         <input type="file" class="form-file-input form-control"
-                                                            name="copiacontrato">
+                                                            required name="historico_escolar">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Declaração de vínculo do aluno à UEMA
+                                                    atualizado (formato PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="declaracao_vinculo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Termo de Compromisso do bolsista
+                                                    (formato
+                                                    PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="termo_compromisso_bolsista">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Declaração Negativa de Vínculo
+                                                    Empregatício
+                                                    (formato PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="declaracao_negativa_vinculo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Currículo atualizado, gerado na
+                                                    Plataforma
+                                                    Lattes (formato PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="curriculo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Declaração conjuta de estágio (quando
+                                                    for o
+                                                    caso) (formato PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            name="declaracao_conjuta_estagio">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr class="mt-4 ">
-                                    <div class="row justify-content-center">
-                                        <h5 class=" text-muted d-inline text-center px-4 pb-2">Área do Projeto de Pesquisa
-                                        </h5>
-                                        <div class="row ">
-                                            <h6 class="text-muted form-label py-2 fw-normal">Grande Área de conhecmento</h6>
-                                            @foreach ($grandeArea as $area)
-                                                <div class="mb-3 col-md-3">
-                                                    <p lass="text-muted d-inline form-label fw-normal text-center">
-                                                        {{ $area->nome }}
-                                                    </p>
-                                                    @foreach ($area->grandeArea_subArea as $sub)
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="areaconhecimento_id"
-                                                                value="{{ $sub->areaconhecimento_id }}" checked="">
-                                                            <label class="form-check-label">
-                                                                {{ $sub->nome }}
-
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="row pt-4">
-                                        <div class="mb-3 col-md-5">
-                                            <label class="form-label fw-normal">Título de Projeto de Pesquisa</label>
-                                            <input type="text" class="form-control" name="tituloprojetopesquisa">
-                                        </div>
-                                        <div class="mb-3 col-md-7">
-                                            <label class="form-label fw-normal">Projeto de Pesquisa</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text bg-primary text-white">Upload</span>
-                                                <div class="form-file">
-                                                    <input type="file" class="form-file-input form-control"
-                                                        name="projetopesquisa">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 col-md-7">
-                                            <label class="form-label fw-normal">Resumo do Projeto</label>
-                                            <textarea class="form-control" rows="6" id="comment" name="resumopeojeto"></textarea>
-                                        </div>
-                                        <div class="mb-3 col-md-5">
-                                            <label class="form-label fw-normal">Chefe Imediato</label>
-                                            <input type="text" class="form-control" name="chefeimediato">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label fw-normal">Parecer do Comitê de Ética</label>
-                                            <div class="input-group mb-6">
-                                                <span class="input-group-text bg-primary text-white">Upload</span>
-                                                <div class="form-file">
-                                                    <input type="file" class="form-file-input form-control"
-                                                        name="parecercomite">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label fw-normal">Currículo Lattes atualizado a partir de
-                                                2018</label>
-                                            <div class="input-group mb-6">
-                                                <span class="input-group-text bg-primary text-white">Upload</span>
-                                                <div class="form-file">
-                                                    <input type="file" class="form-file-input form-control"
-                                                        name="curriculolattes">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="mt-4">
-                                        <div class="row justify-content-center mb-4">
-                                            <h5 class=" text-muted d-inline text-center px-4 pb-2">Plano de Trabalho
-                                            </h5>
-                                            <div class="row ">
-                                                <div class="mb-3 col-md-5">
-                                                    <label class="form-label fw-normal">Título</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="mb-3 col-md-7">
-                                                    <label class="form-label fw-normal">Projeto de Pesquisa</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text bg-primary text-white">Upload</span>
-                                                        <div class="form-file">
-                                                            <input type="file" class="form-file-input form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 col-md-12">
-                                                    <label class="form-label fw-normal">Resumo do Projeto</label>
-                                                    <textarea class="form-control" rows="6" id="comment"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="{{ route('primeirospassos.index', 1) }}"
-                                        class="btn btn-danger float-start">Voltar</a>
-                                    <button type="submit" class="btn btn-primary float-end">Enviar</button>
-
-                                </form>
+                                </div>
                             </div>
-
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <h4 class=" text-muted d-inline text-center px-4 pb-2">Informações Bancárias
+                                        </h4>
+                                    </div>
+                                    <hr class="mt-3 mb-3">
+                                    <div class="basic-form">
+                                        <div class="row mt-3">
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label fw-normal">Agência do Banco do Brasil n°</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Identidade" required name="agencia_banco">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label fw-normal">Número da Conta Corrente do Banco do
+                                                    Brasil</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Matricula" required name="numero_conta_corrente">
+                                            </div>
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
+                                                    do
+                                                    Brasil (formato PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="comprovante_conta_corrente">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <h4 class=" text-muted d-inline text-center px-4 pb-2">Documentação do
+                                            Orientador(a)
+                                        </h4>
+                                    </div>
+                                    <hr class="mt-3 mb-3">
+                                    <div class="basic-form">
+                                        <div class="row mt-3">
+                                            <div class="mb-3 col-md-6 col-sm-6">
+                                                <label class="form-label fw-normal">Termo de Compromisso (formato
+                                                    PDF)</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            required name="termo_compromisso_orientador">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <a href="{{ route('primeirospassos.index', 1) }}"
+                                        class="btn btn-dark float-start">Voltar</a>
+                                    <button type="submit" class="btn btn-primary float-end">Enviar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

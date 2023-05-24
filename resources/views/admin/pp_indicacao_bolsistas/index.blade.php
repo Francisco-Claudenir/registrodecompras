@@ -26,7 +26,7 @@
                                             class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                     @endif
                                 </div>
-                                <a href="{{ route('pp-indicacao-bolsistas.edit', $dados->pp_i_bolsista_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
+                                <a href="{{ route('pp-i-bolsistas.index', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id]) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
                             <p class="mb-4">{{ $dados->descricao }}</p>
                             <div class="row mb-4">
