@@ -111,7 +111,7 @@ return [
 			'sidebarStyle' => 'full',
 			'sidebarPosition' => 'fixed',
 			'headerPosition' => 'static',
-			'containerLayout' => 'wide-box',
+			'containerLayout' => 'full',
 			'hasSideBar' => false,
 			'hasHeader' => false,
 			'hasFooter' => false,
@@ -162,6 +162,25 @@ return [
 					'title' => 'Adicionar',
 					'icon' => 'flaticon-381-key',
 					'route' => 'primeiropasso.create'
+
+				]
+
+			],
+		],
+		[
+			'title' => 'PP-Indicacao Bolsistas',
+			'icon' => 'flaticon-381-trash',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-key',
+					'route' => 'pp-indicacao-bolsistas.index'
+
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-key',
+					'route' => 'pp-indicacao-bolsistas.create'
 
 				]
 

@@ -66,10 +66,10 @@
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress
-                                        <span class="pull-right">75%</span>
+                                        <span class="pull-right">{{ number_format($dados->percentual(), 2)}}%</span>
                                     </h6>
                                     <div class="progress ">
-                                        <div class="progress-bar bg-info progress-animated" style="width: 75%; height:6px;"
+                                        <div class="progress-bar bg-info progress-animated" style="width: {{$dados->percentual()}}%; height:6px;"
                                             role="progressbar"></div>
                                     </div>
                                 </div>

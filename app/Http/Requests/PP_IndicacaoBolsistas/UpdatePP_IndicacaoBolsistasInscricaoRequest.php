@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\PrimeirosPassos\Requests;
+namespace App\Http\Requests\PP_IndicacaoBolsistas;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PrimeiroPassoRequest extends FormRequest
+class UpdatePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PrimeiroPassoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,10 +24,7 @@ class PrimeiroPassoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required', 'string', 'min:2', 'max:150'],
-            'descricao' => ['required', 'string', 'min:2', 'max:255'],
-            'data_inicio' => ['required', 'date'],
-            'data_fim' => ['required', 'date'],
+            //
         ];
     }
 }

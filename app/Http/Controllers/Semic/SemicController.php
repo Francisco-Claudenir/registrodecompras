@@ -12,10 +12,8 @@ class SemicController extends Controller
 {
     protected $semic;
     protected $bag = [
-        'view' => '',
+        'view' => 'admin.semic',
         'route' => '',
-        'Title' => '',
-        'subtitle' => '',
         'msg' => 'temauema.msg.register'
     ];
 

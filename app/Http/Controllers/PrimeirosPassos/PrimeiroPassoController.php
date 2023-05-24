@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\PrimeirosPassos;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PrimeirosPassos\PrimeiroPassoRequest;
+use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosRequest;
+use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosRequest;
 use App\Models\PrimeiroPasso;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PrimeiroPassoController extends Controller
 {
     protected $primeiropasso;
     protected $bag = [
-        'view' => '',
-        'route' => '',
-        'Title' => '',
-        'subtitle' => '',
+        'view' => 'admin.primeirospassos',
+        'route' => 'primeiropasso',
         'msg' => 'temauema.msg.register'
     ];
 
@@ -33,7 +31,7 @@ class PrimeiroPassoController extends Controller
     public function index()
     {
         $primeiropasso = $this->primeiropasso->paginate(20);
-        return view('admin.primeirospassos.index', compact('primeiropasso'));
+        return view($this->bag['view'] . '.index', compact('primeiropasso'));
     }
 
     /**
@@ -43,21 +41,24 @@ class PrimeiroPassoController extends Controller
      */
     public function create()
     {
-        return view('admin.primeirospassos.create');
+        return view($this->bag['view'] . '.create');
     }
 
+    public function site(PrimeiroPasso $primeiropasso)
+    {
+
+        return view('page.primeirospassos.index', compact('primeiropasso'));
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PrimeiroPassoRequest $request)
+    public function store(StorePrimeirosPassosRequest $request)
     {
-        DB::beginTransaction();
-
         try {
-
+            DB::beginTransaction();
             $dados = $request->validated();
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $dados['status'] = 'Aberto';
@@ -65,7 +66,7 @@ class PrimeiroPassoController extends Controller
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->back();
+            return redirect()->route($this->bag['route'] . '.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
@@ -90,9 +91,10 @@ class PrimeiroPassoController extends Controller
      * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function edit(PrimeiroPasso $primeiropasso)
+    public function edit($id)
     {
-        //
+        $primeiropasso = $this->primeiropasso->findOrfail($id);
+        return view($this->bag['view'] . '.edit', compact('primeiropasso'));
     }
 
     /**
@@ -102,9 +104,24 @@ class PrimeiroPassoController extends Controller
      * @param  \App\Models\PrimeiroPasso  $primeiropasso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PrimeiroPasso $primeiropasso)
+    public function update(UpdatePrimeirosPassosRequest $request, $id)
     {
-        //
+        try {
+
+            DB::beginTransaction();
+            $primeiropasso = $this->primeiropasso->findOrfail($id);
+            $dados = $request->validated();
+            $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
+            $primeiropasso->update($dados);
+
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.update'));
+            return redirect()->route($this->bag['route'] . '.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**

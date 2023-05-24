@@ -103,13 +103,13 @@
 		})
 	}
    
-	var handleMinHeight = function() {
-		var win_h = window.outerHeight;
-		var win_h = window.outerHeight;
-		if (win_h > 0 ? win_h : screen.height) {
-			$(".content-body").css("min-height", (win_h + 60) + "px");
-		};
-	}
+	// var handleMinHeight = function() {
+	// 	var win_h = window.outerHeight;
+	// 	var win_h = window.outerHeight;
+	// 	if (win_h > 0 ? win_h : screen.height) {
+	// 		$(".content-body").css("min-height", (win_h + 60) + "px");
+	// 	};
+	// }
     
 	var handleDataAction = function() {
 		$('a[data-action="collapse"]').on("click", function(i) {

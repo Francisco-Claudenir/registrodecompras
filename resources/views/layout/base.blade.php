@@ -23,6 +23,7 @@
         $plugins = isset($plugins) ? $plugins : [];
     @endphp
 
+@yield('css')
     @foreach ($plugins as $plugin)
         @foreach (config('temauema.plugins.' . $plugin . '.css') as $style)
             <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />

@@ -29,7 +29,7 @@
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="flaticon-028-user-1 text-white " style="font-size: 20px"></i>
                                 <div class="header-info">
-                                    <span>{{ Auth::user()->name }}</span>
+                                    <span>{{ explode(' ', Auth::user()->nome)[0] }}</span>
                                     <small>Super Admin</small>
                                 </div>
                             </a>

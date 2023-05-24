@@ -5,8 +5,10 @@ use App\Http\Controllers\GrandeAreaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
+use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -101,14 +103,37 @@ Route::middleware(['auth'])->group(function () {
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 Route::post('login-servidor', [ApiController::class, 'login'])->name('login-professor');
 
-//Semic
-Route::resource('semic', SemicController::class);
 
-//PrimeiroPassos
-Route::resource('primeiropasso', PrimeiroPassoController::class);
 
-Route::get('teste', function () {
-    return view('teste');
+Route::prefix('admin')->group(function () {
+
+    //Semic
+    Route::resource('semic', SemicController::class);
+
+    //PrimeiroPassos
+    Route::resource('primeiropasso', PrimeiroPassoController::class);
+
+    //GrandeArea
+    Route::resource('grandearea', GrandeAreaController::class);
+
+    //PrimeirosPassos Indicacao Bolsistas
+    Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
 });
 
-Route::resource('grandearea', GrandeAreaController::class);
+//Inscrições de Eventos -  VIEW CANDIDATOS
+Route::prefix('primeirospassos')->group(function () {
+    Route::get('/{primeiropasso}', [PrimeiroPassoController::class, 'site'])->name('primeirospassos.index');
+    Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
+    Route::post('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
+});
+
+//Inscrições de Eventos -  VIEW CANDIDATOS
+Route::prefix('pp-indicacao-bolsistas')->group(function () {
+    Route::get('/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'site'])->name('pp-indicacao-bolsistas.index');
+    Route::get('/inscricao/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'create'])->name('pp-indicacao-bolsistas.inscricao.create');
+    Route::post('/inscricao/{pp-indicacao-bolsistas}', [PP_IndicacaoBolsistasController::class, 'store'])->name('pp-indicacao-bolsistas.inscricao.store');
+});
+
+Route::get('teste', function () {
+    return view('inscricao');
+});

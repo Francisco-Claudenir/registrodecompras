@@ -12,12 +12,17 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'nome' => 'Administrador',
-            'usuario' => 'admin@email.com',
-            'password' => Hash::make('ctic@uema'),
-            'cpf' => 'admin@email.com',
-            'telefone' => 'admin@email.com',
-            'email' => 'admin@email.com',
-            'endereco' => '{ "enderecos": [{"rua": "Rua A","cidade": "São Paulo"}]}'
+            'cpf' => '12345678945',
+            'telefone' => '98988888888',
+            'endereco' => '{"cep": "65000000","numero": "00","endereco": "Rua Admin", "bairro": "Bairro Admin"}',
+            'email' => 'admin@ppg.com',
+            'password' => Hash::make('password'),
         ]);
+
+        AreasSeeder::class;
+        ModalidadeSeeder::class;
+
+
+
     }
 }

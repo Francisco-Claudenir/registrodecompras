@@ -23,32 +23,20 @@ class GrandeAreaController extends Controller
         $this->grandearea = $grandearea;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $grandeareas = $this->grandearea->orderby('nome', 'asc')->get();
+       // dd($grandeareas);
+        return view('admin.grandearea.index', compact('grandeareas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.grandearea.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\GrandeArea\StoreGrandeAreaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(StoreGrandeAreaRequest $request)
     {
         DB::beginTransaction();
@@ -56,7 +44,7 @@ class GrandeAreaController extends Controller
         try {
 
             //$request->validated()
-           $this->grandearea->create($request->validated());
+            $this->grandearea->create($request->validated());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->back();
@@ -68,46 +56,39 @@ class GrandeAreaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GrandeArea  $grandeArea
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(GrandeArea $grandeArea)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GrandeArea  $grandeArea
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GrandeArea $grandeArea)
+   
+    public function edit($id)
     {
-        //
+        $grandeareas = $this->grandearea->findOrfail($id);
+        //$grandeareas = $this->grandearea->post();
+        return view('admin.grandearea.edit', compact('grandeareas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\GrandeArea\UpdateGrandeAreaRequest  $request
-     * @param  \App\Models\GrandeArea  $grandeArea
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGrandeAreaRequest $request, GrandeArea $grandeArea)
+    
+    public function update(StoreGrandeAreaRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        
+        try {
+            $grandeareas = $this->grandearea->findOrfail($id);
+            $grandeareas->update($request->all());
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GrandeArea\GrandeArea  $grandeArea
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(GrandeArea $grandeArea)
     {
         //

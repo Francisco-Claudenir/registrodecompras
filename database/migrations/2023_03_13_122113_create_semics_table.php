@@ -19,6 +19,7 @@ class CreateSemicsTable extends Migration
             $table->string('descricao');
             $table->dateTime('data_inicio');
             $table->dateTime('data_fim');
+            $table->string('status', 45)->default('Aberto');
             $table->timestamps();
             $table->softDeletes();
         });

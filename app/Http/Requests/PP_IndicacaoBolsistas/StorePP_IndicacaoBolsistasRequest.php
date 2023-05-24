@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\PrimeirosPassos\Requests;
+namespace App\Http\Requests\PP_IndicacaoBolsistas;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PrimeiroPassoRequest extends FormRequest
+class StorePP_IndicacaoBolsistasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

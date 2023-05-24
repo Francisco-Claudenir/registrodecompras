@@ -2,13 +2,33 @@
 
 namespace App\Http\Controllers\PrimeirosPassos;
 
+use App\Models\SubArea;
+use App\Models\GrandeArea;
+use App\Models\PrimeiroPasso;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePrimeirosPassosInscricaoRequest;
-use App\Http\Requests\UpdatePrimeirosPassosInscricaoRequest;
 use App\Models\PrimeirosPassosInscricao;
+use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
+use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
 
 class PrimeirosPassosInscricaoController extends Controller
 {
+    protected $primeirospassosinscricao;
+    protected $bag = [
+        'view' => '',
+        'route' => '',
+        'Title' => '',
+        'subtitle' => '',
+        'msg' => 'temauema.msg.register'
+    ];
+
+    public function __construct(PrimeirosPassosInscricao $ppinscricao, GrandeArea $grandearea, SubArea $subarea, PrimeiroPasso $primeiropasso)
+    {
+        $this->ppinscricao = $ppinscricao;
+        $this->primeiropasso = $primeiropasso;
+        $this->grandearea = $grandearea;
+        $this->subarea = $subarea;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +36,7 @@ class PrimeirosPassosInscricaoController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.primeirospassos.index');
     }
 
     /**
@@ -24,20 +44,21 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PrimeiroPasso $primeiropasso)
     {
-        //
+        $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+
+        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePrimeirosPassosInscricaoRequest  $request
+     * @param  \App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StorePrimeirosPassosInscricaoRequest $request)
     {
-        //
     }
 
     /**
@@ -65,7 +86,7 @@ class PrimeirosPassosInscricaoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePrimeirosPassosInscricaoRequest  $request
+     * @param  \App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest  $request
      * @param  \App\Models\PrimeirosPassosInscricao  $primeirosPassosInscricao
      * @return \Illuminate\Http\Response
      */
