@@ -15,7 +15,6 @@ class PP_IndicacaoBolsistasInscricao extends Model
     protected $fillable = [
         'pp_i_bolsista_id',
         'user_id',
-        'areaconhecimento_id',
         'curso',
         'centro',
         'numero_identidade',

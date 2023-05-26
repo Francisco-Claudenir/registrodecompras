@@ -121,6 +121,21 @@ Route::prefix('admin')->group(function () {
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
 });
 
+Route::prefix('site')->group(function () {
+
+    //Semic
+    //Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
+
+    //PrimeiroPassos
+    //Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
+
+    //GrandeArea
+    //Route::get('/grandearea', [GrandeAreaController::class, 'site'])->name('site.grandearea');
+
+    //PrimeirosPassos Indicacao Bolsistas
+    Route::get('/pp-indicacao-bolsistas', [PP_IndicacaoBolsistasController::class, 'site'])->name('site.pp-indicacao-bolsistas');
+});
+
 //Inscrições de Eventos -  VIEW CANDIDATOS
 Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso}', [PrimeiroPassoController::class, 'site'])->name('primeirospassos.index');
@@ -128,9 +143,10 @@ Route::prefix('primeirospassos')->group(function () {
     Route::post('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
 });
 
-//Inscrições de Eventos -  VIEW CANDIDATOS
+//Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
 Route::prefix('pp-indicacao-bolsistas')->group(function () {
-    Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'site'])->name('pp-i-bolsistas.index');
+    Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'page'])->name('pp-i-bolsistas.page');
+    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
     Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
     Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
 });
