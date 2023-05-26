@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <table class="table table-striped table-responsive-sm hover" id="tableareas" cellspacing="0" width="100%"
+        {{-- <table class="table table-striped table-responsive-sm hover" id="tableareas" cellspacing="0" width="100%"
             role="grid" style="width: 100%;">
             <thead>
                 <tr>
@@ -18,7 +18,7 @@
             <tbody>
 
             </tbody>
-        </table>
+        </table> --}}
     </div>
 @endsection
 
