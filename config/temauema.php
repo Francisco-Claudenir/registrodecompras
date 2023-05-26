@@ -186,30 +186,21 @@ return [
 
 			],
 		],
-		['header' => 'Segundo Menu'],
+		['header' => 'Sites'],
 		[
-			'title' => 'Item 1',
-			'icon' => 'flaticon-381-user',
-			'route' => 'teste'
-		],
-		['header' => 'Terceiro Menu'],
-		[
-			'title' => 'Item 1',
+			'title' => 'Semic',
 			'icon' => 'flaticon-381-user',
 			'route' => 'teste'
 		],
 		[
-			'title' => 'Item 2',
+			'title' => 'Primeiros Passos',
 			'icon' => 'flaticon-381-user',
-			'route' => 'teste',
-			'submenu' => [
-				[
-					'title' => 'Sub Item 1',
-					'icon' => 'flaticon-381-knob',
-					'route' => 'teste'
-
-				]
-			]
+			'route' => 'teste'
+		],
+		[
+			'title' => 'PP-Indicacao Bolsistas',
+			'icon' => 'flaticon-381-user',
+			'route' => 'site.pp-indicacao-bolsistas'
 		]
 	],
 
@@ -221,12 +212,14 @@ return [
 				'create' => 'Item criado com sucesso',
 				'update' => 'Item atualizado com sucesso',
 				'delete' => 'Item removido com sucesso',
+				'inscricao' => 'Inscrição feita com sucesso'
 			],
 			'error' => [
 				'create' => 'Erro ao tentar salvar',
 				'update' => 'Erro ao tentar atualizar',
 				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
-				'notfound' => 'Item não existe'
+				'notfound' => 'Item não existe',
+				'inscricao' => 'Erro ao tentar de inscrever'
 			],
 		]
 	],

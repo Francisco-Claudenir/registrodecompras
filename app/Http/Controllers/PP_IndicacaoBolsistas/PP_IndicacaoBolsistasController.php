@@ -22,10 +22,25 @@ class PP_IndicacaoBolsistasController extends Controller
         $this->pp_indicacao_bolsistas = $pp_indicacao_bolsistas;
     }
 
+    //Index Para Admin
     public function index()
     {
-        $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->paginate(20);
+        $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->withCount('pp_i_bolsista_pp_i_b_inscricao')->paginate(20);
         return view($this->bag['view'] . '.index', compact('pp_indicacao_bolsistas'));
+    }
+
+    //Indez para User
+    public function site()
+    {
+        $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->paginate(10);
+        return view('page.pp_indicacao_bolsistas.site', compact('pp_indicacao_bolsistas'));
+    }
+
+    //Pagina do Evento Para o User
+    public function page($pp_indicacao_bolsista_id)
+    {
+        $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
+        return view('page.pp_indicacao_bolsistas.page', compact('pp_indicacao_bolsista'));
     }
 
     public function create()
@@ -46,7 +61,6 @@ class PP_IndicacaoBolsistasController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route($this->bag['route'] . '.index');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();
