@@ -20,7 +20,7 @@
 
         <div class="card">
             <div class="col-xl-12 p-lg-4 ">
-                <span>{{ Auth::user() }}</span>
+                {{-- <span>{{ Auth::user() }}</span> --}}
                 <div class="row justify-content-center">
                     <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
                     <div class="col-lg-8 col-md-11 col-sm-11">
