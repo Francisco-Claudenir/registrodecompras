@@ -36,16 +36,19 @@
                                                 <label class="form-label fw-normal">Identidade</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Identidade" name="identidade">
+                                                {!! $errors->default->first('identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Matricula</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Matricula" name="matricula">
+                                                {!! $errors->default->first('matricula', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">centro</label>
                                                 <input type="text" class="form-control" placeholder="Centro"
                                                     name="centro">
+                                                {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-12 col-sm-12">
                                                 <label class="form-label fw-normal">Cópia do Contrato</label>
@@ -56,6 +59,7 @@
                                                             name="copiacontrato">
                                                     </div>
                                                 </div>
+                                                {!! $errors->default->first('copiacontrato', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -74,7 +78,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="areaconhecimento_id"
-                                                                value="{{ $sub->areaconhecimento_id }}" checked="">
+                                                                value="{{ $sub->areaconhecimento_id }}">
                                                             <label class="form-check-label">
                                                                 {{ $sub->nome }}
 
@@ -84,11 +88,16 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        {!! $errors->default->first('areaconhecimento_id', '<span style="color:red" class="form-text">:message</span>') !!}
                                     </div>
                                     <div class="row pt-4">
                                         <div class="mb-3 col-md-5">
                                             <label class="form-label fw-normal">Título de Projeto de Pesquisa</label>
                                             <input type="text" class="form-control" name="tituloprojetopesquisa">
+                                            {!! $errors->default->first(
+                                                'tituloprojetopesquisa',
+                                                '<span style="color:red" class="form-text">:message</span>',
+                                            ) !!}
                                         </div>
                                         <div class="mb-3 col-md-7">
                                             <label class="form-label fw-normal">Projeto de Pesquisa</label>
@@ -99,14 +108,17 @@
                                                         name="projetopesquisa">
                                                 </div>
                                             </div>
+                                            {!! $errors->default->first('projetopesquisa', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <div class="mb-3 col-md-7">
                                             <label class="form-label fw-normal">Resumo do Projeto</label>
-                                            <textarea class="form-control" rows="6" id="comment" name="resumopeojeto"></textarea>
+                                            <textarea class="form-control" rows="6" id="comment" name="resumoprojeto"></textarea>
+                                            {!! $errors->default->first('resumoprojeto', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <div class="mb-3 col-md-5">
                                             <label class="form-label fw-normal">Chefe Imediato</label>
                                             <input type="text" class="form-control" name="chefeimediato">
+                                            {!! $errors->default->first('chefeimediato', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label fw-normal">Parecer do Comitê de Ética</label>
@@ -117,6 +129,7 @@
                                                         name="parecercomite">
                                                 </div>
                                             </div>
+                                            {!! $errors->default->first('parecercomite', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label fw-normal">Currículo Lattes atualizado a partir de
@@ -128,6 +141,7 @@
                                                         name="curriculolattes">
                                                 </div>
                                             </div>
+                                            {!! $errors->default->first('curriculolattes', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <hr class="mt-4">
                                         <div class="row justify-content-center mb-4">

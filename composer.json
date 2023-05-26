@@ -16,7 +16,9 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.4",
-        "lucascudo/laravel-pt-br-localization": "^1.2"
+        "lucascudo/laravel-pt-br-localization": "^1.2",
+        "yajra/laravel-datatables-oracle": "^9.0",
+        "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PP_IndicacaoBolsistas\StorePP_IndicacaoBolsistasInscricaoRequest;
 use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -30,9 +31,14 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pp_indicacao_bolsista_id)
     {
-        //
+        // dd($pp_indicacao_bolsista_id);
+        // $pp_i_bolsistas_inscricao = $this->pp_i_bolsistas_inscricao->with('pp_i_b_inscricao_user')->where('pp_i_bolsista_id','=', $pp_indicacao_bolsista_id)->get();
+
+        // dd($pp_i_bolsistas_inscricao);
+
+        // return view($this->bag['view'] . '.index', compact('pp_indicacao_bolsista_inscritos'));
     }
 
     /**
@@ -69,8 +75,9 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             $this->pp_i_bolsistas_inscricao->create($dados_inscricao);    
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.inscricao'));
-            return redirect()->route('pp-i-bolsistas.index', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
+            return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
