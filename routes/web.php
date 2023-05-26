@@ -94,6 +94,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 });
 
 // Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
