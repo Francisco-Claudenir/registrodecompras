@@ -28,4 +28,10 @@ class SubArea extends Model
     {
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'areaconhecimento_id')->withTrashed();
     }
+
+     //Relacionamento de SubArea para PrimeirosPassosInscricao
+     public function subArea_pp_inscricao()
+     {
+         return $this->hasMany(PrimeirosPassosInscricao::class, 'areaconhecimento_id')->withTrashed();
+     }
 }

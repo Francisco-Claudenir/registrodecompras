@@ -26,8 +26,18 @@ class PrimeirosPassosInscricao extends Model
         'curriculolattes'
         
     ];
+    protected $primaryKey = 'passos_inscricao_id';
 
+    protected $dates = ['deleted_at'];
+
+    //Relacionamento de PrimeirosPassosInscricao para Plano Trabalho
     public function planotrabalho(){
-        return $this->belongsToMany(PlanoTrabalho::class, 'pp_inscricao__ptrabalhos');
+        return $this->belongsToMany(PlanoTrabalho::class, 'pp_inscricao__ptrabalhos','passosinscricao_id','planotrabalho_id')->withTrashed();
+    }
+
+    //Relacionamento de PrimeirosPassosInscricao para SubArea
+    public function pp_inscricao_subArea()
+    {
+        return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
     }
 }
