@@ -44,11 +44,21 @@ class PrimeiroPassoController extends Controller
         return view($this->bag['view'] . '.create');
     }
 
-    public function site(PrimeiroPasso $primeiropasso)
+    //Index para User
+    public function site()
     {
 
-        return view('page.primeirospassos.index', compact('primeiropasso'));
+        $primeirospassos = $this->primeiropasso->paginate(10);
+        return view('page.primeirospassos.site',compact('primeirospassos'));
     }
+
+     //Pagina do Evento Para o User
+     public function page($primeiropasso_id)
+     {
+         $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+
+         return view('page.primeirospassos.page', compact('primeiropasso'));
+     }
     /**
      * Store a newly created resource in storage.
      *

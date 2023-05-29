@@ -122,13 +122,18 @@ Route::prefix('admin')->group(function () {
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
 });
 
+
+
+
+
+
 Route::prefix('site')->group(function () {
 
     //Semic
     //Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
 
     //PrimeiroPassos
-    //Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
+    Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
 
     //GrandeArea
     //Route::get('/grandearea', [GrandeAreaController::class, 'site'])->name('site.grandearea');
@@ -137,11 +142,11 @@ Route::prefix('site')->group(function () {
     Route::get('/pp-indicacao-bolsistas', [PP_IndicacaoBolsistasController::class, 'site'])->name('site.pp-indicacao-bolsistas');
 });
 
-//Inscrições de Eventos -  VIEW CANDIDATOS
+//Inscrições de Eventos -  VIEW CANDIDATOS PRIMEIROS PASSOS
 Route::prefix('primeirospassos')->group(function () {
-    Route::get('/{primeiropasso}', [PrimeiroPassoController::class, 'site'])->name('primeirospassos.index');
+    Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
     Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
-    Route::post('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
+    Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
