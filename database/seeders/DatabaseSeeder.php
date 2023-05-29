@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        AreasSeeder::class;
-        ModalidadeSeeder::class;
 
 
-
+        $this->call([
+            AreasSeeder::class,
+            ModalidadeSeeder::class
+        ]);
     }
 }
