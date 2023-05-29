@@ -10,6 +10,7 @@ use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoCon
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
+use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -115,8 +116,12 @@ Route::prefix('admin')->group(function () {
     //PrimeiroPassos
     Route::resource('primeiropasso', PrimeiroPassoController::class);
 
-    //GrandeArea
-    Route::resource('grandearea', GrandeAreaController::class);
+     //GrandeArea
+     Route::resource('grandearea', GrandeAreaController::class);
+
+     //SubArea
+     Route::resource('subarea', SubAreaController::class);
+ 
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
