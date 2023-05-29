@@ -33,12 +33,24 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function index($pp_indicacao_bolsista_id)
     {
-        // dd($pp_indicacao_bolsista_id);
-        // $pp_i_bolsistas_inscricao = $this->pp_i_bolsistas_inscricao->with('pp_i_b_inscricao_user')->where('pp_i_bolsista_id','=', $pp_indicacao_bolsista_id)->get();
+        $listaInscritos = $this->pp_i_bolsistas_inscricao
+                               ->join('users','users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
+                               ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+                               ->select([
+                                'users.nome',
+                                'users.email',
+                                'users.cpf',
+                                'users.telefone',
+                                'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_inscricao_id'
+                                ])->get();
+        
+        return view($this->bag['view'] . '.index', compact('listaInscritos')); 
+    }
 
-        // dd($pp_i_bolsistas_inscricao);
-
-        // return view($this->bag['view'] . '.index', compact('pp_indicacao_bolsista_inscritos'));
+    public function espelho($pp_i_bolsista_inscricao_id)
+    {
+        $dadosInscritos = $this->pp_i_bolsistas_inscricao->findOrfail($pp_i_bolsista_inscricao_id);
+        return view($this->bag['view'] . '.espelho', compact('dadosInscritos')); 
     }
 
     /**
