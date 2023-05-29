@@ -195,7 +195,7 @@ return [
 		[
 			'title' => 'Primeiros Passos',
 			'icon' => 'flaticon-381-user',
-			'route' => 'teste'
+			'route' => 'site.primeiropasso'
 		],
 		[
 			'title' => 'PP-Indicacao Bolsistas',

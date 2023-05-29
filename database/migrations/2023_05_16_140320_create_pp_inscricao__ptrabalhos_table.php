@@ -14,15 +14,15 @@ class CreatePpInscricaoPtrabalhosTable extends Migration
     public function up()
     {
         Schema::create('pp_inscricao__ptrabalhos', function (Blueprint $table) {
-            $table->unsignedBigInteger('ppassosinscricao_id');
-            $table->unsignedBigInteger('planotrabalho_id');
+            $table->unsignedBigInteger('passos_inscricao_id');
+            $table->unsignedBigInteger('plano_id');
             $table->timestamps();
 
             ////Relacionando com a tabela pirmeiros_passos_inscricaos
-            $table->foreign('ppassosinscricao_id')->references('passos_inscricao_id')->on('primeiros_passos_inscricaos');
+            $table->foreign('passos_inscricao_id')->references('passos_inscricao_id')->on('primeiros_passos_inscricaos');
 
             ////Relacionando com a tabela plano_trabalhos
-            $table->foreign('planotrabalho_id')->references('plano_id')->on('plano_trabalhos');
+            $table->foreign('plano_id')->references('plano_id')->on('plano_trabalhos');
         });
     }
 
