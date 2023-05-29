@@ -9,24 +9,31 @@ use App\Http\Controllers\Controller;
 use App\Models\PrimeirosPassosInscricao;
 use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
 use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
+use App\Models\PlanoTrabalho;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PrimeirosPassosInscricaoController extends Controller
 {
     protected $primeirospassosinscricao;
+    protected $grandearea;
+    protected $subarea;
+    protected $primeiropasso;
+    protected $planotrabalho;
+
     protected $bag = [
-        'view' => '',
-        'route' => '',
-        'Title' => '',
-        'subtitle' => '',
+        'view' => 'page.primeirospassos',
+        'route' => 'primeirospassos',
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PrimeirosPassosInscricao $ppinscricao, GrandeArea $grandearea, SubArea $subarea, PrimeiroPasso $primeiropasso)
+    public function __construct(PrimeirosPassosInscricao $primeirospassosinscricao, GrandeArea $grandearea, SubArea $subarea, PrimeiroPasso $primeiropasso, PlanoTrabalho $planotrabalho)
     {
-        $this->ppinscricao = $ppinscricao;
+        $this->primeirospassosinscricao = $primeirospassosinscricao;
         $this->primeiropasso = $primeiropasso;
         $this->grandearea = $grandearea;
         $this->subarea = $subarea;
+        $this->planotrabalho = $planotrabalho;
     }
 
     /**
@@ -59,6 +66,64 @@ class PrimeirosPassosInscricaoController extends Controller
      */
     public function store(StorePrimeirosPassosInscricaoRequest $request)
     {
+        // dd($request->all(),$primeiropasso_id);
+
+        try {
+            DB::beginTransaction();
+
+             //Verifica se data correta para realizar inscrição
+            if (true) {
+
+                //Create de inscrição
+                $inscricao = $this->primeirospassosinscricao->create([
+                    'primeiropasso_id' => $request['primeiropasso_id'],
+                    'user_id' => Auth::user()->id,
+                    'areaconhecimento_id' => $request['areaconhecimento_id'],
+                    'identidade' => $request['identidade'],
+                    'matricula' => $request['matricula'],
+                    'centro' => $request['centro'],
+                    'copiacontrato' => 'aindavoufazer',              //file
+                    'tituloprojetopesquisa' => $request['tituloprojetopesquisa'],
+                    'resumoprojeto' => $request['resumoprojeto'],
+                    'projetopesquisa' => 'aindavoufazer',          //file
+                    'chefeimediato' => $request['chefeimediato'],
+                    'parecercomite' => 'aindavoufazer',          //file
+                    'curriculolattes' => 'aindavoufazer',       //file
+
+                ]);
+
+
+                // //Create de Plano de trabalho
+                // $plano = $this->planotrabalho->create([
+                //     'titulo' => $request['titulo'],
+                //     'modalidade_id' => $request['modalidade_id'] ?? 1,
+                //     'resumo' => $request['resumo'],
+                //     'arquivo' => 'aindavoufazer'
+                // ]);
+
+
+                // //Adiciona a relação Plano trabalho / Inscrição
+ 
+                // $inscricao->planotrabalho()->attach($plano->plano_id);
+
+                
+
+
+            } else {
+                alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+            }
+            
+            
+  
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+            return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+            return redirect()->back();
+        }
     }
 
     /**
