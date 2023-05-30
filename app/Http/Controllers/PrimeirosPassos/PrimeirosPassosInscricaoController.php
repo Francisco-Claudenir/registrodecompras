@@ -10,6 +10,7 @@ use App\Models\PrimeirosPassosInscricao;
 use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
 use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
 use App\Models\PlanoTrabalho;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -85,11 +86,39 @@ class PrimeirosPassosInscricaoController extends Controller
     {
         // dd($request->all(),$primeiropasso_id);
 
+        $evento = $this->primeiropasso->find($request['primeiropasso_id']);
+
         try {
             DB::beginTransaction();
 
-             //Verifica se data correta para realizar inscrição
+            //Verifica se data correta para realizar inscrição
             if (true) {
+
+
+
+                //Copia Contrato
+                $extensao =  $request['copiacontrato']->extension();
+                $path = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/copiacontrato' . '/' . Auth::user()->cpf . '';
+                $nome = 'copiacontrato' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados['copiacontrato'] = $request['copiacontrato']->storeAs($path, $nome);
+
+                //Projeto Pesquisa
+                $projetoextensao =  $request['projetopesquisa']->extension();
+                $projetopath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/projetopesquisa' . '/' . Auth::user()->cpf . '';
+                $projetonome = 'projetopesquisa' . '_' . uniqid(date('HisYmd')) . '.' . $projetoextensao;
+                $dados['projetopesquisa'] = $request['projetopesquisa']->storeAs($projetopath, $projetonome);
+
+                //Parecer Comite
+                $parecerextensao =  $request['parecercomite']->extension();
+                $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
+                $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
+                $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+
+                //Curriculo Lattes
+                $curriculoextensao =  $request['curriculolattes']->extension();
+                $curriculopath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/curriculolattes' . '/' . Auth::user()->cpf . '';
+                $curriculonome = 'curriculolattes' . '_' . uniqid(date('HisYmd')) . '.' . $curriculoextensao;
+                $dados['curriculolattes'] = $request['curriculolattes']->storeAs($curriculopath, $curriculonome);
 
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
@@ -99,39 +128,37 @@ class PrimeirosPassosInscricaoController extends Controller
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
                     'centro' => $request['centro'],
-                    'copiacontrato' => 'aindavoufazer',              //file
+                    'copiacontrato' => $dados['copiacontrato'],              //file
                     'tituloprojetopesquisa' => $request['tituloprojetopesquisa'],
                     'resumoprojeto' => $request['resumoprojeto'],
-                    'projetopesquisa' => 'aindavoufazer',          //file
+                    'projetopesquisa' => $dados['projetopesquisa'],          //file
                     'chefeimediato' => $request['chefeimediato'],
-                    'parecercomite' => 'aindavoufazer',          //file
-                    'curriculolattes' => 'aindavoufazer',       //file
+                    'parecercomite' => $dados['parecercomite'],          //file
+                    'curriculolattes' => $dados['curriculolattes'],       //file
 
                 ]);
 
 
-                // //Create de Plano de trabalho
-                // $plano = $this->planotrabalho->create([
-                //     'titulo' => $request['titulo'],
-                //     'modalidade_id' => $request['modalidade_id'] ?? 1,
-                //     'resumo' => $request['resumo'],
-                //     'arquivo' => 'aindavoufazer'
-                // ]);
+                //Plano Trabalho
+                $planoextensao =  $request['arquivo']->extension();
+                $planopath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/planotrabalho' . '/' . Auth::user()->cpf . '';
+                $planonome = 'curriculolattes' . '_' . uniqid(date('HisYmd')) . '.' . $planoextensao;
+                $dados['arquivo'] = $request['arquivo']->storeAs($planopath, $planonome);
+
+                //Create de Plano de trabalho
+                $plano = $this->planotrabalho->create([
+                    'titulo' => $request['titulo'],
+                    'modalidade_id' => $request['modalidade_id'] ?? 1,
+                    'resumo' => $request['resumo'],
+                    'arquivo' => $dados['arquivo']
+                ]);
 
 
                 // //Adiciona a relação Plano trabalho / Inscrição
- 
-                // $inscricao->planotrabalho()->attach($plano->plano_id);
-
-                
-
-
+                $inscricao->planotrabalho()->attach($plano->plano_id);
             } else {
                 alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             }
-            
-            
-  
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
