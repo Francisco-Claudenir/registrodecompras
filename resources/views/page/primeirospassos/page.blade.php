@@ -44,7 +44,7 @@
 
                                             </div>
                                             <div class="row mt-4 justify-content-center">
-                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso_id' => $primeiropasso->primeiropasso_id]) }}"
+                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
                                                     class="btn btn-primary mb-1"">Inscreva-se</a>
                                                 <a href="javascript:void(0);" class="btn btn-dark mb-1"
                                                     data-bs-toggle="modal" data-bs-target="#sendMessageModal">Login</a>
