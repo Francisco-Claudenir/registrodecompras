@@ -41,8 +41,25 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($primeiropasso_id)
     {
+        //Verificando se o id existe
+        $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        //Buscando a lista de inscritos atraves de join
+        $listaInscritos = $this->primeirospassosinscricao
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->select([
+                'users.nome',
+                'users.email',
+                'users.cpf',
+                'users.telefone',
+                'primeiros_passos_inscricaos.primeiropasso_id',
+                'primeiros_passos_inscricaos.passos_inscricao_id'
+            ])->paginate(15);
+            
+        dd($listaInscritos);
         return view('page.primeirospassos.index');
     }
 

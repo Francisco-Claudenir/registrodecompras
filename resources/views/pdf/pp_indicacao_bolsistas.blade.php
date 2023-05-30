@@ -100,7 +100,7 @@
                                 <dt>Endereço</dt>
                             </strong>
                             <small>
-                                {{ $dadosInscrito->endereco}}
+                                {{ $dadosInscrito->endereco }}
                             </small>
                         </th>
                     </tr>
@@ -292,6 +292,9 @@
             </table>
         </div>
     </div>
+    <script>
+        window.print();
+    </script>
 </body>
 
 </html>

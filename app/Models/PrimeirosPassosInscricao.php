@@ -40,4 +40,10 @@ class PrimeirosPassosInscricao extends Model
     {
         return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
     }
+
+    //Relacionamento de PrimeirosPassosInscricao para SubArea
+    public function ppInscricao_primeirospassos()
+    {
+        return $this->belongsTo(PrimeiroPasso::class, 'primeiropasso_id')->withTrashed();
+    }
 }

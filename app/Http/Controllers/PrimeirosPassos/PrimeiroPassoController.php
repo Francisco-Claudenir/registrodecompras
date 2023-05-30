@@ -30,7 +30,7 @@ class PrimeiroPassoController extends Controller
      */
     public function index()
     {
-        $primeiropasso = $this->primeiropasso->paginate(20);
+        $primeiropasso = $this->primeiropasso->withCount('primeirospassos_ppInscricao')->paginate(20);
         return view($this->bag['view'] . '.index', compact('primeiropasso'));
     }
 
@@ -47,7 +47,6 @@ class PrimeiroPassoController extends Controller
     //Index para User
     public function site()
     {
-
         $primeirospassos = $this->primeiropasso->paginate(10);
         return view('page.primeirospassos.site',compact('primeirospassos'));
     }
