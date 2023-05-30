@@ -11,7 +11,7 @@
             <div class="card project-card">
                 <div class="card-body">
                     <div class="card-header">
-                        <h4 class="card-title">Lista de Incritos</h4>
+                        <h4 class="card-title">Lista de Inscritos</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -34,7 +34,7 @@
                                             <td>{{ $dados->email }}</td>
                                             <td>{{ $dados->cpf }}</td>
                                             <td>{{ $dados->telefone }}</td>
-                                            <td><a href="{{ route('pp-i-bolsistas-inscricao.espelho', ['pp_i_bolsista_inscricao_id' => $dados->pp_i_bolsista_inscricao_id]) }}"><i class="flaticon-381-file-2"></i></a></td>
+                                            <td><a href="{{ route('pp-i-bolsistas-inscricao.espelho', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dados->pp_i_bolsista_inscricao_id]) }}"><i class="flaticon-381-file-2"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

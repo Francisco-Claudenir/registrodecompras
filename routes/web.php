@@ -158,7 +158,8 @@ Route::prefix('primeirospassos')->group(function () {
 Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'page'])->name('pp-i-bolsistas.page');
     Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
-    Route::get('/lista-inscricao/espelho/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
+    Route::get('/lista-inscricao/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
+    Route::get('/lista-inscricao/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
     Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
     Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
 });
