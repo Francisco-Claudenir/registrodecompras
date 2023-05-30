@@ -274,8 +274,7 @@
                         <div class="col-lg-8 col-md-12 col-sm-12">
                             <div class="card border shadow-sm">
                                 <div class="card-body">
-                                    <a href="{{ route('primeirospassos.index', 1) }}"
-                                        class="btn btn-dark float-start">Voltar</a>
+                                    <a href="" onclick="history.back()" class="btn btn-dark float-start">Voltar</a>
                                     <button type="submit" class="btn btn-primary float-end">Enviar</button>
                                 </div>
                             </div>

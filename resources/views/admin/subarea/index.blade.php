@@ -2,7 +2,7 @@
     'layout' => 'admin',
 ])
 
-@section('title', ' - Index GrandArea')
+@section('title', ' - Index SubArea')
 
 @section('content')
 
@@ -32,28 +32,29 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Lista GrandeArea</h4>
+                    <h4 class="card-title">Lista SubArea</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example5" class="table table-responsive-sm" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th><h5>Name</h5></th>
-                                    <th><h5>Editar</h5></th>
+                                    <th><h5>SubArea</h5></th>
+                                    <th><h5>GrandeArea</h5></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($grandeareas as $grandearea )
-                                <tr>
-                                    <td><p>{{$grandearea->nome }}</p></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <a href="{{ route('grandearea.edit', ['grandearea' =>$grandearea->area_id]) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                        </div>												
-                                    </td>												
-                                </tr>
-                                @endforeach
+                                @foreach ($subareas as $subarea )
+                                    <tr>
+                                        <td><p>{{$subarea->nome }}</p></td>
+                                        <td><p>{{$subarea->subArea_grandeArea->nome }}</p></td>
+                                        <td>
+                                            <div class="d-flex">
+                                               <a href="{{ route('subarea.edit', ['subarea' =>$subarea->areaconhecimento_id]) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                            </div>												
+                                        </td>	
+                                    </tr>
+                                @endforeach                                
                             </tbody>
                         </table>
                     </div>

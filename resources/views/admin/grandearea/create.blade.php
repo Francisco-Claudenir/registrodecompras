@@ -6,11 +6,10 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('sweet::alert')
         <div class="row page-title mx-0">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Cadastro de Grande Area</h4>
+                    <h4 class="card-title">Cadastro de GrandeArea</h4>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
@@ -23,7 +22,7 @@
                                 <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                             @endif
                             <button class="btn btn-success float-end mt-3" ; type="submit">Salvar</button>
-                            <a class="btn btn-danger float-end mt-3 me-2" type="button" href="" onclick="history.back()">Cancelar</a>
+                            <a class="btn btn-danger float-end mt-3 me-2" type="button" href="{{ route('grandearea.index')}}">Cancelar</a>
                         </form>
                     </div>
                 </div>
