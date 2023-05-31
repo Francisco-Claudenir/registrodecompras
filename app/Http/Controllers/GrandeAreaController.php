@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GrandeArea\StoreGrandeAreaRequest;
+use App\Http\Requests\GrandeArea\UpdateGrandeAreaRequest;
 use App\Models\GrandeArea;
 use Illuminate\Support\Facades\DB;
 
@@ -67,7 +68,7 @@ class GrandeAreaController extends Controller
     }
 
     
-    public function update(StoreGrandeAreaRequest $request, $id)
+    public function update(UpdateGrandeAreaRequest $request, $id)
     {
         DB::beginTransaction();
         
