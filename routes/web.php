@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GrandeAreaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -92,6 +95,9 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-register', [ZenixadminController::class, 'page_register']);
 });
 
+
+Route::post('login-eventos', [LoginController::class, 'loginEvento'])->name('login.eventos');
+Route::post('logout-eventos', [LoginController::class, 'logoutEvento'])->name('logout.eventos');
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
@@ -114,14 +120,20 @@ Route::prefix('admin')->group(function () {
     Route::resource('semic', SemicController::class);
 
     //PrimeiroPassos
-    Route::resource('primeiropasso', PrimeiroPassoController::class);
+    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Coordenação']);
 
-     //GrandeArea
-     Route::resource('grandearea', GrandeAreaController::class);
+    //GrandeArea
+    Route::resource('grandearea', GrandeAreaController::class);
 
-     //SubArea
-     Route::resource('subarea', SubAreaController::class);
- 
+    //Perfil
+    Route::resource('perfil', PerfilController::class);
+
+    //SubArea
+    Route::resource('subarea', SubAreaController::class);
+
+    //User
+    Route::resource('users', UserController::class);
+
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
@@ -140,8 +152,6 @@ Route::prefix('site')->group(function () {
     //PrimeiroPassos
     Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
 
-    //GrandeArea
-    //Route::get('/grandearea', [GrandeAreaController::class, 'site'])->name('site.grandearea');
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::get('/pp-indicacao-bolsistas', [PP_IndicacaoBolsistasController::class, 'site'])->name('site.pp-indicacao-bolsistas');

@@ -9,7 +9,7 @@ return [
 		// config nome do projeto
 		'name' => [
 			'prefix' => 'UEMA',
-			'name' => 'Dashboard',
+			'name' => 'PPG',
 			'sufix' => '',
 		],
 
@@ -123,25 +123,121 @@ return [
 
 	'menu' => [
 
-		['header' => 'Main Menu'],
+		['header' => 'Sistema'],
 		[
 			'title' => 'Home',
-			'icon' => 'flaticon-381-user',
+			'icon' => 'flaticon-381-home',
+			'can' => 'Coordenação',
 			'route' => 'home'
 		],
+		[
+			'title' => 'Usuários',
+			'icon' => 'flaticon-381-user-9',
+			'route' => 'teste',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'users.index'
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'users.create'
+				],
+			]
+		],
+		[
+			'title' => 'Perfil',
+			'icon' => 'flaticon-381-id-card-5',
+			'route' => 'teste',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'perfil.index'
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'perfil.create'
+				],
+			]
+		],
+		[
+			'title' => 'Area de conhecimento',
+			'icon' => 'flaticon-381-settings',
+			'submenu' => [
+				[
+					'title' => 'Grande Area',
+					'icon' => 'flaticon-381-networking',
+					'submenu' => [
+						[
+							'title' => 'Lista',
+							'icon' => 'flaticon-381-list-1',
+							'route' => 'grandearea.index',
+						],
+						[
+							'title' => 'Adicionar',
+							'icon' => 'flaticon-381-plus',
+							'route' => 'grandearea.create'
+						]
+
+					],
+				],
+				[
+					'title' => 'Subarea',
+					'icon' => 'flaticon-381-network-3',
+					'submenu' => [
+						[
+							'title' => 'Lista',
+							'icon' => 'flaticon-381-list-1',
+							'route' => 'subarea.index',
+						],
+						[
+							'title' => 'Adicionar',
+							'icon' => 'flaticon-381-plus',
+							'route' => 'subarea.create'
+						]
+
+					],
+
+				]
+
+			],
+		],
+		[
+			'title' => 'Modalidade',
+			'icon' => 'flaticon-381-networking-1',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'teste',
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'teste'
+				]
+
+			],
+		],
+
+		['header' => 'Eventos'],
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-trash',
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'semic.index'
 
 				],
 				[
 					'title' => 'Adcionar',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-plus',
 					'route' => 'semic.create'
 
 				]
@@ -154,13 +250,13 @@ return [
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'primeiropasso.index'
 
 				],
 				[
 					'title' => 'Adicionar',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-plus',
 					'route' => 'primeiropasso.create'
 
 				]
@@ -173,7 +269,7 @@ return [
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'pp-indicacao-bolsistas.index'
 
 				],
