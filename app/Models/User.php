@@ -33,7 +33,6 @@ class User extends Authenticatable
 
     public function user_pp_i_b_inscricao()
     {
-        dd("gfdgsdgfds");
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'id')->withTrashed();
     }
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GrandeAreaController;
+use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -134,6 +135,8 @@ Route::prefix('admin')->group(function () {
     //User
     Route::resource('users', UserController::class);
 
+     //ModalidadeBolsa
+     Route::resource('modalidadebolsa', ModalidadeBolsaController::class);   
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
@@ -162,22 +165,27 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
     Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
+    Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index');
+    Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
+    Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
+    Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
 Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'page'])->name('pp-i-bolsistas.page');
-    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
-    Route::get('/lista-inscricao/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
-    Route::get('/lista-inscricao/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
     Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
     Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
+    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
+    Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
+    Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
 });
 
 Route::get('teste', function () {
-    return view('inscricao');
+    return view('pdf.primeirospassos');
 });
 
 Route::get('tela', function () {
     return view('tela');
 });
+

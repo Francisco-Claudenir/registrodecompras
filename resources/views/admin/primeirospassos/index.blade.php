@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <br>
-                                    <div>Inscritos<span class="text-black ms-3 font-w600">200</span></div>
+                                    <div>Inscritos:<span class="text-black ms-3 font-w600"><a href="{{ route('primeirospassos.inscricao.index',['primeiropasso_id' => $dados->primeiropasso_id])}}">{{$dados->primeirospassos_pp_inscricao_count }}</a></span></div>
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress

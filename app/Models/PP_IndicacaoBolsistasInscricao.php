@@ -53,9 +53,4 @@ class PP_IndicacaoBolsistasInscricao extends Model
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
 
-    
-    public function pp_i_b_inscricao_subArea()
-    {
-        return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
-    }
 }
