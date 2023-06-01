@@ -219,7 +219,8 @@ return [
 				'update' => 'Erro ao tentar atualizar',
 				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
 				'notfound' => 'Item não existe',
-				'inscricao' => 'Erro ao tentar de inscrever'
+				'inscricao' => 'Erro ao tentar de inscrever',
+				'diretorio' => 'Diretório não encontrado'
 			],
 		]
 	],
