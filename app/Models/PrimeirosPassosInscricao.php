@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PrimeirosPassosInscricao extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasUuid;
 
     protected $fillable = [
         'primeiropasso_id',
@@ -29,6 +30,10 @@ class PrimeirosPassosInscricao extends Model
     protected $primaryKey = 'passos_inscricao_id';
 
     protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'endereco' => 'array'
+    ];
 
     //Relacionamento de PrimeirosPassosInscricao para Plano Trabalho
     // public function planotrabalho(){
