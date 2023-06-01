@@ -155,6 +155,7 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index');
     Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
     Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
+    Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
@@ -168,9 +169,10 @@ Route::prefix('pp-indicacao-bolsistas')->group(function () {
 });
 
 Route::get('teste', function () {
-    return view('inscricao');
+    return view('pdf.primeirospassos');
 });
 
 Route::get('tela', function () {
     return view('tela');
 });
+
