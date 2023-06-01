@@ -17,6 +17,7 @@ class CreateModalidadeBolsasTable extends Migration
             $table->bigIncrements('modalidade_id')->autoIncrement()->unique();
             $table->string('nome');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

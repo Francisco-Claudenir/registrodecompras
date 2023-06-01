@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\GrandeAreaController;
+use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -121,7 +122,9 @@ Route::prefix('admin')->group(function () {
 
      //SubArea
      Route::resource('subarea', SubAreaController::class);
- 
+
+     //ModalidadeBolsa
+     Route::resource('modalidadebolsa', ModalidadeBolsaController::class);   
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
