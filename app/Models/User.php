@@ -16,11 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'email','cpf','telefone','endereco', 'password',
+        'nome', 'email', 'cpf', 'telefone', 'endereco', 'password',
     ];
-     protected $casts = [
+
+    protected $casts = [
         'endereco' => 'array'
-     ];
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -33,7 +34,6 @@ class User extends Authenticatable
 
     public function user_pp_i_b_inscricao()
     {
-        dd("gfdgsdgfds");
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'id')->withTrashed();
     }
 }
