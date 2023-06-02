@@ -56,4 +56,8 @@ class PrimeirosPassosInscricao extends Model
     {
         return $this->belongsTo(PrimeiroPasso::class, 'primeiropasso_id')->withTrashed();
     }
+    public function pp_inscricao_user()
+    {
+        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+    }
 }
