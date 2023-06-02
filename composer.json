@@ -17,6 +17,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.4",
         "lucascudo/laravel-pt-br-localization": "^1.2",
+        "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.0@beta",
         "yajra/laravel-datatables-oracle": "^9.0"
     },
     "require-dev": {

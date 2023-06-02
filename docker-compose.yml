@@ -68,7 +68,9 @@ services:
 
     #composer
   composer:
-    image: composer:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-composer
     container_name: uema-composer
     volumes:
       - ./:/var/www/

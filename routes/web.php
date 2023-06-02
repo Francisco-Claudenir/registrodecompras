@@ -124,7 +124,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('semic', SemicController::class);
 
     //PrimeiroPassos
-    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Coordenação']);
+    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Coordenação de Pesquisa']);
 
     //GrandeArea
     Route::resource('grandearea', GrandeAreaController::class);
@@ -138,13 +138,13 @@ Route::prefix('admin')->group(function () {
     //PrimeirosPassos Inscricão
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
 
-     //GrandeArea
-     Route::resource('grandearea', GrandeAreaController::class);
+    //GrandeArea
+    Route::resource('grandearea', GrandeAreaController::class);
     //User
     Route::resource('users', UserController::class);
 
-     //ModalidadeBolsa
-     Route::resource('modalidadebolsa', ModalidadeBolsaController::class);   
+    //ModalidadeBolsa
+    Route::resource('modalidadebolsa', ModalidadeBolsaController::class);
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
@@ -196,4 +196,3 @@ Route::get('teste', function () {
 Route::get('tela', function () {
     return view('tela');
 });
-

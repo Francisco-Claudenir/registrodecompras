@@ -35,6 +35,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'id')->withTrashed();
     }
+    public function user_pp_inscricao()
+    {
+        return $this->hasMany(PrimeirosPassosInscricao::class, 'passos_inscricao_id')->withTrashed();
+    }
 
     public function perfil()
     {
