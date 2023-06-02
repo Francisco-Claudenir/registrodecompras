@@ -91,7 +91,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        dd('teste');
         if ($this->guard()->user() != null) {
             $this->guard()->logout();
         }
