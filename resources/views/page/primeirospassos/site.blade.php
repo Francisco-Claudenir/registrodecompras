@@ -14,14 +14,18 @@
                 </div>
             </div>
         </div>
+    </div>
+@endsection
+@section('content')
+    <div class="container-fluid vh- ">
         <div class="card">
             @foreach ($primeirospassos as $dados)
-                <div class="col-xl-12 p-lg-4 ">
+                <div class="col-xl-12 p-lg-4 p-2">
                     <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-12 col-sm-12">
+                        <div class="col-lg-7 col-md-9 col-sm-10">
                             <div class="card border shadow-sm">
                                 <img src="{{ asset('images/semicbg.jpg') }}" alt="" class="img-fluid w-100 rounded"
-                                    width="100" height="100">
+                                    width="80" height="60">
                                 <div class="card-body">
 
                                     <h3 class="text-black">{{ $dados->nome }}</h3>
@@ -38,6 +42,7 @@
             @endforeach
         </div>
     </div>
+
 
     <div class="footer">
         <div class="copyright">

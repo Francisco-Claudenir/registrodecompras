@@ -2,83 +2,88 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreModalidadeBolsaRequest;
-use App\Http\Requests\UpdateModalidadeBolsaRequest;
+use App\Http\Requests\Modalidade\StoreModalidadeBolsaRequest;
+use App\Http\Requests\Modalidade\UpdateModalidadeBolsaRequest;
 use App\Models\ModalidadeBolsa;
+use Illuminate\Support\Facades\DB;
 
 class ModalidadeBolsaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $modalidadebolsa;
+    protected $bag = [
+        'view' => '',
+        'route' => '',
+        'Title' => '',
+        'subtitle' => '',
+        'msg' => 'temauema.msg.register'
+    ];
+
+    public function __construct(ModalidadeBolsa $modalidadebolsa)
+    {
+        $this->modalidadebolsa = $modalidadebolsa;
+    }
     public function index()
     {
-        //
+        $modalidadebolsas = $this->modalidadebolsa->orderby('nome', 'asc')->get();
+         return view('admin.modalidadebolsa.index', compact('modalidadebolsas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.modalidadebolsa.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreModalidadeBolsaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(StoreModalidadeBolsaRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+
+        try {
+            $this->modalidadebolsa->create($request->validated());
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->route('modalidadebolsa.index');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ModalidadeBolsa  $modalidadeBolsa
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(ModalidadeBolsa $modalidadeBolsa)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ModalidadeBolsa  $modalidadeBolsa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ModalidadeBolsa $modalidadeBolsa)
+    public function edit($id)
     {
-        //
+        $modalidadebolsas = $this->modalidadebolsa->findOrfail($id);
+        return view('admin.modalidadebolsa.edit', compact('modalidadebolsas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateModalidadeBolsaRequest  $request
-     * @param  \App\Models\ModalidadeBolsa  $modalidadeBolsa
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateModalidadeBolsaRequest $request, ModalidadeBolsa $modalidadeBolsa)
+
+    public function update(UpdateModalidadeBolsaRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        
+        try {
+            $modalidadebolsas = $this->modalidadebolsa->findOrfail($id);
+            $modalidadebolsas->update($request->all());
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->route('modalidadebolsa.index');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ModalidadeBolsa  $modalidadeBolsa
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(ModalidadeBolsa $modalidadeBolsa)
     {
         //

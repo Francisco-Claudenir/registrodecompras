@@ -14,7 +14,7 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
     public function up()
     {
         Schema::create('primeiros_passos_inscricaos', function (Blueprint $table) {
-            $table->bigIncrements('passos_inscricao_id')->autoIncrement()->unique();
+            $table->uuid('passos_inscricao_id')->unique();
             $table->unsignedBigInteger('primeiropasso_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('areaconhecimento_id');

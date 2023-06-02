@@ -2,16 +2,20 @@
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Export\ExportsController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GrandeAreaController;
+use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -94,6 +98,9 @@ Route::prefix('tema')->group(function () {
     Route::get('/page-register', [ZenixadminController::class, 'page_register']);
 });
 
+
+Route::post('login-eventos', [LoginController::class, 'loginEvento'])->name('login.eventos');
+Route::post('logout-eventos', [LoginController::class, 'logoutEvento'])->name('logout.eventos');
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
@@ -116,17 +123,27 @@ Route::prefix('admin')->group(function () {
     Route::resource('semic', SemicController::class);
 
     //PrimeiroPassos
-    Route::resource('primeiropasso', PrimeiroPassoController::class);
+    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Coordenação']);
+
+    //GrandeArea
+    Route::resource('grandearea', GrandeAreaController::class);
+
+    //Perfil
+    Route::resource('perfil', PerfilController::class);
+
+    //SubArea
+    Route::resource('subarea', SubAreaController::class);
 
     //PrimeirosPassos Inscricão
     Route::get('/primeirospassos/inscritos', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
 
      //GrandeArea
      Route::resource('grandearea', GrandeAreaController::class);
+    //User
+    Route::resource('users', UserController::class);
 
-     //SubArea
-     Route::resource('subarea', SubAreaController::class);
- 
+     //ModalidadeBolsa
+     Route::resource('modalidadebolsa', ModalidadeBolsaController::class);   
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
@@ -145,8 +162,6 @@ Route::prefix('site')->group(function () {
     //PrimeiroPassos
     Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
 
-    //GrandeArea
-    //Route::get('/grandearea', [GrandeAreaController::class, 'site'])->name('site.grandearea');
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::get('/pp-indicacao-bolsistas', [PP_IndicacaoBolsistasController::class, 'site'])->name('site.pp-indicacao-bolsistas');
@@ -157,22 +172,27 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
     Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
+    Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index');
+    Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
+    Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
+    Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
 Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'page'])->name('pp-i-bolsistas.page');
-    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
-    Route::get('/lista-inscricao/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
-    Route::get('/lista-inscricao/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
     Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
     Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
+    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
+    Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
+    Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
 });
 
 Route::get('teste', function () {
-    return view('inscricao');
+    return view('pdf.primeirospassos');
 });
 
 Route::get('tela', function () {
     return view('tela');
 });
+

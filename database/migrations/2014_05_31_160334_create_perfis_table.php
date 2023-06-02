@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModalidadeBolsasTable extends Migration
+class CreatePerfisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateModalidadeBolsasTable extends Migration
      */
     public function up()
     {
-        Schema::create('modalidade_bolsas', function (Blueprint $table) {
-            $table->bigIncrements('modalidade_id')->autoIncrement()->unique();
+        Schema::create('perfis', function (Blueprint $table) {
+            $table->id();
             $table->string('nome');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateModalidadeBolsasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modalidade_bolsas');
+        Schema::dropIfExists('perfis');
     }
 }
