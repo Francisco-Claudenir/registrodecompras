@@ -8,8 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportsController extends Controller
 {
-    public function primeirosPassosInscritos()
+    public function primeirosPassosInscritos($primeiropasso_id)
     {
-        return Excel::download(new PrimeirosPassosInscricaoExport(), 'inscritos.xlsx');
+        return Excel::download(new PrimeirosPassosInscricaoExport($primeiropasso_id), 'inscritos.xlsx');
     }
 }
