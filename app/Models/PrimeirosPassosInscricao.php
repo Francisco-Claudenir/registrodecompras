@@ -13,6 +13,7 @@ class PrimeirosPassosInscricao extends Model
 
     protected $fillable = [
         'primeiropasso_id',
+        'numero_inscricao',
         'user_id',
         'areaconhecimento_id',
         'identidade',

@@ -19,6 +19,7 @@
                             <table class="table table-striped table-responsive-sm">
                                 <thead>
                                     <tr>
+                                        <th>Nª</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>CPF</th>
@@ -29,6 +30,7 @@
                                 <tbody>
                                     @foreach ($listaInscritos as $dados)
                                         <tr>
+                                            <th>{{ $dados->numero_inscricao }}</th>
                                             <th>{{ $dados->nome }}</th>
                                             <td>{{ $dados->email }}</td>
                                             <td>{{ $dados->cpf }}</td>

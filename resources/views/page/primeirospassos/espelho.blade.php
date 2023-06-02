@@ -24,6 +24,10 @@
                     <h5>Identificação do Candidato</h5>
                     <div class="col-sm-12">
                         <dl>
+                            <dt>Numero de Inscrição</dt>
+                            <dd>{{ $dadosInscrito->numero_inscricao }}</dd>
+                        </dl>
+                        <dl>
                             <dt>Nome Completo</dt>
                             <dd>{{ $dadosInscrito->nome }}</dd>
                         </dl>

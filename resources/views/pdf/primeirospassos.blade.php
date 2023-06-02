@@ -38,6 +38,11 @@
                 Data Inicio: {{ date('d/m/Y', strtotime($primeiropasso->data_inicio)) }} / Data Fim: {{ date('d/m/Y', strtotime($primeiropasso->data_fim)) }}
             </strong>
         </small> <br>
+        <small>
+            <strong>
+                Documento gerado em: {{ now()->format('d/m/Y H:i:s') }}
+            </strong>
+        </small> <br>
     </div>
     <br>
     <div class="col-xl-12 p-lg-4">
@@ -55,7 +60,7 @@
                                 <small>
                                     <dd>
                                         <p style="font-size: 14px">
-                                            {{ $dadosInscrito->passos_inscricao_id }}</p>
+                                            {{ $dadosInscrito->numero_inscricao }}</p>
                                     </dd>
                                 </small>
                             </td>

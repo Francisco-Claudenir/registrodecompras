@@ -74,6 +74,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 'users.cpf',
                 'users.telefone',
                 'primeiros_passos_inscricaos.primeiropasso_id',
+                'primeiros_passos_inscricaos.numero_inscricao',
                 'primeiros_passos_inscricaos.passos_inscricao_id'
             ])->paginate(15);
 
@@ -181,11 +182,17 @@ class PrimeirosPassosInscricaoController extends Controller
                 $curriculonome = 'curriculolattes' . '_' . uniqid(date('HisYmd')) . '.' . $curriculoextensao;
                 $dados['curriculolattes'] = $request['curriculolattes']->storeAs($curriculopath, $curriculonome);
 
+                //Calculo para saber o numero de inscricao
+                $quantidade_inscritos = $this->primeiropasso->withCount('primeirospassos_ppInscricao')->findOrfail($request['primeiropasso_id']);
+
+                $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
+
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
                     'primeiropasso_id' => $request['primeiropasso_id'],
                     'user_id' => Auth::user()->id,
                     'areaconhecimento_id' => $request['areaconhecimento_id'],
+                    'numero_inscricao' => $numero_inscricao,
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
                     'centro' => $request['centro'],
