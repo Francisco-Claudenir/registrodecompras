@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::prefix('tema')->group(function () {
     Route::get('/',             [ZenixadminController::class, 'page_login'])->name('teste');
@@ -115,6 +117,9 @@ Route::prefix('admin')->group(function () {
 
     //PrimeiroPassos
     Route::resource('primeiropasso', PrimeiroPassoController::class);
+
+    //PrimeirosPassos Inscricão
+    Route::get('/primeirospassos/inscritos', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
 
      //GrandeArea
      Route::resource('grandearea', GrandeAreaController::class);
