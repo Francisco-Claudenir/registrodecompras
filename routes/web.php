@@ -1,8 +1,9 @@
 <?php
 
+use App\Exports\PrimeirosPassosInscricaoExport;
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
 use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
@@ -135,7 +136,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('subarea', SubAreaController::class);
 
     //PrimeirosPassos Inscricão
-    Route::get('/primeirospassos/inscritos', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
+    Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
 
      //GrandeArea
      Route::resource('grandearea', GrandeAreaController::class);

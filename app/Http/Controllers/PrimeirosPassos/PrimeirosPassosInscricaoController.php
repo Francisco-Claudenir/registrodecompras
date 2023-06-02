@@ -62,7 +62,7 @@ class PrimeirosPassosInscricaoController extends Controller
     public function index($primeiropasso_id)
     {
         //Verificando se o id existe
-        $this->primeiropasso->findOrfail($primeiropasso_id);
+       $ppasso =  $this->primeiropasso->findOrfail($primeiropasso_id);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->primeirospassosinscricao
@@ -77,7 +77,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 'primeiros_passos_inscricaos.passos_inscricao_id'
             ])->paginate(15);
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos'));
+        return view($this->bag['view'] . '.index', compact('listaInscritos','ppasso'));
     }
 
     //Tras todas as informações que o candidato enviou
