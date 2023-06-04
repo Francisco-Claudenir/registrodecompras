@@ -127,12 +127,12 @@ return [
 		[
 			'title' => 'Home',
 			'icon' => 'flaticon-381-home',
-			'can' => 'Coordenação',
 			'route' => 'home'
 		],
 		[
 			'title' => 'Usuários',
 			'icon' => 'flaticon-381-user-9',
+			'can' => 'Administrador',
 			'route' => 'teste',
 			'submenu' => [
 				[
@@ -151,6 +151,7 @@ return [
 			'title' => 'Perfil',
 			'icon' => 'flaticon-381-id-card-5',
 			'route' => 'teste',
+			'can' => 'Administrador',
 			'submenu' => [
 				[
 					'title' => 'Lista',
@@ -167,6 +168,7 @@ return [
 		[
 			'title' => 'Area de conhecimento',
 			'icon' => 'flaticon-381-settings',
+			'can' => 'Administrador',
 			'submenu' => [
 				[
 					'title' => 'Grande Area',
@@ -209,6 +211,7 @@ return [
 		[
 			'title' => 'Modalidade',
 			'icon' => 'flaticon-381-networking-1',
+			'can' => 'Administrador',
 			'submenu' => [
 				[
 					'title' => 'Lista',
@@ -247,6 +250,7 @@ return [
 		[
 			'title' => 'Primeiros Passos',
 			'icon' => 'flaticon-381-trash',
+			'can' => 'Administrador|Coordenação de Pesquisa',
 			'submenu' => [
 				[
 					'title' => 'Lista',

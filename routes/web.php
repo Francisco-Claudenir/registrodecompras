@@ -19,7 +19,7 @@ use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZenixadminController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
 
 
 Route::prefix('tema')->group(function () {
@@ -124,30 +124,28 @@ Route::prefix('admin')->group(function () {
     Route::resource('semic', SemicController::class);
 
     //PrimeiroPassos
-    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Coordenação de Pesquisa']);
+    Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //GrandeArea
-    Route::resource('grandearea', GrandeAreaController::class);
+    Route::resource('grandearea', GrandeAreaController::class)->middleware(['check-role:Administrador']);
 
     //Perfil
-    Route::resource('perfil', PerfilController::class);
+    Route::resource('perfil', PerfilController::class)->middleware(['check-role:Administrador']);
 
     //SubArea
-    Route::resource('subarea', SubAreaController::class);
+    Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
     //PrimeirosPassos Inscricão
-    Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos');
+    Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
-    //GrandeArea
-    Route::resource('grandearea', GrandeAreaController::class);
     //User
     Route::resource('users', UserController::class);
 
     //ModalidadeBolsa
-    Route::resource('modalidadebolsa', ModalidadeBolsaController::class);
+    Route::resource('modalidadebolsa', ModalidadeBolsaController::class)->middleware(['check-role:Administrador']);
 
     //PrimeirosPassos Indicacao Bolsistas
-    Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class);
+    Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 });
 
 
@@ -173,7 +171,7 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
     Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
-    Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index');
+    Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
     Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
     Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
     Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
