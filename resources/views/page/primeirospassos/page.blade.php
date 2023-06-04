@@ -10,9 +10,9 @@
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/uema/topo-ppg.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
-                        <span class="mt-4"><strong>{{ $primeiropasso->nome }}</strong></span>
+                        <h3 class="mt-4 text-dark"><strong>{{ $primeiropasso->nome }}</strong></h3>
                     </div>
                 </div>
             </div>
