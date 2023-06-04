@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\PrimeiroPasso;
 use App\Models\PrimeirosPassosInscricao;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class PrimeirosPassosInscricaoFactory extends Factory
 {
     protected $model = PrimeirosPassosInscricao::class;
+    private static $counter = 0;
     /**
      * Define the model's default state.
      *
@@ -20,6 +22,10 @@ class PrimeirosPassosInscricaoFactory extends Factory
             'primeiropasso_id' => 1,
             'user_id' => function () {
                 return User::factory()->create()->id;
+            },
+            'numero_inscricao' => static function(array $attributes){
+                self::$counter++;
+                return self::$counter;
             },
             'areaconhecimento_id' => 2,
             'identidade' => '12345678985',

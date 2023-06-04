@@ -61,4 +61,10 @@ class PrimeirosPassosInscricao extends Model
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
+
+    public function cpf()
+    {
+        $cpf = '*.' . substr($this->cpf, 3, 3) . '.' . substr($this->cpf, 6, 3) . '-**';
+        return $cpf;
+    }
 }
