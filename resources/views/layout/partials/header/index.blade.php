@@ -30,7 +30,9 @@
                                 <i class="flaticon-028-user-1 text-white " style="font-size: 20px"></i>
                                 <div class="header-info">
                                     <span>{{ explode(' ', Auth::user()->nome)[0] }}</span>
-                                    <small>Super Admin</small>
+                                   
+                                    <small>{{Auth::user()->perfil->nome}}</small>
+                                        
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
