@@ -13,8 +13,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('perfil_id')->nullable();
             $table->string('nome');
-            $table->string('email');
-            $table->string('cpf');
+            $table->string('email')->unique();
+            $table->string('cpf')->unique();
             $table->string('telefone');
             $table->json('endereco');
             $table->string('password');

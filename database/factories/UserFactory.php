@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -25,10 +26,10 @@ class UserFactory extends Factory
         return [
             'nome' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'cpf' => Str::random(11),
-            'telefone' => '989' . Str::random(8),
+            'cpf' => str_pad($this->faker->randomNumber(8), 11, '0', STR_PAD_LEFT),
+            'telefone' => str_pad($this->faker->randomNumber(8), 11, '989', STR_PAD_LEFT),
             'endereco' => '{"cep": "65000000","numero": "00","endereco": "Rua Admin", "bairro": "Bairro Admin"}',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
         ];
     }
