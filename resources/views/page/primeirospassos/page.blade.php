@@ -57,12 +57,11 @@
                                                     <div class="col-6">
 
                                                         @if ($isInscrito)
-                                                            <a href="" class="btn btn-info btn-xs mb-1"">Acompanhar
-                                                                Inscrição</a>
+                                                            <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id ]) }}" class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
                                                         @else
                                                             @if (Auth::check())
                                                                 <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
-                                                                    class="btn btn-info btn-xs mb-1"">Realizar
+                                                                    class="btn btn-info btn-xs mb-1">Realizar
                                                                     Inscrição</a>
                                                             @endif
                                                         @endif

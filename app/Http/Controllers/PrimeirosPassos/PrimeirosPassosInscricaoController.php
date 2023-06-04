@@ -62,7 +62,7 @@ class PrimeirosPassosInscricaoController extends Controller
     public function index($primeiropasso_id)
     {
         //Verificando se o id existe
-       $ppasso =  $this->primeiropasso->findOrfail($primeiropasso_id);
+        $ppasso =  $this->primeiropasso->findOrfail($primeiropasso_id);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->primeirospassosinscricao
@@ -78,7 +78,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 'primeiros_passos_inscricaos.passos_inscricao_id'
             ])->paginate(15);
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos','ppasso'));
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'ppasso'));
     }
 
     //Tras todas as informações que o candidato enviou
@@ -88,9 +88,9 @@ class PrimeirosPassosInscricaoController extends Controller
         $this->primeiropasso->findOrfail($primeiropasso_id);
 
         $dadosInscrito = $this->primeirospassosinscricao
-        ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
-        ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
-        ->findOrfail($passos_inscricao_id);
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->findOrfail($passos_inscricao_id);
 
         //Transformando Json em array de enderecos
         $endereco = json_decode($dadosInscrito->endereco, true);
@@ -101,7 +101,7 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
 
-        return view($this->bag['view'] . '.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
     }
 
     //Gera o pdf
@@ -121,9 +121,9 @@ class PrimeirosPassosInscricaoController extends Controller
         $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
 
         $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
-                                                     ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
-                                                     ->first();
-        
+            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
+            ->first();
+
         return view('pdf.primeirospassos', compact('dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
     }
 
@@ -271,9 +271,30 @@ class PrimeirosPassosInscricaoController extends Controller
      * @param  \App\Models\PrimeirosPassosInscricao  $primeirosPassosInscricao
      * @return \Illuminate\Http\Response
      */
-    public function show(PrimeirosPassosInscricao $primeirosPassosInscricao)
+    public function show($primeiropasso_id, $user_id)
     {
-        //
+        //Verificando se o primeiropasso_id existe
+        $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        //Verificando se o user_id existe
+        $this->user->findOrfail($user_id);
+
+        $dadosInscrito = $this->primeirospassosinscricao
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('users.id', '=', $user_id)
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->first();
+
+        //Transformando Json em array de enderecos
+        $endereco = json_decode($dadosInscrito->endereco, true);
+
+        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+
+        $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
+            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
+            ->first();
+
+        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
     }
 
     /**

@@ -1,20 +1,32 @@
 @extends('layout.page', [
-    'layout' => 'default',
-    'plugins' => ['wizard'],
+    'layout' => 'evt',
 ])
 
-@section('title', ' - Cadastro de alunno')
-
+@section('title', ' - Ver Inscricao')
+@section('content-header')
+    <div class="container-fluid ">
+        <div class="card">
+            <div class="container">
+                <div class="d-flex flex-column">
+                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <div class="pt-4 pb-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     @include('sweet::alert')
     <div class="container-fluid">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Espelho</h3>
+                    <h3 class="card-title">Inscrição</h3>
                     <div class="card-options">
                         <div class="btn-list">
-                            <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}" class="btn btn-xs btn-info" title="">
+                            <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
+                                class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>
@@ -175,16 +187,33 @@
             </div>
         </div>
     </div>
-    <div class="footer">
+    <div class=" footer">
         <div class="copyright">
             <p>
                 Todos os direitos reservados Universidade Estadual do Maranhão -
-                <a style="color: red;" href="https://www.uema.br/" target="_blank">UEMA</a> {{ now()->year }}
+                <a href="https://www.uema.br/" target="_blank">UEMA</a> {{ now()->year }}
             </p>
             <p>
                 Coordenação de Tecnologia da Informação e Comunicação -
-                <a style="color: red;" href="https://ctic.uema.br/" target="_blank">CTIC</a>
+                <a href="https://ctic.uema.br/" target="_blank">CTIC</a>
             </p>
         </div>
     </div>
+@endsection
+
+@section('css')
+    <style>
+        .form-control::-webkit-file-upload-button {
+            height: 55px !important;
+        }
+
+        @media (max-width: 1400px) {
+            .form-control::-webkit-file-upload-button {
+                height: 40px !important;
+            }
+
+        }
+    </style>
+@endsection
+@section('scripts')
 @endsection
