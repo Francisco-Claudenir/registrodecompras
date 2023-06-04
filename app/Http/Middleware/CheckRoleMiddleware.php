@@ -13,11 +13,8 @@ class CheckRoleMiddleware
 
     public function handle(Request $request, Closure $next, $role)
     {
+       
         $this->authorize('check-role', $role);
         return $next($request);
     }
 }
-
-Gate::define('sem-perfil', function ($user) {
-    return !$user->perfil_id;
-});

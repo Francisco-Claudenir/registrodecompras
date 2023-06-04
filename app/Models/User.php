@@ -45,9 +45,15 @@ class User extends Authenticatable
         return $this->belongsTo(Perfil::class, 'perfil_id');
     }
 
-    public function hasPerfil(string $perfil)
+    public function hasPerfil(array $perfil)
     {
         $perfilAtual = $this->perfil;
-        return $perfilAtual && $perfilAtual->nome == $perfil;
+        return $perfilAtual && in_array($perfilAtual->nome, $perfil);
+    }
+
+    public function cpf()
+    {
+        $cpf = '*.' . substr($this->cpf, 3, 3) . '.' . substr($this->cpf, 6, 3) . '-**';
+        return $cpf;
     }
 }
