@@ -7,12 +7,18 @@ use App\Models\GrandeArea;
 use App\Models\PrimeiroPasso;
 use App\Http\Controllers\Controller;
 use App\Models\PrimeirosPassosInscricao;
+use App\Models\PpInscricao_Ptrabalho;
 use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
 use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
 use App\Models\PlanoTrabalho;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PrimeirosPassosInscricaoController extends Controller
 {
@@ -21,6 +27,8 @@ class PrimeirosPassosInscricaoController extends Controller
     protected $subarea;
     protected $primeiropasso;
     protected $planotrabalho;
+    protected $user;
+    protected $ppinscricao_ptrabalho;
 
     protected $bag = [
         'view' => 'page.primeirospassos',
@@ -28,13 +36,22 @@ class PrimeirosPassosInscricaoController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PrimeirosPassosInscricao $primeirospassosinscricao, GrandeArea $grandearea, SubArea $subarea, PrimeiroPasso $primeiropasso, PlanoTrabalho $planotrabalho)
-    {
+    public function __construct(
+        PrimeirosPassosInscricao $primeirospassosinscricao,
+        GrandeArea $grandearea,
+        SubArea $subarea,
+        PrimeiroPasso $primeiropasso,
+        PlanoTrabalho $planotrabalho,
+        User $user,
+        PpInscricao_Ptrabalho $ppinscricao_ptrabalho
+    ) {
         $this->primeirospassosinscricao = $primeirospassosinscricao;
         $this->primeiropasso = $primeiropasso;
         $this->grandearea = $grandearea;
         $this->subarea = $subarea;
         $this->planotrabalho = $planotrabalho;
+        $this->user = $user;
+        $this->ppinscricao_ptrabalho = $ppinscricao_ptrabalho;
     }
 
     /**
@@ -45,7 +62,7 @@ class PrimeirosPassosInscricaoController extends Controller
     public function index($primeiropasso_id)
     {
         //Verificando se o id existe
-        $this->primeiropasso->findOrfail($primeiropasso_id);
+        $ppasso =  $this->primeiropasso->findOrfail($primeiropasso_id);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->primeirospassosinscricao
@@ -57,11 +74,57 @@ class PrimeirosPassosInscricaoController extends Controller
                 'users.cpf',
                 'users.telefone',
                 'primeiros_passos_inscricaos.primeiropasso_id',
+                'primeiros_passos_inscricaos.numero_inscricao',
                 'primeiros_passos_inscricaos.passos_inscricao_id'
             ])->paginate(15);
-            
-        dd($listaInscritos);
-        return view('page.primeirospassos.index');
+
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'ppasso'));
+    }
+
+    //Tras todas as informações que o candidato enviou
+    public function espelho($primeiropasso_id, $passos_inscricao_id)
+    {
+        //Verificando se o primeiropasso_id existe
+        $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        $dadosInscrito = $this->primeirospassosinscricao
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->findOrfail($passos_inscricao_id);
+
+        //Transformando Json em array de enderecos
+        $endereco = json_decode($dadosInscrito->endereco, true);
+
+        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+
+        $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
+            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
+            ->first();
+
+        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+    }
+
+    //Gera o pdf
+    public function gerarPDF($primeiropasso_id, $passos_inscricao_id)
+    {
+        //Verificando se o primeiropasso_id existe
+        $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        $dadosInscrito = $this->primeirospassosinscricao
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->findOrfail($passos_inscricao_id);
+
+        //Transformando Json em array de enderecos
+        $endereco = json_decode($dadosInscrito->endereco, true);
+
+        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+
+        $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
+            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
+            ->first();
+
+        return view('pdf.primeirospassos', compact('dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
     }
 
     /**
@@ -84,7 +147,6 @@ class PrimeirosPassosInscricaoController extends Controller
      */
     public function store(StorePrimeirosPassosInscricaoRequest $request)
     {
-        // dd($request->all(),$primeiropasso_id);
 
         $evento = $this->primeiropasso->find($request['primeiropasso_id']);
 
@@ -120,11 +182,17 @@ class PrimeirosPassosInscricaoController extends Controller
                 $curriculonome = 'curriculolattes' . '_' . uniqid(date('HisYmd')) . '.' . $curriculoextensao;
                 $dados['curriculolattes'] = $request['curriculolattes']->storeAs($curriculopath, $curriculonome);
 
+                //Calculo para saber o numero de inscricao
+                $quantidade_inscritos = $this->primeiropasso->withCount('primeirospassos_ppInscricao')->findOrfail($request['primeiropasso_id']);
+
+                $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
+
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
                     'primeiropasso_id' => $request['primeiropasso_id'],
                     'user_id' => Auth::user()->id,
                     'areaconhecimento_id' => $request['areaconhecimento_id'],
+                    'numero_inscricao' => $numero_inscricao,
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
                     'centro' => $request['centro'],
@@ -163,9 +231,36 @@ class PrimeirosPassosInscricaoController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
         } catch (\Throwable $th) {
-            dd($th);
+            dd($th, 'ufidsafd');
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+            return redirect()->back();
+        }
+    }
+
+    public function docshow($diretorio)
+    {
+        try {
+
+            $diretorio = Crypt::decrypt($diretorio);
+
+            $path = storage_path('app/' . $diretorio);
+
+            if (!File::exists($path)) {
+
+                abort(404);
+            }
+
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+        } catch (\Throwable $th) {
+
+            alert()->error(config($this->bag['msg'] . '.error.diretorio'));
             return redirect()->back();
         }
     }
@@ -176,9 +271,30 @@ class PrimeirosPassosInscricaoController extends Controller
      * @param  \App\Models\PrimeirosPassosInscricao  $primeirosPassosInscricao
      * @return \Illuminate\Http\Response
      */
-    public function show(PrimeirosPassosInscricao $primeirosPassosInscricao)
+    public function show($primeiropasso_id, $user_id)
     {
-        //
+        //Verificando se o primeiropasso_id existe
+        $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        //Verificando se o user_id existe
+        $this->user->findOrfail($user_id);
+
+        $dadosInscrito = $this->primeirospassosinscricao
+            ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->where('users.id', '=', $user_id)
+            ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
+            ->first();
+
+        //Transformando Json em array de enderecos
+        $endereco = json_decode($dadosInscrito->endereco, true);
+
+        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+
+        $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
+            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
+            ->first();
+
+        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
     }
 
     /**

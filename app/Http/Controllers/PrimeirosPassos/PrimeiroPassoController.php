@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosRequest;
 use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosRequest;
 use App\Models\PrimeiroPasso;
+use App\Models\PrimeirosPassosInscricao;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PrimeiroPassoController extends Controller
@@ -48,16 +50,23 @@ class PrimeiroPassoController extends Controller
     public function site()
     {
         $primeirospassos = $this->primeiropasso->paginate(10);
-        return view('page.primeirospassos.site',compact('primeirospassos'));
+        return view('page.primeirospassos.site', compact('primeirospassos'));
     }
 
-     //Pagina do Evento Para o User
-     public function page($primeiropasso_id)
-     {
-         $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+    //Pagina do Evento Para o User
+    public function page($primeiropasso_id)
+    {
+        $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
 
-         return view('page.primeirospassos.page', compact('primeiropasso'));
-     }
+        if (Auth::check()) {
+            $isInscrito = PrimeirosPassosInscricao::where('primeiropasso_id', $primeiropasso->primeiropasso_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
+
+
+        return view('page.primeirospassos.page', compact('primeiropasso', 'isInscrito'));
+    }
     /**
      * Store a newly created resource in storage.
      *

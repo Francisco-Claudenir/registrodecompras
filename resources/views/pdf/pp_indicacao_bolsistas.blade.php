@@ -16,6 +16,13 @@
 </head>
 
 <body style="margin: 0px">
+    <div class="col-xl-12 p-lg-4 ">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                
+            </div>
+        </div>
+    </div>
     <br>
     <div class="container">
         <div class="col-sm-12 text-center">
@@ -100,7 +107,7 @@
                                 <dt>Endereço</dt>
                             </strong>
                             <small>
-                                {{ $dadosInscrito->endereco }}
+                                dsfadfasfdasfasdfas
                             </small>
                         </th>
                     </tr>

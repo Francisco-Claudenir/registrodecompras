@@ -25,4 +25,9 @@ class PlanoTrabalho extends Model
     {
         return $this->belongsTo(ModalidadeBolsa::class, 'modalidade_id')->withTrashed();
     }
+
+    public function pp_inscricao_ptrabalhos()
+    {
+        return $this->belongsTo(PpInscricao_Ptrabalho::class, 'plano_id');
+    }
 }

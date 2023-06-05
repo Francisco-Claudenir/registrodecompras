@@ -10,9 +10,10 @@
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/uema/topo-ppg.png') }}" alt="" srcset="" width="full"
+                        height="full">
                     <div class="pt-4 pb-4">
-                        <span class="mt-4"><strong>{{ $primeiropasso->nome }}</strong></span>
+                        <h3 class="mt-4 text-dark"><strong>{{ $primeiropasso->nome }}</strong></h3>
                     </div>
                 </div>
             </div>
@@ -44,57 +45,144 @@
 
                                             </div>
                                             <div class="row mt-4 justify-content-center">
-                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
-                                                    class="btn btn-primary mb-1"">Inscreva-se</a>
-                                                <a href="javascript:void(0);" class="btn btn-dark mb-1"
-                                                    data-bs-toggle="modal" data-bs-target="#sendMessageModal">Login</a>
+                                                <div class="row justify-content-center mt-2">
+                                                    @if (!Auth::check())
+                                                        <div class="col-8 align-self-center ">
+                                                            <a href="javascript:void(0);"
+                                                                class="btn btn-outline-info btn-xs btn-block mb-1"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#sendMessageModal">Login</a>
+                                                        </div>
+                                                    @endif
+
+                                                    <div class="col-6">
+
+                                                        @if ($isInscrito)
+                                                            <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id]) }}"
+                                                                class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
+                                                        @else
+                                                            @if (Auth::check())
+                                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
+                                                                    class="btn btn-info btn-xs mb-1">Realizar
+                                                                    Inscrição</a>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-6">
+                                                        @auth
+                                                            <div class="dropdown custom-dropdown">
+                                                                <button type="button" class="btn btn-xs btn-outline-info"
+                                                                    data-bs-toggle="dropdown"
+                                                                    aria-expanded="true">{{ Auth::user()->nome }}
+                                                                    <i class="fa fa-angle-down ms-3"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-end"
+                                                                    data-popper-placement="top-end"
+                                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-31px, -44px);">
+                                                                    @if (isset(Auth::user()->perfil) ||
+                                                                            auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
+                                                                        <a href="{{ route('admin.home') }}"
+                                                                            class="dropdown-item ai-icon">
+                                                                            <i class="flaticon-073-settings text-dark"
+                                                                                aria-hidden="true"></i>
+                                                                            <span class="ms-2">Admin </span>
+                                                                        </a>
+                                                                    @endif
+                                                                    <a href="{{ route('logout.eventos') }}"
+                                                                        class="dropdown-item ai-icon"
+                                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg"
+                                                                            class="text-danger" width="18" height="18"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4">
+                                                                            </path>
+                                                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                                                            <line x1="21" y1="12" x2="9"
+                                                                                y2="12"></line>
+                                                                        </svg>
+                                                                        <span class="ms-2">Sair</span>
+                                                                    </a>
+                                                                    <form id="logout-form"
+                                                                        action="{{ route('logout.eventos') }}" method="POST"
+                                                                        class="d-none">
+                                                                        @csrf
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        @endauth
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Modal -->
                                         <div class="modal fade" id="sendMessageModal">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Send Message</h5>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                    </div>
                                                     <div class="modal-body">
-                                                        <form class="comment-form">
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-black font-w600 form-label">Name
-                                                                            <span class="required">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="Author" name="Author"
-                                                                            placeholder="Author">
+                                                        <div class="row">
+                                                            <div class="auth-form">
+                                                                <form action="{{ route('login.eventos') }}" method="post">
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <label class="mb-1"><strong>Cpf</strong></label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" name="cpf"
+                                                                                class="form-control @error('cpf') is-invalid @enderror"
+                                                                                value="{{ old('cpf') }}"
+                                                                                placeholder="cpf" autofocus>
+                                                                            <div class="input-group-text">
+                                                                                <span class="flaticon-381-user"></span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-black font-w600 form-label">Email
-                                                                            <span class="required">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="Email" placeholder="Email"
-                                                                            name="Email">
+                                                                    {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
+                                                                    {!! $errors->default->first('cpf', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                                    <div class="form-group">
+                                                                        <label class="mb-1"><strong>Senha</strong></label>
+                                                                        <div class="input-group">
+                                                                            <input type="password" name="password"
+                                                                                class="form-control @error('password') is-invalid @enderror"
+                                                                                placeholder="Senha">
+                                                                            <div class="input-group-text">
+                                                                                <span class="flaticon-381-key"></span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="mb-3">
-                                                                        <label
-                                                                            class="text-black font-w600 form-label">Comment</label>
-                                                                        <textarea rows="8" class="form-control" name="comment" placeholder="Comment"></textarea>
+                                                                    {!! $errors->first('password', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                                    <div
+                                                                        class="form-row d-flex justify-content-between mt-4 mb-2">
+                                                                        <div class="form-group">
+                                                                            <div
+                                                                                class="custom-control custom-checkbox ms-1">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="basic_checkbox_1">
+                                                                                <label class="form-check-label"
+                                                                                    for="basic_checkbox_1">Lembrar-me</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <a href="{!! url('/page-forgot-password') !!}">Esqueci
+                                                                                minha senha</a>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="mb-3 mb-0">
-                                                                        <input type="submit" value="Post Comment"
-                                                                            class="submit btn btn-primary" name="submit">
+                                                                    <div class="text-center">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary btn-block">Log
+                                                                            In</button>
                                                                     </div>
+                                                                </form>
+                                                                <div class="new-account mt-3">
+                                                                    <p>
+                                                                        Não possui cadastro?
+                                                                        <a class="text-primary"
+                                                                            href="{!! url('/register') !!}">Cadastre-se</a>
+                                                                    </p>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
