@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-12">
+                        {{-- <div class="col-xl-12">
                             <div class="card bg-light border">
                                 <div class="card-body">
                                     <div class="profile-interest">
@@ -243,8 +243,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-12">
+                        </div> --}}
+                        {{-- <div class="col-xl-12">
                             <div class="card bg-light border">
                                 <div class="card-body">
                                     <div class="profile-news">
@@ -285,7 +285,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-8">
@@ -297,29 +297,22 @@
                                         <li class="nav-item"><a href="#about-me" data-bs-toggle="tab"
                                                 class="nav-link active">Sobre</a>
                                         </li>
-                                        <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
+                                        {{-- <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
                                                 class="nav-link show">Posts</a>
                                         </li>
                                         <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
                                                 class="nav-link ">Galeria</a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                     <div class="tab-content">
                                         <div id="about-me" class="tab-pane fade active show">
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
-                                                    <h4 class="text-primary">About Me</h4>
-                                                    <p class="mb-2">A wonderful serenity has taken possession of my
-                                                        entire soul, like these sweet mornings of spring which I enjoy with
-                                                        my whole heart. I am alone, and feel the charm of existence was
-                                                        created for the bliss of souls like mine.I am so happy, my dear
-                                                        friend, so absorbed in the exquisite sense of mere tranquil
-                                                        existence, that I neglect my talents.</p>
+                                                    <h4 class="text-primary">Descrição</h4>
+                                                    <p class="mb-2">{{ $primeiropasso->descricao }}</p>
                                                 </div>
                                             </div>
-                                            <div class="profile-skills mb-5">
-                                                <h4 class="text-primary mb-2">Skills</h4>
-                                            </div>
+
                                             <div class="profile-personal-info">
                                                 <h4 class="text-primary mb-4">Personal Information</h4>
                                                 <div class="row mb-2">
@@ -374,7 +367,7 @@
                                             </div>
                                         </div>
 
-                                        <div id="my-posts" class="tab-pane fade">
+                                        {{-- <div id="my-posts" class="tab-pane fade">
                                             <div class="my-post-content pt-3">
                                                 <div class="card p-4">
                                                     <div class="profile-uoloaded-post border-bottom-1 pb-5">
@@ -468,7 +461,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <!-- Modal -->
