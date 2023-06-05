@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             ModalidadeSeeder::class
 
         ]);
-        PrimeirosPassosInscricao::factory()->count(100)->create();
+        PrimeirosPassosInscricao::factory()->count(5)->create();
         User::factory()->count(3)->create();
 
         // $user = User::factory()->has(PrimeirosPassosInscricao::factory()->count(1)->state(function (array $attributes, User $user){

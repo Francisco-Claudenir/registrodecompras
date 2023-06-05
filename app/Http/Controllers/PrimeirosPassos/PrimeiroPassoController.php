@@ -49,7 +49,7 @@ class PrimeiroPassoController extends Controller
     //Index para User
     public function site()
     {
-        $primeirospassos = $this->primeiropasso->paginate(10);
+        $primeirospassos = $this->primeiropasso->orderBy('created_at', 'desc')->paginate(10);
         return view('page.primeirospassos.site', compact('primeirospassos'));
     }
 

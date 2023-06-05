@@ -149,14 +149,19 @@ class PrimeirosPassosInscricaoController extends Controller
     {
 
         $evento = $this->primeiropasso->find($request['primeiropasso_id']);
+        if ($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first() == null) {
+            alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+            return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
+            
+        }
+        $data_hoje = Carbon::now();
 
         try {
             DB::beginTransaction();
 
             //Verifica se data correta para realizar inscrição
-            if (true) {
 
-
+            if (($data_hoje->gte($evento->data_inicio) && $data_hoje->lte($evento->data_fim))) {
 
                 //Copia Contrato
                 $extensao =  $request['copiacontrato']->extension();
@@ -231,7 +236,6 @@ class PrimeirosPassosInscricaoController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
         } catch (\Throwable $th) {
-            dd($th, 'ufidsafd');
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
