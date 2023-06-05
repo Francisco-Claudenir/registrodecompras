@@ -15,14 +15,15 @@ class HomeController extends Controller
     }
 
 
-    public function index(Request $request)
+    public function index()
+    {
+        return view('index');
+
+    }
+    public function home()
     {
         return view('home');
 
-
-
-        // $users = SubArea::all();
-        // return view('home', compact('users'));
     }
     public function indexajax()
     {

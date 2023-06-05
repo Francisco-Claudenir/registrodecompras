@@ -119,6 +119,25 @@ return [
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
+		'home' => [
+			'typography' => 'poppins',
+			'version' => 'light',
+			'layout' => 'horizontal',
+			'primary' => 'color_14',
+			'headerBg' => 'color_14',
+			'navheaderBg' => 'color_14',
+			'sidebarBg' => 'color_13',
+			'sidebarStyle' => 'full',
+			'sidebarPosition' => 'fixed',
+			'headerPosition' => 'static',
+			'containerLayout' => 'full',
+			'hasSideBar' => false,
+			'hasHeader' => true,
+			'hasFooter' => true,
+			'hasRightSidebar' => false,
+			'topnavSearchbar' => false,
+			'hasSubHeader' => false
+		],
 	],
 
 	'menu' => [
@@ -127,7 +146,8 @@ return [
 		[
 			'title' => 'Home',
 			'icon' => 'flaticon-381-home',
-			'route' => 'home'
+			'can' => 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete',
+			'route' => 'admin.home'
 		],
 		[
 			'title' => 'Usuários',

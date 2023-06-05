@@ -19,7 +19,7 @@ use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZenixadminController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::prefix('tema')->group(function () {
@@ -104,11 +104,6 @@ Route::post('login-eventos', [LoginController::class, 'loginEvento'])->name('log
 Route::post('logout-eventos', [LoginController::class, 'logoutEvento'])->name('logout.eventos');
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
-});
-
 // Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
 // Route::post('/', [App\Http\Controllers\LoginController::class, 'store'])->name('login.store');
 // Route::post('/logout', [App\Http\Controllers\LoginController::class, 'destroy'])->name('login.destroy');
@@ -118,7 +113,10 @@ Route::post('login-servidor', [ApiController::class, 'login'])->name('login-prof
 
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
+    Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 
     //Semic
     Route::resource('semic', SemicController::class);
