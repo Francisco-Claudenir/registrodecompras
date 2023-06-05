@@ -10,7 +10,8 @@
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/uema/topo-ppg.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/uema/topo-ppg.png') }}" alt="" srcset="" width="full"
+                        height="full">
                     <div class="pt-4 pb-4">
                         <h3 class="mt-4 text-dark"><strong>{{ $primeiropasso->nome }}</strong></h3>
                     </div>
@@ -57,7 +58,8 @@
                                                     <div class="col-6">
 
                                                         @if ($isInscrito)
-                                                            <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id ]) }}" class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
+                                                            <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id]) }}"
+                                                                class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
                                                         @else
                                                             @if (Auth::check())
                                                                 <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
@@ -77,20 +79,15 @@
                                                                 <div class="dropdown-menu dropdown-menu-end"
                                                                     data-popper-placement="top-end"
                                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-31px, -44px);">
-                                                                    <a href="{!! url('/app-profile') !!}"
-                                                                        class="dropdown-item ai-icon">
-                                                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg"
-                                                                            class="text-primary" width="18" height="18"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2">
-                                                                            </path>
-                                                                            <circle cx="12" cy="7"
-                                                                                r="4"></circle>
-                                                                        </svg>
-                                                                        <span class="ms-2">Perfil </span>
-                                                                    </a>
+                                                                    @if (isset(Auth::user()->perfil) ||
+                                                                            auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
+                                                                        <a href="{{ route('admin.home') }}"
+                                                                            class="dropdown-item ai-icon">
+                                                                            <i class="flaticon-073-settings text-dark"
+                                                                                aria-hidden="true"></i>
+                                                                            <span class="ms-2">Admin </span>
+                                                                        </a>
+                                                                    @endif
                                                                     <a href="{{ route('logout.eventos') }}"
                                                                         class="dropdown-item ai-icon"
                                                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -143,8 +140,7 @@
                                                                     {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
                                                                     {!! $errors->default->first('cpf', '<span style="color:red" class="form-text">:message</span>') !!}
                                                                     <div class="form-group">
-                                                                        <label
-                                                                            class="mb-1"><strong>Senha</strong></label>
+                                                                        <label class="mb-1"><strong>Senha</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="password" name="password"
                                                                                 class="form-control @error('password') is-invalid @enderror"
