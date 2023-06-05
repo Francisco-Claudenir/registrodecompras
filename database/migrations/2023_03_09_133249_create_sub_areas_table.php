@@ -20,6 +20,7 @@ class CreateSubAreasTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+             ////Relacionando com a tabela Grande Area
             $table->foreign('area_id')->references('area_id')->on('grande_areas')
             ->onUpdate('cascade')->onDelete('cascade');
         });

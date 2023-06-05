@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="row mt-4 justify-content-center">
                                                 <a href="{{ route('pp-i-bolsistas-inscricao.create', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
-                                                    class="btn btn-primary mb-1"">Inscreva-se</a>
+                                                    class="btn btn-primary mb-1">Inscreva-se</a>
                                                 <a href="javascript:void(0);" class="btn btn-dark mb-1"
                                                     data-bs-toggle="modal" data-bs-target="#sendMessageModal">Login</a>
                                             </div>

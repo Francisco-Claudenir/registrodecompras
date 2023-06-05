@@ -26,7 +26,7 @@
                                             class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                     @endif
                                 </div>
-                                <a href="{{ route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id]) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
+                                <a href="{{ route('pp-indicacao-bolsistas.edit', $dados->pp_i_bolsista_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
                             <p class="mb-4">{{ $dados->descricao }}</p>
                             <div class="row mb-4">
@@ -68,7 +68,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <br>
-                                    <div>Inscritos:<span class="text-black ms-3 font-w600"><a href="">{{$dados->pp_i_bolsista_pp_i_b_inscricao_count }}</a></span></div>
+                                    <div>Inscritos:<span class="text-black ms-3 font-w600"><a href="{{ route('pp-i-bolsistas-inscricao.index',['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id])}}">{{$dados->pp_i_bolsista_pp_i_b_inscricao_count }}</a></span></div>
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress

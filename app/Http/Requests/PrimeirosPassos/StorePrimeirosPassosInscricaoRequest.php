@@ -38,11 +38,10 @@ class StorePrimeirosPassosInscricaoRequest extends FormRequest
             'projetopesquisa' => ['required', 'mimes:pdf'],
 
 
-
-
-
-
-
+            //Plano de Trabalho
+            'titulo' => ['required'],
+            'resumo' => ['required',],
+            'arquivo' => ['required','mimes:pdf']
         ];
     }
 }

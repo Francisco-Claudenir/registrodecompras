@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SubArea;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class StoreSubAreaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreSubAreaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => ['required', 'string', 'min:2', 'max:150'],
+            'area_id' => ['required', 'exists:grande_areas,area_id'],
         ];
     }
 }

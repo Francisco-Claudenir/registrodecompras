@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('check-role', function ($user, $role) {
+
+            $roles = explode('|', $role);
+            return $user->hasPerfil($roles);
+        });
     }
 }

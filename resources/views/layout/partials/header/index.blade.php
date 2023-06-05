@@ -30,11 +30,14 @@
                                 <i class="flaticon-028-user-1 text-white " style="font-size: 20px"></i>
                                 <div class="header-info">
                                     <span>{{ explode(' ', Auth::user()->nome)[0] }}</span>
-                                    <small>Super Admin</small>
+                                    @isset(Auth::user()->perfil)
+                                        <small>{{ Auth::user()->perfil->nome }}</small>
+                                    @endisset
+
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="{!! url('/app-profile') !!}" class="dropdown-item ai-icon">
+                                {{-- <a href="{!! url('/app-profile') !!}" class="dropdown-item ai-icon">
                                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
                                         width="18" height="18" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -43,19 +46,16 @@
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                     <span class="ms-2">Profile </span>
+                                </a> --}}
+                                @if (isset(Auth::user()->perfil) ||
+                                        auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
+                                
+
+                                <a href="{{route('admin.home')}}" class="dropdown-item ai-icon">
+                                    <i class="flaticon-073-settings text-dark" aria-hidden="true"></i>
+                                    <span class="ms-2">Admin </span>
                                 </a>
-                                <a href="{!! url('/email-inbox') !!}" class="dropdown-item ai-icon">
-                                    <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                        width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                        </path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg>
-                                    <span class="ms-2">Inbox </span>
-                                </a>
+                                @endif
                                 <a href="{{ route('logout') }}" class="dropdown-item ai-icon"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"

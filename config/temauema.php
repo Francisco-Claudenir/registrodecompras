@@ -9,7 +9,7 @@ return [
 		// config nome do projeto
 		'name' => [
 			'prefix' => 'UEMA',
-			'name' => 'Dashboard',
+			'name' => 'PPG',
 			'sufix' => '',
 		],
 
@@ -57,7 +57,7 @@ return [
 			'containerLayout' => 'full',
 			'hasSideBar' => true,
 			'hasHeader' => true,
-			'hasFooter' => true,
+			'hasFooter' => false,
 			'hasRightSidebar' => true,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
@@ -119,29 +119,148 @@ return [
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
 		],
+		'home' => [
+			'typography' => 'poppins',
+			'version' => 'light',
+			'layout' => 'horizontal',
+			'primary' => 'color_14',
+			'headerBg' => 'color_14',
+			'navheaderBg' => 'color_14',
+			'sidebarBg' => 'color_13',
+			'sidebarStyle' => 'full',
+			'sidebarPosition' => 'fixed',
+			'headerPosition' => 'static',
+			'containerLayout' => 'full',
+			'hasSideBar' => false,
+			'hasHeader' => true,
+			'hasFooter' => true,
+			'hasRightSidebar' => false,
+			'topnavSearchbar' => false,
+			'hasSubHeader' => false
+		],
 	],
 
 	'menu' => [
 
-		['header' => 'Main Menu'],
+		['header' => 'Sistema'],
 		[
 			'title' => 'Home',
-			'icon' => 'flaticon-381-user',
-			'route' => 'home'
+			'icon' => 'flaticon-381-home',
+			'can' => 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete',
+			'route' => 'admin.home'
 		],
+		[
+			'title' => 'Usuários',
+			'icon' => 'flaticon-381-user-9',
+			'can' => 'Administrador',
+			'route' => 'teste',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'users.index'
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'users.create'
+				],
+			]
+		],
+		[
+			'title' => 'Perfil',
+			'icon' => 'flaticon-381-id-card-5',
+			'route' => 'teste',
+			'can' => 'Administrador',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'perfil.index'
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'perfil.create'
+				],
+			]
+		],
+		[
+			'title' => 'Area de conhecimento',
+			'icon' => 'flaticon-381-settings',
+			'can' => 'Administrador',
+			'submenu' => [
+				[
+					'title' => 'Grande Area',
+					'icon' => 'flaticon-381-networking',
+					'submenu' => [
+						[
+							'title' => 'Lista',
+							'icon' => 'flaticon-381-list-1',
+							'route' => 'grandearea.index',
+						],
+						[
+							'title' => 'Adicionar',
+							'icon' => 'flaticon-381-plus',
+							'route' => 'grandearea.create'
+						]
+
+					],
+				],
+				[
+					'title' => 'Subarea',
+					'icon' => 'flaticon-381-network-3',
+					'submenu' => [
+						[
+							'title' => 'Lista',
+							'icon' => 'flaticon-381-list-1',
+							'route' => 'subarea.index',
+						],
+						[
+							'title' => 'Adicionar',
+							'icon' => 'flaticon-381-plus',
+							'route' => 'subarea.create'
+						]
+
+					],
+
+				]
+
+			],
+		],
+		[
+			'title' => 'Modalidade',
+			'icon' => 'flaticon-381-networking-1',
+			'can' => 'Administrador',
+			'submenu' => [
+				[
+					'title' => 'Lista',
+					'icon' => 'flaticon-381-list-1',
+					'route' => 'teste',
+				],
+				[
+					'title' => 'Adicionar',
+					'icon' => 'flaticon-381-plus',
+					'route' => 'teste'
+				]
+
+			],
+		],
+
+		['header' => 'Eventos'],
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-trash',
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'semic.index'
 
 				],
 				[
 					'title' => 'Adcionar',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-plus',
 					'route' => 'semic.create'
 
 				]
@@ -151,16 +270,17 @@ return [
 		[
 			'title' => 'Primeiros Passos',
 			'icon' => 'flaticon-381-trash',
+			'can' => 'Administrador|Coordenação de Pesquisa',
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'primeiropasso.index'
 
 				],
 				[
 					'title' => 'Adicionar',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-plus',
 					'route' => 'primeiropasso.create'
 
 				]
@@ -173,7 +293,7 @@ return [
 			'submenu' => [
 				[
 					'title' => 'Lista',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-list-1',
 					'route' => 'pp-indicacao-bolsistas.index'
 
 				],
@@ -195,7 +315,7 @@ return [
 		[
 			'title' => 'Primeiros Passos',
 			'icon' => 'flaticon-381-user',
-			'route' => 'teste'
+			'route' => 'site.primeiropasso'
 		],
 		[
 			'title' => 'PP-Indicacao Bolsistas',
@@ -219,7 +339,8 @@ return [
 				'update' => 'Erro ao tentar atualizar',
 				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
 				'notfound' => 'Item não existe',
-				'inscricao' => 'Erro ao tentar de inscrever'
+				'inscricao' => 'Erro ao tentar de inscrever',
+				'diretorio' => 'Diretório não encontrado'
 			],
 		]
 	],

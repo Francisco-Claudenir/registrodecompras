@@ -19,11 +19,11 @@ class PrimeiroPasso extends Model
 
     protected $dates = ['deleted_at'];
 
-    // //Relacionamento com a tabela PrimeiroPassoInscricao
-    // public function semic_semicInscricao()
-    // {
-    //     return $this->hasMany(PrimeiroPassoInscricao::class, 'primeiropasso_id')->withTrashed();
-    // }
+    //Relacionamento com a tabela PrimeiroPassoInscricao
+    public function primeirospassos_ppInscricao()
+    {
+        return $this->hasMany(PrimeirosPassosInscricao::class, 'primeiropasso_id')->withTrashed();
+    }
 
     public function percentual()
     {

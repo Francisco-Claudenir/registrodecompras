@@ -1,5 +1,5 @@
 @extends('layout.page', [
-    'layout' => 'admin',
+     'layout' => 'admin',
     'plugins' => ['datatable'],
 ])
 

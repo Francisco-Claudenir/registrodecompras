@@ -42,12 +42,10 @@ class GrandeAreaController extends Controller
         DB::beginTransaction();
 
         try {
-
-            //$request->validated()
             $this->grandearea->create($request->validated());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->back();
+            return redirect()->route('grandearea.index');
         } catch (\Throwable $th) {
             dd($th);
             DB::rollBack();
@@ -66,12 +64,11 @@ class GrandeAreaController extends Controller
     public function edit($id)
     {
         $grandeareas = $this->grandearea->findOrfail($id);
-        //$grandeareas = $this->grandearea->post();
         return view('admin.grandearea.edit', compact('grandeareas'));
     }
 
     
-    public function update(StoreGrandeAreaRequest $request, $id)
+    public function update(UpdateGrandeAreaRequest $request, $id)
     {
         DB::beginTransaction();
         
@@ -80,7 +77,7 @@ class GrandeAreaController extends Controller
             $grandeareas->update($request->all());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->back();
+            return redirect()->route('grandearea.index');
         } catch (\Throwable $th) {
             dd($th);
             DB::rollBack();
