@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
+use App\Http\Controllers\Bati\BatiController;
 use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -141,6 +142,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //ModalidadeBolsa
     Route::resource('modalidadebolsa', ModalidadeBolsaController::class)->middleware(['check-role:Administrador']);
+
+     //bati
+     Route::resource('bati', BatiController::class);  
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);

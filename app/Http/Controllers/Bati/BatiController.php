@@ -1,84 +1,79 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bati;
 
-use App\Http\Requests\StoreBatiRequest;
-use App\Http\Requests\UpdateBatiRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Bati\StoreBatiRequest;
+use App\Http\Requests\Bati\UpdateBatiRequest;
 use App\Models\Bati;
+use Illuminate\Support\Facades\DB;
 
 class BatiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $bati;
+    protected $bag = [
+        'view' => 'admin.bati',
+        'route' => '',
+        'Title' => '',
+        'subtitle' => '',
+        'msg' => 'temauema.msg.register'
+    ];
+
+    public function __construct(Bati $bati)
+    {
+        $this->bati = $bati;
+    }
+    
     public function index()
     {
-        //
+        $Batis = $this->bati->paginate(20);
+        $totalBatis = Bati::count();    
+        return view('admin.bati.index', compact('Batis'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
-        //
+        return view('admin.bati.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBatiRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(StoreBatiRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+
+            $this->bati->create($request->validated());
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->route('bati.index');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bati  $bati
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Bati $bati)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bati  $bati
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit(Bati $bati)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBatiRequest  $request
-     * @param  \App\Models\Bati  $bati
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(UpdateBatiRequest $request, Bati $bati)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bati  $bati
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(Bati $bati)
     {
         //
