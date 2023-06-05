@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\PlanoTrabalho;
 use App\Models\PrimeiroPasso;
 use App\Models\PrimeirosPassosInscricao;
 use App\Models\User;
@@ -39,5 +40,13 @@ class PrimeirosPassosInscricaoFactory extends Factory
             'parecercomite' => 'PrimeirosPassos/2023/1/copiacontrato/12345678945/copiacontrato_104418202306026479f23212b01.pdf',
             'curriculolattes' => 'PrimeirosPassos/2023/1/copiacontrato/12345678945/copiacontrato_104418202306026479f23212b01.pdf',
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (PrimeirosPassosInscricao $ppinscricao){
+
+            $ppinscricao->planotrabalho()->attach(PlanoTrabalho::factory()->create());
+        });
     }
 }
