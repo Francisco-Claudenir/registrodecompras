@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'cpf' => $data['cpf'],
             'telefone' => $data['telefone'],
-            'endereco' => $data['endereco'],
+            'endereco' => json_encode($data['endereco']),
             'password' => Hash::make($data['password']),
         ]);
     }

@@ -19,12 +19,10 @@
         </div>
 
         <div class="card">
-            <form
-                action="{{ route('primeirospassos.inscricao.store') }}"
-                method="post" enctype="multipart/form-data">
+            <form action="{{ route('primeirospassos.inscricao.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="text" class="form-control form-control-sm"
-                placeholder="Identidade" name="primeiropasso_id" hidden value="{{$primeiropasso->primeiropasso_id}}">
+                <input type="text" class="form-control form-control-sm" placeholder="Identidade" name="primeiropasso_id"
+                    hidden value="{{ $primeiropasso->primeiropasso_id }}">
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
                         <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
@@ -41,19 +39,20 @@
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Número de Identidade</label>
                                                 <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Identidade" name="identidade" value="{{old('identidade')}}">
+                                                    placeholder="Identidade" name="identidade"
+                                                    value="{{ old('identidade') }}">
                                                 {!! $errors->default->first('identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Matrícula</label>
                                                 <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Matricula" name="matricula" value="{{old('matricula')}}">
+                                                    placeholder="Matricula" name="matricula" value="{{ old('matricula') }}">
                                                 {!! $errors->default->first('matricula', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Centro</label>
                                                 <input type="text" class="form-control" placeholder="Centro"
-                                                    name="centro" value="{{old('centro')}}">
+                                                    name="centro" value="{{ old('centro') }}">
                                                 {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-12 col-sm-12">
@@ -93,7 +92,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="areaconhecimento_id"
-                                                                value="{{ $sub->areaconhecimento_id }}"/>
+                                                                value="{{ $sub->areaconhecimento_id }}" />
                                                             <label class="form-check-label">
                                                                 {{ $sub->nome }}
 
@@ -122,7 +121,9 @@
                                         <div class="row ">
                                             <div class="mb-3 col-md-5">
                                                 <label class="form-label fw-normal">Título de Projeto de Pesquisa</label>
-                                                <input type="text" class="form-control" placeholder="Título de Projeto de Pesquisa" name="tituloprojetopesquisa" value="{{old('tituloprojetopesquisa')}}">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Título de Projeto de Pesquisa" name="tituloprojetopesquisa"
+                                                    value="{{ old('tituloprojetopesquisa') }}">
                                                 {!! $errors->default->first(
                                                     'tituloprojetopesquisa',
                                                     '<span style="color:red" class="form-text">:message</span>',
@@ -141,12 +142,14 @@
                                             </div>
                                             <div class="mb-3 col-md-7">
                                                 <label class="form-label fw-normal">Resumo do Projeto</label>
-                                                <textarea class="form-control" rows="6" id="comment" placeholder="Resumo do Projeto" name="resumoprojeto" value="{{old('resumoprojeto')}}"></textarea>
+                                                <textarea class="form-control" rows="6" id="comment" placeholder="Resumo do Projeto" name="resumoprojeto"
+                                                    value="{{ old('resumoprojeto') }}"></textarea>
                                                 {!! $errors->default->first('resumoprojeto', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-5">
                                                 <label class="form-label fw-normal">Chefe Imediato</label>
-                                                <input type="text" class="form-control" name="chefeimediato" placeholder="Chefe Imediato" value="{{old('chefeimediato')}}">
+                                                <input type="text" class="form-control" name="chefeimediato"
+                                                    placeholder="Chefe Imediato" value="{{ old('chefeimediato') }}">
                                                 {!! $errors->default->first('chefeimediato', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -191,7 +194,9 @@
                                         <div class="row ">
                                             <div class="mb-3 col-md-5">
                                                 <label class="form-label fw-normal">Título do Plano de Trabalho</label>
-                                                <input type="text" class="form-control" name="titulo" placeholder="Título do Plano de Trabalho" value="{{old('titulo')}}">
+                                                <input type="text" class="form-control" name="titulo"
+                                                    placeholder="Título do Plano de Trabalho"
+                                                    value="{{ old('titulo') }}">
                                                 {!! $errors->default->first('titulo', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-7">
@@ -199,14 +204,16 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" name="arquivo" class="form-file-input form-control">
+                                                        <input type="file" name="arquivo"
+                                                            class="form-file-input form-control">
                                                     </div>
                                                     {!! $errors->default->first('arquivo', '<span style="color:red" class="form-text">:message</span>') !!}
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label class="form-label fw-normal">Resumo do Plano de Trabalho</label>
-                                                <textarea class="form-control" name="resumo" rows="6" id="comment" placeholder="Resumo do Plano de Trabalho" value="{{old('resumo')}}"></textarea>
+                                                <textarea class="form-control" name="resumo" rows="6" id="comment"
+                                                    placeholder="Resumo do Plano de Trabalho" value="{{ old('resumo') }}"></textarea>
                                                 {!! $errors->default->first('resumo', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                         </div>
@@ -225,18 +232,6 @@
             </form>
         </div>
     </div>
-    </div>
-    <div class=" footer">
-        <div class="copyright">
-            <p>
-                Todos os direitos reservados Universidade Estadual do Maranhão -
-                <a href="https://www.uema.br/" target="_blank">UEMA</a> {{ now()->year }}
-            </p>
-            <p>
-                Coordenação de Tecnologia da Informação e Comunicação -
-                <a href="https://ctic.uema.br/" target="_blank">CTIC</a>
-            </p>
-        </div>
     </div>
 @endsection
 

@@ -313,7 +313,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="profile-personal-info">
+                                            {{-- <div class="profile-personal-info">
                                                 <h4 class="text-primary mb-4">Personal Information</h4>
                                                 <div class="row mb-2">
                                                     <div class="col-sm-3 col-5">
@@ -364,7 +364,7 @@
                                                     <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         {{-- <div id="my-posts" class="tab-pane fade">
@@ -491,19 +491,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class=" footer">
-        <div class="copyright">
-            <p>
-                Todos os direitos reservados Universidade Estadual do Maranhão -
-                <a href="https://www.uema.br/" target="_blank">UEMA</a> {{ now()->year }}
-            </p>
-            <p>
-                Coordenação de Tecnologia da Informação e Comunicação -
-                <a href="https://ctic.uema.br/" target="_blank">CTIC</a>
-            </p>
         </div>
     </div>
 @endsection

@@ -114,7 +114,7 @@ return [
 			'containerLayout' => 'full',
 			'hasSideBar' => false,
 			'hasHeader' => false,
-			'hasFooter' => false,
+			'hasFooter' => true,
 			'hasRightSidebar' => false,
 			'topnavSearchbar' => false,
 			'hasSubHeader' => false
