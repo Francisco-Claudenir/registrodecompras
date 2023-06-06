@@ -229,12 +229,13 @@ class PrimeirosPassosInscricaoController extends Controller
 
                 // //Adiciona a relação Plano trabalho / Inscrição
                 $inscricao->planotrabalho()->attach($plano->plano_id);
+
+                DB::commit();
+                alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+                return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
             } else {
                 alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             }
-            DB::commit();
-            alert()->success(config($this->bag['msg'] . '.success.inscricao'));
-            return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
