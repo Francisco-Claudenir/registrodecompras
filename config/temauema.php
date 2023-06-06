@@ -236,12 +236,12 @@ return [
 				[
 					'title' => 'Lista',
 					'icon' => 'flaticon-381-list-1',
-					'route' => 'teste',
+					'route' => 'modalidadebolsa.index',
 				],
 				[
 					'title' => 'Adicionar',
 					'icon' => 'flaticon-381-plus',
-					'route' => 'teste'
+					'route' => 'modalidadebolsa.create'
 				]
 
 			],
