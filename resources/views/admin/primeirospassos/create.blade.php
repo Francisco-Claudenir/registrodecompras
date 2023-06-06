@@ -78,14 +78,15 @@
             </div>
         </div>
     </div>
+@section('scripts')
     <script>
         // Obtém a data atual
         var today = new Date();
 
         // Obtém o dia, mês e ano da data atual
-        var dd = today.getDate();// dia
+        var dd = today.getDate(); // dia
         var mm = today.getMonth() + 1; //January is 0! // mês (lembrando que janeiro é representado por 0)
-        var yyyy = today.getFullYear();// ano
+        var yyyy = today.getFullYear(); // ano
 
         // Verifica se o dia é menor que 10 e adiciona um zero à frente, se necessário
         if (dd < 10) {
@@ -104,6 +105,4 @@
         document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
-@endsection
-@section('scripts')
 @endsection
