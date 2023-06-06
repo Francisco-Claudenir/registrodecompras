@@ -149,11 +149,11 @@ class PrimeirosPassosInscricaoController extends Controller
     {
 
         $evento = $this->primeiropasso->find($request['primeiropasso_id']);
-        if ($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first() == null) {
+        if ($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first() !== null) {
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
-            
         }
+        // dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
         $data_hoje = Carbon::now();
 
         try {

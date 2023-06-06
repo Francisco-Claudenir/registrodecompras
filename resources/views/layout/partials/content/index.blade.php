@@ -1,4 +1,4 @@
-<div class="content-body vh-100">
+<div class="content-body">
     @yield('content-header')
     @yield('content')
 </div>
