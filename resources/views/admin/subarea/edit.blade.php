@@ -3,15 +3,27 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Editar SubArea')
+@section('title', ' - Edição Sub Area')
 
 @section('content')
     <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+    
+                    <h4 class="card-title">Editar Sub Area</h4>
+    
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Sub Area</a></li>
+                    <li class="breadcrumb-item active"><a href="">Editar</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="row page-title mx-0">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Editar SubArea ( {{ $subareas->nome }} )</h4>
-                </div>
                 <div class="card-body">
                     <div class="basic-form">
                         <form action="{{ route('subarea.update', ['subarea' => $subareas->areaconhecimento_id]) }}" method="post">
@@ -24,7 +36,7 @@
                                 <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                             @endif
                             <div class="mb-3 mt-3">
-                                <label for="area_id" class="form-label">Selecione a GrandeArea:</label>
+                                <label for="area_id" class="form-label">Selecione a Grande Area:</label>
                                 <select name="area_id" class="default-select  form-control wide" @if ($errors->first('area_id')) border border-danger @endif"
                                     aria-hidden="true" required>
                                     <option value="">Selecione</option>
