@@ -29,10 +29,13 @@ class StorePrimeirosPassosInscricaoRequest extends FormRequest
             'matricula' => ['required', 'string'],
             'centro' => ['required', 'string'],
             'copiacontrato' => ['required', 'mimes:pdf'],
+            'vigencia_inicio' => ['required', 'date'],
+            'vigencia_fim' => ['required', 'date'],
             'areaconhecimento_id' => ['required'],
             'tituloprojetopesquisa' => ['required', 'string', 'max:100'],
             'resumoprojeto' => ['required'],
             'chefeimediato' => ['required'],
+            'anuenciachefe' => ['required', 'mimes:pdf'],
             'parecercomite' => ['mimes:pdf'],
             'curriculolattes' => ['required', 'mimes:pdf'],
             'projetopesquisa' => ['required', 'mimes:pdf'],
@@ -41,7 +44,7 @@ class StorePrimeirosPassosInscricaoRequest extends FormRequest
             //Plano de Trabalho
             'titulo' => ['required'],
             'resumo' => ['required',],
-            'arquivo' => ['required','mimes:pdf']
+            'arquivo' => ['required', 'mimes:pdf']
         ];
     }
 }

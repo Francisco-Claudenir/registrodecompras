@@ -162,35 +162,42 @@ class PrimeirosPassosInscricaoController extends Controller
             //Verifica se data correta para realizar inscrição
 
             if (($data_hoje->gte($evento->data_inicio) && $data_hoje->lte($evento->data_fim))) {
-
+                
                 //Copia Contrato
                 $extensao =  $request['copiacontrato']->extension();
                 $path = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/copiacontrato' . '/' . Auth::user()->cpf . '';
                 $nome = 'copiacontrato' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                 $dados['copiacontrato'] = $request['copiacontrato']->storeAs($path, $nome);
-
+                
                 //Projeto Pesquisa
                 $projetoextensao =  $request['projetopesquisa']->extension();
                 $projetopath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/projetopesquisa' . '/' . Auth::user()->cpf . '';
                 $projetonome = 'projetopesquisa' . '_' . uniqid(date('HisYmd')) . '.' . $projetoextensao;
                 $dados['projetopesquisa'] = $request['projetopesquisa']->storeAs($projetopath, $projetonome);
-
+                
                 //Parecer Comite
                 $parecerextensao =  $request['parecercomite']->extension();
                 $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
                 $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
                 $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
-
+                
+                //Anuencia Chefe
+                $anuenciachefe =  $request['anuenciachefe']->extension();
+                $anuenciapath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/anuenciachefe' . '/' . Auth::user()->cpf . '';
+                $anuencianome = 'anuenciachefe' . '_' . uniqid(date('HisYmd')) . '.' . $anuenciachefe;
+                $dados['anuenciachefe'] = $request['anuenciachefe']->storeAs($anuenciapath, $anuencianome);
+                
                 //Curriculo Lattes
                 $curriculoextensao =  $request['curriculolattes']->extension();
                 $curriculopath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/curriculolattes' . '/' . Auth::user()->cpf . '';
                 $curriculonome = 'curriculolattes' . '_' . uniqid(date('HisYmd')) . '.' . $curriculoextensao;
                 $dados['curriculolattes'] = $request['curriculolattes']->storeAs($curriculopath, $curriculonome);
-
+                
                 //Calculo para saber o numero de inscricao
                 $quantidade_inscritos = $this->primeiropasso->withCount('primeirospassos_ppInscricao')->findOrfail($request['primeiropasso_id']);
-
+                
                 $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
+                
 
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
@@ -202,15 +209,17 @@ class PrimeirosPassosInscricaoController extends Controller
                     'matricula' => $request['matricula'],
                     'centro' => $request['centro'],
                     'copiacontrato' => $dados['copiacontrato'],              //file
+                    'vigencia_inicio' => $request['vigencia_inicio'],
+                    'vigencia_fim' => $request['vigencia_fim'],
                     'tituloprojetopesquisa' => $request['tituloprojetopesquisa'],
                     'resumoprojeto' => $request['resumoprojeto'],
                     'projetopesquisa' => $dados['projetopesquisa'],          //file
                     'chefeimediato' => $request['chefeimediato'],
+                    'anuenciachefe' => $dados['anuenciachefe'],
                     'parecercomite' => $dados['parecercomite'],          //file
                     'curriculolattes' => $dados['curriculolattes'],       //file
 
                 ]);
-
 
                 //Plano Trabalho
                 $planoextensao =  $request['arquivo']->extension();
@@ -234,7 +243,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                 return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
             } else {
-                alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+                alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
             }
         } catch (\Throwable $th) {
             DB::rollBack();

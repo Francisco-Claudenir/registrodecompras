@@ -20,10 +20,13 @@ class PrimeirosPassosInscricao extends Model
         'matricula',
         'centro',
         'copiacontrato',
+        'vigencia_inicio',
+        'vigencia_fim',
         'tituloprojetopesquisa',
         'resumoprojeto',
         'projetopesquisa',
         'chefeimediato',
+        'anuenciachefe',
         'parecercomite',
         'curriculolattes'
 

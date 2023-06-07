@@ -23,10 +23,13 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
             $table->string('matricula');
             $table->string('centro');
             $table->string('copiacontrato');
+            $table->dateTime('vigencia_inicio');
+            $table->dateTime('vigencia_fim');
             $table->string('tituloprojetopesquisa');
             $table->string('resumoprojeto');
             $table->string('projetopesquisa');
             $table->string('chefeimediato');
+            $table->string('anuenciachefe');
             $table->string('parecercomite')->nullable();
             $table->string('curriculolattes');
             $table->timestamps();
