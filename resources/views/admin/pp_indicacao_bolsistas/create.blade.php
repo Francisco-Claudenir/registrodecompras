@@ -25,12 +25,12 @@
                                 </div>
                                 <div class="mb-4 col-md-4">
                                     <label class="form-label">Data Inicio</label>
-                                    <input type="date" class="form-control @if($errors->first('data_inicio')) is-invalid @endif" name="data_inicio" required="" value="{{ old('data_inicio') }}">
+                                    <input type="date" class="form-control @if($errors->first('data_inicio')) is-invalid @endif" name="data_inicio" id="data_inicio" required="" value="{{ old('data_inicio') }}">
                                     @if ($errors->has('data_inicio'))<div class="invalid-feedback">{{ $errors->first('data_inicio') }}</div>@endif
                                 </div>
                                 <div class="mb-4 col-md-4">
                                     <label class="form-label">Data Fim</label>
-                                    <input type="date" class="form-control @if($errors->first('data_fim')) is-invalid @endif" name="data_fim" required="" value="{{ old('data_fim') }}">
+                                    <input type="date" class="form-control @if($errors->first('data_fim')) is-invalid @endif" name="data_fim" id="data_fim" required="" value="{{ old('data_fim') }}">
                                     @if ($errors->has('data_fim'))<div class="invalid-feedback">{{ $errors->first('data_fim') }}</div>@endif
                                 </div>
                             </div>
@@ -49,4 +49,32 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        // Obtém a data atual
+        var today = new Date();
+
+        // Obtém o dia, mês e ano da data atual
+        var dd = today.getDate(); // dia
+        var mm = today.getMonth() + 1; //January is 0! // mês (lembrando que janeiro é representado por 0)
+        var yyyy = today.getFullYear(); // ano
+
+        // Verifica se o dia é menor que 10 e adiciona um zero à frente, se necessário
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        // Verifica se o mês é menor que 10 e adiciona um zero à frente, se necessário
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        // Formata a data no formato "yyyy-mm-dd"
+        today = yyyy + '-' + mm + '-' + dd;
+
+        // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
+        document.getElementById("data_inicio").setAttribute("min", today);
+        document.getElementById("data_fim").setAttribute("min", today);
+    </script>
 @endsection

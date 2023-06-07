@@ -78,6 +78,7 @@
             </div>
         </div>
     </div>
+@endsection
 @section('scripts')
     <script>
         // Obtém a data atual

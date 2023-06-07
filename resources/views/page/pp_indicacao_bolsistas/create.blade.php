@@ -20,7 +20,9 @@
             </div>
         </div>
         <div class="card">
-            <form action="{{ route('pp-i-bolsistas-inscricao.store', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}" method="post">
+            <form
+                action="{{ route('pp-i-bolsistas-inscricao.store', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
+                method="post">
                 @csrf
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
@@ -36,39 +38,62 @@
                                     <div class="basic-form">
                                         <div class="row mt-3">
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Curso</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Curso" required name="curso">
+                                                <label class="form-label fw-normal">Cursos</label>
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('cursos')) is-invalid @endif"
+                                                    placeholder="Cursos" required name="cursos" value="{{ old('cursos') }}">
+                                                @if ($errors->has('cursos'))
+                                                    <div class="invalid-feedback">{{ $errors->first('cursos') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Centro</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Centro" required name="centro">
+                                                <label class="form-label fw-normal">Campos/Centros</label>
+                                                <select class="default-select form-control wide @if ($errors->first('centros_id')) is-invalid @endif" name="centros_id" required>
+                                                    <option value="{{ null }}" selected hidden>Selecione...
+                                                    </option>
+                                                    @foreach ($centros as $dados)
+                                                        <option value="{{ $dados->id }}">{{ $dados->centros }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('centros_id'))
+                                                    <div class="invalid-feedback">{{ $errors->first('centros_id') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Numero de Identidade</label>
-                                                <input type="text" class="form-control" placeholder="Identidade" required
-                                                    name="numero_identidade">
+                                                <input type="text" class="form-control @if ($errors->first('numero_identidade')) is-invalid @endif" placeholder="Identidade" required
+                                                    name="numero_identidade" value="{{ old('numero_identidade') }}">
+                                                @if ($errors->has('numero_identidade'))
+                                                    <div class="invalid-feedback">{{ $errors->first('numero_identidade') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Documento de Identidade</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control" required
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('documento_identidade')) is-invalid @endif" required
                                                             name="documento_identidade">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('documento_identidade'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('documento_identidade') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Documento CPF</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control" required
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('documento_cpf')) is-invalid @endif" required
                                                             name="documento_cpf">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('documento_cpf'))
+                                                    <div class="invalid-feedback">{{ $errors->first('documento_cpf') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -88,32 +113,69 @@
                                         <div class="row mt-3">
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Nome Completo</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Nome" required name="nome_orientador">
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('nome_orientador')) is-invalid @endif"
+                                                    placeholder="Nome" required name="nome_orientador" value="{{ old('nome_orientador') }}">
+                                                @if ($errors->has('nome_orientador'))
+                                                    <div class="invalid-feedback">{{ $errors->first('nome_orientador') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Telefone</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Telefone" required name="telefone_orientador">
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('telefone_orientador')) is-invalid @endif"
+                                                    placeholder="Telefone" required name="telefone_orientador"
+                                                    minlength="1" maxlength="11" value="{{ old('telefone_orientador') }}">
+                                                @if ($errors->has('telefone_orientador'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('telefone_orientador') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">E-mail</label>
-                                                <input type="text" class="form-control" placeholder="E-mail" required
-                                                    name="email_orientador">
+                                                <input type="text" class="form-control @if ($errors->first('email_orientador')) is-invalid @endif" placeholder="E-mail" required
+                                                    name="email_orientador" value="{{ old('email_orientador') }}">
+                                                @if ($errors->has('email_orientador'))
+                                                    <div class="invalid-feedback">{{ $errors->first('email_orientador') }}
+                                                    </div>
+                                                @endif
                                             </div>
-                                            <div class="mb-3 col-md-6">
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Campos/Centros</label>
+                                                <select class="default-select form-control wide @if ($errors->first('centros_orientador_id')) is-invalid @endif"
+                                                    name="centros_orientador_id" required>
+                                                    <option value="{{ null }}" selected hidden>Selecione...
+                                                    </option>
+                                                    @foreach ($centros as $dados)
+                                                        <option value="{{ $dados->id }}">{{ $dados->centros }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('centros_orientador_id'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('centros_orientador_id') }}</div>
+                                                @endif
+                                            </div>
+                                            <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Título do Projeto do
                                                     Orientador(a)</label>
-                                                <input type="text" class="form-control form-control-sm"
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('titulo_projeto_orientador')) is-invalid @endif"
                                                     placeholder="Título do Projeto do Orientador(a)" required
-                                                    name="titulo_projeto_orientador">
+                                                    name="titulo_projeto_orientador" value="{{ old('titulo_projeto_orientador') }}">
+                                                @if ($errors->has('titulo_projeto_orientador'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('titulo_projeto_orientador') }}</div>
+                                                @endif
                                             </div>
-                                            <div class="mb-3 col-md-6">
+                                            <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Título do Plano de Trabalho
                                                     Bolsista</label>
-                                                <input type="text" class="form-control form-control-sm"
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('titulo_plano_orientador')) is-invalid @endif"
                                                     placeholder="Título do Plano de Trabalho Bolsista" required
-                                                    name="titulo_plano_orientador">
+                                                    name="titulo_plano_orientador" value="{{ old('titulo_plano_orientador') }}">
+                                                @if ($errors->has('titulo_plano_orientador'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('titulo_plano_orientador') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -137,10 +199,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('historico_escolar')) is-invalid @endif"
                                                             required name="historico_escolar">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('historico_escolar'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('historico_escolar') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração de vínculo do aluno à UEMA
@@ -148,10 +214,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
-                                                            required name="declaracao_vinculo">
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('declaracao_vinculo')) is-invalid @endif"
+                                                            required name="declaracao_vinculo" >
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('declaracao_vinculo'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('declaracao_vinculo') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Termo de Compromisso do bolsista
@@ -160,10 +230,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('termo_compromisso_bolsista')) is-invalid @endif"
                                                             required name="termo_compromisso_bolsista">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('termo_compromisso_bolsista'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('termo_compromisso_bolsista') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração Negativa de Vínculo
@@ -172,10 +246,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('declaracao_negativa_vinculo')) is-invalid @endif"
                                                             required name="declaracao_negativa_vinculo">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('declaracao_negativa_vinculo'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('declaracao_negativa_vinculo') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Currículo atualizado, gerado na
@@ -184,10 +262,13 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('curriculo')) is-invalid @endif"
                                                             required name="curriculo">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('curriculo'))
+                                                    <div class="invalid-feedback">{{ $errors->first('curriculo') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração conjuta de estágio (quando
@@ -196,10 +277,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('declaracao_conjuta_estagio')) is-invalid @endif"
                                                             name="declaracao_conjuta_estagio">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('declaracao_conjuta_estagio'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('declaracao_conjuta_estagio') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -218,14 +303,22 @@
                                         <div class="row mt-3">
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Agência do Banco do Brasil n°</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Identidade" required name="agencia_banco">
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('agencia_banco')) is-invalid @endif"
+                                                    placeholder="Identidade" required name="agencia_banco" value="{{ old('agencia_banco') }}">
+                                                @if ($errors->has('agencia_banco'))
+                                                    <div class="invalid-feedback">{{ $errors->first('agencia_banco') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Número da Conta Corrente do Banco do
                                                     Brasil</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    placeholder="Matricula" required name="numero_conta_corrente">
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('numero_conta_corrente')) is-invalid @endif"
+                                                    placeholder="Matricula" required name="numero_conta_corrente" value="{{ old('numero_conta_corrente') }}">
+                                                @if ($errors->has('numero_conta_corrente'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('numero_conta_corrente') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
@@ -234,9 +327,13 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('comprovante_conta_corrente')) is-invalid @endif"
                                                             required name="comprovante_conta_corrente">
                                                     </div>
+                                                    @if ($errors->has('comprovante_conta_corrente'))
+                                                        <div class="invalid-feedback">
+                                                            {{ $errors->first('comprovante_conta_corrente') }}</div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -261,10 +358,14 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
+                                                        <input type="file" class="form-file-input form-control @if ($errors->first('termo_compromisso_orientador')) is-invalid @endif"
                                                             required name="termo_compromisso_orientador">
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('termo_compromisso_orientador'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('termo_compromisso_orientador') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -274,7 +375,8 @@
                         <div class="col-lg-8 col-md-12 col-sm-12">
                             <div class="card border shadow-sm">
                                 <div class="card-body">
-                                    <a href="" onclick="history.back()" class="btn btn-dark float-start">Voltar</a>
+                                    <a href="" onclick="history.back()"
+                                        class="btn btn-dark float-start">Voltar</a>
                                     <button type="submit" class="btn btn-primary float-end">Enviar</button>
                                 </div>
                             </div>
@@ -285,18 +387,6 @@
         </div>
     </div>
 
-    <div class=" footer">
-        <div class="copyright">
-            <p>
-                Todos os direitos reservados Universidade Estadual do Maranhão -
-                <a href="https://www.uema.br/" target="_blank">UEMA</a> {{ now()->year }}
-            </p>
-            <p>
-                Coordenação de Tecnologia da Informação e Comunicação -
-                <a href="https://ctic.uema.br/" target="_blank">CTIC</a>
-            </p>
-        </div>
-    </div>
 @endsection
 
 @section('css')
