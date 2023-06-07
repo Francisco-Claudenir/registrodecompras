@@ -7,6 +7,7 @@ use App\Models\PrimeiroPasso;
 use App\Models\PrimeirosPassosInscricao;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -43,11 +44,15 @@ class DatabaseSeeder extends Seeder
             'status' => 'Aberto'
         ]);
 
+        $path = public_path('centros-cursos-postgres.sql');
+        DB::unprepared(file_get_contents($path));
+
         $this->call([
             AreasSeeder::class,
             ModalidadeSeeder::class
 
         ]);
+
         PrimeirosPassosInscricao::factory()->count(5)->create();
         User::factory()->count(3)->create();
 
