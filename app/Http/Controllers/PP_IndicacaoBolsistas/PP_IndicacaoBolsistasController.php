@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PP_IndicacaoBolsistas\StorePP_IndicacaoBolsistasRequest;
 use App\Http\Requests\PP_IndicacaoBolsistas\UpdatePP_IndicacaoBolsistasRequest;
 use App\Models\PP_IndicacaoBolsistas;
+use App\Models\PP_IndicacaoBolsistasInscricao;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PP_IndicacaoBolsistasController extends Controller
@@ -40,7 +42,14 @@ class PP_IndicacaoBolsistasController extends Controller
     public function page($pp_indicacao_bolsista_id)
     {
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-        return view('page.pp_indicacao_bolsistas.page', compact('pp_indicacao_bolsista'));
+
+        if (Auth::check()) {
+            $isInscrito = PP_IndicacaoBolsistasInscricao::where('pp_i_bolsista_id', $pp_indicacao_bolsista->pp_i_bolsista_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
+
+        return view('page.pp_indicacao_bolsistas.page', compact('pp_indicacao_bolsista', 'isInscrito'));
     }
 
     public function create()
@@ -77,7 +86,7 @@ class PP_IndicacaoBolsistasController extends Controller
     public function update(UpdatePP_IndicacaoBolsistasRequest $request, $id)
     {
         try {
-            
+
             DB::beginTransaction();
             $primeiropasso = $this->pp_indicacao_bolsistas->findOrfail($id);
             $dados = $request->validated();

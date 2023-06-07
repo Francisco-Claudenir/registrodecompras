@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PP_IndicacaoBolsistas\StorePP_IndicacaoBolsistasInscricaoRequest;
 use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
-use App\Models\User;
+use App\Models\Centro;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -15,16 +15,18 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
 {
     protected $pp_indicacao_bolsistas;
     protected $pp_i_bolsistas_inscricao;
+    protected $centros;
     protected $bag = [
         'view' => 'page.pp_indicacao_bolsistas',
         'route' => 'pp-i-bolsistas-inscricao',
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PP_IndicacaoBolsistas $pp_indicacao_bolsistas, PP_IndicacaoBolsistasInscricao $pp_i_bolsistas_inscricao)
+    public function __construct(PP_IndicacaoBolsistas $pp_indicacao_bolsistas, PP_IndicacaoBolsistasInscricao $pp_i_bolsistas_inscricao, Centro $centros)
     {
         $this->pp_indicacao_bolsistas = $pp_indicacao_bolsistas;
         $this->pp_i_bolsistas_inscricao = $pp_i_bolsistas_inscricao;
+        $this->centros = $centros;
     }
     /**
      * Display a listing of the resource.
@@ -89,7 +91,10 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
     public function create($pp_indicacao_bolsista_id)
     {
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-        return view($this->bag['view'] . '.create', compact('pp_indicacao_bolsista'));
+
+        $centros = $this->centros->where('centros','not like', "%Polo%")->get();
+
+        return view($this->bag['view'] . '.create', compact('pp_indicacao_bolsista', 'centros'));
     }
 
     /**
@@ -100,6 +105,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function store(StorePP_IndicacaoBolsistasInscricaoRequest $request, $pp_indicacao_bolsista_id)
     {
+        dd( $request);
+        dd( $request, $pp_indicacao_bolsista_id);
         try {
             DB::beginTransaction();
             //variavel para adicionar os ids

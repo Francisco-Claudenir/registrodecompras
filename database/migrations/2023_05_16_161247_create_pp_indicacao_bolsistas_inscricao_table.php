@@ -17,14 +17,15 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->bigIncrements('pp_i_bolsista_inscricao_id')->autoIncrement()->unique();
             $table->unsignedBigInteger('pp_i_bolsista_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('curso');
-            $table->string('centro');
+            $table->string('cursos');
+            $table->unsignedBigInteger('centros_id');
             $table->string('numero_identidade');
             $table->string('documento_identidade');
             $table->string('documento_cpf');
             $table->string('nome_orientador');
             $table->string('telefone_orientador');
             $table->string('email_orientador');
+            $table->unsignedBigInteger('centros_orientador_id');
             $table->string('titulo_projeto_orientador');
             $table->string('titulo_plano_orientador');
             $table->string('historico_escolar');
@@ -40,11 +41,13 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('pp_i_bolsista_id')->references('pp_i_bolsista_id')->on('pp_indicacao_bolsistas')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('pp_i_bolsista_id')->references('pp_i_bolsista_id')->on('pp_indicacao_bolsistas');
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('centros_id')->references('id')->on('centros');
+            
+            $table->foreign('centros_orientador_id')->references('id')->on('centros');
         });
     }
 

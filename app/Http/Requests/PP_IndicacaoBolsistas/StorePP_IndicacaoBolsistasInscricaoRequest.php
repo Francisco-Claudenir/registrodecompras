@@ -24,14 +24,15 @@ class StorePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'curso' => ['required', 'string', 'min:2', 'max:200'],
-            'centro' => ['required', 'string', 'min:2', 'max:200'],
+            'cursos' => ['required', 'string', 'min:2', 'max:200'],
+            'centros_id' => ['required', 'exists:centros,id'],
             'numero_identidade' => ['required', 'string', 'min:2', 'max:200'],
             'documento_identidade' => ['required'],
             'documento_cpf' => ['required'],
             'nome_orientador' => ['required', 'string', 'min:2', 'max:150'],
-            'telefone_orientador' => ['required', 'string', 'min:2', 'max:100'],
+            'telefone_orientador' => ['required', 'string', 'min:1', 'max:11', 'regex:/^\d+$/'],
             'email_orientador' => ['required', 'string', 'min:2', 'max:100'],
+            'centros_orientador_id' => ['required', 'exists:centros,id'],
             'titulo_projeto_orientador' => ['required', 'string', 'min:2', 'max:200'],
             'titulo_plano_orientador' => ['required', 'string', 'min:2', 'max:200'],
             'historico_escolar' => ['required'],
