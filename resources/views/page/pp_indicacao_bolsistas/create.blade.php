@@ -22,7 +22,7 @@
         <div class="card">
             <form
                 action="{{ route('pp-i-bolsistas-inscricao.store', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
-                method="post">
+                method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
@@ -38,24 +38,24 @@
                                     <div class="basic-form">
                                         <div class="row mt-3">
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Cursos</label>
-                                                <input type="text" class="form-control form-control-sm @if ($errors->first('cursos')) is-invalid @endif"
-                                                    placeholder="Cursos" required name="cursos" value="{{ old('cursos') }}">
-                                                @if ($errors->has('cursos'))
-                                                    <div class="invalid-feedback">{{ $errors->first('cursos') }}</div>
+                                                <label class="form-label fw-normal">Curso</label>
+                                                <input type="text" class="form-control form-control-sm @if ($errors->first('curso')) is-invalid @endif"
+                                                    placeholder="Curso" required name="curso" value="{{ old('curso') }}">
+                                                @if ($errors->has('curso'))
+                                                    <div class="invalid-feedback">{{ $errors->first('curso') }}</div>
                                                 @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Campos/Centros</label>
-                                                <select class="default-select form-control wide @if ($errors->first('centros_id')) is-invalid @endif" name="centros_id" required>
+                                                <label class="form-label fw-normal">Campus/Centros</label>
+                                                <select class="default-select form-control wide @if ($errors->first('centro_id')) is-invalid @endif" name="centro_id" required>
                                                     <option value="{{ null }}" selected hidden>Selecione...
                                                     </option>
                                                     @foreach ($centros as $dados)
                                                         <option value="{{ $dados->id }}">{{ $dados->centros }}</option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('centros_id'))
-                                                    <div class="invalid-feedback">{{ $errors->first('centros_id') }}</div>
+                                                @if ($errors->has('centro_id'))
+                                                    <div class="invalid-feedback">{{ $errors->first('centro_id') }}</div>
                                                 @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
@@ -140,9 +140,9 @@
                                                 @endif
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Campos/Centros</label>
-                                                <select class="default-select form-control wide @if ($errors->first('centros_orientador_id')) is-invalid @endif"
-                                                    name="centros_orientador_id" required>
+                                                <label class="form-label fw-normal">Campus/Centros</label>
+                                                <select class="default-select form-control wide @if ($errors->first('centro_orientador_id')) is-invalid @endif"
+                                                    name="centro_orientador_id" required>
                                                     <option value="{{ null }}" selected hidden>Selecione...
                                                     </option>
                                                     @foreach ($centros as $dados)
@@ -150,9 +150,9 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('centros_orientador_id'))
+                                                @if ($errors->has('centro_orientador_id'))
                                                     <div class="invalid-feedback">
-                                                        {{ $errors->first('centros_orientador_id') }}</div>
+                                                        {{ $errors->first('centro_orientador_id') }}</div>
                                                 @endif
                                             </div>
                                             <div class="mb-3 col-md-4">

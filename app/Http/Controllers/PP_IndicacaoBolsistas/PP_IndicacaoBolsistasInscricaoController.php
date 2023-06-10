@@ -8,6 +8,7 @@ use App\Http\Requests\PP_IndicacaoBolsistas\StorePP_IndicacaoBolsistasInscricaoR
 use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
 use App\Models\Centro;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -63,8 +64,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
         $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
 
         $dadosInscrito = $this->pp_i_bolsistas_inscricao
-                              ->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-                              ->findOrfail($pp_i_bolsista_inscricao_id);
+            ->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+            ->findOrfail($pp_i_bolsista_inscricao_id);
 
         return view($this->bag['view'] . '.espelho', compact('dadosInscrito'));
     }
@@ -92,7 +93,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
     {
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
 
-        $centros = $this->centros->where('centros','not like', "%Polo%")->get();
+        $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
 
         return view($this->bag['view'] . '.create', compact('pp_indicacao_bolsista', 'centros'));
     }
@@ -105,24 +106,98 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function store(StorePP_IndicacaoBolsistasInscricaoRequest $request, $pp_indicacao_bolsista_id)
     {
-        dd( $request);
-        dd( $request, $pp_indicacao_bolsista_id);
+
         try {
             DB::beginTransaction();
-            //variavel para adicionar os ids
-            $ids = [];
 
-            //Buscando e adcionando os id de pp_indicacao_bolsista_id e id so user a variavel
-            $ids['pp_i_bolsista_id'] = $pp_indicacao_bolsista_id;
-            $ids['user_id'] = Auth::user()->id;
+            $data_hoje = Carbon::now();
 
-            //combina as duas arrays $request e $ids na variavel %dados_inscricao
-            $dados_inscricao = array_merge($ids, $request->all());
+            $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->withCount('pp_i_bolsista_pp_i_b_inscricao')->findOrfail($pp_indicacao_bolsista_id);
 
-            $this->pp_i_bolsistas_inscricao->create($dados_inscricao);
-            DB::commit();
-            alert()->success(config($this->bag['msg'] . '.success.inscricao'));
-            return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
+            if (($data_hoje->gte($pp_indicacao_bolsistas->data_inicio) && $data_hoje->lte($pp_indicacao_bolsistas->data_fim))) {
+
+                //Calculo para saber o numero de inscricao
+                $numero_inscricao['numero_inscricao'] = $pp_indicacao_bolsistas['pp_i_bolsista_pp_i_b_inscricao_count'] + 1;
+
+                //variavel para adicionar os ids
+                $ids = [];
+
+                //Buscando e adcionando os id de pp_indicacao_bolsista_id e id so user a variavel
+                $ids['pp_i_bolsista_id'] = $pp_indicacao_bolsista_id;
+                $ids['user_id'] = Auth::user()->id;
+
+                //combina as duas arrays $request e $ids na variavel $dados_inscricao
+                $dados_inscricao = array_merge($ids, $numero_inscricao, $request->all());
+
+                //Caminho de arquirvos
+                //Documento Indentidade
+                $extensao =  $request['documento_identidade']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/documento_identidade' . '/' . Auth::user()->cpf . '';
+                $nome = 'documento_identidade' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['documento_identidade'] = $request['documento_identidade']->storeAs($path, $nome);
+
+                //Documento Cpf
+                $extensao =  $request['documento_cpf']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/documento_cpf' . '/' . Auth::user()->cpf . '';
+                $nome = 'documento_cpf' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['documento_cpf'] = $request['documento_cpf']->storeAs($path, $nome);
+
+                //Historico Escolar
+                $extensao =  $request['historico_escolar']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/historico_escolar' . '/' . Auth::user()->cpf . '';
+                $nome = 'historico_escolar' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['historico_escolar'] = $request['historico_escolar']->storeAs($path, $nome);
+
+                //Declaracao Vinculo
+                $extensao =  $request['declaracao_vinculo']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/declaracao_vinculo' . '/' . Auth::user()->cpf . '';
+                $nome = 'declaracao_vinculo' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['declaracao_vinculo'] = $request['declaracao_vinculo']->storeAs($path, $nome);
+
+                //Termo compromisso bolsista
+                $extensao =  $request['termo_compromisso_bolsista']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/termo_compromisso_bolsista' . '/' . Auth::user()->cpf . '';
+                $nome = 'termo_compromisso_bolsista' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['termo_compromisso_bolsista'] = $request['termo_compromisso_bolsista']->storeAs($path, $nome);
+
+                //Declaracao negativa vinculo
+                $extensao =  $request['declaracao_negativa_vinculo']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/declaracao_negativa_vinculo' . '/' . Auth::user()->cpf . '';
+                $nome = 'declaracao_negativa_vinculo' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['declaracao_negativa_vinculo'] = $request['declaracao_negativa_vinculo']->storeAs($path, $nome);
+
+                //Curriculo
+                $extensao =  $request['curriculo']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/curriculo' . '/' . Auth::user()->cpf . '';
+                $nome = 'curriculo' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['curriculo'] = $request['curriculo']->storeAs($path, $nome);
+
+                //Declaracao conjuta estagio
+                $extensao =  $request['declaracao_conjuta_estagio']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/declaracao_conjuta_estagio' . '/' . Auth::user()->cpf . '';
+                $nome = 'declaracao_conjuta_estagio' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['declaracao_conjuta_estagio'] = $request['declaracao_conjuta_estagio']->storeAs($path, $nome);
+
+                //Comprovante conta corrente
+                $extensao =  $request['comprovante_conta_corrente']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/comprovante_conta_corrente' . '/' . Auth::user()->cpf . '';
+                $nome = 'comprovante_conta_corrente' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['comprovante_conta_corrente'] = $request['comprovante_conta_corrente']->storeAs($path, $nome);
+
+                //Termo compromisso orientador
+                $extensao =  $request['termo_compromisso_orientador']->extension();
+                $path = 'PP_IndicacaoBolsistas/' . Carbon::create($pp_indicacao_bolsistas->created_at)->format('Y') . '/' . $pp_indicacao_bolsista_id . '/termo_compromisso_orientador' . '/' . Auth::user()->cpf . '';
+                $nome = 'termo_compromisso_orientador' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                $dados_inscricao['termo_compromisso_orientador'] = $request['termo_compromisso_orientador']->storeAs($path, $nome);
+
+                $this->pp_i_bolsistas_inscricao->create($dados_inscricao);
+
+                DB::commit();
+                alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+                return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
+            } else {
+                alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
+            }
         } catch (\Throwable $th) {
             dd($th);
             DB::rollBack();
