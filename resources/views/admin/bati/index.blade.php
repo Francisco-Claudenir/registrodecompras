@@ -2,13 +2,27 @@
     'layout' => 'admin',
 ])
 
-@section('title', ' - Index Bati')
+@section('title', ' - Bati')
 
 @section('content')
     @include('sweet::alert')
     <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+    
+                    <h4 class="card-title">Lista Bati</h4>
+    
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Bati</a></li>
+                    <li class="breadcrumb-item active"><a href="">Lista</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="row">
-            
             @foreach ($Batis as $bati) 
 
                 <div class="col-xl-6 col-lg-12">
@@ -19,14 +33,19 @@
                                     <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
-                                    <h5 class="title font-w600 mb-2"><a href="post-details.html"
-                                            class="text-black">{{ $bati->nome }}</a></h5>
-                                    <span>We Create Your Dream</span>
+                                    <h4 class="title mb-2 mt-1">{{ $bati->nome }}</h4>
+                                    @if ($bati->status == 'Aberto')
+                                        <span
+                                            class="badge badge-sm badge-success d-sm-inline-block d-none mt-2">Aberto</span>
+                                    @else
+                                        <span
+                                            class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
+                                    @endif
                                 </div>
-                                <span class="badge badge-success d-sm-inline-block d-none">Status</span>
+                                <a href="{{ route('bati.edit', $bati->bati_id) }}"><i
+                                    class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                             </div>
-                            <p class="mb-4">It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout.</p>
+                            <p class="mb-4">{{ $bati->descricao }}</p>
                             <div class="row mb-4">
                                 <div class="col-sm-6 mb-sm-0 mb-3 d-flex">
                                     <div class="dt-icon bgl-info me-3">
@@ -68,11 +87,12 @@
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress
-                                       {{-- <span class="pull-right">{{ number_format($dados->percentual(), 2)}}%</span>--}}
+                                        <span class="pull-right">{{ number_format($bati->percentual(), 2) }}%</span>
                                     </h6>
                                     <div class="progress ">
-                                       {{-- <div class="progress-bar bg-info progress-animated" style="width: {{$dados->percentual()}}%; height:6px;"
-                                            role="progressbar"></div>--}}
+                                        <div class="progress-bar bg-info progress-animated"
+                                            style="width: {{ $bati->percentual() }}%; height:6px;" role="progressbar">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

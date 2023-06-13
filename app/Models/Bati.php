@@ -13,7 +13,7 @@ class Bati extends Model
 
     protected $table = 'batis';
 
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim'];
+    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
 
     protected $primaryKey = 'bati_id';
 
@@ -36,6 +36,11 @@ class Bati extends Model
         $quanto_passou = $today->diffInDays($inicio);
         $fim = Carbon::createFromFormat('Y-m-d H:i:s', $this->data_fim);
         $total_dias = $fim->diffInDays($inicio) + 1;
+
+        if(($quanto_passou / $total_dias) * 100 > 100.00){
+            return 100.00;
+        }
+        
         return ($quanto_passou / $total_dias) * 100;
     }
 
