@@ -101,7 +101,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->centro }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->centros->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
