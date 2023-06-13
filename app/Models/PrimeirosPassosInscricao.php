@@ -60,14 +60,15 @@ class PrimeirosPassosInscricao extends Model
     {
         return $this->belongsTo(PrimeiroPasso::class, 'primeiropasso_id')->withTrashed();
     }
+
     public function pp_inscricao_user()
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
 
-    public function cpf()
+    public function cpf($cpff)
     {
-        $cpf = '*.' . substr($this->cpf, 3, 3) . '.' . substr($this->cpf, 6, 3) . '-**';
+        $cpf = '***.' . substr($cpff, 3, 3) . '.' . substr($cpff, 6, 3) . '-**';
         return $cpf;
     }
 }

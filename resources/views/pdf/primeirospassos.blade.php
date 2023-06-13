@@ -114,7 +114,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf($dadosInscrito->cpf) }}</p>
                                     </dd>
                                 </small>
                             </th>

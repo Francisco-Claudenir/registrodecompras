@@ -59,7 +59,7 @@
                                                     <div class="col-6">
 
                                                         @if ($isInscrito)
-                                                            <a href=""
+                                                            <a href="{{ route('pp-i-bolsistas-inscricao.show', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
                                                                 class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
                                                         @else
                                                             @if (Auth::check())
