@@ -18,7 +18,7 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->unsignedBigInteger('pp_i_bolsista_id');
             $table->unsignedBigInteger('user_id');
             $table->string('numero_inscricao');
-            $table->string('curso');
+            $table->unsignedBigInteger('curso_id');
             $table->unsignedBigInteger('centro_id');
             $table->string('numero_identidade');
             $table->string('documento_identidade');
@@ -45,6 +45,8 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->foreign('pp_i_bolsista_id')->references('pp_i_bolsista_id')->on('pp_indicacao_bolsistas');
 
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('curso_id')->references('id')->on('cursos');
 
             $table->foreign('centro_id')->references('id')->on('centros');
             

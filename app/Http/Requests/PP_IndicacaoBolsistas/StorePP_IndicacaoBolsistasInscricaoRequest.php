@@ -24,8 +24,8 @@ class StorePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'curso' => ['required', 'string', 'min:2', 'max:200'],
             'centro_id' => ['required', 'exists:centros,id'],
+            'curso_id' => ['required', 'exists:cursos,id'],
             'numero_identidade' => ['required', 'string', 'min:2', 'max:200'],
             'documento_identidade' => ['required', 'mimes:pdf'],
             'documento_cpf' => ['required', 'mimes:pdf'],
