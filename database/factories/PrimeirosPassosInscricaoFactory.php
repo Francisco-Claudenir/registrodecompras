@@ -28,10 +28,10 @@ class PrimeirosPassosInscricaoFactory extends Factory
                 self::$counter++;
                 return self::$counter;
             },
-            'areaconhecimento_id' => 2,
+            'areaconhecimento_id' => random_int(1, 26),
             'identidade' => '12345678985',
             'matricula' => '12345678985',
-            'centro' => '12345678985',
+            'centro_id' => random_int(1, 54),
             'copiacontrato' => 'PrimeirosPassos/2023/1/copiacontrato/12345678945/copiacontrato_104418202306026479f23212b01.pdf',
             'vigencia_inicio' => '2023-06-02 00:00:00.000',
             'vigencia_fim' => '2023-06-02 00:00:00.000',

@@ -18,7 +18,7 @@ class PrimeirosPassosInscricao extends Model
         'areaconhecimento_id',
         'identidade',
         'matricula',
-        'centro',
+        'centro_id',
         'copiacontrato',
         'vigencia_inicio',
         'vigencia_fim',
@@ -63,6 +63,12 @@ class PrimeirosPassosInscricao extends Model
     public function pp_inscricao_user()
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
+    }
+
+    public function centros()
+    {
+
+        return $this->belongsTo(Centro::class, 'centro_id', 'id');
     }
 
     public function cpf()

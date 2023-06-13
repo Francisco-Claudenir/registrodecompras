@@ -22,4 +22,8 @@ class Centro extends Model
         return $this->hasMany(Equipamento::class, 'centro_id');
     }
 
+    public function pp_inscricao()
+    {
+        return $this->hasMany(PrimeirosPassosInscricao::class, 'centro_id');
+    }
 }
