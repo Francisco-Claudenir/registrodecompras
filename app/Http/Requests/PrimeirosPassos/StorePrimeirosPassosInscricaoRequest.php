@@ -27,7 +27,7 @@ class StorePrimeirosPassosInscricaoRequest extends FormRequest
             'primeiropasso_id' => ['required'],
             'identidade' => ['required', 'string'],
             'matricula' => ['required', 'string'],
-            'centro' => ['required', 'string'],
+            'centro_id' => ['required'],
             'copiacontrato' => ['required', 'mimes:pdf'],
             'vigencia_inicio' => ['required', 'date'],
             'vigencia_fim' => ['required', 'date'],

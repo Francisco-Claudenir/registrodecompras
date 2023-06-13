@@ -3,33 +3,30 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Edição Primeiros Passos')
+@section('title', ' - Edição Bati')
 
 @section('content')
     <div class="container-fluid">
-        @include('sweet::alert')
-
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">Editar Primeiros Passos</h4>
+                    <h4 class="card-title">Editar Bati</h4>
 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Primeiros Passos</a></li>
+                    <li class="breadcrumb-item"><a href="">Bati</a></li>
                     <li class="breadcrumb-item active"><a href="">Editar</a></li>
                 </ol>
             </div>
         </div>
-
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('primeiropasso.update', $primeiropasso->primeiropasso_id) }}" method="post">
+                        <form action="{{ route('bati.update', $bati->bati_id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="row">
@@ -37,7 +34,7 @@
                                     <label class="form-label">Nome</label>
                                     <input type="text"
                                         class="form-control @if ($errors->first('nome')) is-invalid @endif"
-                                        name="nome" required="" value="{{ $primeiropasso->nome }}">
+                                        name="nome" required="" value="{{ $bati->nome }}">
                                     @if ($errors->has('nome'))
                                         <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                                     @endif
@@ -47,7 +44,7 @@
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_inicio')) is-invalid @endif"
                                         name="data_inicio" required=""
-                                        value="{{ date('Y-m-d', strtotime($primeiropasso->data_inicio)) }}" id="data_inicio">
+                                        value="{{ date('Y-m-d', strtotime($bati->data_inicio)) }}" id="data_inicio">
                                     @if ($errors->has('data_inicio'))
                                         <div class="invalid-feedback">{{ $errors->first('data_inicio') }}</div>
                                     @endif
@@ -57,7 +54,7 @@
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_fim')) is-invalid @endif"
                                         name="data_fim" required=""
-                                        value="{{ date('Y-m-d', strtotime($primeiropasso->data_fim)) }}" id="data_fim">
+                                        value="{{ date('Y-m-d', strtotime($bati->data_fim)) }}" id="data_fim">
                                     @if ($errors->has('data_fim'))
                                         <div class="invalid-feedback">{{ $errors->first('data_fim') }}</div>
                                     @endif
@@ -67,7 +64,7 @@
                                 <div class="mb-4 col-md-12">
                                     <label class="form-label">Descrição</label>
                                     <textarea class="form-control @if ($errors->first('descricao')) is-invalid @endif" cols="30" rows="10"
-                                        id="comment" name="descricao" required="">{{ $primeiropasso->descricao }}</textarea>
+                                        id="comment" name="descricao" required="">{{ $bati->descricao }}</textarea>
                                     @if ($errors->has('descricao'))
                                         <div class="invalid-feedback">{{ $errors->first('descricao') }}</div>
                                     @endif
@@ -76,13 +73,12 @@
                             <div class="row">
                                 <label for="">Status</label>
                                 <div class="mb-3 mb-0 mt-2">
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($primeiropasso->status == "Aberto") checked @endif> Aberto</label>
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($primeiropasso->status == "Fechado") checked @endif> Fechado</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($bati->status == "Aberto") checked @endif> Aberto</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($bati->status == "Fechado") checked @endif> Fechado</label>
                                 </div>
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
-                            <a class="btn btn-danger float-end me-2" type="button" href=""
-                                onclick="history.back()">Cancelar</a>
+                            <a class="btn btn-danger float-end me-2" type="button" href="{{route('bati.index')}}">Cancelar</a>
                         </form>
                     </div>
                 </div>

@@ -36,13 +36,13 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $primeiropasso = PrimeiroPasso::create([
-            'nome' => 'Primeiros Passos 2023',
-            'descricao' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indust',
-            'data_inicio' => '2023-05-02 00:00:00.000',
-            'data_fim' => '2023-05-25 23:59:59.000',
-            'status' => 'Aberto'
-        ]);
+        // $primeiropasso = PrimeiroPasso::create([
+        //     'nome' => 'Primeiros Passos 2023',
+        //     'descricao' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indust',
+        //     'data_inicio' => '2023-05-02 00:00:00.000',
+        //     'data_fim' => '2023-05-25 23:59:59.000',
+        //     'status' => 'Aberto'
+        // ]);
 
         $path = public_path('centros-cursos-postgres.sql');
         DB::unprepared(file_get_contents($path));
@@ -53,8 +53,8 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        PrimeirosPassosInscricao::factory()->count(5)->create();
-        User::factory()->count(3)->create();
+        // PrimeirosPassosInscricao::factory()->count(5)->create();
+        // User::factory()->count(3)->create();
 
         // $user = User::factory()->has(PrimeirosPassosInscricao::factory()->count(1)->state(function (array $attributes, User $user){
         //     return $user->id; 

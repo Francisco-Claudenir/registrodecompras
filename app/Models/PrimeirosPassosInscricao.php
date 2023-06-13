@@ -18,7 +18,7 @@ class PrimeirosPassosInscricao extends Model
         'areaconhecimento_id',
         'identidade',
         'matricula',
-        'centro',
+        'centro_id',
         'copiacontrato',
         'vigencia_inicio',
         'vigencia_fim',

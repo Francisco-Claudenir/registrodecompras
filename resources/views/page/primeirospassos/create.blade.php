@@ -5,6 +5,7 @@
 
 @section('title', ' - Login')
 @section('content-header')
+    @include('sweet::alert')
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
@@ -36,24 +37,35 @@
                                     <hr class="mt-3 mb-3">
                                     <div class="basic-form">
                                         <div class="row">
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-3">
                                                 <label class="form-label fw-normal">Número de Identidade</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Identidade" name="identidade"
                                                     value="{{ old('identidade') }}">
                                                 {!! $errors->default->first('identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-3">
                                                 <label class="form-label fw-normal">Matrícula</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Matricula" name="matricula" value="{{ old('matricula') }}">
                                                 {!! $errors->default->first('matricula', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Centro</label>
-                                                <input type="text" class="form-control" placeholder="Centro"
+                                                <select class="default-select form-control form-custom wide mb-3"
+                                                    tabindex="null" name="centro_id" required>
+                                                    <option disabled selected value="">
+                                                        Selecione
+                                                        uma opção</option>
+                                                    @foreach ($centros as $centro)
+                                                        <option value={{ $centro->id }}">
+                                                            {{ $centro->centros }}</option>
+                                                    @endforeach
+                                                    {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                </select>
+                                                {{-- <input type="text" class="form-control" placeholder="Centro"
                                                     name="centro" value="{{ old('centro') }}">
-                                                {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!} --}}
                                             </div>
 
                                             <div class="card border">
@@ -282,6 +294,18 @@
 
 @section('css')
     <style>
+        .bootstrap-select .btn {
+            height: 3.5rem !important;
+        }
+
+        @media (max-width: 1402px) {
+            .bootstrap-select .btn {
+                height: 2.5rem !important;
+            }
+
+
+        }
+
         .form-control::-webkit-file-upload-button {
             height: 55px !important;
         }
@@ -290,6 +314,7 @@
             .form-control::-webkit-file-upload-button {
                 height: 40px !important;
             }
+
 
         }
     </style>

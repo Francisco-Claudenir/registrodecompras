@@ -20,6 +20,7 @@ class UpdateBatiRequest extends FormRequest
             'descricao' => ['required', 'string', 'min:2', 'max:255'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],
+            'status' => ['required','string']
         ];
     }
 }
