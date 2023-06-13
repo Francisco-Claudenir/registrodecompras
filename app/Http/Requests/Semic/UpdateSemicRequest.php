@@ -4,7 +4,7 @@ namespace App\Http\Requests\Semic;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SemicRequest extends FormRequest
+class UpdateSemicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,6 +28,7 @@ class SemicRequest extends FormRequest
             'descricao' => ['required', 'string', 'min:2', 'max:255'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],
+            'status' => ['required','string']
         ];
     }
 }
