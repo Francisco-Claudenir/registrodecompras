@@ -14,12 +14,12 @@ class Cidade extends Model
 
     public function estados()
     {
-        return $this->belongsTo(estados::class, 'estado_id');
+        return $this->belongsTo(Estado::class, 'estado_id');
     }
 
     public function centros()
     {
-        return $this->hasMany(centros::class, 'cidade_id');
+        return $this->hasMany(Centro::class, 'cidade_id');
     }
 
 }

@@ -14,7 +14,7 @@ class Centro extends Model
 
     public function cidades()
     {
-        return $this->belongsTo(cidades::class, 'cidade_id');
+        return $this->belongsTo(Cidade::class, 'cidade_id');
     }
 
     public function equipamentos()

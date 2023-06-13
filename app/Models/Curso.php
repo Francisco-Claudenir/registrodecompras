@@ -14,12 +14,12 @@ class Curso extends Model
 
     public function centros()
     {
-        return $this->belongsTo(centros::class, 'centro_id');
+        return $this->belongsTo(Centro::class, 'centro_id');
     }
 
     public function modalidades()
     {
-        return $this->belongsTo(modalidades::class, 'modalidade_id');
+        return $this->belongsTo(Modalidade::class, 'modalidade_id');
     }
 
 }
