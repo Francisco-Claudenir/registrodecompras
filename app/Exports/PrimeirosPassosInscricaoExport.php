@@ -38,6 +38,10 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = PrimeirosPassosInscricao::join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
+            ->join('sub_areas', 'sub_areas.areaconhecimento_id', '=', 'primeiros_passos_inscricaos.areaconhecimento_id')
+            ->join('pp_inscricao__ptrabalhos', 'pp_inscricao__ptrabalhos.passos_inscricao_id', '=', 'primeiros_passos_inscricaos.passos_inscricao_id')
+            ->join('plano_trabalhos', 'plano_trabalhos.plano_id', '=', 'pp_inscricao__ptrabalhos.plano_id')
+            ->join('centros', 'centros.id', '=', 'primeiros_passos_inscricaos.centro_id')
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
             ->select([
                 'primeiros_passos_inscricaos.numero_inscricao',
@@ -45,7 +49,12 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
                 'users.email',
                 'users.cpf',
                 'users.telefone',
-            ])->get();
+                'sub_areas.nome as subarea',
+                'centros.centros as centro',
+                'primeiros_passos_inscricaos.tituloprojetopesquisa',
+                'plano_trabalhos.titulo'
+            ])
+            ->get();
         return $listaInscritos;
     }
 
@@ -68,7 +77,11 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
             'Nome',
             'Email',
             'Cpf',
-            'Telefone'
+            'Telefone',
+            'Área de Conhecimento',
+            'Centro',
+            'Titulo do Projeto',
+            'Titulo do Plano'
             // Outras colunas...
         ];
     }
@@ -86,12 +99,12 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
                 $imagePath = public_path('/images/uema/topo-ppg.png');
                 $drawing = new Drawing();
                 $drawing->setPath($imagePath);
-                $drawing->setCoordinates('B1');
+                $drawing->setCoordinates('C1');
                 $drawing->setWidth($lastColumnIndex * 37);
                 $drawing->setWorksheet($event->sheet->getDelegate());
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
-                $event->sheet->getStyle('A1:E7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+                $event->sheet->getStyle('A1:I7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
             },
         ];
     }

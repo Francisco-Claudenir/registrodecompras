@@ -35,7 +35,8 @@
         </small> <br>
         <small>
             <strong>
-                Data Inicio: {{ date('d/m/Y', strtotime($primeiropasso->data_inicio)) }} / Data Fim: {{ date('d/m/Y', strtotime($primeiropasso->data_fim)) }}
+                Data Inicio: {{ date('d/m/Y', strtotime($primeiropasso->data_inicio)) }} / Data Fim:
+                {{ date('d/m/Y', strtotime($primeiropasso->data_fim)) }}
             </strong>
         </small> <br>
         <small>
@@ -218,7 +219,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->centro }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->centros->centros }}</p>
                                     </dd>
                                 </small>
                             </th>
