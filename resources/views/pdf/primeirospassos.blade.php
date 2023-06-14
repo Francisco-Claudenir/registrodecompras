@@ -214,18 +214,6 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Centro</dt>
-                                    </h6>
-                                </strong>
-                                <small>
-                                    <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->centros->centros }}</p>
-                                    </dd>
-                                </small>
-                            </th>
-                            <td colspan="2">
-                                <strong>
-                                    <h6>
                                         <dt style="font-size: 14px">Cópia do Contrato</dt>
                                     </h6>
                                 </strong>
@@ -235,7 +223,19 @@
                                         </p>
                                     </dd>
                                 </small>
-                            </td>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Centro</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $centro->centros }}</p>
+                                    </dd>
+                                </small>
+                            </th>
                         </tr>
                     </thead>
                 </table>
@@ -318,10 +318,17 @@
                                     </h6>
                                 </strong>
                                 <small>
-                                    <dd class="text-justify"><a style="color: red;"
-                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
-                                        </p>
-                                    </dd>
+                                    @if ($dadosInscrito->parecercomite != null)
+                                        <dd class="text-justify"><a style="color: red;"
+                                                href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                            </p>
+                                        </dd>
+                                    @else
+                                        <dd>
+                                            <p style="font-size: 14px">Sem Arquivo</p>
+                                        </dd>
+                                    @endif
+
                                 </small>
                             </th>
                         </tr>

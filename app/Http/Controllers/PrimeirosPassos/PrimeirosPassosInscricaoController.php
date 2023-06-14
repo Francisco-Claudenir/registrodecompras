@@ -114,7 +114,7 @@ class PrimeirosPassosInscricaoController extends Controller
         //Verificando se o primeiropasso_id existe
         $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
 
-        $dadosInscrito = $this->primeirospassosinscricao->with('centros')
+        $dadosInscrito = $this->primeirospassosinscricao
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
             ->findOrfail($passos_inscricao_id);
@@ -127,8 +127,10 @@ class PrimeirosPassosInscricaoController extends Controller
         $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
+        
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
 
-        return view('pdf.primeirospassos', compact('dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
+        return view('pdf.primeirospassos', compact('centro', 'dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
     }
 
     /**
@@ -158,7 +160,7 @@ class PrimeirosPassosInscricaoController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
         }
-        // dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
+        //dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
         $data_hoje = Carbon::now();
 
         try {
@@ -181,10 +183,18 @@ class PrimeirosPassosInscricaoController extends Controller
                 $dados['projetopesquisa'] = $request['projetopesquisa']->storeAs($projetopath, $projetonome);
 
                 //Parecer Comite
-                $parecerextensao =  $request['parecercomite']->extension();
-                $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
-                $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
-                $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                // $parecerextensao =  $request['parecercomite']->extension();
+                // $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
+                // $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
+                // $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                $parecerextensao =  $request['parecercomite'] ? $request['parecercomite']->extension() : null;
+                if ($parecerextensao != null) {
+                    $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
+                    $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
+                    $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                } else {
+                    $dados['parecercomite'] = null;
+                }
 
                 //Anuencia Chefe
                 $anuenciachefe =  $request['anuenciachefe']->extension();
@@ -203,7 +213,7 @@ class PrimeirosPassosInscricaoController extends Controller
 
                 $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
 
-
+                
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
                     'primeiropasso_id' => $request['primeiropasso_id'],
@@ -299,12 +309,12 @@ class PrimeirosPassosInscricaoController extends Controller
         //Verificando se o user_id existe
         $this->user->findOrfail($user_id);
 
-        $dadosInscrito = $this->primeirospassosinscricao->with('centros')
+        $dadosInscrito = $this->primeirospassosinscricao
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
             ->where('users.id', '=', $user_id)
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
             ->first();
-
+        
         //Transformando Json em array de enderecos
         $endereco = json_decode($dadosInscrito->endereco, true);
 
@@ -314,7 +324,9 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
             ->first();
 
-        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
     }
 
     /**

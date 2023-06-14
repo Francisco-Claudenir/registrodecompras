@@ -101,7 +101,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->centros->centros }}</dd>
+                            <dd class="text-justify">{{ $centro->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -149,9 +149,14 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Parecer Comitê</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
-                            </dd>
+                            @if ($dadosInscrito->parecercomite != null)
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                </dd>
+                            @else
+                                <dd class="text-justify">Sem Arquivo</dd>
+                            @endif
+
                         </dl>
                     </div>
                     <div class="col-sm-12">

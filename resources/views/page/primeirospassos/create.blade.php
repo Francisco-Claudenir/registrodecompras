@@ -3,7 +3,7 @@
     'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - Inscrição')
 @section('content-header')
     @include('sweet::alert')
     <div class="container-fluid ">
@@ -58,7 +58,7 @@
                                                         Selecione
                                                         uma opção</option>
                                                     @foreach ($centros as $centro)
-                                                        <option value={{ $centro->id }}">
+                                                        <option value={{ $centro->id }}>
                                                             {{ $centro->centros }}</option>
                                                     @endforeach
                                                     {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
