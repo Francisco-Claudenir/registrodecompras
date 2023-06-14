@@ -3,7 +3,7 @@
     'plugins' => ['sweetalert'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - Registro')
 
 @section('content')
     <div class="row justify-content-center">
@@ -101,7 +101,7 @@
                                             <div class="input-group">
                                                 <input type="text" name="endereco[numero]"
                                                     class="form-control @error('endereco.numero') is-invalid @enderror"
-                                                    placeholder="Ex 01" required value="{{ old('endereco.numero') }}">
+                                                    placeholder="Ex 01"  value="{{ old('endereco.numero') }}">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-381-location"></span>
                                                 </div>

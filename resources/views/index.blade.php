@@ -2,7 +2,7 @@
     'layout' => 'home',
 ])
 
-@section('title', ' - Cadastro de alunno')
+@section('title', ' - Programas e Eventos')
 
 @section('content')
     <div class="container-fluid">

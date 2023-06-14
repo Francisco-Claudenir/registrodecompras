@@ -2,7 +2,7 @@
     'layout' => 'evt',
 ])
 
-@section('title', ' - Login')
+@section('title', ' - ' . $primeiropasso->nome)
 @section('content-header')
     @include('sweet::alert')
     <div class="container-fluid ">
