@@ -2,11 +2,27 @@
     'layout' => 'admin',
 ])
 
-@section('title', ' - Index Primeiros Passos')
+@section('title', ' - Primeiros Passos')
 
 @section('content')
 
     <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+
+                    <h4 class="card-title">Lista Primeiros Passos</h4>
+
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Primeiros Passos</a></li>
+                    <li class="breadcrumb-item active"><a href="">Lista</a></li>
+                </ol>
+            </div>
+        </div>
+
         <div class="row">
             @forelse($primeiropasso as $dados)
                 <div class="col-xl-6 col-lg-12">
@@ -14,7 +30,7 @@
                         <div class="card-body">
                             <div class="d-flex mb-4 align-items-start">
                                 <div class="dz-media me-3">
-                                    <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
+                                    <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
                                     <h4 class="title mb-2 mt-1">{{ $dados->nome }}</h4>

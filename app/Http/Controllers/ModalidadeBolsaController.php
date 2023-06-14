@@ -45,7 +45,6 @@ class ModalidadeBolsaController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('modalidadebolsa.index');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();
@@ -76,7 +75,6 @@ class ModalidadeBolsaController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('modalidadebolsa.index');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();

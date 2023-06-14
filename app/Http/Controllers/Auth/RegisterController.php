@@ -59,15 +59,12 @@ class RegisterController extends Controller
             'endereco' => ['required', 'array'],
             'endereco.cep' => ['required', 'digits:8'],
             'endereco.endereco' => ['required'],
-            'endereco.numero' => ['required'],
             'endereco.bairro' => ['required']
 
         ], [
             //cep
             'endereco.cep.required' => 'O cep é obrigatório',
             'endereco.cep.digits' => 'O cep deve conter 8 dígitos',
-            //numero
-            'endereco.numero.required' => 'O numero é obrigatório',
             //endereco
             'endereco.endereco.required' => 'O endereco é obrigatório',
             //Bairro

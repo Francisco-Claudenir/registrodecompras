@@ -3,14 +3,15 @@
     'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - Inscrição')
 @section('content-header')
+    @include('sweet::alert')
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                         <span class="mt-4"><strong>{{ $primeiropasso->nome }}</strong></span>
                     </div>
@@ -36,35 +37,79 @@
                                     <hr class="mt-3 mb-3">
                                     <div class="basic-form">
                                         <div class="row">
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-3">
                                                 <label class="form-label fw-normal">Número de Identidade</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Identidade" name="identidade"
                                                     value="{{ old('identidade') }}">
                                                 {!! $errors->default->first('identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-3">
                                                 <label class="form-label fw-normal">Matrícula</label>
                                                 <input type="text" class="form-control form-control-sm"
                                                     placeholder="Matricula" name="matricula" value="{{ old('matricula') }}">
                                                 {!! $errors->default->first('matricula', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-4">
+                                            <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Centro</label>
-                                                <input type="text" class="form-control" placeholder="Centro"
+                                                <select class="default-select form-control form-custom wide mb-3"
+                                                    tabindex="null" name="centro_id" required>
+                                                    <option disabled selected value="">
+                                                        Selecione
+                                                        uma opção</option>
+                                                    @foreach ($centros as $centro)
+                                                        <option value={{ $centro->id }}>
+                                                            {{ $centro->centros }}</option>
+                                                    @endforeach
+                                                    {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                </select>
+                                                {{-- <input type="text" class="form-control" placeholder="Centro"
                                                     name="centro" value="{{ old('centro') }}">
-                                                {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!} --}}
                                             </div>
-                                            <div class="mb-3 col-md-12 col-sm-12">
-                                                <label class="form-label fw-normal">Cópia do Contrato</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text bg-primary text-white">Upload</span>
-                                                    <div class="form-file">
-                                                        <input type="file" class="form-file-input form-control"
-                                                            name="copiacontrato">
+
+                                            <div class="card border">
+                                                <div class=" pt-4 d-flex justify-content-center">
+                                                    <h5 class="text-muted">Contrato</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-12 col-sm-12">
+                                                            <label class="form-label fw-normal">Cópia do Contrato</label>
+                                                            <div class="input-group mb-3">
+                                                                <span
+                                                                    class="input-group-text bg-primary text-white">Upload</span>
+                                                                <div class="form-file">
+                                                                    <input type="file"
+                                                                        class="form-file-input form-control"
+                                                                        name="copiacontrato">
+                                                                </div>
+                                                            </div>
+                                                            {!! $errors->default->first('copiacontrato', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-4">
+                                                            <label class="form-label fw-normal">Período de Vigência -
+                                                                Início</label>
+                                                            <input type="date"
+                                                                class="form-control @if ($errors->first('vigencia_inicio')) is-invalid @endif"
+                                                                name="vigencia_inicio" required=""
+                                                                value="{{ old('vigencia_inicio') }}">
+                                                            {!! $errors->default->first('vigencia_inicio', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                        </div>
+                                                        <div class="col-1 d-flex align-items-center justify-content-center">
+                                                            -</div>
+                                                        <div class="mb-3 col-md-4">
+                                                            <label class="form-label fw-normal">Período de Vigência -
+                                                                Fim</label>
+                                                            <input type="date"
+                                                                class="form-control @if ($errors->first('vigencia_fim')) is-invalid @endif"
+                                                                name="vigencia_fim" required=""
+                                                                value="{{ old('vigencia_fim') }}">
+                                                            {!! $errors->default->first('vigencia_fim', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                {!! $errors->default->first('copiacontrato', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +167,8 @@
                                             <div class="mb-3 col-md-5">
                                                 <label class="form-label fw-normal">Título de Projeto de Pesquisa</label>
                                                 <input type="text" class="form-control"
-                                                    placeholder="Título de Projeto de Pesquisa" name="tituloprojetopesquisa"
+                                                    placeholder="Título de Projeto de Pesquisa"
+                                                    name="tituloprojetopesquisa"
                                                     value="{{ old('tituloprojetopesquisa') }}">
                                                 {!! $errors->default->first(
                                                     'tituloprojetopesquisa',
@@ -140,20 +186,31 @@
                                                 </div>
                                                 {!! $errors->default->first('projetopesquisa', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-7">
+                                            <div class="mb-3 col-md-8">
                                                 <label class="form-label fw-normal">Resumo do Projeto</label>
                                                 <textarea class="form-control" rows="6" id="comment" placeholder="Resumo do Projeto" name="resumoprojeto"
                                                     value="{{ old('resumoprojeto') }}"></textarea>
                                                 {!! $errors->default->first('resumoprojeto', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-5">
+                                            <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Chefe Imediato</label>
                                                 <input type="text" class="form-control" name="chefeimediato"
                                                     placeholder="Chefe Imediato" value="{{ old('chefeimediato') }}">
                                                 {!! $errors->default->first('chefeimediato', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label fw-normal">Parecer Comitê</label>
+                                                <label class="form-label fw-normal">Anuência do chefe imediato</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text bg-primary text-white">Upload</span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input form-control"
+                                                            name="anuenciachefe">
+                                                    </div>
+                                                </div>
+                                                {!! $errors->default->first('anuenciachefe', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label fw-normal">Comitê de Ética</label>
                                                 <div class="input-group mb-6">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
@@ -237,6 +294,18 @@
 
 @section('css')
     <style>
+        .bootstrap-select .btn {
+            height: 3.5rem !important;
+        }
+
+        @media (max-width: 1402px) {
+            .bootstrap-select .btn {
+                height: 2.5rem !important;
+            }
+
+
+        }
+
         .form-control::-webkit-file-upload-button {
             height: 55px !important;
         }
@@ -245,6 +314,7 @@
             .form-control::-webkit-file-upload-button {
                 height: 40px !important;
             }
+
 
         }
     </style>

@@ -16,289 +16,450 @@
 </head>
 
 <body style="margin: 0px">
-    <div class="col-xl-12 p-lg-4 ">
+    <br>
+    <div class="col-sm-12 text-center">
+        <small>
+            <strong>
+                UNIVERSIDADE ESTADUAL DO MARANHÃO - UEMA
+            </strong>
+        </small><br>
+        <small>
+            <strong>
+                PRÓ-REITORIA DE PESQUISA E PÓS-GRADUAÇÃO - PPG
+            </strong>
+        </small> <br>
+        <small>
+            <strong>
+                {{ strtoupper($pp_indicacao_bolsista->nome) }}
+            </strong>
+        </small> <br>
+        <small>
+            <strong>
+                Data Inicio: {{ date('d/m/Y', strtotime($pp_indicacao_bolsista->data_inicio)) }} / Data Fim:
+                {{ date('d/m/Y', strtotime($pp_indicacao_bolsista->data_fim)) }}
+            </strong>
+        </small> <br>
+        <small>
+            <strong>
+                Documento gerado em: {{ now()->format('d/m/Y H:i:s') }}
+            </strong>
+        </small> <br>
+    </div>
+    <br>
+    <br>
+    <div class="col-xl-12 p-lg-4">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                
+            <div class="col-lg-8 col-md-11 col-sm-11">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Nª Inscrição</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->numero_inscricao }}</p>
+                                    </dd>
+                                </small>
+                            </td>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px"> Data Inscrição</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">
+                                            {{ date('d/m/Y H:i', strtotime($dadosInscrito->created_at)) }}
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px"> Nome</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->nome }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Email</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->email }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Cpf</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf($dadosInscrito->cpf) }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Número de Identidade</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->numero_identidade }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Telefone</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Cep</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $endereco['cep'] }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Número</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Endereço</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $endereco['endereco'] }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Bairro</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $endereco['bairro'] }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Campus/Centros</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $centro_candidato->centros }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Curso</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $curso->cursos }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Documento CPF</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_cpf)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <td colspan="3">
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Documento de Identidade</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_identidade)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+
+                <br>
+                <br>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Nome do Orientador</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->nome_orientador }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Telefone do Orientador</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone_orientador }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">E-mail do Orientador</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->email_orientador }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Campus/Centros</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $centro_orientador->centros }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Título do Projeto do Orientador(a)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->titulo_projeto_orientador }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Título do Plano de Trabalho Bolsista</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->titulo_plano_orientador }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Histórico Escolar atualizado, disponível do SIGUEMA
+                                            (formato PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->historico_escolar)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Declaração de vínculo do aluno à UEMA atualizado
+                                            (formato PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_vinculo)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Termo de Compromisso do bolsista (formato PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício (formato
+                                            PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_negativa_vinculo)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Currículo atualizado, gerado na Plataforma Lattes
+                                            (formato PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Declaração conjuta de estágio (quando for o caso)
+                                            (formato PDF)</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    @if ($dadosInscrito->declaracao_conjuta_estagio != null)
+                                        <dd class="text-justify"><a style="color: red;"
+                                                href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_conjuta_estagio)]) }}">Arquivo</a>
+                                            </p>
+                                        </dd>
+                                    @else
+                                        Sem Arquivo
+                                    @endif
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
-    <br>
-    <div class="container">
-        <div class="col-sm-12 text-center">
-            <small>
-                <strong>
-                    UNIVERSIDADE ESTADUAL DO MARANHÃO - UEMA
-                </strong>
-            </small><br>
-            <small>
-                <strong>
-                    PRÓ-REITORIA DE PESQUISA E PÓS-GRADUAÇÃO - PPG
-                </strong>
-            </small> <br>
-        </div>
-        <br>
-        <div class="col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Nome</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->nome }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Email</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->email }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Cpf</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->cpf }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Telefone</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->telefone }}</dd>
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Rg</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->numero_identidade }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Curso</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->curso }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Centro</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->centro }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Endereço</dt>
-                            </strong>
-                            <small>
-                                dsfadfasfdasfasdfas
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td colspan="2">
-                            <strong>
-                                <dt>Documento Cpf</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->documento_cpf }}</dd>
-                            </small>
-                        </td>
-                        <td colspan="2">
-                            <strong>
-                                <dt>Documento Indentidade</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->documento_identidade }}</dd>
-                            </small>
-                        </td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Nome Orientador</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->nome_orientador }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Telefone Orientador</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->telefone_orientador }}</dd>
-                            </small>
-                        </th>
-                        <td colspan="2">
-                            <strong>
-                                <dt>Email Orientador</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->email_orientador }}</dd>
-                            </small>
-                        </td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td colspan="2">
-                            <strong>
-                                <dt>Título do Projeto do Orientador</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->titulo_projeto_orientador }}</dd>
-                            </small>
-                        </td>
-                        <td colspan="2">
-                            <strong>
-                                <dt>Título do Plano de Trabalho Bolsista</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->titulo_plano_orientador }}</dd>
-                            </small>
-                        </td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Historico Escolar Disponível no SIGUEMA</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->historico_escolar }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Declaração de vínculo do aluno a UEMA</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->declaracao_vinculo }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Termo de Compromisso do bolsista</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->termo_compromisso_bolsista }}</dd>
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Declaração Negativa de Vínculo Empregatício</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->declaracao_negativa_vinculo }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Curriculo gerado na Plataforma Lattes</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->curriculo }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Declaração conjuta de estágio</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->declaracao_conjuta_estagio }}</dd>
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Agência do Banco do Brasil</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->agencia_banco }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Número da conta corrente no Brasil</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->numero_conta_corrente }}</dd>
-                            </small>
-                        </th>
-                        <th>
-                            <strong>
-                                <dt>Comprovante de conta corrente do Banco do Brasil</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->comprovante_conta_corrente }}</dd>
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <strong>
-                                <dt>Termo de Compromisso</dt>
-                            </strong>
-                            <small>
-                                <dd>{{ $dadosInscrito->termo_compromisso_orientador }}</dd>
-                            </small>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+
     <script>
         window.print();
     </script>

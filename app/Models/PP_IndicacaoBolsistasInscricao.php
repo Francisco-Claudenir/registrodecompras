@@ -15,14 +15,16 @@ class PP_IndicacaoBolsistasInscricao extends Model
     protected $fillable = [
         'pp_i_bolsista_id',
         'user_id',
-        'curso',
-        'centro',
+        'numero_inscricao',
+        'curso_id',
+        'centro_id',
         'numero_identidade',
         'documento_identidade',
         'documento_cpf',
         'nome_orientador',
         'telefone_orientador',
         'email_orientador',
+        'centro_orientador_id',
         'titulo_projeto_orientador',
         'titulo_plano_orientador',
         'historico_escolar',
@@ -41,6 +43,10 @@ class PP_IndicacaoBolsistasInscricao extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $casts = [
+        'endereco' => 'array'
+    ];
+
     
     public function pp_i_b_inscricao_pp_i_bolsista()
     {
@@ -53,4 +59,9 @@ class PP_IndicacaoBolsistasInscricao extends Model
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
 
+    public function cpf($cpff)
+    {
+        $cpf = '***.' . substr($cpff, 3, 3) . '.' . substr($cpff, 6, 3) . '-**';
+        return $cpf;
+    }
 }

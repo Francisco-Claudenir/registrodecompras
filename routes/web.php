@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\Bati\BatiController;
 use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
@@ -188,7 +189,11 @@ Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
     Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
     Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
+    Route::get('/docshow/{diretorio}', [PP_IndicacaoBolsistasInscricaoController::class, 'docshow'])->name('pp-i-bolsistas-inscricao.docshow');
+    Route::get('/verinscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'show'])->name('pp-i-bolsistas-inscricao.show');
 });
+
+Route::post('/getcursos', [CursoController::class, 'getCurso'])->name('getCurso');
 
 Route::get('teste', function () {
     return view('pdf.primeirospassos');

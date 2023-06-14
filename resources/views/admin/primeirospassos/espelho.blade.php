@@ -14,7 +14,8 @@
                     <h3 class="card-title">Espelho</h3>
                     <div class="card-options">
                         <div class="btn-list">
-                            <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}" class="btn btn-xs btn-info" title="">
+                            <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
+                                class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>
@@ -89,7 +90,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->centro }}</dd>
+                            <dd class="text-justify">{{ $centro->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -97,6 +98,20 @@
                             <dt>Cópia do Contrato</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->copiacontrato)]) }}">Arquivo</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Início</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Fim</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
                             </dd>
                         </dl>
                     </div>
@@ -136,7 +151,15 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Parecer Comitê</dt>
+                            <dt>Anuência do Chefe Imediato</dt>
+                            <dd class="text-justify"><a style="color: red;"
+                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Comitê de Ética</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
                             </dd>
@@ -144,7 +167,7 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Currículo Lattes atualizado a partir de 2018</dt>
+                            <dt>Currículo Lattes atualizado</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
                             </dd>

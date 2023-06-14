@@ -10,6 +10,7 @@ use App\Models\PrimeirosPassosInscricao;
 use App\Models\PpInscricao_Ptrabalho;
 use App\Http\Requests\PrimeirosPassos\StorePrimeirosPassosInscricaoRequest;
 use App\Http\Requests\PrimeirosPassos\UpdatePrimeirosPassosInscricaoRequest;
+use App\Models\Centro;
 use App\Models\PlanoTrabalho;
 use App\Models\User;
 use Carbon\Carbon;
@@ -29,6 +30,7 @@ class PrimeirosPassosInscricaoController extends Controller
     protected $planotrabalho;
     protected $user;
     protected $ppinscricao_ptrabalho;
+    protected $centros;
 
     protected $bag = [
         'view' => 'page.primeirospassos',
@@ -43,7 +45,8 @@ class PrimeirosPassosInscricaoController extends Controller
         PrimeiroPasso $primeiropasso,
         PlanoTrabalho $planotrabalho,
         User $user,
-        PpInscricao_Ptrabalho $ppinscricao_ptrabalho
+        PpInscricao_Ptrabalho $ppinscricao_ptrabalho,
+        Centro $centros
     ) {
         $this->primeirospassosinscricao = $primeirospassosinscricao;
         $this->primeiropasso = $primeiropasso;
@@ -52,6 +55,7 @@ class PrimeirosPassosInscricaoController extends Controller
         $this->planotrabalho = $planotrabalho;
         $this->user = $user;
         $this->ppinscricao_ptrabalho = $ppinscricao_ptrabalho;
+        $this->centros = $centros;
     }
 
     /**
@@ -101,7 +105,9 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
 
-        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
     }
 
     //Gera o pdf
@@ -124,7 +130,9 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
 
-        return view('pdf.primeirospassos', compact('dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        return view('pdf.primeirospassos', compact('centro', 'dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
     }
 
     /**
@@ -135,8 +143,9 @@ class PrimeirosPassosInscricaoController extends Controller
     public function create(PrimeiroPasso $primeiropasso)
     {
         $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+        $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
 
-        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso'));
+        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso', 'centros'));
     }
 
     /**
@@ -153,16 +162,16 @@ class PrimeirosPassosInscricaoController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
         }
-        // dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
+        //dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
         $data_hoje = Carbon::now();
 
         try {
             DB::beginTransaction();
 
+
             //Verifica se data correta para realizar inscrição
 
             if (($data_hoje->gte($evento->data_inicio) && $data_hoje->lte($evento->data_fim))) {
-
                 //Copia Contrato
                 $extensao =  $request['copiacontrato']->extension();
                 $path = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/copiacontrato' . '/' . Auth::user()->cpf . '';
@@ -176,10 +185,24 @@ class PrimeirosPassosInscricaoController extends Controller
                 $dados['projetopesquisa'] = $request['projetopesquisa']->storeAs($projetopath, $projetonome);
 
                 //Parecer Comite
-                $parecerextensao =  $request['parecercomite']->extension();
-                $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
-                $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
-                $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                // $parecerextensao =  $request['parecercomite']->extension();
+                // $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
+                // $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
+                // $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                $parecerextensao =  $request['parecercomite'] ? $request['parecercomite']->extension() : null;
+                if ($parecerextensao != null) {
+                    $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
+                    $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
+                    $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+                } else {
+                    $dados['parecercomite'] = null;
+                }
+
+                //Anuencia Chefe
+                $anuenciachefe =  $request['anuenciachefe']->extension();
+                $anuenciapath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/anuenciachefe' . '/' . Auth::user()->cpf . '';
+                $anuencianome = 'anuenciachefe' . '_' . uniqid(date('HisYmd')) . '.' . $anuenciachefe;
+                $dados['anuenciachefe'] = $request['anuenciachefe']->storeAs($anuenciapath, $anuencianome);
 
                 //Curriculo Lattes
                 $curriculoextensao =  $request['curriculolattes']->extension();
@@ -192,6 +215,7 @@ class PrimeirosPassosInscricaoController extends Controller
 
                 $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
 
+
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
                     'primeiropasso_id' => $request['primeiropasso_id'],
@@ -200,12 +224,15 @@ class PrimeirosPassosInscricaoController extends Controller
                     'numero_inscricao' => $numero_inscricao,
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
-                    'centro' => $request['centro'],
+                    'centro_id' => $request['centro_id'],
                     'copiacontrato' => $dados['copiacontrato'],              //file
+                    'vigencia_inicio' => $request['vigencia_inicio'],
+                    'vigencia_fim' => $request['vigencia_fim'],
                     'tituloprojetopesquisa' => $request['tituloprojetopesquisa'],
                     'resumoprojeto' => $request['resumoprojeto'],
                     'projetopesquisa' => $dados['projetopesquisa'],          //file
                     'chefeimediato' => $request['chefeimediato'],
+                    'anuenciachefe' => $dados['anuenciachefe'],
                     'parecercomite' => $dados['parecercomite'],          //file
                     'curriculolattes' => $dados['curriculolattes'],       //file
 
@@ -234,7 +261,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                 return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
             } else {
-                alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+                alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
             }
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -299,7 +326,9 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
             ->first();
 
-        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
     }
 
     /**

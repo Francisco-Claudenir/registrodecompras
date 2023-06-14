@@ -21,12 +21,15 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
             $table->string('numero_inscricao');
             $table->string('identidade');
             $table->string('matricula');
-            $table->string('centro');
+            $table->unsignedBigInteger('centro_id');
             $table->string('copiacontrato');
+            $table->dateTime('vigencia_inicio');
+            $table->dateTime('vigencia_fim');
             $table->string('tituloprojetopesquisa');
             $table->string('resumoprojeto');
             $table->string('projetopesquisa');
             $table->string('chefeimediato');
+            $table->string('anuenciachefe');
             $table->string('parecercomite')->nullable();
             $table->string('curriculolattes');
             $table->timestamps();
@@ -37,6 +40,9 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
 
             ////Relacionando com a tabela users
             $table->foreign('user_id')->references('id')->on('users');
+
+            ////Relacionando com a tabela centros
+            $table->foreign('centro_id')->references('id')->on('centros');
         });
     }
 

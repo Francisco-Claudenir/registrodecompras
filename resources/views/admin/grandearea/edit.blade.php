@@ -3,16 +3,28 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Editar GrandeArea')
+@section('title', ' - Edição Grande Area')
 
 @section('content')
     <div class="container-fluid">
         @include('sweet::alert')
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+
+                    <h4 class="card-title">Editar Grande Area</h4>
+
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Grande Area</a></li>
+                    <li class="breadcrumb-item active"><a href="">Editar</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="row page-title mx-0">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Editar GrandeArea ( {{ $grandeareas->nome }} )</h4>
-                </div>
                 <div class="card-body">
                     <div class="basic-form">
                         <form action="{{ route('grandearea.update', $grandeareas->area_id) }}" method="post">

@@ -8,7 +8,7 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->centro }}</dd>
+                            <dd class="text-justify">{{ $centro->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -109,6 +109,20 @@
                             <dt>Cópia do Contrato</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->copiacontrato)]) }}">Arquivo</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Início</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Fim</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
                             </dd>
                         </dl>
                     </div>
@@ -148,15 +162,28 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Parecer Comitê</dt>
+                            <dt>Anuência do Chefe Imediato</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Currículo Lattes atualizado a partir de 2018</dt>
+                            <dt>Comitê de Ética</dt>
+                            @if ($dadosInscrito->parecercomite != null)
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                </dd>
+                            @else
+                                <dd class="text-justify">Sem Arquivo</dd>
+                            @endif
+
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Currículo Lattes atualizado</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
                             </dd>

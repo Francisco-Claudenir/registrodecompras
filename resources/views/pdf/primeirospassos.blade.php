@@ -35,7 +35,8 @@
         </small> <br>
         <small>
             <strong>
-                Data Inicio: {{ date('d/m/Y', strtotime($primeiropasso->data_inicio)) }} / Data Fim: {{ date('d/m/Y', strtotime($primeiropasso->data_fim)) }}
+                Data Inicio: {{ date('d/m/Y', strtotime($primeiropasso->data_inicio)) }} / Data Fim:
+                {{ date('d/m/Y', strtotime($primeiropasso->data_fim)) }}
             </strong>
         </small> <br>
         <small>
@@ -74,6 +75,7 @@
                                     <dd>
                                         <p style="font-size: 14px">
                                             {{ date('d/m/Y H:i', strtotime($dadosInscrito->created_at)) }}
+                                        </p>
                                     </dd>
                                 </small>
                             </th>
@@ -114,7 +116,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf($dadosInscrito->cpf) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -213,16 +215,48 @@
                             <th>
                                 <strong>
                                     <h6>
+                                        <dt style="font-size: 14px">Vigência - Início</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify">
+                                        <p style="font-size: 14px">
+                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Vigência - Fim</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify">
+                                        <p style="font-size: 14px">
+                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <strong>
+                                    <h6>
                                         <dt style="font-size: 14px">Centro</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->centro }}</p>
+                                        <p style="font-size: 14px">{{ $centro->centros }}</p>
                                     </dd>
                                 </small>
                             </th>
-                            <td colspan="2">
+                            <th>
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Cópia do Contrato</dt>
@@ -234,9 +268,10 @@
                                         </p>
                                     </dd>
                                 </small>
-                            </td>
+                            </th>
                         </tr>
                     </thead>
+
                 </table>
 
                 <br>
@@ -313,12 +348,12 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Parecer Comitê</dt>
+                                        <dt style="font-size: 14px">Anuência do Chefe Imediato</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd class="text-justify"><a style="color: red;"
-                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
                                         </p>
                                     </dd>
                                 </small>
@@ -327,7 +362,7 @@
                     </thead>
                     <thead>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Currículo Lattes</dt>
@@ -340,6 +375,26 @@
                                     </dd>
                                 </small>
                             </td>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Parecer Comitê</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    @if ($dadosInscrito->parecercomite != null)
+                                        <dd class="text-justify"><a style="color: red;"
+                                                href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
+                                            </p>
+                                        </dd>
+                                    @else
+                                        <dd>
+                                            <p style="font-size: 14px">Sem Arquivo</p>
+                                        </dd>
+                                    @endif
+
+                                </small>
+                            </th>
                         </tr>
                     </thead>
                 </table>
