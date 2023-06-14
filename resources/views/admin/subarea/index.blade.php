@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example5" class="table table-responsive-sm" style="min-width: 845px">
+                        <table id="example5" class="table table-striped table-bordered table-hover table-responsive-sm mb-0" style="min-width: 845px">
                             <thead>
                                 <tr>
                                     <th><h5>Sub Area</h5></th>
