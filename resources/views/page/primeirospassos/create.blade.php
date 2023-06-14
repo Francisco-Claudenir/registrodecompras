@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                         <span class="mt-4"><strong>{{ $primeiropasso->nome }}</strong></span>
                     </div>
