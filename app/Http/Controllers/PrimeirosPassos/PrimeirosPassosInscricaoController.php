@@ -91,7 +91,7 @@ class PrimeirosPassosInscricaoController extends Controller
         //Verificando se o primeiropasso_id existe
         $this->primeiropasso->findOrfail($primeiropasso_id);
 
-        $dadosInscrito = $this->primeirospassosinscricao->with('centros')
+        $dadosInscrito = $this->primeirospassosinscricao
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
             ->findOrfail($passos_inscricao_id);
@@ -105,7 +105,9 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
 
-        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho'));
+        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
     }
 
     //Gera o pdf
@@ -127,7 +129,7 @@ class PrimeirosPassosInscricaoController extends Controller
         $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
             ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $passos_inscricao_id)
             ->first();
-        
+
         $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
 
         return view('pdf.primeirospassos', compact('centro', 'dadosInscrito', 'endereco', 'subArea', 'planotrabalho', 'primeiropasso'));
@@ -213,7 +215,7 @@ class PrimeirosPassosInscricaoController extends Controller
 
                 $numero_inscricao = $quantidade_inscritos['primeirospassos_pp_inscricao_count'] + 1;
 
-                
+
                 //Create de inscrição
                 $inscricao = $this->primeirospassosinscricao->create([
                     'primeiropasso_id' => $request['primeiropasso_id'],
@@ -314,7 +316,7 @@ class PrimeirosPassosInscricaoController extends Controller
             ->where('users.id', '=', $user_id)
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
             ->first();
-        
+
         //Transformando Json em array de enderecos
         $endereco = json_decode($dadosInscrito->endereco, true);
 

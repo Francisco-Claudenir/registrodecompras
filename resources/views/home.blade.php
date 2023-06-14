@@ -1,9 +1,9 @@
 @extends('layout.page', [
-     'layout' => 'admin',
+    'layout' => 'admin',
     'plugins' => ['datatable'],
 ])
 
-@section('title', ' - Cadastro de alunno')
+@section('title', ' - Dashboard')
 
 @section('content')
     <div class="container-fluid">

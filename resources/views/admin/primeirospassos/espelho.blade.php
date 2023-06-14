@@ -90,7 +90,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->centros->centros }}</dd>
+                            <dd class="text-justify">{{ $centro->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -167,7 +167,7 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Currículo Lattes atualizado a partir de 2018</dt>
+                            <dt>Currículo Lattes atualizado</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
                             </dd>
