@@ -215,19 +215,6 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Cópia do Contrato</dt>
-                                    </h6>
-                                </strong>
-                                <small>
-                                    <dd class="text-justify"><a style="color: red;"
-                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->copiacontrato)]) }}">Arquivo</a>
-                                        </p>
-                                    </dd>
-                                </small>
-                            </th>
-                            <th>
-                                <strong>
-                                    <h6>
                                         <dt style="font-size: 14px">Vigência - Início</dt>
                                     </h6>
                                 </strong>
@@ -239,7 +226,20 @@
                                     </dd>
                                 </small>
                             </th>
-                    
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Vigência - Fim</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify">
+                                        <p style="font-size: 14px">
+                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
                         </tr>
                     </thead>
                     <thead>
@@ -259,13 +259,12 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Vigência - Fim</dt>
+                                        <dt style="font-size: 14px">Cópia do Contrato</dt>
                                     </h6>
                                 </strong>
                                 <small>
-                                    <dd class="text-justify">
-                                        <p style="font-size: 14px">
-                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->copiacontrato)]) }}">Arquivo</a>
                                         </p>
                                     </dd>
                                 </small>
@@ -349,6 +348,36 @@
                             <th>
                                 <strong>
                                     <h6>
+                                        <dt style="font-size: 14px">Anuência do Chefe Imediato</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Currículo Lattes</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </td>
+                            <th>
+                                <strong>
+                                    <h6>
                                         <dt style="font-size: 14px">Parecer Comitê</dt>
                                     </h6>
                                 </strong>
@@ -366,23 +395,6 @@
 
                                 </small>
                             </th>
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <td colspan="3">
-                                <strong>
-                                    <h6>
-                                        <dt style="font-size: 14px">Currículo Lattes</dt>
-                                    </h6>
-                                </strong>
-                                <small>
-                                    <dd class="text-justify"><a style="color: red;"
-                                            href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
-                                        </p>
-                                    </dd>
-                                </small>
-                            </td>
                         </tr>
                     </thead>
                 </table>
