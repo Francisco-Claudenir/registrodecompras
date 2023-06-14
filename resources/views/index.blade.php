@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-6">
                     <!--Primeiros Passos -->
                     <div class="card-bx stacked card">
                         <div class="card-info  ">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- <!--Primeiros Passos Indicação Bolsista -->
                 <div class="col-lg-4 col-md-6 col-sm-6">
