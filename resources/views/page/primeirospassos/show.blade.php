@@ -112,6 +112,20 @@
                             </dd>
                         </dl>
                     </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Início</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Vigência - Fim</dt>
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                            </dd>
+                        </dl>
+                    </div>
                     <h5>Área do Projeto de Pesquisa</h5>
                     <div class="col-sm-12">
                         <dl>
@@ -148,7 +162,15 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Parecer Comitê</dt>
+                            <dt>Anuência do Chefe Imediato</dt>
+                            <dd class="text-justify"><a style="color: red;"
+                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-12">
+                        <dl>
+                            <dt>Comitê de Ética</dt>
                             @if ($dadosInscrito->parecercomite != null)
                                 <dd class="text-justify"><a style="color: red;"
                                         href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
@@ -161,7 +183,7 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Currículo Lattes atualizado a partir de 2018</dt>
+                            <dt>Currículo Lattes atualizado</dt>
                             <dd class="text-justify"><a style="color: red;"
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
                             </dd>
