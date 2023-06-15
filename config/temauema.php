@@ -153,7 +153,6 @@ return [
 			'title' => 'Usuários',
 			'icon' => 'flaticon-381-user-9',
 			'can' => 'Administrador',
-			'route' => 'teste',
 			'submenu' => [
 				[
 					'title' => 'Lista',
@@ -170,7 +169,6 @@ return [
 		[
 			'title' => 'Perfil',
 			'icon' => 'flaticon-381-id-card-5',
-			'route' => 'teste',
 			'can' => 'Administrador',
 			'submenu' => [
 				[
@@ -310,7 +308,6 @@ return [
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-user',
-			'route' => 'teste'
 		],
 		[
 			'title' => 'Primeiros Passos',

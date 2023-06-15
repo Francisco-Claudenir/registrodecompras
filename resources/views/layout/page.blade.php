@@ -14,7 +14,9 @@
         @if (config($layout . '.hasSideBar'))
             @include('layout.partials.left-sidebar.index')
         @endif
-        @include('layout.partials.right-sidebar.index')
+        @if (config($layout . '.hasRightSidebar'))
+            @include('layout.partials.right-sidebar.index')
+        @endif
         @include('layout.partials.content.index')
         @if (config($layout . '.hasFooter'))
             @include('layout.partials.footer.index')
