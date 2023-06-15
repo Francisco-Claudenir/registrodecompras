@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::defaultView('vendor.pagination.default');
+        //
+
+        $this->app['request']->server->set('HTTPS', $this->app->environment() != 'local');
     }
 }
