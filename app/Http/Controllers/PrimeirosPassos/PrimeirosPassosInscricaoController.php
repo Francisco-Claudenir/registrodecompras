@@ -14,6 +14,7 @@ use App\Models\Centro;
 use App\Models\PlanoTrabalho;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +64,7 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($primeiropasso_id)
+    public function index($primeiropasso_id, Request $request)
     {
         //Verificando se o id existe
         $ppasso =  $this->primeiropasso->findOrfail($primeiropasso_id);
@@ -80,9 +81,11 @@ class PrimeirosPassosInscricaoController extends Controller
                 'primeiros_passos_inscricaos.primeiropasso_id',
                 'primeiros_passos_inscricaos.numero_inscricao',
                 'primeiros_passos_inscricaos.passos_inscricao_id'
-            ])->paginate(15);
+            ])->paginate(20);
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos', 'ppasso'));
+        $links = $listaInscritos->appends($request->except('page'));
+
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'ppasso', 'links'));
     }
 
     //Tras todas as informações que o candidato enviou
