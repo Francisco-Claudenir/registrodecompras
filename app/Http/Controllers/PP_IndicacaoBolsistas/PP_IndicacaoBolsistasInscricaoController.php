@@ -107,7 +107,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
             ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->findOrfail($pp_i_bolsista_inscricao_id);
-        
+
         //Transformando Json em array de enderecos
         $endereco = json_decode($dadosInscrito->endereco, true);
 
@@ -130,11 +130,20 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function create($pp_indicacao_bolsista_id)
     {
+        $data_hoje = Carbon::now();
+
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
 
-        $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+        if (($data_hoje->gte($pp_indicacao_bolsista->data_inicio) && $data_hoje->lte($pp_indicacao_bolsista->data_fim))) {
 
-        return view($this->bag['view'] . '.create', compact('pp_indicacao_bolsista', 'centros'));
+            $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+
+            return view($this->bag['view'] . '.create', compact('pp_indicacao_bolsista', 'centros'));
+        } else {
+
+            alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -239,7 +248,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                 return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
             } else {
-                alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
+                alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+                return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
             }
         } catch (\Throwable $th) {
             DB::rollBack();

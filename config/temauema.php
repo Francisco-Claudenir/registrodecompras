@@ -340,7 +340,8 @@ return [
 				'delete' => 'Erro ao tentar deletar. Verifique seo item tem dependência no sistema.',
 				'notfound' => 'Item não existe',
 				'inscricao' => 'Erro ao tentar de inscrever',
-				'diretorio' => 'Diretório não encontrado'
+				'diretorio' => 'Diretório não encontrado',
+				'data_inscricao' => 'Fora da data de inscrição'
 			],
 		]
 	],
