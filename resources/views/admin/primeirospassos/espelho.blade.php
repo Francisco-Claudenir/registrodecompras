@@ -7,6 +7,49 @@
 
 @section('content')
     @include('sweet::alert')
+
+    <!-- Modal -->
+    <div class="modal fade" id="analiseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $dadosInscrito->nome }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <label class="col-form-label col-sm-3 pt-0">Resultado</label>
+                        <div class="col-sm-9">
+                            <form
+                                action="{{ route('primeirospassosinscricao.analise', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
+                                method="post">
+                                @csrf
+                                @foreach (config('status.status') as $item)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status"
+                                            value="{{ $item }}" checked="">
+                                        <label class="form-check-label">
+                                            {{ $item }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-xs btn-success">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
@@ -14,6 +57,11 @@
                     <h3 class="card-title">Espelho</h3>
                     <div class="card-options">
                         <div class="btn-list">
+                            <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#analiseModal" class="btn btn-xs btn-info" title="">
+                                Analisar
+                            </a>
+
                             <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
                                 class="btn btn-xs btn-info" title="">
                                 PDF
@@ -21,6 +69,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body pt-2 pb-0">
                     <h5>Identificação do Candidato</h5>
                     <div class="col-sm-12">

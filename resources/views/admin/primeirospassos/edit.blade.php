@@ -89,7 +89,8 @@
                                     <div class="form-check custom-checkbox mb-3 checkbox-info">
                                         <input type="checkbox"
                                             class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
-                                            @if ($primeiropasso->visivel == 1 ) checked @endif value="1" id="customCheckBox2" name="visivel">
+                                            @if ($primeiropasso->visivel == true) checked @endif value="{{ true }}"
+                                            id="customCheckBox2" name="visivel">
 
                                         <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
                                         @if ($errors->has('visivel'))

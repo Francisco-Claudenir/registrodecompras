@@ -61,6 +61,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //PrimeirosPassos Inscricão
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+    //PrimeirosPassos Inscricão Espelho ADMIN
+    Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //Analise Primeiros Passos Inscrição
+    Route::post('/primeirospassos/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+
     //User
     Route::resource('users', UserController::class);
 
@@ -98,7 +105,7 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
     Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-    Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
+
     Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
     Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
     Route::get('/verinscricao/{primeiropasso_id}/{user_id}', [PrimeirosPassosInscricaoController::class, 'show'])->name('primeirospassos.inscricao.show');

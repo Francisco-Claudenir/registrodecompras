@@ -235,6 +235,7 @@ class PrimeirosPassosInscricaoController extends Controller
                     'primeiropasso_id' => $request['primeiropasso_id'],
                     'user_id' => Auth::user()->id,
                     'areaconhecimento_id' => $request['areaconhecimento_id'],
+                    'status' => 'Em Analise',
                     'numero_inscricao' => $numero_inscricao,
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
@@ -283,6 +284,13 @@ class PrimeirosPassosInscricaoController extends Controller
             return redirect()->back();
         }
     }
+
+    public function analise(UpdatePrimeirosPassosInscricaoRequest $request, PrimeirosPassosInscricao $primeirosPassosInscricao)
+    {
+
+        dd($request->all(), $primeirosPassosInscricao);
+    }
+
 
     public function docshow($diretorio)
     {

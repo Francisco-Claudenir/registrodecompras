@@ -134,7 +134,7 @@ class PrimeiroPassoController extends Controller
             DB::beginTransaction();
             $primeiropasso = $this->primeiropasso->findOrfail($id);
             $dados = $request->validated();
-            $dados['visivel'] = $request['visivel'] ?? 0;
+            $dados['visivel'] = $request['visivel'] ?? false;
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $primeiropasso->update($dados);
 
