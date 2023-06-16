@@ -14,6 +14,7 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
     public function up()
     {
         Schema::create('pp_indicacao_bolsistas_inscricao', function (Blueprint $table) {
+            $table->string('status');
             $table->bigIncrements('pp_i_bolsista_inscricao_id')->autoIncrement()->unique();
             $table->unsignedBigInteger('pp_i_bolsista_id');
             $table->unsignedBigInteger('user_id');
