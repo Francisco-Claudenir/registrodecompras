@@ -58,7 +58,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SubArea
     Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
-    //PrimeirosPassos Inscricão
+    //PrimeirosPassos Inscricão Execel
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //PrimeirosPassos Inscricão Espelho ADMIN
@@ -79,6 +79,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+     //PP_IndicacaoBolsistas Inscricão Execel
+     Route::get('/pp-indicacao-bolsistas/inscritos/{pp_indicacao_bolsista_id}', [ExportsController::class, 'ppIndicacaoBolsista'])->name('lista.pp_i_bolsista.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 });
 
 

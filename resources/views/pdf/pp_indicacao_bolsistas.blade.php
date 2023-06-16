@@ -29,8 +29,8 @@
             </strong>
         </small> <br>
         <small>
-            <strong>
-                {{ strtoupper($pp_indicacao_bolsista->nome) }}
+            <strong style="text-transform: uppercase">
+                {{ $pp_indicacao_bolsista->nome }}
             </strong>
         </small> <br>
         <small>
@@ -362,7 +362,7 @@
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Histórico Escolar atualizado, disponível do SIGUEMA
-                                            (formato PDF)</dt>
+                                        </dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -376,7 +376,7 @@
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Declaração de vínculo do aluno à UEMA atualizado
-                                            (formato PDF)</dt>
+                                        </dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -393,7 +393,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Termo de Compromisso do bolsista (formato PDF)</dt>
+                                        <dt style="font-size: 14px">Termo de Compromisso do bolsista </dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -406,8 +406,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício (formato
-                                            PDF)</dt>
+                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício)</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -425,7 +424,7 @@
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Currículo atualizado, gerado na Plataforma Lattes
-                                            (formato PDF)</dt>
+                                        </dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -438,8 +437,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Declaração conjuta de estágio (quando for o caso)
-                                            (formato PDF)</dt>
+                                        <dt style="font-size: 14px">Declaração conjuta de estágio</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -451,6 +449,72 @@
                                     @else
                                         Sem Arquivo
                                     @endif
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Agência do Banco do Brasil n°</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->agencia_banco)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Número da Conta Corrente do Banco do Brasil</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->numero_conta_corrente }}</p>
+                                    </dd>
+                                </small>
+                            </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Comprovante de Conta Corrente do Banco do Brasil
+                                        </dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->comprovante_conta_corrente)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
+                                </small>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">Termo de Compromisso</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd class="text-justify"><a style="color: red;"
+                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                        </p>
+                                    </dd>
                                 </small>
                             </th>
                         </tr>

@@ -51,11 +51,11 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
 
     //Tras a lista de inscritos
-    public function index($pp_indicacao_bolsista_id)
+    public function index($pp_indicacao_bolsista_id, Request $request)
     {
         //Verificando se o id existe
-        $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-
+        $ppIndicacaoBolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
+        
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->pp_i_bolsistas_inscricao
             ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
@@ -66,10 +66,13 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 'users.cpf',
                 'users.telefone',
                 'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id',
-                'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_inscricao_id'
-            ])->paginate(15);
+                'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_inscricao_id',
+                'pp_indicacao_bolsistas_inscricao.numero_inscricao'
+            ])->paginate(20);
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos'));
+        $links = $listaInscritos->appends($request->except('page'));
+
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
     }
 
     //Tras todas as informações que o candidato enviou
@@ -173,6 +176,16 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 //Buscando e adcionando os id de pp_indicacao_bolsista_id e id so user a variavel
                 $ids['pp_i_bolsista_id'] = $pp_indicacao_bolsista_id;
                 $ids['user_id'] = Auth::user()->id;
+
+                //Verificando se o user ja esta inscrito do evento
+                $buscaInscricao = $this->pp_i_bolsistas_inscricao->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+                    ->where('user_id', '=', Auth::user()->id)
+                    ->first();
+
+                if ($buscaInscricao != null) {
+                    alert()->error(config($this->bag['msg'] . '.error.inscricao_validacao'));
+                    return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
+                }
 
                 //combina as duas arrays $request e $ids na variavel $dados_inscricao
                 $dados_inscricao = array_merge($ids, $numero_inscricao, $request->all());
@@ -305,6 +318,11 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->first();
 
+
+        if ($dadosInscrito == null) {
+            alert()->error(config('Você não está inscrito nesse Evento'));
+            return redirect()->back();
+        }
 
         //Transformando Json em array de enderecos
         $endereco = json_decode($dadosInscrito->endereco, true);
