@@ -54,8 +54,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
     public function index($pp_indicacao_bolsista_id, Request $request)
     {
         //Verificando se o id existe
-        $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-
+        $ppIndicacaoBolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
+        
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->pp_i_bolsistas_inscricao
             ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
@@ -72,7 +72,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
 
         $links = $listaInscritos->appends($request->except('page'));
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos', 'links'));
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
     }
 
     //Tras todas as informações que o candidato enviou

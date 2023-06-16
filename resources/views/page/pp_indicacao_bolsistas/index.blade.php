@@ -12,6 +12,8 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
+                        <a href="{{ route('lista.pp_i_bolsista.excel', ['pp_indicacao_bolsista_id' => $ppIndicacaoBolsista->pp_i_bolsista_id]) }}"
+                            class="btn btn-success pull-right">Exportar Excel</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
