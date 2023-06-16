@@ -29,8 +29,8 @@
             </strong>
         </small> <br>
         <small>
-            <strong>
-                {{ strtoupper($primeiropasso->nome) }}
+            <strong style="text-transform: uppercase">
+                {{ $primeiropasso->nome }}
             </strong>
         </small> <br>
         <small>
