@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\AuditoriaObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,13 @@ class PrimeiroPasso extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(AuditoriaObserver::class);
+
+    }
 
     //Relacionamento com a tabela PrimeiroPassoInscricao
     public function primeirospassos_ppInscricao()
