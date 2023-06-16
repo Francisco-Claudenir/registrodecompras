@@ -13,9 +13,13 @@ class PrimeiroPasso extends Model
 
     protected $table = 'primeirospassos';
     
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
+    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim','visivel', 'status'];
 
     protected $primaryKey = 'primeiropasso_id';
+
+    protected $casts = [
+        'visivel' => 'boolean',
+    ];
 
     protected $dates = ['deleted_at'];
 

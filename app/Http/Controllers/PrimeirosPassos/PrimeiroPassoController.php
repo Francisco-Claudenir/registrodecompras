@@ -49,7 +49,7 @@ class PrimeiroPassoController extends Controller
     //Index para User
     public function site()
     {
-        $primeirospassos = $this->primeiropasso->orderBy('created_at', 'desc')->paginate(10);
+        $primeirospassos = $this->primeiropasso->where('visivel', '=', 1)->orderBy('created_at', 'desc')->paginate(10);
         return view('page.primeirospassos.site', compact('primeirospassos'));
     }
 
@@ -57,6 +57,11 @@ class PrimeiroPassoController extends Controller
     public function page($primeiropasso_id)
     {
         $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        if ($primeiropasso->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
 
         if (Auth::check()) {
             $isInscrito = PrimeirosPassosInscricao::where('primeiropasso_id', $primeiropasso->primeiropasso_id)->where('user_id', Auth::user()->id)->exists();
@@ -129,6 +134,7 @@ class PrimeiroPassoController extends Controller
             DB::beginTransaction();
             $primeiropasso = $this->primeiropasso->findOrfail($id);
             $dados = $request->validated();
+            $dados['visivel'] = $request['visivel'] ?? 0;
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $primeiropasso->update($dados);
 

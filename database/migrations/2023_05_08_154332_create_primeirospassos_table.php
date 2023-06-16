@@ -17,6 +17,7 @@ class CreatePrimeirospassosTable extends Migration
             $table->bigIncrements('primeiropasso_id')->autoIncrement()->unique();
             $table->string('nome');
             $table->string('descricao');
+            $table->boolean('visivel')->default(false);
             $table->dateTime('data_inicio');
             $table->dateTime('data_fim');
             $table->string('status', 45)->default('Aberto');

@@ -25,6 +25,7 @@ class StorePrimeirosPassosRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'string', 'min:2', 'max:150'],
+            'visivel' => ['boolean'],
             'descricao' => ['required', 'string', 'min:2', 'max:300'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],

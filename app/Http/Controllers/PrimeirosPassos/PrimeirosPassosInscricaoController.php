@@ -143,12 +143,23 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(PrimeiroPasso $primeiropasso)
+    public function create($primeiropasso_id)
     {
-        $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
-        $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+        $data_hoje = Carbon::now();
 
-        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso', 'centros'));
+        $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        if (($data_hoje->gte($primeiropasso->data_inicio) && $data_hoje->lte($primeiropasso->data_fim))) {
+
+            $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+            $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+
+            return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso', 'centros'));
+        } else {
+
+            alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+            return redirect()->back();
+        }
     }
 
     /**

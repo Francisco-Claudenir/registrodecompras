@@ -67,8 +67,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //ModalidadeBolsa
     Route::resource('modalidadebolsa', ModalidadeBolsaController::class)->middleware(['check-role:Administrador']);
 
-     //bati
-     Route::resource('bati', BatiController::class);  
+    //bati
+    Route::resource('bati', BatiController::class);
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -95,7 +95,7 @@ Route::prefix('site')->group(function () {
 //Inscrições de Eventos -  VIEW CANDIDATOS PRIMEIROS PASSOS
 Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
-    Route::get('/inscricao/{primeiropasso}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
+    Route::get('/inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
     Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
     Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho');
