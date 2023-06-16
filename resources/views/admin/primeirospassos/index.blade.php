@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <div class="d-flex mb-4 align-items-start">
                                 <div class="dz-media me-3">
-                                    <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" class="img-fluid" alt="">
+                                    <img src="{{ asset('images/pp_na_ciencia/Logo.png') }}" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
                                     <h4 class="title mb-2 mt-1">{{ $dados->nome }}</h4>
