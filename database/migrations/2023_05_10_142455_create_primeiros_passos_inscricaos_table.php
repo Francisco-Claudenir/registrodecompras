@@ -19,7 +19,7 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
             $table->unsignedBigInteger('primeiropasso_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('areaconhecimento_id');
-            $table->string('numero_inscricao');
+            $table->integer('numero_inscricao');
             $table->string('identidade');
             $table->string('matricula');
             $table->unsignedBigInteger('centro_id');

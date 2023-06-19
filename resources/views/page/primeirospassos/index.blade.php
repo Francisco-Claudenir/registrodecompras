@@ -25,11 +25,7 @@
                                         <th>Email</th>
                                         <th>CPF</th>
                                         <th>Telefone</th>
-                                        @foreach ($listaInscritos as $dados)
-                                            @if ($dados->status !== 'Em Analise')
-                                                <th>Status</th>
-                                            @endif
-                                        @endforeach
+                                        <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -55,8 +51,15 @@
                                                         </td>
                                                     @break
 
+                                                    @case('Em Analise')
+                                                        <td>
+                                                            <span class="badge light badge-dark">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
                                                     @default
                                                 @endswitch
+                                            @else
                                             @endif
                                             <td><a href="{{ route('primeirospassos.inscricao.espelho', ['primeiropasso_id' => $dados->primeiropasso_id, 'passos_inscricao_id' => $dados->passos_inscricao_id]) }}"
                                                     class="badge badge-circle badge-dark"><i

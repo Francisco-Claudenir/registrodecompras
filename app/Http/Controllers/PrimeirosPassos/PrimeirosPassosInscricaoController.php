@@ -83,7 +83,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 'primeiros_passos_inscricaos.primeiropasso_id',
                 'primeiros_passos_inscricaos.numero_inscricao',
                 'primeiros_passos_inscricaos.passos_inscricao_id'
-            ])->paginate(20);
+            ])->orderBy('primeiros_passos_inscricaos.numero_inscricao', 'asc')->paginate(20);
 
         $links = $listaInscritos->appends($request->except('page'));
 
