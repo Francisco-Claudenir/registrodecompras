@@ -15,6 +15,7 @@ class CreatePrimeirosPassosInscricaosTable extends Migration
     {
         Schema::create('primeiros_passos_inscricaos', function (Blueprint $table) {
             $table->uuid('passos_inscricao_id')->unique();
+            $table->string('status');
             $table->unsignedBigInteger('primeiropasso_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('areaconhecimento_id');

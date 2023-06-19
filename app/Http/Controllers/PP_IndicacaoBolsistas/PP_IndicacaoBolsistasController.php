@@ -34,7 +34,7 @@ class PP_IndicacaoBolsistasController extends Controller
     //Indez para User
     public function site()
     {
-        $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->paginate(10);
+        $pp_indicacao_bolsistas = $this->pp_indicacao_bolsistas->where('visivel', '=', 1)->orderBy('created_at', 'desc')->paginate(10);
         return view('page.pp_indicacao_bolsistas.site', compact('pp_indicacao_bolsistas'));
     }
 
@@ -42,6 +42,11 @@ class PP_IndicacaoBolsistasController extends Controller
     public function page($pp_indicacao_bolsista_id)
     {
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
+
+        if ($pp_indicacao_bolsista->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
 
         if (Auth::check()) {
             $isInscrito = PP_IndicacaoBolsistasInscricao::where('pp_i_bolsista_id', $pp_indicacao_bolsista->pp_i_bolsista_id)->where('user_id', Auth::user()->id)->exists();
@@ -90,6 +95,7 @@ class PP_IndicacaoBolsistasController extends Controller
             DB::beginTransaction();
             $primeiropasso = $this->pp_indicacao_bolsistas->findOrfail($id);
             $dados = $request->validated();
+            $dados['visivel'] = $request['visivel'] ?? 0;
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $primeiropasso->update($dados);
 

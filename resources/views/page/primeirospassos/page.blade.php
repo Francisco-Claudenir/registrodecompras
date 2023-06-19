@@ -62,9 +62,16 @@
                                                                 class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
                                                         @else
                                                             @if (Auth::check())
-                                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $primeiropasso->primeiropasso_id]) }}"
-                                                                    class="btn btn-info btn-xs mb-1">Realizar
-                                                                    Inscrição</a>
+
+                                                                @if (now()->gte($primeiropasso->data_inicio) && now()->lte($primeiropasso->data_fim))
+                                                                    <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso_id' => $primeiropasso->primeiropasso_id]) }}"
+                                                                        class="btn btn-info btn-xs mb-1">Realizar
+                                                                        Inscrição</a>
+                                                                @else
+                                                                    <span class="text-danger"> Não é possível realizar a
+                                                                        inscrição !</span>
+                                                                @endif
+
                                                             @endif
                                                         @endif
                                                     </div>

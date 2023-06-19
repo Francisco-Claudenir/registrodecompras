@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuid;
+use App\Observers\AuditoriaObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,7 @@ class PrimeirosPassosInscricao extends Model
     protected $fillable = [
         'primeiropasso_id',
         'numero_inscricao',
+        'status',
         'user_id',
         'areaconhecimento_id',
         'identidade',
@@ -38,6 +40,14 @@ class PrimeirosPassosInscricao extends Model
     protected $casts = [
         'endereco' => 'array'
     ];
+    public static function boot()
+    {
+        parent::boot();
+
+        parent::observe(AuditoriaObserver::class);
+    }
+
+
 
     //Relacionamento de PrimeirosPassosInscricao para Plano Trabalho
     // public function planotrabalho(){

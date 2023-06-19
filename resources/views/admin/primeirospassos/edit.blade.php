@@ -47,7 +47,8 @@
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_inicio')) is-invalid @endif"
                                         name="data_inicio" required=""
-                                        value="{{ date('Y-m-d', strtotime($primeiropasso->data_inicio)) }}" id="data_inicio">
+                                        value="{{ date('Y-m-d', strtotime($primeiropasso->data_inicio)) }}"
+                                        id="data_inicio">
                                     @if ($errors->has('data_inicio'))
                                         <div class="invalid-feedback">{{ $errors->first('data_inicio') }}</div>
                                     @endif
@@ -76,8 +77,26 @@
                             <div class="row">
                                 <label for="">Status</label>
                                 <div class="mb-3 mb-0 mt-2">
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($primeiropasso->status == "Aberto") checked @endif> Aberto</label>
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($primeiropasso->status == "Fechado") checked @endif> Fechado</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto"
+                                            @if ($primeiropasso->status == 'Aberto') checked @endif> Aberto</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado"
+                                            @if ($primeiropasso->status == 'Fechado') checked @endif> Fechado</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4 col-md-12">
+                                    <label class="form-label">Visibilidade do Evento</label>
+                                    <div class="form-check custom-checkbox mb-3 checkbox-info">
+                                        <input type="checkbox"
+                                            class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
+                                            @if ($primeiropasso->visivel == true) checked @endif value="{{ true }}"
+                                            id="customCheckBox2" name="visivel">
+
+                                        <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
+                                        @if ($errors->has('visivel'))
+                                            <div class="invalid-feedback">{{ $errors->first('visivel') }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
@@ -114,7 +133,7 @@
         today = yyyy + '-' + mm + '-' + dd;
 
         // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
-        document.getElementById("data_inicio").setAttribute("min", today);
+        // document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
 @endsection

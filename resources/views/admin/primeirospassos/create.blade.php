@@ -69,6 +69,21 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="mb-4 col-md-12">
+                                    <label class="form-label">Visibilidade do Evento</label>
+                                    <div class="form-check custom-checkbox mb-3 checkbox-info">
+                                        <input type="checkbox"
+                                            class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
+                                            checked="" value="1" id="customCheckBox2" name="visivel">
+
+                                        <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
+                                        @if ($errors->has('visivel'))
+                                            <div class="invalid-feedback">{{ $errors->first('visivel') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
                             <a class="btn btn-primary float-end me-2" type="button" href=""
                                 onclick="history.back()">Cancelar</a>

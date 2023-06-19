@@ -12,10 +12,15 @@ class PP_IndicacaoBolsistas extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'pp_indicacao_bolsistas';
-    
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
+
+    protected $fillable = ['nome', 'descricao', 'data_inicio','visivel', 'data_fim', 'status'];
 
     protected $primaryKey = 'pp_i_bolsista_id';
+
+    protected $casts = [
+        'visivel' => 'boolean',
+    ];
+
 
     protected $dates = ['deleted_at'];
 
@@ -48,12 +53,11 @@ class PP_IndicacaoBolsistas extends Model
         $total_dias = $fim->diffInDays($inicio) + 1;
 
         // Verifica se a porcentagem de dias passados em relação ao total de dias é maior que 100.00%
-        if(($quanto_passou / $total_dias) * 100 > 100.00){
+        if (($quanto_passou / $total_dias) * 100 > 100.00) {
             return 100.00;
         }
-        
+
         // Retorna a porcentagem de dias passados em relação ao total de dias
         return ($quanto_passou / $total_dias) * 100;
     }
-
 }

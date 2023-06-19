@@ -14,6 +14,7 @@ use App\Models\Centro;
 use App\Models\PlanoTrabalho;
 use App\Models\User;
 use Carbon\Carbon;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -78,6 +79,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 'users.email',
                 'users.cpf',
                 'users.telefone',
+                'primeiros_passos_inscricaos.status',
                 'primeiros_passos_inscricaos.primeiropasso_id',
                 'primeiros_passos_inscricaos.numero_inscricao',
                 'primeiros_passos_inscricaos.passos_inscricao_id'
@@ -143,12 +145,23 @@ class PrimeirosPassosInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(PrimeiroPasso $primeiropasso)
+    public function create($primeiropasso_id)
     {
-        $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
-        $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+        $data_hoje = Carbon::now();
 
-        return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso', 'centros'));
+        $primeiropasso = $this->primeiropasso->findOrfail($primeiropasso_id);
+
+        if (($data_hoje->gte($primeiropasso->data_inicio) && $data_hoje->lte($primeiropasso->data_fim))) {
+
+            $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+            $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+
+            return view('page.primeirospassos.create', compact('grandeArea', 'primeiropasso', 'centros'));
+        } else {
+
+            alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -224,6 +237,7 @@ class PrimeirosPassosInscricaoController extends Controller
                     'primeiropasso_id' => $request['primeiropasso_id'],
                     'user_id' => Auth::user()->id,
                     'areaconhecimento_id' => $request['areaconhecimento_id'],
+                    'status' => 'Em Analise',
                     'numero_inscricao' => $numero_inscricao,
                     'identidade' => $request['identidade'],
                     'matricula' => $request['matricula'],
@@ -269,6 +283,27 @@ class PrimeirosPassosInscricaoController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+            return redirect()->back();
+        }
+    }
+
+    public function analise(UpdatePrimeirosPassosInscricaoRequest $request,  $primeiropasso_id, $passos_inscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->primeirospassosinscricao->where('primeiropasso_id', $primeiropasso_id)->find($passos_inscricao_id);
+                if ($inscricao['primeiropasso_id'] == $primeiropasso_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
             return redirect()->back();
         }
     }

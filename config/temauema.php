@@ -338,6 +338,7 @@ return [
 				'notfound' => 'Item não existe',
 				'inscricao' => 'Erro ao tentar de inscrever',
 				'diretorio' => 'Diretório não encontrado',
+				'inscricao_validacao' => 'Ja está inscrito',
 				'data_inscricao' => 'Fora da data de inscrição'
 			],
 		]

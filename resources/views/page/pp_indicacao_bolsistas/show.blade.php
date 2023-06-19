@@ -25,7 +25,8 @@
                     <h3 class="card-title">Inscrição</h3>
                     <div class="card-options">
                         <div class="btn-list">
-                            <a href="" class="btn btn-xs btn-info" title="">
+                            <a href="{{ route('pp-i-bolsistas-inscricao.pdf', ['pp_indicacao_bolsista_id' => $dadosInscrito->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dadosInscrito->pp_i_bolsista_inscricao_id]) }}"
+                                class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>

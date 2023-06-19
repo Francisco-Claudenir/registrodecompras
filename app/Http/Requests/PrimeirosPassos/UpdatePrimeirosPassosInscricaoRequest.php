@@ -3,6 +3,7 @@
 namespace App\Http\Requests\PrimeirosPassos;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePrimeirosPassosInscricaoRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ class UpdatePrimeirosPassosInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
+            'status' => ['required',Rule::in(config('status.status'))],
             //
         ];
     }

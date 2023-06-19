@@ -11,9 +11,9 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-    
+
                     <h4 class="card-title">Editar Primeiros Passos Indicação Bolsistas</h4>
-    
+
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -27,7 +27,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('pp-indicacao-bolsistas.update', $pp_indicacao_bolsistas->pp_i_bolsista_id) }}" method="post">
+                        <form
+                            action="{{ route('pp-indicacao-bolsistas.update', $pp_indicacao_bolsistas->pp_i_bolsista_id) }}"
+                            method="post">
                             @csrf
                             @method('put')
                             <div class="row">
@@ -74,8 +76,26 @@
                             <div class="row">
                                 <label for="">Status</label>
                                 <div class="mb-3 mb-0 mt-2">
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($pp_indicacao_bolsistas->status == "Aberto") checked @endif> Aberto</label>
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($pp_indicacao_bolsistas->status == "Fechado") checked @endif> Fechado</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto"
+                                            @if ($pp_indicacao_bolsistas->status == 'Aberto') checked @endif> Aberto</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado"
+                                            @if ($pp_indicacao_bolsistas->status == 'Fechado') checked @endif> Fechado</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4 col-md-12">
+                                    <label class="form-label">Visibilidade do Evento</label>
+                                    <div class="form-check custom-checkbox mb-3 checkbox-info">
+                                        <input type="checkbox"
+                                            class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
+                                            @if ($pp_indicacao_bolsistas->visivel == 1) checked @endif value="1"
+                                            id="customCheckBox2" name="visivel">
+
+                                        <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
+                                        @if ($errors->has('visivel'))
+                                            <div class="invalid-feedback">{{ $errors->first('visivel') }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
