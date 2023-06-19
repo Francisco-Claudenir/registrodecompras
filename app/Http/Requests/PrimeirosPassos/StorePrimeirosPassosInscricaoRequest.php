@@ -28,23 +28,23 @@ class StorePrimeirosPassosInscricaoRequest extends FormRequest
             'identidade' => ['required', 'string'],
             'matricula' => ['required', 'string'],
             'centro_id' => ['required'],
-            'copiacontrato' => ['required', 'mimes:pdf'],
+            'copiacontrato' => ['required', 'mimes:pdf', 'max:5000'],
             'vigencia_inicio' => ['required', 'date'],
             'vigencia_fim' => ['required', 'date'],
             'areaconhecimento_id' => ['required'],
             'tituloprojetopesquisa' => ['required', 'string', 'max:100'],
             'resumoprojeto' => ['required'],
             'chefeimediato' => ['required'],
-            'anuenciachefe' => ['required', 'mimes:pdf'],
-            'parecercomite' => ['mimes:pdf'],
-            'curriculolattes' => ['required', 'mimes:pdf'],
-            'projetopesquisa' => ['required', 'mimes:pdf'],
+            'anuenciachefe' => ['required', 'mimes:pdf', 'max:5000'],
+            'parecercomite' => ['mimes:pdf', 'max:5000'],
+            'curriculolattes' => ['required', 'mimes:pdf', 'max:5000'],
+            'projetopesquisa' => ['required', 'mimes:pdf', 'max:5000'],
 
 
             //Plano de Trabalho
             'titulo' => ['required'],
             'resumo' => ['required',],
-            'arquivo' => ['required', 'mimes:pdf']
+            'arquivo' => ['required', 'mimes:pdf', 'max:5000']
         ];
     }
 }

@@ -80,7 +80,7 @@
                                                             <div class="dropdown custom-dropdown">
                                                                 <button type="button" class="btn btn-xs btn-outline-info"
                                                                     data-bs-toggle="dropdown"
-                                                                    aria-expanded="true">{{ Auth::user()->nome }}
+                                                                    aria-expanded="true">{{ explode(' ', Auth::user()->nome)[0] }}
                                                                     <i class="fa fa-angle-down ms-3"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-end"
