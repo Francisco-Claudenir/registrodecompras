@@ -25,6 +25,11 @@
                                         <th>Email</th>
                                         <th>CPF</th>
                                         <th>Telefone</th>
+                                        @foreach ($listaInscritos as $dados)
+                                            @if ($dados->status !== 'Em Analise')
+                                                <th>Status</th>
+                                            @endif
+                                        @endforeach
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -36,8 +41,25 @@
                                             <td>{{ $dados->email }}</td>
                                             <td>{{ $dados->cpf }}</td>
                                             <td>{{ $dados->telefone }}</td>
-                                            <td><a
-                                                    href="{{ route('primeirospassos.inscricao.espelho', ['primeiropasso_id' => $dados->primeiropasso_id, 'passos_inscricao_id' => $dados->passos_inscricao_id]) }}"><i
+                                            @if (!$dados->status !== 'Em Analise')
+                                                @switch($dados->status)
+                                                    @case('Indeferido')
+                                                        <td>
+                                                            <span class="badge light badge-danger">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case('Deferido')
+                                                        <td>
+                                                            <span class="badge light badge-success">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
+                                                    @default
+                                                @endswitch
+                                            @endif
+                                            <td><a href="{{ route('primeirospassos.inscricao.espelho', ['primeiropasso_id' => $dados->primeiropasso_id, 'passos_inscricao_id' => $dados->passos_inscricao_id]) }}"
+                                                    class="badge badge-circle badge-dark"><i
                                                         class="flaticon-381-file-2"></i></a></td>
                                         </tr>
                                     @endforeach

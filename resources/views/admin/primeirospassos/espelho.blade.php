@@ -43,8 +43,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-xs btn-success">Save changes</button>
+                    <button type="button" class="btn btn-xs btn-danger" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-xs btn-success">Salvar</button>
                 </div>
                 </form>
             </div>
@@ -61,7 +61,6 @@
                                 data-bs-target="#analiseModal" class="btn btn-xs btn-info" title="">
                                 Analisar
                             </a>
-
                             <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
                                 class="btn btn-xs btn-info" title="">
                                 PDF

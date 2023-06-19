@@ -133,7 +133,7 @@
         today = yyyy + '-' + mm + '-' + dd;
 
         // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
-        document.getElementById("data_inicio").setAttribute("min", today);
+        // document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
 @endsection
