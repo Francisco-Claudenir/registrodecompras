@@ -11,9 +11,9 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-    
+
                     <h4 class="card-title">Cadastro Usuário</h4>
-    
+
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -166,7 +166,7 @@
                                         <div class="input-group">
                                             <select
                                                 class="default-select form-control @error('perfil_id') is-invalid @enderror wide mb-3"
-                                                tabindex="null">
+                                                tabindex="null" name="perfil_id">
                                                 <option disabled selected value="">
                                                     Selecione
                                                     uma opção</option>

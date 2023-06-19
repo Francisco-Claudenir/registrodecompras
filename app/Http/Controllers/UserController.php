@@ -7,6 +7,7 @@ use App\Models\Perfil;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -57,6 +58,7 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
+            $request['password'] = Hash::make($request['password']);
             $this->user->create($request->validated());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
