@@ -314,6 +314,7 @@ class PrimeirosPassosInscricaoController extends Controller
 
             $diretorio = Crypt::decrypt($diretorio);
 
+            dd($diretorio);
             $path = storage_path('app/' . $diretorio);
 
             if (!File::exists($path)) {
