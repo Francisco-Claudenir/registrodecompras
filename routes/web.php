@@ -80,8 +80,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
-     //PP_IndicacaoBolsistas Inscricão Execel
-     Route::get('/pp-indicacao-bolsistas/inscritos/{pp_indicacao_bolsista_id}', [ExportsController::class, 'ppIndicacaoBolsista'])->name('lista.pp_i_bolsista.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    //PP_IndicacaoBolsistas Inscricão Execel
+    Route::get('/pp-indicacao-bolsistas/inscritos/{pp_indicacao_bolsista_id}', [ExportsController::class, 'ppIndicacaoBolsista'])->name('lista.pp_i_bolsista.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 });
 
 
@@ -120,7 +121,6 @@ Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
     Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
     Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
-    Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho');
     Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
     Route::get('/docshow/{diretorio}', [PP_IndicacaoBolsistasInscricaoController::class, 'docshow'])->name('pp-i-bolsistas-inscricao.docshow');
     Route::get('/verinscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'show'])->name('pp-i-bolsistas-inscricao.show');
