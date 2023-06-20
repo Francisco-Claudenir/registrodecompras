@@ -2,13 +2,11 @@
 
 namespace App\Exports;
 
-use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Models\PrimeiroPasso;
 use App\Models\PrimeirosPassosInscricao;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -51,24 +49,16 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
                 'users.telefone',
                 'sub_areas.nome as subarea',
                 'centros.centros as centro',
+                'primeiros_passos_inscricaos.status',
                 'primeiros_passos_inscricaos.tituloprojetopesquisa',
                 'plano_trabalhos.titulo'
             ])
             ->get();
+
         return $listaInscritos;
     }
 
-    //    public function drawings()
-    //    {
-    //        $drawing = new Drawing();
-    //        $drawing->setName('Logo');
-    //        $drawing->setDescription('This is my logo');
-    //        $drawing->setPath(public_path('/images/uema/logo_uema.png'));
-    //        $drawing->setHeight(90);
-    //        $drawing->setCoordinates('A1');
 
-    //        return $drawing;
-    //    }
     public function headings(): array
     {
         // Defina os nomes personalizados para as colunas
@@ -80,11 +70,13 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
             'Telefone',
             'Área de Conhecimento',
             'Centro',
+            'Status',
             'Titulo do Projeto',
             'Titulo do Plano'
-            // Outras colunas...
         ];
     }
+
+
     public function registerEvents(): array
     {
         return [
@@ -104,10 +96,12 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
                 $drawing->setWorksheet($event->sheet->getDelegate());
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
-                $event->sheet->getStyle('A1:I7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+                $event->sheet->getStyle('A1:J7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
             },
+
         ];
     }
+
     public function styles(Worksheet $sheet)
     {
         // Obter a última coluna preenchida na planilha
@@ -129,11 +123,25 @@ class PrimeirosPassosInscricaoExport implements FromCollection, WithHeadings, Wi
         $sheet->getRowDimension(1)->setRowHeight(25);
         $sheet->getStyle('A1:Z1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
 
-
         // Aplicar estilo para as demais colunas
         // Estilizar as demais linhas
         $lastRow = $sheet->getHighestRow();
         for ($row = 2; $row <= $lastRow; $row++) {
+            $statusCell = $sheet->getCell('H' . $row);
+            $status = $statusCell->getValue();
+
+            // Defina a cor de fundo com base no valor do status
+            if ($status == 'Em Analise') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('B2B2B2'); // Amarelo
+            } elseif ($status == 'Deferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('00FF00'); // Verde
+            } elseif ($status == 'Indeferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000'); // Vermelho
+            }
+
             $sheet->getRowDimension($row)->setRowHeight(20);
             $sheet->getStyle("A{$row}:Z{$row}")->applyFromArray([
                 'font' => [
