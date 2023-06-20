@@ -329,7 +329,6 @@ class PrimeirosPassosInscricaoController extends Controller
 
             return $response;
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             alert()->error(config($this->bag['msg'] . '.error.diretorio'));
             return redirect()->back();
         }
