@@ -94,7 +94,7 @@ class PrimeirosPassosInscricaoController extends Controller
     public function espelho($primeiropasso_id, $passos_inscricao_id)
     {
         //Verificando se o primeiropasso_id existe
-        $this->primeiropasso->findOrfail($primeiropasso_id);
+        $evento = $this->primeiropasso->findOrfail($primeiropasso_id);
 
         $dadosInscrito = $this->primeirospassosinscricao
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
@@ -112,7 +112,7 @@ class PrimeirosPassosInscricaoController extends Controller
 
         $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
 
-        return view('admin.primeirospassos.espelho', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
+        return view('admin.primeirospassos.espelho', compact('evento', 'dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
     }
 
     //Gera o pdf
