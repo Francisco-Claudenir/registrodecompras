@@ -51,6 +51,24 @@
         </div>
     </div>
     <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+
+                    <h4 class="card-title">{{ $evento->nome }}</h4>
+
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('primeirospassos.inscricao.index', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id]) }}">Lista
+                            de Inscritos</a></li>
+                    <li class="breadcrumb-item active"><a href="">{{ explode(' ', $dadosInscrito->nome)[0] }}</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
         <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
