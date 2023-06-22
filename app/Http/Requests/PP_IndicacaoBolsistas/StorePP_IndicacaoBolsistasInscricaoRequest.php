@@ -24,6 +24,14 @@ class StorePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
+            'nome_bolsista' => ['required', 'string', 'max:255'],
+            'email_bolsista' => ['required', 'string', 'email', 'max:255',],
+            'cpf_bolsista' => ['required', 'string', 'cpf', 'size:11'],
+            'telefone_bolsista' => ['required', 'string', 'min:2', 'max:45'],
+            'endereco_bolsista' => ['required', 'array'],
+            'endereco_bolsista.cep' => ['required', 'digits:8'],
+            'endereco_bolsista.endereco' => ['required'],
+            'endereco_bolsista.bairro' => ['required'],
             'centro_id' => ['required', 'exists:centros,id'],
             'curso_id' => ['required', 'exists:cursos,id'],
             'numero_identidade' => ['required', 'string', 'min:2', 'max:200'],
@@ -31,7 +39,8 @@ class StorePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
             'documento_cpf' => ['required', 'mimes:pdf'],
             'nome_orientador' => ['required', 'string', 'min:2', 'max:150'],
             'telefone_orientador' => ['required', 'string', 'min:1', 'max:11', 'regex:/^\d+$/'],
-            'email_orientador' => ['required', 'string', 'min:2', 'max:100'],
+            'email_orientador' => ['required', 'string', 'email', 'max:255'],
+            'cpf_orientador' => ['required', 'string', 'cpf', 'size:11'],
             'centro_orientador_id' => ['required', 'exists:centros,id'],
             'titulo_projeto_orientador' => ['required', 'string', 'min:2', 'max:200'],
             'titulo_plano_orientador' => ['required', 'string', 'min:2', 'max:200'],

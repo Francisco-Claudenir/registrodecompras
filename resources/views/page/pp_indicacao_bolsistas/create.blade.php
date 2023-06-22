@@ -38,24 +38,29 @@
                                     <div class="basic-form">
                                         <div class="row mt-3">
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Campus/Centros</label>
-                                                <select
-                                                    class="default-select form-control wide @if ($errors->first('centro_id')) is-invalid @endif"
-                                                    name="centro_id" required id="centro_id">
-                                                    <option value="{{ null }}" selected hidden>Selecione...
-                                                    </option>
-                                                    @foreach ($centros as $dados)
-                                                        <option value="{{ $dados->id }}">{{ $dados->centros }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('centro_id'))
-                                                    <div class="invalid-feedback">{{ $errors->first('centro_id') }}</div>
-                                                @endif
+                                                <label class="form-label fw-normal">Nome completo do(a) bolsista</label>
+                                                <input type="text"
+                                                    class="form-control @if ($errors->first('nome_bolsista')) is-invalid @endif"
+                                                    placeholder="Nome Bolsista" required name="nome_bolsista"
+                                                    value="{{ old('nome_bolsista') }}">
+                                                {!! $errors->default->first('nome_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Curso</label>
-                                                <select class="form-control" name="curso_id" id="curso_id" required>
-                                                </select>
+                                                <label class="form-label fw-normal">E-mail</label>
+                                                <input type="text"
+                                                    class="form-control @if ($errors->first('email_bolsista')) is-invalid @endif"
+                                                    placeholder="E-mail" required name="email_bolsista"
+                                                    value="{{ old('email_bolsista') }}">
+                                                {!! $errors->default->first('email_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">CPF</label>
+                                                <input type="text"
+                                                    class="form-control @if ($errors->first('cpf_bolsista')) is-invalid @endif"
+                                                    placeholder="CPF" required name="cpf_bolsista"
+                                                    value="{{ old('cpf_bolsista') }}" autocomplete="cpf" autofocus
+                                                    maxlength="11">
+                                                {!! $errors->default->first('cpf_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Numero de Identidade</label>
@@ -63,12 +68,93 @@
                                                     class="form-control @if ($errors->first('numero_identidade')) is-invalid @endif"
                                                     placeholder="Identidade" required name="numero_identidade"
                                                     value="{{ old('numero_identidade') }}">
-                                                @if ($errors->has('numero_identidade'))
-                                                    <div class="invalid-feedback">{{ $errors->first('numero_identidade') }}
-                                                    </div>
-                                                @endif
+                                                {!! $errors->default->first('numero_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-6 col-sm-6">
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Telefone</label>
+                                                <input type="text"
+                                                    class="form-control @if ($errors->first('telefone_bolsista')) is-invalid @endif"
+                                                    placeholder="00 00000-0000" required name="telefone_bolsista"
+                                                    value="{{ old('telefone_bolsista') }}" autocomplete="phone"
+                                                    maxlength="11">
+                                                {!! $errors->default->first('telefone_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Cep</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="endereco_bolsista[cep]" id="cep"
+                                                        class="form-control @error('endereco_bolsista.cep') is-invalid @enderror"
+                                                        placeholder="0000000" required
+                                                        value="{{ old('endereco_bolsista.cep') }}" maxlength="9"
+                                                        pattern="/^[0-9]{5}\-[0-9]{3}$/">
+                                                    {{-- <div class="input-group-text"> --}}
+                                                    <button type="button" class="input-group-text"
+                                                        onclick="pesquisacep(cep.value)">
+                                                        <span class="flaticon-381-location"></span>
+
+                                                    </button>
+                                                </div>
+                                                {!! $errors->default->first(
+                                                    'endereco_bolsista.cep',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Endereço</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="endereco_bolsista[endereco]" id="endereco"
+                                                        class="form-control @error('endereco_bolsista.endereco') is-invalid @enderror"
+                                                        placeholder="Endereço" required autocomplete="endereco"
+                                                        value="{{ old('endereco_bolsista.endereco') }}">
+                                                </div>
+                                                {!! $errors->default->first(
+                                                    'endereco_bolsista.endereco',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Número</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="endereco_bolsista[numero]"
+                                                        class="form-control @error('endereco_bolsista.numero') is-invalid @enderror"
+                                                        placeholder="Ex 01" value="{{ old('endereco_bolsista.numero') }}">
+                                                </div>
+                                                {!! $errors->default->first(
+                                                    'endereco_bolsista.numero',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="mb-1" for="endereco_bolsista[bairro]">Bairro</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="endereco_bolsista[bairro]" id="bairro"
+                                                        class="form-control @error('endereco_bolsista.bairro') is-invalid @enderror"
+                                                        placeholder="Bairro" autocomplete="email" required
+                                                        value="{{ old('endereco_bolsista.bairro') }}">
+                                                </div>
+                                                {!! $errors->default->first('endereco.bairro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Campus/Centros</label>
+                                                <select
+                                                    class="default-select form-control wide @if ($errors->first('centro_id')) is-invalid @endif"
+                                                    name="centro_id" required id="centro_id">
+                                                    <option value="{{ null }}" selected hidden>Selecione...
+                                                    </option>
+                                                    @foreach ($centros as $dados)
+                                                        <option value="{{ $dados->id }}">{{ $dados->centros }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                {!! $errors->default->first('centro_id', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">Curso</label>
+                                                <select class="form-control" name="curso_id" id="curso_id" required>
+                                                </select>
+                                                {!! $errors->default->first('curso_id', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4 col-sm-4">
                                                 <label class="form-label fw-normal">Documento de Identidade</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
@@ -78,12 +164,9 @@
                                                             required name="documento_identidade">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('documento_identidade'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('documento_identidade') }}</div>
-                                                @endif
+                                                {!! $errors->default->first('documento_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
-                                            <div class="mb-3 col-md-6 col-sm-6">
+                                            <div class="mb-3 col-md-4 col-sm-4">
                                                 <label class="form-label fw-normal">Documento CPF</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
@@ -93,10 +176,7 @@
                                                             required name="documento_cpf">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('documento_cpf'))
-                                                    <div class="invalid-feedback">{{ $errors->first('documento_cpf') }}
-                                                    </div>
-                                                @endif
+                                                {!! $errors->default->first('documento_cpf', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -118,23 +198,27 @@
                                                 <label class="form-label fw-normal">Nome Completo</label>
                                                 <input type="text"
                                                     class="form-control form-control-sm @if ($errors->first('nome_orientador')) is-invalid @endif"
-                                                    placeholder="Nome" required name="nome_orientador"
+                                                    placeholder="Nome Completo" required name="nome_orientador"
                                                     value="{{ old('nome_orientador') }}">
-                                                @if ($errors->has('nome_orientador'))
-                                                    <div class="invalid-feedback">{{ $errors->first('nome_orientador') }}
-                                                    </div>
-                                                @endif
+                                                {!! $errors->default->first('nome_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label class="form-label fw-normal">CPF Orientador</label>
+                                                <input type="text"
+                                                    class="form-control @if ($errors->first('cpf_orientador')) is-invalid @endif"
+                                                    placeholder="CPF Orientador" required name="cpf_orientador"
+                                                    value="{{ old('cpf_orientador') }}" autocomplete="cpf" autofocus
+                                                    maxlength="11">
+                                                {!! $errors->default->first('cpf_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Telefone</label>
                                                 <input type="text"
                                                     class="form-control form-control-sm @if ($errors->first('telefone_orientador')) is-invalid @endif"
                                                     placeholder="Telefone" required name="telefone_orientador"
-                                                    minlength="1" maxlength="11" value="{{ old('telefone_orientador') }}">
-                                                @if ($errors->has('telefone_orientador'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('telefone_orientador') }}</div>
-                                                @endif
+                                                    minlength="1" maxlength="11"
+                                                    value="{{ old('telefone_orientador') }}">
+                                                {!! $errors->default->first('telefone_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">E-mail</label>
@@ -142,10 +226,7 @@
                                                     class="form-control @if ($errors->first('email_orientador')) is-invalid @endif"
                                                     placeholder="E-mail" required name="email_orientador"
                                                     value="{{ old('email_orientador') }}">
-                                                @if ($errors->has('email_orientador'))
-                                                    <div class="invalid-feedback">{{ $errors->first('email_orientador') }}
-                                                    </div>
-                                                @endif
+                                                {!! $errors->default->first('email_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Campus/Centros</label>
@@ -159,10 +240,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('centro_orientador_id'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('centro_orientador_id') }}</div>
-                                                @endif
+                                                {!! $errors->default->first('centro_orientador_id', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Título do Projeto do
@@ -172,10 +250,10 @@
                                                     placeholder="Título do Projeto do Orientador(a)" required
                                                     name="titulo_projeto_orientador"
                                                     value="{{ old('titulo_projeto_orientador') }}">
-                                                @if ($errors->has('titulo_projeto_orientador'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('titulo_projeto_orientador') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'titulo_projeto_orientador',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Título do Plano de Trabalho
@@ -185,10 +263,10 @@
                                                     placeholder="Título do Plano de Trabalho Bolsista" required
                                                     name="titulo_plano_orientador"
                                                     value="{{ old('titulo_plano_orientador') }}">
-                                                @if ($errors->has('titulo_plano_orientador'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('titulo_plano_orientador') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'titulo_plano_orientador',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -217,10 +295,7 @@
                                                             required name="historico_escolar">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('historico_escolar'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('historico_escolar') }}</div>
-                                                @endif
+                                                {!! $errors->default->first('historico_escolar', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração de vínculo do aluno à UEMA
@@ -233,10 +308,7 @@
                                                             required name="declaracao_vinculo">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('declaracao_vinculo'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('declaracao_vinculo') }}</div>
-                                                @endif
+                                                {!! $errors->default->first('declaracao_vinculo', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Termo de Compromisso do bolsista
@@ -250,10 +322,10 @@
                                                             required name="termo_compromisso_bolsista">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('termo_compromisso_bolsista'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('termo_compromisso_bolsista') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'termo_compromisso_bolsista',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração Negativa de Vínculo
@@ -267,10 +339,10 @@
                                                             required name="declaracao_negativa_vinculo">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('declaracao_negativa_vinculo'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('declaracao_negativa_vinculo') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'declaracao_negativa_vinculo',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Currículo atualizado, gerado na
@@ -284,9 +356,7 @@
                                                             required name="curriculo">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('curriculo'))
-                                                    <div class="invalid-feedback">{{ $errors->first('curriculo') }}</div>
-                                                @endif
+                                                {!! $errors->default->first('curriculo', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Declaração conjuta de estágio (quando
@@ -300,10 +370,10 @@
                                                             name="declaracao_conjuta_estagio">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('declaracao_conjuta_estagio'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('declaracao_conjuta_estagio') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'declaracao_conjuta_estagio',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -324,24 +394,21 @@
                                                 <label class="form-label fw-normal">Agência do Banco do Brasil n°</label>
                                                 <input type="text"
                                                     class="form-control form-control-sm @if ($errors->first('agencia_banco')) is-invalid @endif"
-                                                    placeholder="Identidade" required name="agencia_banco"
+                                                    placeholder="Agência do Banco" required name="agencia_banco"
                                                     value="{{ old('agencia_banco') }}">
-                                                @if ($errors->has('agencia_banco'))
-                                                    <div class="invalid-feedback">{{ $errors->first('agencia_banco') }}
-                                                    </div>
-                                                @endif
+                                                {!! $errors->default->first('agencia_banco', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Número da Conta Corrente do Banco do
                                                     Brasil</label>
                                                 <input type="text"
                                                     class="form-control form-control-sm @if ($errors->first('numero_conta_corrente')) is-invalid @endif"
-                                                    placeholder="Matricula" required name="numero_conta_corrente"
+                                                    placeholder="Número da Conta" required name="numero_conta_corrente"
                                                     value="{{ old('numero_conta_corrente') }}">
-                                                @if ($errors->has('numero_conta_corrente'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('numero_conta_corrente') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'numero_conta_corrente',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
@@ -354,10 +421,10 @@
                                                             class="form-file-input form-control @if ($errors->first('comprovante_conta_corrente')) is-invalid @endif"
                                                             required name="comprovante_conta_corrente">
                                                     </div>
-                                                    @if ($errors->has('comprovante_conta_corrente'))
-                                                        <div class="invalid-feedback">
-                                                            {{ $errors->first('comprovante_conta_corrente') }}</div>
-                                                    @endif
+                                                    {!! $errors->default->first(
+                                                        'comprovante_conta_corrente',
+                                                        '<span style="color:red" class="form-text">:message</span>',
+                                                    ) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -387,10 +454,10 @@
                                                             required name="termo_compromisso_orientador">
                                                     </div>
                                                 </div>
-                                                @if ($errors->has('termo_compromisso_orientador'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('termo_compromisso_orientador') }}</div>
-                                                @endif
+                                                {!! $errors->default->first(
+                                                    'termo_compromisso_orientador',
+                                                    '<span style="color:red" class="form-text">:message</span>',
+                                                ) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -463,7 +530,7 @@
                 success: function(cursos) {
 
                     $('select[name=curso_id]').empty();
-                    $('select[name=curso_id]').append('<option>Selecione o curso</option>');
+                    $('select[name=curso_id]').append('<option value="">Selecione o curso</option>');
 
                     $.each(cursos, function(key, value) {
                         console.log(key, value);
@@ -476,6 +543,75 @@
 
 
         });
+    </script>
+
+    <script>
+        //CEP
+        function limpa_formulario_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('endereco').value = ("");
+            document.getElementById('bairro').value = ("");
+
+        }
+
+
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('endereco').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulario_cep();
+                sweetAlert("Oops...", "Cep não encontrado", "error");
+                document.getElementById('cep').value = ("");
+            }
+        }
+
+
+
+        function pesquisacep(valor) {
+
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep !== "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('endereco').value = "...";
+                    document.getElementById('bairro').value = "...";
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = '//viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulario_cep();
+                    sweetAlert("Ops", "Formato de CEP inválido.", "error");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulario_cep();
+            }
+        }
     </script>
 
 @endsection

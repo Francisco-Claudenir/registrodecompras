@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PP_IndicacaoBolsistas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PP_IndicacaoBolsistas\StorePP_IndicacaoBolsistasInscricaoRequest;
+use App\Http\Requests\PP_IndicacaoBolsistas\UpdatePP_IndicacaoBolsistasInscricaoRequest;
 use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
 use App\Models\Centro;
@@ -55,38 +56,39 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
     {
         //Verificando se o id existe
         $ppIndicacaoBolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-        
+
         //Buscando a lista de inscritos atraves de join
-        $listaInscritos = $this->pp_i_bolsistas_inscricao
-            ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
-            ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->select([
-                'users.nome',
-                'users.email',
-                'users.cpf',
-                'users.telefone',
-                'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id',
-                'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_inscricao_id',
-                'pp_indicacao_bolsistas_inscricao.numero_inscricao'
-            ])->paginate(20);
+        // $listaInscritos = $this->pp_i_bolsistas_inscricao
+        //     ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
+        //     ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+        //     ->select([
+        //         'users.nome',
+        //         'users.email',
+        //         'users.cpf',
+        //         'users.telefone',
+        //         'pp_indicacao_bolsistas_inscricao.status',
+        //         'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id',
+        //         'pp_indicacao_bolsistas_inscricao.pp_i_bolsista_inscricao_id',
+        //         'pp_indicacao_bolsistas_inscricao.numero_inscricao'
+        //     ])->orderBy('pp_indicacao_bolsistas_inscricao.numero_inscricao', 'asc')->paginate(20);
+
+        $listaInscritos = $this->pp_i_bolsistas_inscricao->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+            ->orderBy('pp_indicacao_bolsistas_inscricao.numero_inscricao', 'asc')->paginate(20);
 
         $links = $listaInscritos->appends($request->except('page'));
 
         return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
     }
 
-    //Tras todas as informações que o candidato enviou
+
     public function espelho($pp_indicacao_bolsista_id, $pp_i_bolsista_inscricao_id)
     {
         //Verificando se o pp_indicacao_bolsista_id existe
-        $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
+        $ppIndicacaoBolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
 
-        $dadosInscrito = $this->pp_i_bolsistas_inscricao
-            ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
-            ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->findOrfail($pp_i_bolsista_inscricao_id);
+        $dadosInscrito = $this->pp_i_bolsistas_inscricao->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)->findOrfail($pp_i_bolsista_inscricao_id);
 
-        $endereco = json_decode($dadosInscrito->endereco, true);
+        $endereco = json_decode($dadosInscrito->endereco_bolsista, true);
 
         //Buscando o centro do candidato
         $centro_candidato = $this->centros->findOrfail($dadosInscrito->centro_id);
@@ -96,8 +98,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
 
         //Buscando o curso do candidato
         $curso = $this->curso->findOrfail($dadosInscrito->curso_id);
-
-        return view('admin.pp_indicacao_bolsistas.espelho', compact('dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
+        
+        return view('admin.pp_indicacao_bolsistas.espelho', compact('dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso', 'ppIndicacaoBolsista'));
     }
 
     //Gera o pdf
@@ -106,13 +108,10 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
         //Verificando se o pp_indicacao_bolsista_id existe
         $pp_indicacao_bolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
 
-        $dadosInscrito = $this->pp_i_bolsistas_inscricao
-            ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
-            ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->findOrfail($pp_i_bolsista_inscricao_id);
+        $dadosInscrito = $this->pp_i_bolsistas_inscricao->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)->findOrfail($pp_i_bolsista_inscricao_id);
 
         //Transformando Json em array de enderecos
-        $endereco = json_decode($dadosInscrito->endereco, true);
+        $endereco = json_decode($dadosInscrito->endereco_bolsista, true);
 
         //Buscando o centro do candidato
         $centro_candidato = $this->centros->findOrfail($dadosInscrito->centro_id);
@@ -124,6 +123,27 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
         $curso = $this->curso->findOrfail($dadosInscrito->curso_id);
 
         return view('pdf.pp_indicacao_bolsistas', compact('pp_indicacao_bolsista', 'dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
+    }
+
+    public function analise(UpdatePP_IndicacaoBolsistasInscricaoRequest $request,  $pp_indicacao_bolsista_id, $pp_i_bolsista_inscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->pp_i_bolsistas_inscricao->where('pp_i_bolsista_id', $pp_indicacao_bolsista_id)->find($pp_i_bolsista_inscricao_id);
+                if ($inscricao['pp_i_bolsista_id'] == $pp_indicacao_bolsista_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -157,7 +177,6 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function store(StorePP_IndicacaoBolsistasInscricaoRequest $request, $pp_indicacao_bolsista_id)
     {
-
         try {
             DB::beginTransaction();
 
@@ -168,14 +187,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             if (($data_hoje->gte($pp_indicacao_bolsistas->data_inicio) && $data_hoje->lte($pp_indicacao_bolsistas->data_fim))) {
 
                 //Calculo para saber o numero de inscricao
-                $numero_inscricao['numero_inscricao'] = $pp_indicacao_bolsistas['pp_i_bolsista_pp_i_b_inscricao_count'] + 1;
-
-                //variavel para adicionar os ids
-                $ids = [];
-
-                //Buscando e adcionando os id de pp_indicacao_bolsista_id e id so user a variavel
-                $ids['pp_i_bolsista_id'] = $pp_indicacao_bolsista_id;
-                $ids['user_id'] = Auth::user()->id;
+                $numero_inscricao = $pp_indicacao_bolsistas['pp_i_bolsista_pp_i_b_inscricao_count'] + 1;
 
                 //Verificando se o user ja esta inscrito do evento
                 $buscaInscricao = $this->pp_i_bolsistas_inscricao->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
@@ -188,7 +200,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 }
 
                 //combina as duas arrays $request e $ids na variavel $dados_inscricao
-                $dados_inscricao = array_merge($ids, $numero_inscricao, $request->all());
+                $dados_inscricao = $request->all();
 
                 //Caminho de arquirvos
                 //Documento Indentidade
@@ -255,7 +267,39 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 $nome = 'termo_compromisso_orientador' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                 $dados_inscricao['termo_compromisso_orientador'] = $request['termo_compromisso_orientador']->storeAs($path, $nome);
 
-                $this->pp_i_bolsistas_inscricao->create($dados_inscricao);
+                $this->pp_i_bolsistas_inscricao->create([
+                    'pp_i_bolsista_id' => $pp_indicacao_bolsista_id,
+                    'user_id' => Auth::user()->id,
+                    'nome_bolsista' => $dados_inscricao['nome_bolsista'],
+                    'email_bolsista' => $dados_inscricao['email_bolsista'],
+                    'cpf_bolsista' => $dados_inscricao['cpf_bolsista'],
+                    'telefone_bolsista' => $dados_inscricao['telefone_bolsista'],
+                    'endereco_bolsista' => json_encode($dados_inscricao['endereco_bolsista']),
+                    'status' => "Em Analise",
+                    'numero_inscricao' => $numero_inscricao,
+                    'curso_id' => $dados_inscricao['curso_id'],
+                    'centro_id' => $dados_inscricao['centro_id'],
+                    'numero_identidade' => $dados_inscricao['numero_identidade'],
+                    'documento_identidade' => $dados_inscricao['documento_identidade'],
+                    'documento_cpf' => $dados_inscricao['documento_cpf'],
+                    'nome_orientador' => $dados_inscricao['nome_orientador'],
+                    'telefone_orientador' => $dados_inscricao['telefone_orientador'],
+                    'email_orientador' => $dados_inscricao['email_orientador'],
+                    'cpf_orientador' => $dados_inscricao['cpf_orientador'],
+                    'centro_orientador_id' => $dados_inscricao['centro_orientador_id'],
+                    'titulo_projeto_orientador' => $dados_inscricao['titulo_projeto_orientador'],
+                    'titulo_plano_orientador' => $dados_inscricao['titulo_plano_orientador'],
+                    'historico_escolar' => $dados_inscricao['historico_escolar'],
+                    'declaracao_vinculo' => $dados_inscricao['declaracao_vinculo'],
+                    'termo_compromisso_bolsista' => $dados_inscricao['termo_compromisso_bolsista'],
+                    'declaracao_negativa_vinculo' => $dados_inscricao['declaracao_negativa_vinculo'],
+                    'curriculo' => $dados_inscricao['curriculo'],
+                    'declaracao_conjuta_estagio' => $dados_inscricao['declaracao_conjuta_estagio'],
+                    'agencia_banco' => $dados_inscricao['agencia_banco'],
+                    'numero_conta_corrente' => $dados_inscricao['numero_conta_corrente'],
+                    'comprovante_conta_corrente' => $dados_inscricao['comprovante_conta_corrente'],
+                    'termo_compromisso_orientador' => $dados_inscricao['termo_compromisso_orientador'],
+                ]);
 
                 DB::commit();
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
@@ -265,6 +309,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
             }
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
