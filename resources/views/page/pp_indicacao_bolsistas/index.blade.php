@@ -7,6 +7,22 @@
 
 @section('content')
     <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+
+                    <h4 class="card-title">{{ $ppIndicacaoBolsista->nome }}</h4>
+
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('pp-indicacao-bolsistas.index') }}">Lista</a></li>
+                    <li class="breadcrumb-item active"><a href="">Lista Inscritos</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
         <div class="col-xl-12 col-lg-12">
             <div class="card project-card">
                 <div class="card-body">
@@ -21,10 +37,11 @@
                                 <thead>
                                     <tr>
                                         <th>Nª</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>CPF</th>
-                                        <th>Telefone</th>
+                                        <th>Nome Orientador</th>
+                                        <th>CPF Orientador</th>
+                                        <th>Nome Bolsista</th>
+                                        <th>CPF Bolsista</th>
+                                        <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -32,13 +49,37 @@
                                     @foreach ($listaInscritos as $dados)
                                         <tr>
                                             <th>{{ $dados->numero_inscricao }}</th>
-                                            <th>{{ $dados->nome }}</th>
-                                            <td>{{ $dados->email }}</td>
-                                            <td>{{ $dados->cpf }}</td>
-                                            <td>{{ $dados->telefone }}</td>
-                                            <td><a
-                                                    href="{{ route('pp-i-bolsistas-inscricao.espelho', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dados->pp_i_bolsista_inscricao_id]) }}"><i
-                                                        class="flaticon-381-file-2"></i></a></td>
+                                            <th>{{ $dados->nome_orientador }}</th>
+                                            <td>{{ $dados->cpf_orientador }}</td>
+                                            <td>{{ $dados->nome_bolsista }}</td>
+                                            <td>{{ $dados->cpf_orientador }}</td>
+                                            @if (!$dados->status !== 'Em Analise')
+                                                @switch($dados->status)
+                                                    @case('Indeferido')
+                                                        <td>
+                                                            <span class="badge light badge-danger">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case('Deferido')
+                                                        <td>
+                                                            <span class="badge light badge-success">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case('Em Analise')
+                                                        <td>
+                                                            <span class="badge light badge-dark">{{ $dados->status }}</span>
+                                                        </td>
+                                                    @break
+
+                                                    @default
+                                                @endswitch
+                                            @else
+                                            @endif
+                                            <td><a href="{{ route('pp-i-bolsistas-inscricao.espelho', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dados->pp_i_bolsista_inscricao_id]) }}"
+                                                class="badge badge-circle badge-dark"><i
+                                                    class="flaticon-381-file-2"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

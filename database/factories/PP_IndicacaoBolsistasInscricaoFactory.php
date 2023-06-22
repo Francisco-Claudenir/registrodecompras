@@ -26,7 +26,11 @@ class PP_IndicacaoBolsistasInscricaoFactory extends Factory
                 self::$counter++;
                 return self::$counter;
             },
-
+            'nome_bolsista' => 'Dajdkfhas',
+            'email_bolsista' => 'daniel@gmail.com',
+            'cpf_bolsista' => '61741281300',
+            'telefone_bolsista' => '98984160491',
+            'endereco_bolsista' => 'fsafdsadfsafdsafd',
             'curso_id' => '1',
             'centro_id' => '1',
             'status' => 'Em Analise',
@@ -36,7 +40,9 @@ class PP_IndicacaoBolsistasInscricaoFactory extends Factory
             'nome_orientador' => 'teste teste',
             'telefone_orientador' => '98984160491',
             'email_orientador' => 'Daniel@gmail.com',
+            'cpf_orientador' => '61741281300',
             'centro_orientador_id' => '1',
+            'status' => 'Em Analise', 
             'titulo_projeto_orientador' => 'testeste',
             'titulo_plano_orientador' => 'testeste',
             'historico_escolar' => 'PP_IndicacaoBolsistas/2023/1/historico_escolar/12345678945/historico_escolar_11044520230615648b1a7d0c1a4.pdf',

@@ -65,7 +65,7 @@
                                                             @if (Auth::check())
 
                                                                 @if (now()->gte($pp_indicacao_bolsista->data_inicio) && now()->lte($pp_indicacao_bolsista->data_fim))
-                                                                    <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso' => $pp_indicacao_bolsista->primeiropasso_id]) }}"
+                                                                    <a href="{{ route('pp-i-bolsistas-inscricao.create', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
                                                                         class="btn btn-info btn-xs mb-1">Realizar
                                                                         Inscrição</a>
                                                                 @else

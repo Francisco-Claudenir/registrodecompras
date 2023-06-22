@@ -68,10 +68,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //PrimeirosPassos Inscricão Espelho ADMIN
-    Route::get('/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('primeirospassos/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //Analise Primeiros Passos Inscrição
-    Route::post('/primeirospassos/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::post('/primeirospassos/analise/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
 
     //User
@@ -88,7 +88,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //PP_IndicacaoBolsistas Inscricão Execel
     Route::get('/pp-indicacao-bolsistas/inscritos/{pp_indicacao_bolsista_id}', [ExportsController::class, 'ppIndicacaoBolsista'])->name('lista.pp_i_bolsista.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-    Route::get('/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //PP_IndicacaoBolsistas Inscricão Espelho
+    Route::get('pp-indicacao-bolsistas/espelho/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'espelho'])->name('pp-i-bolsistas-inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //Analise Primeiros Passos Inscrição
+    Route::post('/pp-indicacao-bolsistas/analise/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'analise'])->name('pp-i-bolsistas-inscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 });
 
 
@@ -115,7 +120,6 @@ Route::prefix('primeirospassos')->group(function () {
     Route::get('/inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
     Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
     Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-
     Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
     Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
     Route::get('/verinscricao/{primeiropasso_id}/{user_id}', [PrimeirosPassosInscricaoController::class, 'show'])->name('primeirospassos.inscricao.show');

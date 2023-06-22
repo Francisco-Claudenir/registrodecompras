@@ -3,6 +3,7 @@
 namespace App\Http\Requests\PP_IndicacaoBolsistas;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdatePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class UpdatePP_IndicacaoBolsistasInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'status' => ['required',Rule::in(config('status.status'))],
         ];
     }
 }

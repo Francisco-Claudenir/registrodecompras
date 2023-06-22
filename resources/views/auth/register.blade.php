@@ -55,7 +55,7 @@
                                                 <input type="text" name="telefone"
                                                     class="form-control @error('telefone') is-invalid @enderror"
                                                     value="{{ old('telefone') }}" placeholder="00 00000-00000" required
-                                                    autocomplete="phone">
+                                                    autocomplete="phone" maxlength="11">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-136-phone-call"></span>
                                                 </div>
