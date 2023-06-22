@@ -59,7 +59,7 @@
 
                                                         @if ($isInscrito)
                                                             <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id]) }}"
-                                                                class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
+                                                                class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
                                                         @else
                                                             @if (Auth::check())
 

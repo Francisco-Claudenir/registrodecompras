@@ -8,7 +8,8 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full"
+                        height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
@@ -25,15 +26,24 @@
                     <h3 class="card-title">Inscrição</h3>
                     <div class="card-options">
                         <div class="btn-list">
-                            <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
+                            {{-- <a href="{{ route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) }}"
                                 class="btn btn-xs btn-info" title="">
                                 PDF
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>
                 <div class="card-body pt-2 pb-0">
-                    <h5>Identificação do Candidato</h5>
+
+
+                    @foreach ($dadosInscrito as $dados)
+                        <div class="card">
+
+                            {{ $dados }}
+                        </div>
+                    @endforeach
+
+                    {{-- <h5>Identificação do Candidato</h5>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Numero de Inscrição</dt>
@@ -209,7 +219,7 @@
                                     href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($planotrabalho->arquivo)]) }}">Arquivo</a>
                             </dd>
                         </dl>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
