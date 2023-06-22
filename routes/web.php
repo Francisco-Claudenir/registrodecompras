@@ -2,6 +2,7 @@
 
 use App\Exports\PrimeirosPassosInscricaoExport;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
@@ -38,7 +39,12 @@ Route::post('login-servidor', [ApiController::class, 'login'])->name('login-prof
 
 
 
+
 Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+
+
+    Route::resource('auditoria', AuditoriaController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
