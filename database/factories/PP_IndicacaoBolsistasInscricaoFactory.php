@@ -29,6 +29,7 @@ class PP_IndicacaoBolsistasInscricaoFactory extends Factory
 
             'curso_id' => '1',
             'centro_id' => '1',
+            'status' => 'Em Analise',
             'numero_identidade' => '123456789',
             'documento_identidade' => 'PP_IndicacaoBolsistas/2023/1/documento_identidade/12345678945/documento_identidade_11044420230615648b1a7cede38.pdf',
             'documento_cpf' => 'PP_IndicacaoBolsistas/2023/1/documento_cpf/12345678945/documento_cpf_11044520230615648b1a7d09a29.pdf',

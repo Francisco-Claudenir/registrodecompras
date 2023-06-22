@@ -55,7 +55,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
     {
         //Verificando se o id existe
         $ppIndicacaoBolsista = $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
-        
+
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->pp_i_bolsistas_inscricao
             ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
