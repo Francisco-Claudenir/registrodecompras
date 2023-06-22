@@ -59,6 +59,7 @@ class UserController extends Controller
 
         try {
             $request['password'] = Hash::make($request['password']);
+            $request['endereco'] = json_encode($request['endereco']);
             $this->user->create($request->validated());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
@@ -89,7 +90,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $perfis = $this->perfil->get();
+        $user = $this->user->find($id);
+        $endereco = json_decode($user->endereco, true);
+        return view($this->bag['view'] . '.edit', compact('user', 'perfis', 'endereco'));
     }
 
     /**
@@ -101,7 +105,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $user = $this->user->findOrfail($id);
+            $request['endereco'] = json_encode($request['endereco']);
+                  
+            $user->update($request->all());
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->route('users.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
     }
 
     /**
