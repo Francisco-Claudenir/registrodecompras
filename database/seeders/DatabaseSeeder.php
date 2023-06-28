@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'telefone' => '98988888888',
             'endereco' => '{"cep": "65000000","numero": "00","endereco": "Rua Admin", "bairro": "Bairro Admin"}',
             'email' => 'admin@ppg.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Uema@Ppg2023'),
         ]);
 
         // $primeiropasso = PrimeiroPasso::create([
