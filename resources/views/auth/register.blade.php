@@ -68,7 +68,7 @@
                                                 <input type="text" name="endereco[cep]" id="cep"
                                                     class="form-control @error('endereco.cep') is-invalid @enderror"
                                                     placeholder="0000000" required value="{{ old('endereco.cep') }}"
-                                                    maxlength="9" pattern="/^[0-9]{5}\-[0-9]{3}$/">
+                                                    maxlength="8" pattern="/^[0-9]{5}\-[0-9]{3}$/">
                                                 {{-- <div class="input-group-text"> --}}
                                                 <button type="button" class="input-group-text"
                                                     onclick="pesquisacep(cep.value)">
