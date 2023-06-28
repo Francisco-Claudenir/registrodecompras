@@ -98,7 +98,8 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
 
         //Buscando o curso do candidato
         $curso = $this->curso->findOrfail($dadosInscrito->curso_id);
-        
+
+
         return view('admin.pp_indicacao_bolsistas.espelho', compact('dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso', 'ppIndicacaoBolsista'));
     }
 
@@ -190,14 +191,14 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 $numero_inscricao = $pp_indicacao_bolsistas['pp_i_bolsista_pp_i_b_inscricao_count'] + 1;
 
                 //Verificando se o user ja esta inscrito do evento
-                $buscaInscricao = $this->pp_i_bolsistas_inscricao->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-                    ->where('user_id', '=', Auth::user()->id)
-                    ->first();
+                // $buscaInscricao = $this->pp_i_bolsistas_inscricao->where('pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
+                //     ->where('user_id', '=', Auth::user()->id)
+                //     ->first();
 
-                if ($buscaInscricao != null) {
-                    alert()->error(config($this->bag['msg'] . '.error.inscricao_validacao'));
-                    return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
-                }
+                // if ($buscaInscricao != null) {
+                //     alert()->error(config($this->bag['msg'] . '.error.inscricao_validacao'));
+                //     return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
+                // }
 
                 //combina as duas arrays $request e $ids na variavel $dados_inscricao
                 $dados_inscricao = $request->all();
@@ -349,7 +350,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($pp_indicacao_bolsista_id)
+    public function show($pp_indicacao_bolsista_id, Request $request)
     {
         //Verificando se o pp_indicacao_bolsista_id existe
         $this->pp_indicacao_bolsistas->findOrfail($pp_indicacao_bolsista_id);
@@ -357,11 +358,11 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
         //Verificando se o user_id existe
         $user = $this->user->findOrfail(Auth::user()->id);
 
-        $dadosInscrito = $this->pp_i_bolsistas_inscricao
+        $dadosInscrito = $this->pp_i_bolsistas_inscricao->with('curso')
             ->join('users', 'users.id', '=', 'pp_indicacao_bolsistas_inscricao.user_id')
             ->where('users.id', '=', $user->id)
             ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->first();
+            ->paginate(10);
 
 
         if ($dadosInscrito == null) {
@@ -369,19 +370,33 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             return redirect()->back();
         }
 
-        //Transformando Json em array de enderecos
-        $endereco = json_decode($dadosInscrito->endereco, true);
 
-        //Buscando o centro do candidato
-        $centro_candidato = $this->centros->findOrfail($dadosInscrito->centro_id);
+        foreach ($dadosInscrito as $key => $dados) {
 
-        //Buscando o centro do orientador
-        $centro_orientador = $this->centros->findOrfail($dadosInscrito->centro_orientador_id);
+            //Transformando Json em array de enderecos
+            $dados->endereco = json_decode($dados->endereco, true);
+            $dados->endereco_bolsista = json_decode($dados->endereco_bolsista, true);
 
-        //Buscando o curso do candidato
-        $curso = $this->curso->findOrfail($dadosInscrito->curso_id);
+            //Buscando o centro do candidato
+            $dados['centro_candidato'] = $this->centros->findOrfail($dados->centro_id);
 
-        return view('page.pp_indicacao_bolsistas.show', compact('dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
+            //Buscando o centro do orientador
+            $dados['centro_orientador'] = $this->centros->findOrfail($dados->centro_orientador_id);
+        }
+
+
+        // //Buscando o centro do candidato
+        // $centro_candidato = $this->centros->findOrfail($dadosInscrito->centro_id);
+
+        // //Buscando o centro do orientador
+        // $centro_orientador = $this->centros->findOrfail($dadosInscrito->centro_orientador_id);
+
+        // //Buscando o curso do candidato
+        // $curso = $this->curso->findOrfail($dadosInscrito->curso_id);
+
+
+        $links = $dadosInscrito->appends($request->except('page'));
+        return view('page.pp_indicacao_bolsistas.show', compact('dadosInscrito','links'));
     }
 
     /**

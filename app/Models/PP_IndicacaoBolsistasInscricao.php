@@ -68,6 +68,11 @@ class PP_IndicacaoBolsistasInscricao extends Model
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
 
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class,'curso_id');
+    }
+    
     public function cpf($cpff)
     {
         $cpf = '***.' . substr($cpff, 3, 3) . '.' . substr($cpff, 6, 3) . '-**';
