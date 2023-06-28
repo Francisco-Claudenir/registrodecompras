@@ -86,7 +86,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px"> Nome</dt>
+                                        <dt style="font-size: 14px">Nome</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -99,7 +99,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Email</dt>
+                                        <dt style="font-size: 14px">E-mail</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -111,7 +111,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Cpf</dt>
+                                        <dt style="font-size: 14px">CPF</dt>
                                     </h6>
                                 </strong>
                                 <small>

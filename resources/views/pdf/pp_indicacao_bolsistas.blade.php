@@ -116,7 +116,8 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf($dadosInscrito->cpf_bolsista) }}</p>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->cpf($dadosInscrito->cpf_bolsista) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -171,9 +172,15 @@
                                     </h6>
                                 </strong>
                                 <small>
-                                    <dd>
-                                        <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
-                                    </dd>
+                                    @if ($endereco['numero'] != null)
+                                        <dd>
+                                            <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
+                                        </dd>
+                                    @else
+                                        <dd>
+                                            <p style="font-size: 14px">Sem Número</p>
+                                        </dd>
+                                    @endif
                                 </small>
                             </th>
                             <th>
@@ -263,7 +270,6 @@
                 </table>
 
                 <br>
-                <br>
 
                 <table class="table table-bordered">
                     <thead>
@@ -312,7 +318,8 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->cPF($dadosInscrito->cpf_bolsista) }}</p>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->cPF($dadosInscrito->cpf_bolsista) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -360,6 +367,8 @@
                     </thead>
                 </table>
 
+                <br>
+                <br>
                 <br>
                 <br>
                 <br>
@@ -416,7 +425,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício)</dt>
+                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício</dt>
                                     </h6>
                                 </strong>
                                 <small>

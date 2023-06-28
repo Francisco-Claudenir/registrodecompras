@@ -88,7 +88,7 @@
                     <h5>Identificação do Candidato</h5>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Numero de Inscrição</dt>
+                            <dt>Número de Inscrição</dt>
                             <dd>{{ $dadosInscrito->numero_inscricao }}</dd>
                         </dl>
                         <dl>
@@ -98,13 +98,13 @@
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Email</dt>
+                            <dt>E-mail</dt>
                             <dd class="text-justify">{{ $dadosInscrito->email }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Cpf</dt>
+                            <dt>CPF</dt>
                             <dd class="text-justify">{{ $dadosInscrito->cpf }}</dd>
                         </dl>
                     </div>
