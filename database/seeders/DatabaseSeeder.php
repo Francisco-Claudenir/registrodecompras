@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'telefone' => '98988888888',
             'endereco' => '{"cep": "65000000","numero": "00","endereco": "Rua Admin", "bairro": "Bairro Admin"}',
             'email' => 'admin@ppg.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Uema@Ppg2023'),
         ]);
 
         // $primeiropasso = PrimeiroPasso::create([
@@ -63,10 +63,10 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        //PrimeirosPassosInscricao::factory()->count(100)->create();
+        // PrimeirosPassosInscricao::factory()->count(50)->create();
         // User::factory()->count(3)->create();
 
-        //PP_IndicacaoBolsistasInscricao::factory()->count(100)->create();
+        //PP_IndicacaoBolsistasInscricao::factory()->count(50)->create();
 
         // $user = User::factory()->has(PrimeirosPassosInscricao::factory()->count(1)->state(function (array $attributes, User $user){
         //     return $user->id; 

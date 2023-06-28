@@ -62,7 +62,7 @@
 
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ route('perfil.edit', ['perfil' => $user->id]) }}"
+                                                    <a href="{{ route('users.edit', ['user' => $user->id],'edit') }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                             class="fas fa-pencil-alt"></i></a>
                                                 </div>

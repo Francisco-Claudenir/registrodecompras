@@ -86,37 +86,38 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px"> Nome</dt>
+                                        <dt style="font-size: 14px">Nome do Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd>
                                         <p style="font-size: 14px">
-                                            {{ $dadosInscrito->nome }}</p>
+                                            {{ $dadosInscrito->nome_bolsista }}</p>
                                     </dd>
                                 </small>
                             </th>
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Email</dt>
+                                        <dt style="font-size: 14px">E-mail do Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->email }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->email_bolsista }}</p>
                                     </dd>
                                 </small>
                             </th>
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Cpf</dt>
+                                        <dt style="font-size: 14px">CPF do Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->cpf($dadosInscrito->cpf) }}</p>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->cpf($dadosInscrito->cpf_bolsista) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -139,12 +140,12 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Telefone</dt>
+                                        <dt style="font-size: 14px">Telefone do Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone_bolsista }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -171,9 +172,15 @@
                                     </h6>
                                 </strong>
                                 <small>
-                                    <dd>
-                                        <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
-                                    </dd>
+                                    @if ($endereco['numero'] != null)
+                                        <dd>
+                                            <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
+                                        </dd>
+                                    @else
+                                        <dd>
+                                            <p style="font-size: 14px">Sem Número</p>
+                                        </dd>
+                                    @endif
                                 </small>
                             </th>
                             <th>
@@ -263,7 +270,6 @@
                 </table>
 
                 <br>
-                <br>
 
                 <table class="table table-bordered">
                     <thead>
@@ -304,6 +310,19 @@
                                     </dd>
                                 </small>
                             </th>
+                            <th>
+                                <strong>
+                                    <h6>
+                                        <dt style="font-size: 14px">CPF do Orientador</dt>
+                                    </h6>
+                                </strong>
+                                <small>
+                                    <dd>
+                                        <p style="font-size: 14px">
+                                            {{ $dadosInscrito->cPF($dadosInscrito->cpf_bolsista) }}</p>
+                                    </dd>
+                                </small>
+                            </th>
                         </tr>
                     </thead>
                     <thead>
@@ -332,7 +351,7 @@
                                     </dd>
                                 </small>
                             </th>
-                            <th>
+                            <td colspan="2">
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Título do Plano de Trabalho Bolsista</dt>
@@ -343,7 +362,7 @@
                                         <p style="font-size: 14px">{{ $dadosInscrito->titulo_plano_orientador }}</p>
                                     </dd>
                                 </small>
-                            </th>
+                            </td>
                         </tr>
                     </thead>
                 </table>
@@ -406,7 +425,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício)</dt>
+                                        <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício</dt>
                                     </h6>
                                 </strong>
                                 <small>

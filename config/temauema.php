@@ -150,6 +150,11 @@ return [
 			'route' => 'admin.home'
 		],
 		[
+			'title' => 'Auditoria ',
+			'icon' => 'flaticon-381-search-3',
+			'route' => 'auditoria.index'
+		],
+		[
 			'title' => 'Usuários',
 			'icon' => 'flaticon-381-user-9',
 			'can' => 'Administrador',

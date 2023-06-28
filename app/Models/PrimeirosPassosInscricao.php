@@ -71,9 +71,14 @@ class PrimeirosPassosInscricao extends Model
         return $this->belongsTo(PrimeiroPasso::class, 'primeiropasso_id')->withTrashed();
     }
 
+    public function centros()
+    {
+        return $this->belongsTo(Centro::class,'id');
+    }
+
     public function pp_inscricao_user()
     {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function cpf($cpff)

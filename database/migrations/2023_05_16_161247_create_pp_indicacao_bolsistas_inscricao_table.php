@@ -14,10 +14,15 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
     public function up()
     {
         Schema::create('pp_indicacao_bolsistas_inscricao', function (Blueprint $table) {
-            $table->string('status');
             $table->uuid('pp_i_bolsista_inscricao_id')->unique();
             $table->unsignedBigInteger('pp_i_bolsista_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('nome_bolsista');
+            $table->string('email_bolsista');
+            $table->string('cpf_bolsista');
+            $table->string('telefone_bolsista');
+            $table->json('endereco_bolsista');
+            $table->string('status');
             $table->integer('numero_inscricao');
             $table->unsignedBigInteger('curso_id');
             $table->unsignedBigInteger('centro_id');
@@ -27,6 +32,7 @@ class CreatePpIndicacaoBolsistasInscricaoTable extends Migration
             $table->string('nome_orientador');
             $table->string('telefone_orientador');
             $table->string('email_orientador');
+            $table->string('cpf_orientador');
             $table->unsignedBigInteger('centro_orientador_id');
             $table->string('titulo_projeto_orientador');
             $table->string('titulo_plano_orientador');

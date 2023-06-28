@@ -174,11 +174,7 @@ class PrimeirosPassosInscricaoController extends Controller
     {
 
         $evento = $this->primeiropasso->find($request['primeiropasso_id']);
-        if ($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first() !== null) {
-            alert()->error(config($this->bag['msg'] . '.error.inscricao'));
-            return redirect()->route('primeirospassos.page', ['primeiropasso_id' => $request['primeiropasso_id']]);
-        }
-        //dd($this->primeirospassosinscricao->where('primeiropasso_id', $request['primeiropasso_id'])->where('user_id', Auth::user()->id)->first());
+
         $data_hoje = Carbon::now();
 
         try {
@@ -200,11 +196,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 $projetonome = 'projetopesquisa' . '_' . uniqid(date('HisYmd')) . '.' . $projetoextensao;
                 $dados['projetopesquisa'] = $request['projetopesquisa']->storeAs($projetopath, $projetonome);
 
-                //Parecer Comite
-                // $parecerextensao =  $request['parecercomite']->extension();
-                // $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
-                // $parecernome = 'parecercomite' . '_' . uniqid(date('HisYmd')) . '.' . $parecerextensao;
-                // $dados['parecercomite'] = $request['parecercomite']->storeAs($parecerpath, $parecernome);
+
                 $parecerextensao =  $request['parecercomite'] ? $request['parecercomite']->extension() : null;
                 if ($parecerextensao != null) {
                     $parecerpath = 'PrimeirosPassos/' . Carbon::create($evento->created_at)->format('Y') . '/' . $request['primeiropasso_id'] . '/parecercomite' . '/' . Auth::user()->cpf . '';
@@ -281,6 +273,7 @@ class PrimeirosPassosInscricaoController extends Controller
                 alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
             }
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
@@ -340,32 +333,40 @@ class PrimeirosPassosInscricaoController extends Controller
      * @param  \App\Models\PrimeirosPassosInscricao  $primeirosPassosInscricao
      * @return \Illuminate\Http\Response
      */
-    public function show($primeiropasso_id, $user_id)
+    public function show($primeiropasso_id, $user_id, Request $request)
     {
         //Verificando se o primeiropasso_id existe
         $this->primeiropasso->findOrfail($primeiropasso_id);
 
+
         //Verificando se o user_id existe
         $this->user->findOrfail($user_id);
 
-        $dadosInscrito = $this->primeirospassosinscricao
+        $dadosInscrito = $this->primeirospassosinscricao->with('pp_inscricao_subArea','pp_inscricao_subArea.subArea_grandeArea', 'centros', 'planotrabalho', 'pp_inscricao_user')
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
             ->where('users.id', '=', $user_id)
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
-            ->first();
+            ->paginate(10);
+
+        foreach ($dadosInscrito as $key => $dados) {
+
+            $dados->endereco = json_decode($dados->endereco, true);
+        }
 
         //Transformando Json em array de enderecos
-        $endereco = json_decode($dadosInscrito->endereco, true);
+        // $endereco = json_decode($dadosInscrito->endereco, true);
 
-        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+        // $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
 
-        $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
-            ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
-            ->first();
+        // $planotrabalho = $this->ppinscricao_ptrabalho->join('plano_trabalhos', 'pp_inscricao__ptrabalhos.plano_id', '=', 'plano_trabalhos.plano_id')
+        //     ->where('pp_inscricao__ptrabalhos.passos_inscricao_id', '=', $dadosInscrito->passos_inscricao_id)
+        //     ->first();
 
-        $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
+        // $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
 
-        return view('page.primeirospassos.show', compact('dadosInscrito', 'subArea', 'endereco', 'planotrabalho', 'centro'));
+        // dd($dadosInscrito);
+        $links = $dadosInscrito->appends($request->except('page'));
+        return view('page.primeirospassos.show', compact('dadosInscrito','links'));
     }
 
     /**
