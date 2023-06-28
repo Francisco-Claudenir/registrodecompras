@@ -60,12 +60,20 @@
                                                         @if ($isInscrito)
                                                             <a href="{{ route('primeirospassos.inscricao.show', ['primeiropasso_id' => $primeiropasso->primeiropasso_id, 'user_id' => Auth::user()->id]) }}"
                                                                 class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
+                                                            @if (now()->gte($primeiropasso->data_inicio) && now()->lte($primeiropasso->data_fim))
+                                                                <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso_id' => $primeiropasso->primeiropasso_id]) }}"
+                                                                    class="btn btn-primary btn-xs mb-1">Realizar
+                                                                    Inscrição</a>
+                                                            @else
+                                                                <span class="text-danger"> Não é possível realizar a
+                                                                    inscrição !</span>
+                                                            @endif
                                                         @else
                                                             @if (Auth::check())
 
                                                                 @if (now()->gte($primeiropasso->data_inicio) && now()->lte($primeiropasso->data_fim))
                                                                     <a href="{{ route('primeirospassos.inscricao.create', ['primeiropasso_id' => $primeiropasso->primeiropasso_id]) }}"
-                                                                        class="btn btn-info btn-xs mb-1">Realizar
+                                                                        class="btn btn-primary btn-xs mb-1">Realizar
                                                                         Inscrição</a>
                                                                 @else
                                                                     <span class="text-danger"> Não é possível realizar a
@@ -147,7 +155,8 @@
                                                                     {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
                                                                     {!! $errors->default->first('cpf', '<span style="color:red" class="form-text">:message</span>') !!}
                                                                     <div class="form-group">
-                                                                        <label class="mb-1"><strong>Senha</strong></label>
+                                                                        <label
+                                                                            class="mb-1"><strong>Senha</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="password" name="password"
                                                                                 class="form-control @error('password') is-invalid @enderror"
