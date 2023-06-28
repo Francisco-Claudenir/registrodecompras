@@ -333,7 +333,7 @@ class PrimeirosPassosInscricaoController extends Controller
      * @param  \App\Models\PrimeirosPassosInscricao  $primeirosPassosInscricao
      * @return \Illuminate\Http\Response
      */
-    public function show($primeiropasso_id, $user_id)
+    public function show($primeiropasso_id, $user_id, Request $request)
     {
         //Verificando se o primeiropasso_id existe
         $this->primeiropasso->findOrfail($primeiropasso_id);
@@ -342,16 +342,16 @@ class PrimeirosPassosInscricaoController extends Controller
         //Verificando se o user_id existe
         $this->user->findOrfail($user_id);
 
-        $dadosInscrito = $this->primeirospassosinscricao->with('pp_inscricao_subArea', 'centros', 'planotrabalho', 'pp_inscricao_user')
+        $dadosInscrito = $this->primeirospassosinscricao->with('pp_inscricao_subArea','pp_inscricao_subArea.subArea_grandeArea', 'centros', 'planotrabalho', 'pp_inscricao_user')
             ->join('users', 'users.id', '=', 'primeiros_passos_inscricaos.user_id')
             ->where('users.id', '=', $user_id)
             ->where('primeiros_passos_inscricaos.primeiropasso_id', '=', $primeiropasso_id)
-            ->get();
+            ->paginate(10);
 
-        // foreach ($dadosInscrito as $key => $dados) {
+        foreach ($dadosInscrito as $key => $dados) {
 
-        //     $dados->pp_inscricao_user['endereco'] = json_decode($dados->pp_inscricao_user['endereco'], true);
-        // }
+            $dados->endereco = json_decode($dados->endereco, true);
+        }
 
         //Transformando Json em array de enderecos
         // $endereco = json_decode($dadosInscrito->endereco, true);
@@ -364,7 +364,9 @@ class PrimeirosPassosInscricaoController extends Controller
 
         // $centro = $this->centros->findOrfail($dadosInscrito->centro_id);
 
-        return view('page.primeirospassos.show', compact('dadosInscrito'));
+        // dd($dadosInscrito);
+        $links = $dadosInscrito->appends($request->except('page'));
+        return view('page.primeirospassos.show', compact('dadosInscrito','links'));
     }
 
     /**
