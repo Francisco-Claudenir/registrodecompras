@@ -78,40 +78,45 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
+                                                <h5>Número de Inscrição</h5>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <dl>
-                                                            <dt>Numero de Inscrição</dt>
+                                                            <dt>Nª Inscrição</dt>
                                                             <dd>{{ $dados->numero_inscricao }}</dd>
                                                         </dl>
                                                     </div>
+                                                    <hr>
+                                                </div>
+                                                <h5>Identificação do(a) Bolsista</h5>
+                                                <div class="row">
                                                     <div class="col-6">
                                                         <dl>
-                                                            <dt>Nome Completo</dt>
-                                                            <dd>{{ $dados->nome }}</dd>
+                                                            <dt>Nome completo</dt>
+                                                            <dd>{{ $dados->nome_bolsista }}</dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-6 ">
                                                         <dl>
                                                             <dt>Cpf</dt>
-                                                            <dd class="text-justify">{{ $dados->cpf }}</dd>
+                                                            <dd class="text-justify">{{ $dados->cpf_bolsista }}</dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-6 ">
                                                         <dl>
-                                                            <dt>Email</dt>
-                                                            <dd class="text-justify">{{ $dados->email }}</dd>
+                                                            <dt>E-mail</dt>
+                                                            <dd class="text-justify">{{ $dados->email_bolsista }}</dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Telefone</dt>
-                                                            <dd class="text-justify">{{ $dados->telefone }}</dd>
+                                                            <dd class="text-justify">{{ $dados->telefone_bolsista }}</dd>
                                                         </dl>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    @foreach ($dados->endereco as $key => $item)
+
+
+                                                    @foreach ($dados->endereco_bolsista as $key => $item)
                                                         <div class="col-6">
 
                                                             <dl>
@@ -120,9 +125,8 @@
                                                             </dl>
                                                         </div>
                                                     @endforeach
-                                                </div>
-                                                <hr>
-                                                <div class="row">
+
+
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Número de Identidade</dt>
@@ -167,6 +171,8 @@
                                                             </dd>
                                                         </dl>
                                                     </div>
+                                                </div>
+                                                <div class="row">
                                                     <hr>
                                                     <h5>Identificação do
                                                         Orientador(a)</h5>

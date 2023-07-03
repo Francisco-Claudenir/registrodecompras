@@ -83,20 +83,23 @@
                     </div>
                 </div>
                 <div class="card-body pt-2 pb-0">
-                    <h5>Identificação do Bolsista</h5>
+                    <h5>Número de Inscrição</h5>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Número de Inscrição</dt>
+                            <dt>Nª Inscrição</dt>
                             <dd>{{ $dadosInscrito->numero_inscricao }}</dd>
                         </dl>
+                    </div>
+                    <h5>Identificação do(a) Bolsista</h5>
+                    <div class="col-sm-12">
                         <dl>
-                            <dt>Nome completo do(a) bolsista</dt>
+                            <dt>Nome completo</dt>
                             <dd>{{ $dadosInscrito->nome_bolsista }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Email</dt>
+                            <dt>E-mail</dt>
                             <dd class="text-justify">{{ $dadosInscrito->email_bolsista }}</dd>
                         </dl>
                     </div>
