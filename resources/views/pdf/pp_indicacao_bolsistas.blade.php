@@ -86,7 +86,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Nome do Bolsista</dt>
+                                        <dt style="font-size: 14px">Nome do(a) Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -99,7 +99,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">E-mail do Bolsista</dt>
+                                        <dt style="font-size: 14px">E-mail do(a) Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -111,7 +111,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">CPF do Bolsista</dt>
+                                        <dt style="font-size: 14px">CPF do(a) Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -140,7 +140,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Telefone do Bolsista</dt>
+                                        <dt style="font-size: 14px">Telefone do(a) Bolsista</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -168,19 +168,13 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Número</dt>
+                                        <dt style="font-size: 14px">Bairro</dt>
                                     </h6>
                                 </strong>
                                 <small>
-                                    @if ($endereco['numero'] != null)
-                                        <dd>
-                                            <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
-                                        </dd>
-                                    @else
-                                        <dd>
-                                            <p style="font-size: 14px">Sem Número</p>
-                                        </dd>
-                                    @endif
+                                    <dd>
+                                        <p style="font-size: 14px">{{ $endereco['bairro'] }}</p>
+                                    </dd>
                                 </small>
                             </th>
                             <th>
@@ -198,13 +192,19 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Bairro</dt>
+                                        <dt style="font-size: 14px">Número</dt>
                                     </h6>
                                 </strong>
                                 <small>
-                                    <dd>
-                                        <p style="font-size: 14px">{{ $endereco['bairro'] }}</p>
-                                    </dd>
+                                    @if ($endereco['numero'] != null)
+                                        <dd>
+                                            <p style="font-size: 14px">{{ $endereco['numero'] }}</p>
+                                        </dd>
+                                    @else
+                                        <dd>
+                                            <p style="font-size: 14px">Sem Número</p>
+                                        </dd>
+                                    @endif
                                 </small>
                             </th>
                         </tr>
@@ -277,7 +277,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Nome do Orientador</dt>
+                                        <dt style="font-size: 14px">Nome do Orientador(a)</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -289,7 +289,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Telefone do Orientador</dt>
+                                        <dt style="font-size: 14px">Telefone do Orientador(a)</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -301,7 +301,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">E-mail do Orientador</dt>
+                                        <dt style="font-size: 14px">E-mail do Orientador(a)</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -313,7 +313,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">CPF do Orientador</dt>
+                                        <dt style="font-size: 14px">CPF do Orientador(a)</dt>
                                     </h6>
                                 </strong>
                                 <small>

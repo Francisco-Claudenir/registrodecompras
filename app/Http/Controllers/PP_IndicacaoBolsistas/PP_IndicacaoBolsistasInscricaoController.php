@@ -364,7 +364,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->paginate(10);
 
-
+    
         if ($dadosInscrito == null) {
             alert()->error(config('Você não está inscrito nesse Evento'));
             return redirect()->back();
