@@ -53,11 +53,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'cpf' => ['required', 'string', 'cpf', 'unique:users', 'size:11'],
-            'telefone' => ['required', 'string', 'min:2', 'max:45'],
+            'cpf' => ['required', 'string', 'cpf', 'unique:users', 'size:14'],
+            'telefone' => ['required', 'string', 'size:15'],
             'password' => ['required', 'confirmed', 'string', 'min:8', 'max:255'],
             'endereco' => ['required', 'array'],
-            'endereco.cep' => ['required', 'digits:8'],
+            'endereco.cep' => ['required', 'size:9'],
             'endereco.endereco' => ['required'],
             'endereco.bairro' => ['required']
 
@@ -80,6 +80,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['endereco']['cep'] = str_replace(['.', '-'], '', $data['endereco']['cep']);
+        $data['cpf'] = str_replace(['.', '-'], '', $data['cpf']);
+        $data['telefone'] = str_replace(['(', ')', '.', '-', ' '], '', $data['telefone']);
+        
         return User::create([
             'nome' => $data['nome'],
             'email' => $data['email'],

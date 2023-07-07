@@ -38,7 +38,7 @@
                                 <div class="input-group">
                                     <input type="text" name="cpf"
                                         class="form-control @error('cpf') is-invalid @enderror" value="{{ old('cpf') }}"
-                                        placeholder="Ex : 00000000000" required autocomplete="cpf" autofocus maxlength="11">
+                                        placeholder="000.000.000-00" required autocomplete="cpf" id="cpf">
                                     <div class="input-group-text">
                                         <span class="flaticon-008-credit-card"></span>
                                     </div>
@@ -54,8 +54,8 @@
                                             <div class="input-group">
                                                 <input type="text" name="telefone"
                                                     class="form-control @error('telefone') is-invalid @enderror"
-                                                    value="{{ old('telefone') }}" placeholder="00 00000-00000" required
-                                                    autocomplete="phone" maxlength="11">
+                                                    value="{{ old('telefone') }}" placeholder="(00) 00000-00000" required
+                                                    autocomplete="phone" id="telefone">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-136-phone-call"></span>
                                                 </div>
@@ -67,8 +67,8 @@
                                             <div class="input-group">
                                                 <input type="text" name="endereco[cep]" id="cep"
                                                     class="form-control @error('endereco.cep') is-invalid @enderror"
-                                                    placeholder="0000000" required value="{{ old('endereco.cep') }}"
-                                                    maxlength="8" pattern="/^[0-9]{5}\-[0-9]{3}$/">
+                                                    placeholder="00000-000" required value="{{ old('endereco.cep') }}"
+                                                    pattern="/^[0-9]{5}\-[0-9]{3}$/">
                                                 {{-- <div class="input-group-text"> --}}
                                                 <button type="button" class="input-group-text"
                                                     onclick="pesquisacep(cep.value)">
@@ -101,7 +101,7 @@
                                             <div class="input-group">
                                                 <input type="text" name="endereco[numero]"
                                                     class="form-control @error('endereco.numero') is-invalid @enderror"
-                                                    placeholder="Ex 01"  value="{{ old('endereco.numero') }}">
+                                                    placeholder="Ex 01" value="{{ old('endereco.numero') }}">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-381-location"></span>
                                                 </div>
@@ -200,6 +200,15 @@
     </div>
 @endsection
 @section('scripts')
+
+    <script src="/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#cep").mask("99999-999", {});
+            $("#cpf").mask("999.999.999-99", {});
+            $("#telefone").mask("(99) 99999-9999", {});
+        })
+    </script>
     <script>
         //CEP
         function limpa_formulario_cep() {

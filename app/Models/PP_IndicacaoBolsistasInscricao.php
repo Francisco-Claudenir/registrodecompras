@@ -73,9 +73,27 @@ class PP_IndicacaoBolsistasInscricao extends Model
         return $this->belongsTo(Curso::class,'curso_id');
     }
     
-    public function cpf($cpff)
+    public function cpf($cpf)
     {
-        $cpf = '***.' . substr($cpff, 3, 3) . '.' . substr($cpff, 6, 3) . '-**';
-        return $cpf;
+        $dados = '***.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-**';
+        return $dados;
+    }
+
+    public function mask_telefone($telefone)
+    {
+        $dado = '(' . substr($telefone, 0, 2) . ')' . ' ' . substr($telefone, 2, 5) . '-' . substr($telefone, 7, 5);
+        return $dado;
+    }
+
+    public function mask_cpf($cpf)
+    {
+        $dados = substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+        return $dados;
+    }
+
+    public function mask_cep($cep)
+    {
+        $dados = substr($cep, 0, 5) . '-' . substr($cep, 5, 3);
+        return $dados;
     }
 }
