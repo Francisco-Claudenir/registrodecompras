@@ -99,7 +99,7 @@
                                                     <div class="col-6 ">
                                                         <dl>
                                                             <dt>Cpf</dt>
-                                                            <dd class="text-justify">{{ $dados->cpf_bolsista }}</dd>
+                                                            <dd class="text-justify">{{ $dados->mask_cpf($dados->cpf_bolsista) }}</dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-6 ">
@@ -111,7 +111,7 @@
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Telefone</dt>
-                                                            <dd class="text-justify">{{ $dados->telefone_bolsista }}</dd>
+                                                            <dd class="text-justify">{{ $dados->mask_telefone($dados->telefone_bolsista) }}</dd>
                                                         </dl>
                                                     </div>
 
@@ -185,8 +185,15 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <dl>
+                                                            <dt>CPF</dt>
+                                                            <dd class="text-justify">{{ $dados->mask_cpf($dados->cpf_orientador) }}
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <dl>
                                                             <dt>Telefone</dt>
-                                                            <dd class="text-justify">{{ $dados->telefone_orientador }}
+                                                            <dd class="text-justify">{{ $dados->mask_telefone($dados->telefone_orientador) }}
                                                             </dd>
                                                         </dl>
                                                     </div>
