@@ -12,9 +12,6 @@
                     <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                         <span class="mt-4"><strong>{{ $pp_indicacao_bolsista->nome }}</strong></span>
-                        @if (Auth::user() != null)
-                            > Logado
-                        @endif
                     </div>
                 </div>
             </div>
@@ -59,7 +56,7 @@
                                                     class="form-control @if ($errors->first('cpf_bolsista')) is-invalid @endif"
                                                     placeholder="CPF" required name="cpf_bolsista"
                                                     value="{{ old('cpf_bolsista') }}" autocomplete="cpf" autofocus
-                                                    maxlength="11">
+                                                    id="cpf_bolsista">
                                                 {!! $errors->default->first('cpf_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
@@ -74,9 +71,9 @@
                                                 <label class="form-label fw-normal">Telefone</label>
                                                 <input type="text"
                                                     class="form-control @if ($errors->first('telefone_bolsista')) is-invalid @endif"
-                                                    placeholder="00 00000-0000" required name="telefone_bolsista"
+                                                    placeholder="(99) 99999-9999" required name="telefone_bolsista"
                                                     value="{{ old('telefone_bolsista') }}" autocomplete="phone"
-                                                    maxlength="11">
+                                                    id="telefone_bolsista">
                                                 {!! $errors->default->first('telefone_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
@@ -84,8 +81,8 @@
                                                 <div class="input-group">
                                                     <input type="text" name="endereco_bolsista[cep]" id="cep"
                                                         class="form-control @error('endereco_bolsista.cep') is-invalid @enderror"
-                                                        placeholder="0000000" required
-                                                        value="{{ old('endereco_bolsista.cep') }}" maxlength="9"
+                                                        placeholder="00000-000" required
+                                                        value="{{ old('endereco_bolsista.cep') }}"
                                                         pattern="/^[0-9]{5}\-[0-9]{3}$/">
                                                     {{-- <div class="input-group-text"> --}}
                                                     <button type="button" class="input-group-text"
@@ -208,16 +205,15 @@
                                                     class="form-control @if ($errors->first('cpf_orientador')) is-invalid @endif"
                                                     placeholder="CPF Orientador" required name="cpf_orientador"
                                                     value="{{ old('cpf_orientador') }}" autocomplete="cpf" autofocus
-                                                    maxlength="11">
+                                                    id="cpf_orientador">
                                                 {!! $errors->default->first('cpf_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
                                                 <label class="form-label fw-normal">Telefone</label>
                                                 <input type="text"
                                                     class="form-control form-control-sm @if ($errors->first('telefone_orientador')) is-invalid @endif"
-                                                    placeholder="Telefone" required name="telefone_orientador"
-                                                    minlength="1" maxlength="11"
-                                                    value="{{ old('telefone_orientador') }}">
+                                                    required name="telefone_orientador"
+                                                    value="{{ old('telefone_orientador') }}" id="telefone_orientador" placeholder="(99) 99999-9999">
                                                 {!! $errors->default->first('telefone_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
@@ -496,7 +492,16 @@
     </style>
 @endsection
 @section('scripts')
-
+    <script src="/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#cep").mask("99999-999", {});
+            $("#cpf_bolsista").mask("999.999.999-99", {});
+            $("#cpf_orientador").mask("999.999.999-99", {});
+            $("#telefone_orientador").mask("(99) 99999-9999", {});
+            $("#telefone_bolsista").mask("(99) 99999-9999", {});
+        })
+    </script>
     <script>
         $('#lightgallery2').lightGallery({
             loop: true,
@@ -613,5 +618,4 @@
             }
         }
     </script>
-
 @endsection

@@ -10,6 +10,7 @@ use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
 use App\Models\Centro;
 use App\Models\Curso;
+use App\Models\Modalidade;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -202,6 +203,12 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
 
                 //combina as duas arrays $request e $ids na variavel $dados_inscricao
                 $dados_inscricao = $request->all();
+
+                $dados_inscricao['endereco_bolsista']['cep'] = str_replace(['.', '-'], '', $dados_inscricao['endereco_bolsista']['cep']);
+                $dados_inscricao['cpf_bolsista'] = str_replace(['.', '-'], '', $dados_inscricao['cpf_bolsista']);
+                $dados_inscricao['cpf_orientador'] = str_replace(['.', '-'], '', $dados_inscricao['cpf_orientador']);
+                $dados_inscricao['telefone_bolsista'] = str_replace(['(', ')', '.', '-', ' '], '', $dados_inscricao['telefone_bolsista']);
+                $dados_inscricao['telefone_orientador'] = str_replace(['(', ')', '.', '-', ' '], '', $dados_inscricao['telefone_orientador']);
 
                 //Caminho de arquirvos
                 //Documento Indentidade
@@ -419,7 +426,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
