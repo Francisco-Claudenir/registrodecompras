@@ -14,7 +14,8 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
     public function up()
     {
         Schema::create('pibicindicacao_inscricoes', function (Blueprint $table) {
-            $table->bigIncrements('pi_cinscricao_id')->autoIncrement()->unique();
+            $table->bigIncrements('pi_inscricao_id')->autoIncrement()->unique();
+            $table->unsignedBigInteger('pibicindicacao_id');
 
             //Identificação do bolsista
             $table->string('nome_bolsista');
@@ -57,6 +58,10 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             //Documentação Orientador
             $table->string('termocompromisso_orientador');
             $table->timestamps();
+
+
+            ////Relacionando com a tabela Pibic Indicação
+            $table->foreign('pibicindicacao_id')->references('pibicindicacao_id')->on('pibic_indicacoes');
         });
     }
 
