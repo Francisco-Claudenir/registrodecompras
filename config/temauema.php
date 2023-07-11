@@ -252,19 +252,19 @@ return [
 
 		['header' => 'Eventos'],
 		[
-			'title' => 'Semic',
+			'title' => 'Pibic',
 			'icon' => 'flaticon-381-trash',
 			'submenu' => [
 				[
 					'title' => 'Lista',
 					'icon' => 'flaticon-381-list-1',
-					'route' => 'semic.index'
+					'route' => 'pibic.index'
 
 				],
 				[
 					'title' => 'Adcionar',
 					'icon' => 'flaticon-381-plus',
-					'route' => 'semic.create'
+					'route' => 'pibic.create'
 
 				]
 

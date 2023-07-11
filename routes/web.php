@@ -1,6 +1,5 @@
 <?php
 
-use App\Exports\PrimeirosPassosInscricaoExport;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\Auth\LoginController;
@@ -13,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PibicIndicacaoController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
@@ -20,7 +20,6 @@ use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ZenixadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -51,6 +50,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Semic
     Route::resource('semic', SemicController::class);
+
+    //Pibic
+    Route::resource('pibic', PibicIndicacaoController::class);
 
     //PrimeiroPassos
     Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
