@@ -4,8 +4,10 @@ namespace App\Exports;
 
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Models\Centro;
+use App\Models\Curso;
 use App\Models\PP_IndicacaoBolsistas;
 use App\Models\PP_IndicacaoBolsistasInscricao;
+use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -19,6 +21,8 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 
 class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
 {
@@ -33,41 +37,61 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
     }
     public function collection()
     {
-        $pp_indicacao_bolsista_id = $this->pp_indicacao_bolsista_id;
+        $lista = [];
 
+        $pp_indicacao_bolsista_id = $this->pp_indicacao_bolsista_id;
 
         //Verificando se o id existe
         PP_IndicacaoBolsistas::findOrfail($pp_indicacao_bolsista_id);
 
         //Buscando a dados do inscritos atraves de join
-        $lista = PP_IndicacaoBolsistasInscricao::join('users', 'pp_indicacao_bolsistas_inscricao.user_id', '=', 'users.id')
-            ->join('centros', 'pp_indicacao_bolsistas_inscricao.centro_id', '=', 'centros.id')
-            ->join('cursos', 'pp_indicacao_bolsistas_inscricao.curso_id', '=', 'cursos.id')
-            ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->select([
-                'pp_indicacao_bolsistas_inscricao.numero_inscricao',
-                'users.nome',
-                'users.email',
-                'users.cpf',
-                'users.telefone',
-                'centros.centros',
-                'cursos.cursos',
-                'pp_indicacao_bolsistas_inscricao.nome_orientador',
-                'pp_indicacao_bolsistas_inscricao.email_orientador',
-                'pp_indicacao_bolsistas_inscricao.telefone_orientador',
-                'pp_indicacao_bolsistas_inscricao.centro_orientador_id',
-            ])
+        $inscricoes = PP_IndicacaoBolsistasInscricao::where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->get();
 
-        
-        for ($i=0; $i < count($lista); $i++) { 
-            
-            $centro = Centro::findOrfail($lista[$i]['centro_orientador_id']);
+        foreach ($inscricoes as $key => $dados) {
 
-            $lista[$i]['centro_orientador_id'] = $centro['centros'];
+            $endereco = json_decode($dados['endereco_bolsista'], true);
+
+            $curso = Curso::findOrfail($dados['curso_id']);
+            $centro_candidato = Centro::findOrfail($dados['centro_id']);
+            $centro_orientador = Centro::findOrfail($dados['centro_orientador_id']);
+
+            $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
+            $lista[$key]['nome_bolsista'] = $dados['nome_bolsista'];
+            $lista[$key]['email_bolsista'] = $dados['email_bolsista'];
+            $lista[$key]['cpf_bolsista'] = $dados['cpf_bolsista'];
+            $lista[$key]['telefone_bolsista'] = $dados['telefone_bolsista'];
+            $lista[$key]['cep'] = $endereco['cep'];
+            $lista[$key]['endereco'] = $endereco['endereco'];
+            $lista[$key]['numero'] = $endereco['numero'];
+            $lista[$key]['bairro'] = $endereco['bairro'];
+            $lista[$key]['curso_id'] = $curso['cursos'];
+            $lista[$key]['centro_id'] = $centro_candidato['centros'];
+            $lista[$key]['numero_identidade'] = $dados['numero_identidade'];
+            $lista[$key]['documento_identidade'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['documento_identidade'])]);
+            $lista[$key]['documento_cpf'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['documento_cpf'])]);
+            $lista[$key]['nome_orientador'] = $dados['nome_orientador'];
+            $lista[$key]['telefone_orientador'] = $dados['telefone_orientador'];
+            $lista[$key]['email_orientador'] = $dados['email_orientador'];
+            $lista[$key]['cpf_orientador'] = $dados['cpf_orientador'];
+            $lista[$key]['centro_orientador_id'] = $centro_orientador['centros'];
+            $lista[$key]['titulo_projeto_orientador'] = $dados['titulo_projeto_orientador'];
+            $lista[$key]['titulo_plano_orientador'] = $dados['titulo_plano_orientador'];
+            $lista[$key]['historico_escolar'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['historico_escolar'])]);
+            $lista[$key]['declaracao_vinculo'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['declaracao_vinculo'])]);
+            $lista[$key]['termo_compromisso_bolsista'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['termo_compromisso_bolsista'])]);
+            $lista[$key]['declaracao_negativa_vinculo'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['declaracao_negativa_vinculo'])]);
+            $lista[$key]['curriculo'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['curriculo'])]);
+            $lista[$key]['declaracao_conjuta_estagio'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['declaracao_conjuta_estagio'])]);
+            $lista[$key]['agencia_banco'] = $dados['agencia_banco'];
+            $lista[$key]['numero_conta_corrente'] = $dados['numero_conta_corrente'];
+            $lista[$key]['comprovante_conta_corrente'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['comprovante_conta_corrente'])]);
+            $lista[$key]['termo_compromisso_orientador'] = route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['termo_compromisso_orientador'])]);
         }
-        
-        return $lista;
+
+        $colecao = collect($lista);
+
+        return $colecao;
     }
 
     //    public function drawings()
@@ -76,7 +100,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
     //        $drawing->setName('Logo');
     //        $drawing->setDescription('This is my logo');
     //        $drawing->setPath(public_path('/images/uema/logo_uema.png'));
-    //        $drawing->setHeight(90);
+    //        $drawing->setHeight(90);all
     //        $drawing->setCoordinates('A1');
 
     //        return $drawing;
@@ -86,24 +110,50 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         // Defina os nomes personalizados para as colunas
         return [
             'N° Inscrição',
-            'Nome',
-            'Email',
-            'Cpf',
-            'Telefone',
+            'Nome Bolsista',
+            'E-mail Bolsista',
+            'Cpf Bolsista',
+            'Telefone Bolsista',
+            'Cep',
+            'Endereço',
+            'Numero',
+            'Bairro',
             'Centro',
             'Curso',
+            'Numero Identidade',
+            'Doocumento Identidade',
+            'Documento Cpf',
             'Nome Orientador',
-            'Email Orientador',
             'Telefone Orientador',
-            'Centro Orientador'
-            // Outras colunas...
+            'E-mail Orientador',
+            'Cpf Orientador',
+            'Centro Orientador',
+            'Título do Projeto do
+            Orientador',
+            'Título do Plano de Trabalho
+            Bolsista',
+            'Histórico Escolar',
+            'Declaração de Vínculo',
+            'Termo de Compromisso do Bolsista',
+            'Declaração Negativa de Vínculo
+            Empregatício',
+            'Currículo',
+            'Declaração Conjuta de Estágio',
+            'Agência do Banco do Brasil',
+            'Número da Conta Corrente do Banco do
+            Brasil',
+            'Comprovante de Conta Corrente do Banco
+            do
+            Brasil',
+            'Termo de Compromisso'
         ];
     }
+
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-
 
                 $event->sheet->insertNewRowBefore(1, 7);
                 $lastColumn = $event->sheet->getHighestColumn();
@@ -119,6 +169,30 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
                 $event->sheet->getStyle('A1:I7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+
+                foreach ($event->sheet->getColumnIterator('H') as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        // Verifica se a célula não está vazia e contém '://'
+                        if ($cell->getValue() != "" && str_contains($cell->getValue(), '://')) {
+                            // Cria um objeto Hyperlink com a URL e o texto do link
+                            $hyperlink = new Hyperlink($cell->getValue(), "Arquivo");
+
+                            // Define o hyperlink na célula
+                            $event->sheet->getCell($cell->getCoordinate())->setHyperlink($hyperlink);
+
+                            // Define o valor da célula como "Arquivo Teste"
+                            $event->sheet->getCell($cell->getCoordinate())->setValue("Arquivo");
+
+                            // Aplica estilo ao link
+                            $event->sheet->getStyle($cell->getCoordinate())->applyFromArray([
+                                'font' => [
+                                    'color' => ['rgb' => '0000FF'],
+                                    'underline' => 'single'
+                                ]
+                            ]);
+                        }
+                    }
+                }
             },
         ];
     }
@@ -165,7 +239,6 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
             'C' => 55,
             'D' => 20,
             'E' => 20,
-
         ];
     }
 }
