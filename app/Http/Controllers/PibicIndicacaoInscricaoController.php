@@ -2,20 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PibicIndicacao;
 use App\Models\PibicIndicacaoInscricao;
 use Illuminate\Http\Request;
 
 class PibicIndicacaoInscricaoController extends Controller
 {
+
+    protected $pibicIndicacao;
+    protected $pibicIndicacaoInscricao;
+    // protected $bag = [
+    //     'view' => 'admin.pibic',
+    //     'route' => 'pibic',
+    //     'msg' => 'temauema.msg.register'
+    // ];
+
+    public function __construct(PibicIndicacao $pibicIndicacao, PibicIndicacaoInscricao $pibicIndicacaoInscricao)
+    {
+        $this->pibicIndicacao = $pibicIndicacao;
+        $this->pibicIndicacaoInscricao = $pibicIndicacaoInscricao;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    // public function index($pibic_indicacao_id, $tipo, Request $request)
+    // {
+    //     //verificando se existe
+    //     $pibic_indicacao = $this->pibicIndicacao->where('tipo','=', $tipo)->findOrfail($pibic_indicacao_id);
+
+    //     $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes','pibicindicacao_inscricoes.pibicindicacao_id','=','pibic_indicacoes.pibicindicacao_id')
+    //                                                     ->where('pibicindicacao_inscricoes.pibicindicacao_id', '=', $pibic_indicacao_id)
+    //                                                     ->where('pibic_indicacoes.tipo', '=', $tipo)
+    //                                                     ->get();
+
+
+    //     return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
+    // }
 
     /**
      * Show the form for creating a new resource.

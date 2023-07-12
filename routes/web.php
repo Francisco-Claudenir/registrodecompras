@@ -119,23 +119,23 @@ Route::prefix('site')->group(function () {
 //Inscrições de Eventos -  VIEW CANDIDATOS PRIMEIROS PASSOS
 Route::prefix('primeirospassos')->group(function () {
     Route::get('/{primeiropasso_id}', [PrimeiroPassoController::class, 'page'])->name('primeirospassos.page');
-    Route::get('/inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create');
-    Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store');
+    Route::get('/inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'create'])->name('primeirospassos.inscricao.create')->middleware(['auth']);
+    Route::post('/inscricao', [PrimeirosPassosInscricaoController::class, 'store'])->name('primeirospassos.inscricao.store')->middleware(['auth']);
     Route::get('/lista-inscricao/{primeiropasso_id}', [PrimeirosPassosInscricaoController::class, 'index'])->name('primeirospassos.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-    Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf');
-    Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow');
-    Route::get('/verinscricao/{primeiropasso_id}/{user_id}', [PrimeirosPassosInscricaoController::class, 'show'])->name('primeirospassos.inscricao.show');
+    Route::get('/pdf/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'gerarPDF'])->name('primeirospassos.inscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [PrimeirosPassosInscricaoController::class, 'docshow'])->name('primeirospassos.inscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{primeiropasso_id}/{user_id}', [PrimeirosPassosInscricaoController::class, 'show'])->name('primeirospassos.inscricao.show')->middleware(['auth']);
 });
 
 //Inscrições de Eventos -  VIEW CANDIDATOS PP_IndicacaoBolsistas
 Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasController::class, 'page'])->name('pp-i-bolsistas.page');
-    Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create');
-    Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store');
-    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index');
-    Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf');
-    Route::get('/docshow/{diretorio}', [PP_IndicacaoBolsistasInscricaoController::class, 'docshow'])->name('pp-i-bolsistas-inscricao.docshow');
-    Route::get('/verinscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'show'])->name('pp-i-bolsistas-inscricao.show');
+    Route::get('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'create'])->name('pp-i-bolsistas-inscricao.create')->middleware(['auth']);
+    Route::post('/inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'store'])->name('pp-i-bolsistas-inscricao.store')->middleware(['auth']);
+    Route::get('/lista-inscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'index'])->name('pp-i-bolsistas-inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [PP_IndicacaoBolsistasInscricaoController::class, 'docshow'])->name('pp-i-bolsistas-inscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'show'])->name('pp-i-bolsistas-inscricao.show')->middleware(['auth']);
 });
 
 Route::post('/getcursos', [CursoController::class, 'getCurso'])->name('getCurso');
