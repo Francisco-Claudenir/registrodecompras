@@ -3,7 +3,7 @@
     'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - Inscrição')
 @section('content-header')
     <div class="container-fluid ">
         <div class="card">

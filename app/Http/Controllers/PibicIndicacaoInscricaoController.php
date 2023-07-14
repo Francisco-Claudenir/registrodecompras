@@ -29,10 +29,19 @@ class PibicIndicacaoInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    // public function index($pibic_indicacao_id, $tipo, Request $request)
+    // {
+    //     //verificando se existe
+    //     $pibic_indicacao = $this->pibicIndicacao->where('tipo','=', $tipo)->findOrfail($pibic_indicacao_id);
+
+    //     $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes','pibicindicacao_inscricoes.pibicindicacao_id','=','pibic_indicacoes.pibicindicacao_id')
+    //                                                     ->where('pibicindicacao_inscricoes.pibicindicacao_id', '=', $pibic_indicacao_id)
+    //                                                     ->where('pibic_indicacoes.tipo', '=', $tipo)
+    //                                                     ->get();
+
+
+    //     return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
+    // }
 
     /**
      * Show the form for creating a new resource.
