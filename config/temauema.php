@@ -258,13 +258,13 @@ return [
 				[
 					'title' => 'Lista',
 					'icon' => 'flaticon-381-list-1',
-					'route' => 'pibic.index'
+					'route' => 'pibic-indicacao.index'
 
 				],
 				[
 					'title' => 'Adcionar',
 					'icon' => 'flaticon-381-plus',
-					'route' => 'pibic.create'
+					'route' => 'pibic-indicacao.create'
 
 				]
 
@@ -313,6 +313,12 @@ return [
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-user',
+			''
+		],
+		[
+			'title' => 'Pibic Indicação',
+			'icon' => 'flaticon-381-user',
+			'route' => 'site.pibic-indicacao'
 		],
 		[
 			'title' => 'Primeiros Passos',
