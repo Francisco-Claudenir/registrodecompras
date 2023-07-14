@@ -16,6 +16,7 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
         Schema::create('pibicindicacao_inscricoes', function (Blueprint $table) {
             $table->bigIncrements('pi_inscricao_id')->autoIncrement()->unique();
             $table->unsignedBigInteger('pibicindicacao_id');
+            $table->unsignedBigInteger('user_id');
 
             //Identificação do bolsista
             $table->string('nome_bolsista');
@@ -62,6 +63,9 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
 
             ////Relacionando com a tabela Pibic Indicação
             $table->foreign('pibicindicacao_id')->references('pibicindicacao_id')->on('pibic_indicacoes');
+
+            ////Relacionando com a tabela User
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
