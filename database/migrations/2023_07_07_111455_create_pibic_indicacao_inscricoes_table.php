@@ -14,20 +14,22 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
     public function up()
     {
         Schema::create('pibicindicacao_inscricoes', function (Blueprint $table) {
-            $table->bigIncrements('pi_inscricao_id')->autoIncrement()->unique();
+            $table->uuid('pi_inscricao_id')->unique();
+            $table->integer('numero_inscricao');
+            $table->string('status');
             $table->unsignedBigInteger('pibicindicacao_id');
             $table->unsignedBigInteger('user_id');
 
             //Identificação do bolsista
             $table->string('nome_bolsista');
-            $table->json('endereco');
-            $table->string('curso');
-            $table->string('centro');
-            $table->string('telefone');
-            $table->string('identidade');
-            $table->string('doc_identidade');
-            $table->string('cpf');
-            $table->string('doc_cpf');
+            $table->json('endereco_bolsista');
+            $table->string('centro_bolsista');
+            $table->string('curso_bolsista');
+            $table->string('telefone_bolsista');
+            $table->string('numero_identidade');
+            $table->string('documento_identidade');
+            $table->string('cpf_bolsista');
+            $table->string('documento_cpf');
 
             //Identificação do Orientador
             $table->string('nome_orientador');
@@ -53,8 +55,8 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
 
             //Informações Bancarias
             $table->string('agencia');
-            $table->string('conta');
-            $table->string('comprovante');
+            $table->string('conta_corrente');
+            $table->string('comprovante_conta_corrente');
 
             //Documentação Orientador
             $table->string('termocompromisso_orientador');
@@ -66,6 +68,13 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
 
             ////Relacionando com a tabela User
             $table->foreign('user_id')->references('id')->on('users');
+
+            ////Relacionando com a tabela Curso
+            $table->foreign('curso_bolsista')->references('id')->on('cursos');
+
+            ////Relacionando com a tabela Centro
+            $table->foreign('centro_orientador')->references('id')->on('centros');
+            $table->foreign('centro_bolsista')->references('id')->on('centros');
         });
     }
 
