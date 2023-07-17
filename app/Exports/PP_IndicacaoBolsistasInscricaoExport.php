@@ -46,7 +46,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
 
         //Buscando a dados do inscritos atraves de join
         $inscricoes = PP_IndicacaoBolsistasInscricao::where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
-            ->get();
+            ->orderby('numero_inscricao', 'asc')->get();
 
         foreach ($inscricoes as $key => $dados) {
 
@@ -121,30 +121,24 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
             'Centro',
             'Curso',
             'Numero Identidade',
-            'Doocumento Identidade',
+            'Documento Identidade',
             'Documento Cpf',
             'Nome Orientador',
             'Telefone Orientador',
             'E-mail Orientador',
             'Cpf Orientador',
             'Centro Orientador',
-            'Título do Projeto do
-            Orientador',
-            'Título do Plano de Trabalho
-            Bolsista',
+            'Título do Projeto do Orientador',
+            'Título do Plano de Trabalho Bolsista',
             'Histórico Escolar',
             'Declaração de Vínculo',
             'Termo de Compromisso do Bolsista',
-            'Declaração Negativa de Vínculo
-            Empregatício',
+            'Declaração Negativa de Vínculo Empregatício',
             'Currículo',
             'Declaração Conjuta de Estágio',
             'Agência do Banco do Brasil',
-            'Número da Conta Corrente do Banco do
-            Brasil',
-            'Comprovante de Conta Corrente do Banco
-            do
-            Brasil',
+            'Número da Conta Corrente do Banco do Brasil',
+            'Comprovante de Conta Corrente do Banco do Brasil',
             'Termo de Compromisso'
         ];
     }
@@ -155,7 +149,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         return [
             AfterSheet::class => function (AfterSheet $event) {
 
-                $event->sheet->insertNewRowBefore(1, 7);
+                $event->sheet->insertNewRowBefore(1, 10);
                 $lastColumn = $event->sheet->getHighestColumn();
                 $lastColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($lastColumn);
 
@@ -163,12 +157,12 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
                 $imagePath = public_path('/images/uema/topo-ppg.png');
                 $drawing = new Drawing();
                 $drawing->setPath($imagePath);
-                $drawing->setCoordinates('C1');
-                $drawing->setWidth($lastColumnIndex * 37);
+                $drawing->setCoordinates('A1');
+                $drawing->setWidth($lastColumnIndex * 27);
                 $drawing->setWorksheet($event->sheet->getDelegate());
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
-                $event->sheet->getStyle('A1:I7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+                $event->sheet->getStyle('A1:AE10')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
 
                 foreach ($event->sheet->getColumnIterator('H') as $row) {
                     foreach ($row->getCellIterator() as $cell) {
@@ -216,6 +210,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         ]);
         $sheet->getRowDimension(1)->setRowHeight(25);
         $sheet->getStyle('A1:Z1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('AA1:AZ1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
 
 
         // Aplicar estilo para as demais colunas
@@ -230,6 +225,15 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
             ]);
             $sheet->getStyle("A{$row}:Z{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
         }
+        for ($row = 2; $row <= $lastRow; $row++) {
+            $sheet->getRowDimension($row)->setRowHeight(20);
+            $sheet->getStyle("AA{$row}:AZ{$row}")->applyFromArray([
+                'font' => [
+                    'size' => 12,
+                ]
+            ]);
+            $sheet->getStyle("AA{$row}:AZ{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        }
     }
     public function columnWidths(): array
     {
@@ -239,6 +243,11 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
             'C' => 55,
             'D' => 20,
             'E' => 20,
+            // 'T' => 75,
+            // 'U' => 65,
+            // 'Y' => 85,
+            // 'AC' => 65,
+            // 'AD' => 75,
         ];
     }
 }

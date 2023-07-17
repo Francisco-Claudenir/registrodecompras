@@ -17,7 +17,7 @@
                             <div class="d-flex">
                                 <div class="me-4 text-dark">
                                     <p class="fs-12 mb-4 op6">O Programa Primeiros Passos na Ciência é voltado para o
-                                        desenvolvimento do pensamento cienífico e da iniciação à pesquisa de estudantes de
+                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes de
                                         graduação do ensino superior</p>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                             <div class="d-flex">
                                 <div class="me-4 text-dark">
                                     <p class="fs-12 mb-4 op6">O Programa Primeiros Passos Indicação Bolsista é voltado para o
-                                        desenvolvimento do pensamento cienífico e da iniciação à pesquisa de estudantes de
+                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes de
                                         graduação do ensino superior</p>
                                 </div>
                             </div>

@@ -3,22 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\PibicIndicacao;
+use App\Models\PibicIndicacaoInscricao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PibicIndicacaoController extends Controller
 {
 
-    protected $pibicIndicacao;
+    protected $pibicIndicacao, $pibicIndicacaoInscricao;
     protected $bag = [
         'view' => 'admin.pibic',
         'route' => 'pibic',
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PibicIndicacao $pibicIndicacao)
+    public function __construct(PibicIndicacao $pibicIndicacao, PibicIndicacaoInscricao $pibicIndicacaoInscricao)
     {
         $this->pibicIndicacao = $pibicIndicacao;
+        $this->pibicIndicacaoInscricao = $pibicIndicacaoInscricao;
     }
     /**
      * Display a listing of the resource.
@@ -39,11 +42,40 @@ class PibicIndicacaoController extends Controller
         //
     }
 
+    //Index para User
+    public function site()
+    {
+        $pibics = $this->pibicIndicacao->where('visivel', '=', 1)->orderBy('created_at', 'desc')->paginate(10);
+        return view('page.pibic_indicacao.site', compact('pibics'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    //Pagina do Evento Para o User
+    public function page($pibicindicacao_id)
+    {
+
+        $pindicacao = $this->pibicIndicacao->findOrfail($pibicindicacao_id);
+
+        if ($pindicacao->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+
+        if (Auth::check()) {
+            $isInscrito = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', $pindicacao->pibicindicacao_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
+
+        return view('page.pibic_indicacao.page', compact('pindicacao', 'isInscrito'));
+    }
+
     public function create()
     {
 

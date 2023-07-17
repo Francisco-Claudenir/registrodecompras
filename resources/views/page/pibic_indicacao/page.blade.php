@@ -1,20 +1,20 @@
 @extends('layout.page', [
     'layout' => 'evt',
-    'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - ' . $pp_indicacao_bolsista->nome)
+@section('title', ' - ' . $pindicacao->nome)
 @section('content-header')
     @include('sweet::alert')
+
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/uema/topo-ppg.png') }}" alt="" srcset="" width="full"
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full"
                         height="full">
                     <div class="pt-4 pb-4">
-                        <h3 class="mt-4 text-dark"><strong>{{ $pp_indicacao_bolsista->nome }}</strong></h3>
+                        <h3 class="mt-4 text-dark"><strong>{{ $pindicacao->nome }}</strong></h3>
                     </div>
                 </div>
             </div>
@@ -31,14 +31,14 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <h4 class="m-b-0">
-                                                        {{ date('d/m/Y', strtotime($pp_indicacao_bolsista->data_inicio)) }}
+                                                        {{ date('d/m/Y', strtotime($pindicacao->data_inicio)) }}
                                                     </h4>
                                                     <span>Data
                                                         início</span>
                                                 </div>
                                                 <div class="col">
                                                     <h4 class="m-b-0">
-                                                        {{ date('d/m/Y', strtotime($pp_indicacao_bolsista->data_fim)) }}
+                                                        {{ date('d/m/Y', strtotime($pindicacao->data_fim)) }}
                                                     </h4>
                                                     <span>Data
                                                         fim</span>
@@ -59,10 +59,10 @@
                                                     <div class="col-6">
 
                                                         @if ($isInscrito)
-                                                            <a href="{{ route('pp-i-bolsistas-inscricao.show', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
+                                                            <a href="{{ route('pibicindicacao.inscricao.show', ['pibicindicacao_id' => $pindicacao->pibicindicacao_id, 'user_id' => Auth::user()->id]) }}"
                                                                 class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
-                                                            @if (now()->gte($pp_indicacao_bolsista->data_inicio) && now()->lte($pp_indicacao_bolsista->data_fim))
-                                                                <a href="{{ route('pp-i-bolsistas-inscricao.create', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
+                                                            @if (now()->gte($pindicacao->data_inicio) && now()->lte($pindicacao->data_fim))
+                                                                <a href="{{ route('pibicindicacao.inscricao.create', ['pibicindicacao_id' => $pindicacao->pibicindicacao_id]) }}"
                                                                     class="btn btn-primary btn-xs mb-1">Realizar
                                                                     Inscrição</a>
                                                             @else
@@ -72,9 +72,9 @@
                                                         @else
                                                             @if (Auth::check())
 
-                                                                @if (now()->gte($pp_indicacao_bolsista->data_inicio) && now()->lte($pp_indicacao_bolsista->data_fim))
-                                                                    <a href="{{ route('pp-i-bolsistas-inscricao.create', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista->pp_i_bolsista_id]) }}"
-                                                                        class="btn btn-info btn-xs mb-1">Realizar
+                                                                @if (now()->gte($pindicacao->data_inicio) && now()->lte($pindicacao->data_fim))
+                                                                    <a href="{{ route('pibicindicacao.inscricao.create', ['pibicindicacao_id' => $pindicacao->pibicindicacao_id]) }}"
+                                                                        class="btn btn-primary btn-xs mb-1">Realizar
                                                                         Inscrição</a>
                                                                 @else
                                                                     <span class="text-danger"> Não é possível realizar a
@@ -89,7 +89,7 @@
                                                             <div class="dropdown custom-dropdown">
                                                                 <button type="button" class="btn btn-xs btn-outline-info"
                                                                     data-bs-toggle="dropdown"
-                                                                    aria-expanded="true">{{ Auth::user()->nome }}
+                                                                    aria-expanded="true">{{ explode(' ', Auth::user()->nome)[0] }}
                                                                     <i class="fa fa-angle-down ms-3"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-end"
@@ -153,7 +153,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    {{-- {!! $errors->first('usuario', '<span style="color:red" class="form-text">:message</span>') !!} --}}
                                                                     {!! $errors->default->first('cpf', '<span style="color:red" class="form-text">:message</span>') !!}
                                                                     <div class="form-group">
                                                                         <label
@@ -326,7 +325,7 @@
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
                                                     <h4 class="text-primary">Descrição</h4>
-                                                    <p class="mb-2">{{ $pp_indicacao_bolsista->descricao }}</p>
+                                                    <p class="mb-2">{{ $pindicacao->descricao }}</p>
                                                 </div>
                                             </div>
 

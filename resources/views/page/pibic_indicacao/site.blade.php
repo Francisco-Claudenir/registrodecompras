@@ -1,35 +1,39 @@
 @extends('layout.page', [
     'layout' => 'evt',
-    'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Primeiros Passos Indicação Bolsista')
+@section('title', ' - Pibic')
 @section('content-header')
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full"
+                        height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+@endsection
+@section('content')
+    @include('sweet::alert')
+    <div class="container-fluid vh- ">
         <div class="card">
-            @foreach ($pp_indicacao_bolsistas as $dados)
-                <div class="col-xl-12 p-lg-4 ">
+            @foreach ($pibics as $dados)
+                <div class="col-xl-12 p-lg-4 p-2">
                     <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-12 col-sm-12">
+                        <div class="col-lg-7 col-md-9 col-sm-10">
                             <div class="card border shadow-sm">
-                                <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" alt="" class="img-fluid w-100 rounded"
-                                    width="100" height="100">
+                                <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" alt=""
+                                    class="img-fluid w-100 rounded" width="80" height="60">
                                 <div class="card-body">
 
                                     <h3 class="text-black">{{ $dados->nome }}</h3>
 
                                     <p>{{ $dados->descricao }}</p>
-                                    <a class="btn btn-info"
-                                        href="{{ route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id]) }}">Ver
+                                    <a class="btn btn-info" href="{{ route('pibic.page',['pibicindicacao_id'=> $dados->pibicindicacao_id])}}">Ver
                                         Mais</a>
                                 </div>
                             </div>
@@ -56,12 +60,4 @@
     </style>
 @endsection
 @section('scripts')
-
-    <script>
-        $('#lightgallery2').lightGallery({
-            loop: true,
-            thumbnail: true,
-            exThumbImage: 'data-exthumbimage'
-        });
-    </script>
 @endsection
