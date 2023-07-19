@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layout.page',[
+    'layout' => 'auth',
+])
+
+@section('title', ' - Recuperar Senha')
 
 @section('content')
 <div class="container">
