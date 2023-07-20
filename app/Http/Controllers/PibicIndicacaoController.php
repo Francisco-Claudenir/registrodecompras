@@ -14,7 +14,7 @@ class PibicIndicacaoController extends Controller
     protected $pibicIndicacao, $pibicIndicacaoInscricao;
     protected $bag = [
         'view' => 'admin.pibic',
-        'route' => 'pibic',
+        'route' => 'pibic-indicacao',
         'msg' => 'temauema.msg.register'
     ];
 
