@@ -21,11 +21,12 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->unsignedBigInteger('user_id');
 
             //Identificação do bolsista
-            $table->string('nome_bolsista');
+            $table->string('nome_bolsista');                         
             $table->json('endereco_bolsista');
-            $table->string('centro_bolsista');
-            $table->string('curso_bolsista');
+            $table->unsignedBigInteger('curso_bolsista');
+            $table->unsignedBigInteger('centro_bolsista');
             $table->string('telefone_bolsista');
+            $table->string('email_bolsista');
             $table->string('numero_identidade');
             $table->string('documento_identidade');
             $table->string('cpf_bolsista');
@@ -33,9 +34,9 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
 
             //Identificação do Orientador
             $table->string('nome_orientador');
-            $table->string('cpf_orientador');
-            $table->string('centro_orientador');
             $table->string('telefone_orientador');
+            $table->string('cpf_orientador');
+            $table->unsignedBigInteger('centro_orientador');
             $table->string('email_orientador');
             $table->string('tituloprojeto_orientador');
             $table->string('tituloplano_bolsista');
@@ -47,14 +48,14 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->string('declaracao_vinculo');
             $table->string('termocompromisso_bolsista');
             $table->string('termocompromissobolsista_fapema');
-            $table->string('declaracaoempregaticio');
+            $table->string('declaracaonegativa_vinculo');
             $table->string('declaracaoempregaticio_fapema');
             $table->string('curriculo_lattes');
             $table->string('declaracao_estagio');
             $table->string('doc_comprobatorio');
 
             //Informações Bancarias
-            $table->string('agencia');
+            $table->string('agencia_banco');
             $table->string('conta_corrente');
             $table->string('comprovante_conta_corrente');
 

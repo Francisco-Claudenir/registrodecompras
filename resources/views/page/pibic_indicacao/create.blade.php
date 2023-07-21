@@ -42,6 +42,16 @@
 @endsection
 @section('css')
     <style>
+        .bootstrap-select .btn {
+            height: 3.5rem !important;
+        }
+
+        @media (max-width: 1402px) {
+            .bootstrap-select .btn {
+                height: 2.5rem !important;
+            }
+        }
+
         .form-control::-webkit-file-upload-button {
             height: 55px !important;
         }
@@ -80,7 +90,7 @@
     <script>
         $('.curso').hide();
 
-        $('select[name=centro_id]').change(function() {
+        $('select[name=centro_bolsista]').change(function() {
 
             var centro = $(this).val();
 
@@ -97,16 +107,17 @@
                 data: dados,
                 dataType: 'json',
                 beforeSend: function() {
-                    $('select[name=curso_id]').append('<option>Carregando</option>')
+                    $('select[name=curso_bolsista]').append('<option>Carregando</option>')
                 },
                 success: function(cursos) {
 
-                    $('select[name=curso_id]').empty();
-                    $('select[name=curso_id]').append('<option value="">Selecione o curso</option>');
+                    $('select[name=curso_bolsista]').empty();
+                    $('select[name=curso_bolsista]').append(
+                        '<option value="">Selecione o curso</option>');
 
                     $.each(cursos, function(key, value) {
                         console.log(key, value);
-                        $('select[name=curso_id]').append('<option value="' + value.id +
+                        $('select[name=curso_bolsista]').append('<option value="' + value.id +
                             '">' + value.cursos + '</option>');
                     });
 
