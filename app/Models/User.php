@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\AuditoriaObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,6 +32,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(AuditoriaObserver::class);
+
+    }
+    
     public function user_pp_i_b_inscricao()
     {
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'id')->withTrashed();

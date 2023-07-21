@@ -10,9 +10,9 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-    
+
                     <h4 class="card-title">Lista Usuários</h4>
-    
+
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -28,7 +28,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example5" class="table table-striped table-bordered table-hover table-responsive-sm mb-0" style="min-width: 845px">
+                            <table id="example5"
+                                class="table table-striped table-bordered table-hover table-responsive-sm mb-0"
+                                style="min-width: 845px">
                                 <thead>
                                     <tr>
                                         <th>
@@ -62,12 +64,57 @@
 
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ route('users.edit', ['user' => $user->id],'edit') }}"
+                                                    <a href="{{ route('users.edit', ['user' => $user->id], 'edit') }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                             class="fas fa-pencil-alt"></i></a>
+                                                    <button type="button" class="btn btn-info shadow btn-xs sharp me-1"
+                                                        data-bs-toggle="modal" data-bs-target="#modal-resetpass-{{ $user->id }}"><i
+                                                        class="fas fa-key"></i></button>
                                                 </div>
                                             </td>
+
                                         </tr>
+
+                                        <!-- Modal ResetPass -->
+                                        <div class="modal fade " id="modal-resetpass-{{ $user->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Resetar Senha
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body justify-content-center">
+                                                        <div class="row">
+                                                            <strong class="pr-1">Funcionário : </strong>
+                                                            <p> {{ $user->nome }}</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <strong class="pr-1">CPF : </strong>
+                                                            <p> {{ $user->cpf }}</p>
+                                                        </div>
+                                                        <strong>
+                                                            Resetar senha deste usuário ?
+                                                        </strong>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-dismiss="modal">Não</button>
+                                                        <form action="{{ route('user.passreset', $user->id) }}"
+                                                            class="form-horizontal" method="POST">
+                                                            @csrf
+                                                            @method('put')
+                                                            <button type="submit" class="btn btn-info">Sim </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Modal ResetPass -->
                                     @endforeach
                                 </tbody>
                             </table>

@@ -88,6 +88,43 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function resetPass(Request $request, $id)
+    {
+        if (!$usuario = $this->user->find($id))
+        {
+            //Se não encontrar o ID de usuário, retorna ao index com mensagem de erro
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
+
+        $senhapadrao = '123456789';
+
+        DB::beginTransaction();
+        
+        try {
+            $this->user->find($id)->update([
+                'password' => Hash::make($senhapadrao)
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            //Se der erro, retorna ao index de funcionário com mensagem de erro
+            toastr()->error('Erro ao resetar senha de funcionário!');
+            return redirect()->back();
+        }
+            //Após atualizado, retorna ao index de funcionário com mensagem de sucesso
+            alert()->error(config($this->bag['msg'] . '.success.update'));
+            return redirect()->route($this->bag['route'] . '.' . 'index');
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $perfis = $this->perfil->get();
@@ -109,7 +146,7 @@ class UserController extends Controller
         try {
             $user = $this->user->findOrfail($id);
             $request['endereco'] = json_encode($request['endereco']);
-                  
+
             $user->update($request->all());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
