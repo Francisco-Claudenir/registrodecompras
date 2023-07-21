@@ -44,7 +44,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
 
-    Route::resource('auditoria', AuditoriaController::class);
+    Route::resource('auditoria', AuditoriaController::class)->middleware(['check-role:Administrador']);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
@@ -79,6 +79,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //User
     Route::resource('users', UserController::class);
+    Route::put('/user/pass_reset/{id}', [UserController::class, 'resetPass'])->name('user.passreset')->middleware(['check-role:Administrador']);
 
     //ModalidadeBolsa
     Route::resource('modalidadebolsa', ModalidadeBolsaController::class)->middleware(['check-role:Administrador']);
