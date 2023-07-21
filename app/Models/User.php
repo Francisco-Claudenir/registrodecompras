@@ -38,19 +38,19 @@ class User extends Authenticatable
         parent::observe(AuditoriaObserver::class);
 
     }
-    
+
     public function user_pp_i_b_inscricao()
     {
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'id')->withTrashed();
     }
     public function user_pp_inscricao()
     {
-        return $this->hasMany(PrimeirosPassosInscricao::class, 'passos_inscricao_id')->withTrashed();
+        return $this->hasMany(PrimeirosPassosInscricao::class, 'user_id','id')->withTrashed();
     }
 
     public function perfil()
     {
-        return $this->belongsTo(Perfil::class, 'perfil_id');
+        return $this->belongsTo(Perfil::class, 'perfil_id','id');
     }
 
     public function hasPerfil(array $perfil)
