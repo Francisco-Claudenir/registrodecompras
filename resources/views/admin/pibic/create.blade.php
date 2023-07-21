@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('pibic.index') }}">Pibic</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('pibic-indicacao.index') }}">Pibic</a></li>
                     <li class="breadcrumb-item active"><a href="">Cadastro</a></li>
                 </ol>
             </div>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('pibic.store') }}" method="post">
+                        <form action="{{ route('pibic-indicacao.store') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="mb-4 col-md-4">
@@ -99,7 +99,7 @@
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
                             <a class="btn btn-primary float-end me-2" type="button"
-                                href="{{ route('pibic.index') }}">Cancelar</a>
+                                href="{{ route('pibic-indicacao.index') }}">Cancelar</a>
                         </form>
                     </div>
                 </div>
