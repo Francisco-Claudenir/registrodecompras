@@ -29,19 +29,20 @@ class PibicIndicacaoInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index($pibic_indicacao_id, $tipo, Request $request)
-    // {
-    //     //verificando se existe
-    //     $pibic_indicacao = $this->pibicIndicacao->where('tipo','=', $tipo)->findOrfail($pibic_indicacao_id);
+    public function index($pibic_indicacao_id, $tipo, Request $request)
+    {
+        //verificando se existe
+        $pibic_indicacao = $this->pibicIndicacao->where('tipo', '=', $tipo)->findOrfail($pibic_indicacao_id);
 
-    //     $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes','pibicindicacao_inscricoes.pibicindicacao_id','=','pibic_indicacoes.pibicindicacao_id')
-    //                                                     ->where('pibicindicacao_inscricoes.pibicindicacao_id', '=', $pibic_indicacao_id)
-    //                                                     ->where('pibic_indicacoes.tipo', '=', $tipo)
-    //                                                     ->get();
+        $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes', 'pibicindicacao_inscricoes.pibicindicacao_id', '=', 'pibic_indicacoes.pibicindicacao_id')
+            ->where('pibic_indicacoes.pibicindicacao_id', '=', $pibic_indicacao_id)
+            ->where('pibic_indicacoes.tipo', '=', $tipo)
+            ->paginate(20);
 
+        $links = $listaInscritos->appends($request->except('page'));
 
-    //     return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'ppIndicacaoBolsista'));
-    // }
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'pibic_indicacao'));
+    }
 
     /**
      * Show the form for creating a new resource.

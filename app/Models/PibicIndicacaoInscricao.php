@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Observers\AuditoriaObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PibicIndicacaoInscricao extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'pibicindicacao_inscricoes';
 
     protected $fillable = [
@@ -62,4 +63,33 @@ class PibicIndicacaoInscricao extends Model
     }
 
     protected $dates = ['deleted_at'];
+
+    public function pibicindicacao_inscricao_pibicindicacao()
+    {
+        return $this->belongsTo(PibicIndicacao::class, 'pibicindicacao_id')->withTrashed();
+    }
+
+    public function cpf($cpf)
+    {
+        $dados = '***.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-**';
+        return $dados;
+    }
+
+    public function mask_telefone($telefone)
+    {
+        $dado = '(' . substr($telefone, 0, 2) . ')' . ' ' . substr($telefone, 2, 5) . '-' . substr($telefone, 7, 5);
+        return $dado;
+    }
+
+    public function mask_cpf($cpf)
+    {
+        $dados = substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+        return $dados;
+    }
+
+    public function mask_cep($cep)
+    {
+        $dados = substr($cep, 0, 5) . '-' . substr($cep, 5, 3);
+        return $dados;
+    }
 }
