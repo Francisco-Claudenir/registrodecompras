@@ -40,7 +40,14 @@ class PibicIndicacaoInscricaoController extends Controller
 
         $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes', 'pibicindicacao_inscricoes.pibicindicacao_id', '=', 'pibic_indicacoes.pibicindicacao_id')
             ->where('pibic_indicacoes.pibicindicacao_id', '=', $pibic_indicacao_id)
-            ->paginate(20);
+            ->select([
+                'pibicindicacao_inscricoes.numero_inscricao',
+                'pibicindicacao_inscricoes.nome_orientador', 
+                'pibicindicacao_inscricoes.cpf_orientador',
+                'pibicindicacao_inscricoes.nome_bolsista',
+                'pibicindicacao_inscricoes.cpf_bolsista',
+                'pibicindicacao_inscricoes.status'
+            ])->orderBy('pibicindicacao_inscricoes.numero_inscricao', 'asc')->paginate(20);
 
         $links = $listaInscritos->appends($request->except('page'));
 

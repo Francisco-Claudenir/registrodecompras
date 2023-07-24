@@ -105,6 +105,8 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
 
     //        return $drawing;
     //    }
+
+
     public function headings(): array
     {
         // Defina os nomes personalizados para as colunas

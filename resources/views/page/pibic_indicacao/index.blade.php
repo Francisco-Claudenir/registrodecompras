@@ -77,9 +77,9 @@
                                                 @endswitch
                                             @else
                                             @endif
-                                            {{-- <td><a href="{{ route('pp-i-bolsistas-inscricao.espelho', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dados->pp_i_bolsista_inscricao_id]) }}"
+                                            <td><a href=""
                                                 class="badge badge-circle badge-dark"><i
-                                                    class="flaticon-381-file-2"></i></a></td> --}}
+                                                    class="flaticon-381-file-2"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
