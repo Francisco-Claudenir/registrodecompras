@@ -33,14 +33,13 @@ class PibicIndicacaoInscricaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pibic_indicacao_id, $tipo, Request $request)
+    public function index($pibic_indicacao_id, Request $request)
     {
         //verificando se existe
-        $pibic_indicacao = $this->pibicIndicacao->where('tipo', '=', $tipo)->findOrfail($pibic_indicacao_id);
+        $pibic_indicacao = $this->pibicIndicacao->findOrfail($pibic_indicacao_id);
 
         $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes', 'pibicindicacao_inscricoes.pibicindicacao_id', '=', 'pibic_indicacoes.pibicindicacao_id')
             ->where('pibic_indicacoes.pibicindicacao_id', '=', $pibic_indicacao_id)
-            ->where('pibic_indicacoes.tipo', '=', $tipo)
             ->paginate(20);
 
         $links = $listaInscritos->appends($request->except('page'));
@@ -169,6 +168,8 @@ class PibicIndicacaoInscricaoController extends Controller
                     $nome = 'declaracaonegativa_vinculo' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                     $dados_inscricao['declaracaonegativa_vinculo'] = $request['declaracaonegativa_vinculo']->storeAs($path, $nome);
 
+                }else{
+                    $dados_inscricao['declaracaonegativa_vinculo'] = null;
                 }
 
 

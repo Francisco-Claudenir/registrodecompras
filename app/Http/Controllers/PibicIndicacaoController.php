@@ -30,12 +30,12 @@ class PibicIndicacaoController extends Controller
      */
     public function index()
     {
-        $pibicIndicacao = $this->pibicIndicacao->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
-        $pibic = $this->pibicIndicacao->where('tipo', 'Pibic')->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
-        $acoes = $this->pibicIndicacao->where('tipo', 'Ações Afirmativas')->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
-        $cnpq = $this->pibicIndicacao->where('tipo', 'Cnpq')->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
-        $fapema = $this->pibicIndicacao->where('tipo', 'Fapema')->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
-        $pivic = $this->pibicIndicacao->where('tipo', 'Pivic')->withCount('pibicindicacao_pibicindicacao_inscricao')->paginate(20);
+        $pibicIndicacao = $this->pibicIndicacao->withCount('pibicIndicacao_Inscricao')->paginate(20);
+        $pibic = $this->pibicIndicacao->where('tipo', 'Pibic')->paginate(20);
+        $acoes = $this->pibicIndicacao->where('tipo', 'Ações Afirmativas')->paginate(20);
+        $cnpq = $this->pibicIndicacao->where('tipo', 'Cnpq')->paginate(20);
+        $fapema = $this->pibicIndicacao->where('tipo', 'Fapema')->paginate(20);
+        $pivic = $this->pibicIndicacao->where('tipo', 'Pivic')->paginate(20);
         return view($this->bag['view'] . '.index', compact('pibicIndicacao', 'pibic', 'acoes', 'cnpq', 'fapema', 'pivic'));
 
     }

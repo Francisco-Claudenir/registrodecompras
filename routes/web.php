@@ -118,7 +118,7 @@ Route::prefix('pibic-indicacao')->group(function () {
     Route::get('/{pibicindicacao_id}', [PibicIndicacaoController::class, 'page'])->name('pibicindicacao.page');
     Route::get('/inscricao/{pibicindicacao_id}', [PibicIndicacaoInscricaoController::class, 'create'])->name('pibicindicacao.inscricao.create')->middleware(['auth']);
     Route::post('/inscricao/{pibicindicacao_id}', [PibicIndicacaoInscricaoController::class, 'store'])->name('pibicindicacao.inscricao.store')->middleware(['auth']);
-    // Route::get('/lista-inscricao/{primeiropasso_id}', [PibicIndicacaoInscricaoController::class, 'index'])->name('pibicindicacao.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+     Route::get('/lista-inscricao/{pibicindicacao_id}', [PibicIndicacaoInscricaoController::class, 'index'])->name('pibicindicacao.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
      Route::get('/pdf/{pibicindicacao_id}/{pi_inscricao_id}', [PibicIndicacaoInscricaoController::class, 'gerarPDF'])->name('pibicindicacao.inscricao.pdf');
     // Route::get('/docshow/{diretorio}', [PibicIndicacaoInscricaoController::class, 'docshow'])->name('pibicindicacao.inscricao.docshow');
     Route::get('/verinscricao/{pibicindicacao_id}/{user_id}', [PibicIndicacaoInscricaoController::class, 'show'])->name('pibicindicacao.inscricao.show');

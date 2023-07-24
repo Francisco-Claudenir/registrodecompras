@@ -117,12 +117,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <br>
+
                                         <div class="row">
                                             <div class="col-6">
                                                 <br>
                                                 <div>Inscritos:<span class="text-black ms-3 font-w600"><a
-                                                            href="{{ route('pibicindicacao.inscricao.index',['pibicindicacao_id' => $dados->pibicindicacao_id, 'tipo' => $dados->tipo])}}">{{ $dados->pibicindicacao_pibicindicacao_inscricao_count }}</a></span>
+                                                            href="{{ route('pibicindicacao.inscricao.index',['pibicindicacao_id' => $dados->pibicindicacao_id])}}">{{ $dados->pibic_indicacao__inscricao_count }}</a></span>
                                                 </div>
                                             </div>
                                             <div class="col-6">
