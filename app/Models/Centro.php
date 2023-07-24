@@ -26,4 +26,12 @@ class Centro extends Model
     {
         return $this->hasMany(PrimeirosPassosInscricao::class, 'centro_id');
     }
+    public function pibicIndicacaoInscricao_bolsista()
+    {
+        return $this->hasMany(PibicIndicacaoInscricao::class, 'centro_bolsista');
+    }
+    public function pibicIndicacaoInscricao_orientador()
+    {
+        return $this->hasMany(PibicIndicacaoInscricao::class, 'centro_orientador');
+    }
 }
