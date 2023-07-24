@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PibicIndicacao\StorePibicIndicacaoInscricaoRequest;
 use App\Models\Centro;
+use App\Models\Curso;
 use App\Models\PibicIndicacao;
 use App\Models\PibicIndicacaoInscricao;
 use App\Models\User;
@@ -14,18 +15,19 @@ use Illuminate\Support\Facades\DB;
 
 class PibicIndicacaoInscricaoController extends Controller
 {
-    protected $pibicIndicacao, $pibicIndicacaoInscricao, $user, $centros;
+    protected $pibicIndicacao, $pibicIndicacaoInscricao, $user, $centros,$curso;
     protected $bag = [
         'view' => 'page.pibic_indicacao',
         'route' => 'pibicindicacao',
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(PibicIndicacao $pibicIndicacao, PibicIndicacaoInscricao $pibicIndicacaoInscricao, User $user, Centro $centros)
+    public function __construct(PibicIndicacao $pibicIndicacao, PibicIndicacaoInscricao $pibicIndicacaoInscricao, User $user, Centro $centros, Curso $curso)
     {
         $this->pibicIndicacao = $pibicIndicacao;
         $this->pibicIndicacaoInscricao = $pibicIndicacaoInscricao;
         $this->centros = $centros;
+        $this->curso = $curso;
         $this->user = $user;
     }
     /**
@@ -265,6 +267,29 @@ class PibicIndicacaoInscricaoController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
         }
+    }
+
+    //Gera o pdf
+    public function gerarPDF($pibicindicacao_id, $pi_inscricao_id)
+    {
+        //Verificando se o pp_indicacao_bolsista_id existe
+        $indicacao_bolsista = $this->pibicIndicacao->findOrfail($pibicindicacao_id);
+        $dadosInscrito = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', '=', $pibicindicacao_id)->findOrfail($pi_inscricao_id);
+
+
+        //Transformando Json em array de enderecos
+        $endereco = json_decode($dadosInscrito->endereco_bolsista, true);
+
+        //Buscando o centro do candidato
+        $centro_candidato = $this->centros->findOrfail($dadosInscrito->centro_bolsista);
+
+        //Buscando o centro do orientador
+        $centro_orientador = $this->centros->findOrfail($dadosInscrito->centro_orientador);
+
+        //Buscando o curso do candidato
+        $curso = $this->curso->findOrfail($dadosInscrito->curso_bolsista);
+
+        return view('pdf.pibicindicacao', compact('indicacao_bolsista', 'dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
     }
 
     /**
