@@ -11,7 +11,7 @@
                 <div class="d-flex flex-column ">
 
                     <img src="{{ asset('images/pibic/LOGO-PIBIC-2022.png') }}" alt="" srcset="" width="full"
-                        height="full">
+                         height="full">
                     <div class="pt-4 pb-4">
                         <span class="mt-4"><strong>{{ $pibics->nome }}</strong></span>
                     </div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="card">
-            <form action="" method="post">
+            <form action="{{route('pibicindicacao.inscricao.store',['pibicindicacao_id' => $pibics->pibicindicacao_id])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
@@ -28,6 +28,15 @@
                             <div class="card border shadow-sm">
                                 <div class="card-body">
                                     @include('page.pibic_indicacao.form')
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="card border shadow-sm">
+                                <div class="card-body">
+                                    <a href="" onclick="history.back()"
+                                       class="btn btn-dark float-start">Voltar</a>
+                                    <button type="submit" class="btn btn-primary float-end">Enviar</button>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +80,7 @@
 @section('scripts')
     <script src="/js/jquery.maskedinput.js"></script>
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $("#cep").mask("99999-999", {});
             $("#cpf_bolsista").mask("999.999.999-99", {});
             $("#cpf_orientador").mask("999.999.999-99", {});
@@ -90,7 +99,7 @@
     <script>
         $('.curso').hide();
 
-        $('select[name=centro_bolsista]').change(function() {
+        $('select[name=centro_bolsista]').change(function () {
 
             var centro = $(this).val();
 
@@ -106,16 +115,16 @@
                 type: 'POST',
                 data: dados,
                 dataType: 'json',
-                beforeSend: function() {
+                beforeSend: function () {
                     $('select[name=curso_bolsista]').append('<option>Carregando</option>')
                 },
-                success: function(cursos) {
+                success: function (cursos) {
 
                     $('select[name=curso_bolsista]').empty();
                     $('select[name=curso_bolsista]').append(
                         '<option value="">Selecione o curso</option>');
 
-                    $.each(cursos, function(key, value) {
+                    $.each(cursos, function (key, value) {
                         console.log(key, value);
                         $('select[name=curso_bolsista]').append('<option value="' + value.id +
                             '">' + value.cursos + '</option>');
@@ -138,7 +147,6 @@
         }
 
 
-
         function meu_callback(conteudo) {
             if (!("erro" in conteudo)) {
                 //Atualiza os campos com os valores.
@@ -152,7 +160,6 @@
                 document.getElementById('cep').value = ("");
             }
         }
-
 
 
         function pesquisacep(valor) {

@@ -8,7 +8,7 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full"
+                    <img src="{{ asset('images/pibic/LOGO PIBIC 2023.png') }}" alt="" srcset="" width="full"
                         height="full">
                     <div class="pt-4 pb-4">
                     </div>
@@ -26,14 +26,15 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-7 col-md-9 col-sm-10">
                             <div class="card border shadow-sm">
-                                <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" alt=""
+                                <img src="{{ asset('images/pibic/PAINEL PIBIC23.png') }}" alt=""
                                     class="img-fluid w-100 rounded" width="80" height="60">
                                 <div class="card-body">
 
                                     <h3 class="text-black">{{ $dados->nome }}</h3>
+                                    <h5 class="text-muted">{{ $dados->tipo }}</h5>
 
                                     <p>{{ $dados->descricao }}</p>
-                                    <a class="btn btn-info" href="{{ route('pibic.page',['pibicindicacao_id'=> $dados->pibicindicacao_id])}}">Ver
+                                    <a class="btn btn-info" href="{{ route('pibicindicacao.page',['pibicindicacao_id'=> $dados->pibicindicacao_id])}}">Ver
                                         Mais</a>
                                 </div>
                             </div>
