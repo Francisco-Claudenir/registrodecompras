@@ -63,6 +63,7 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->string('termocompromisso_orientador');
             $table->softDeletes();
             $table->timestamps();
+            
 
 
             ////Relacionando com a tabela Pibic Indicação
