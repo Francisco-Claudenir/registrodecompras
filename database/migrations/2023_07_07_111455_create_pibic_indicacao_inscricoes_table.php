@@ -21,7 +21,7 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->unsignedBigInteger('user_id');
 
             //Identificação do bolsista
-            $table->string('nome_bolsista');                         
+            $table->string('nome_bolsista');
             $table->json('endereco_bolsista');
             $table->unsignedBigInteger('curso_bolsista');
             $table->unsignedBigInteger('centro_bolsista');
@@ -40,27 +40,28 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->string('email_orientador');
             $table->string('tituloprojeto_orientador');
             $table->string('tituloplano_bolsista');
-            $table->string('palavras_chave');
-            $table->string('curriculolattes_orientador');
+            $table->string('palavras_chave')->nullable();
+            $table->string('curriculolattes_orientador')->nullable();
 
             //Dados Academicos
             $table->string('historico_escolar');
             $table->string('declaracao_vinculo');
             $table->string('termocompromisso_bolsista');
-            $table->string('termocompromissobolsista_fapema');
-            $table->string('declaracaonegativa_vinculo');
-            $table->string('declaracaoempregaticio_fapema');
+            $table->string('termocompromissobolsista_fapema')->nullable();
+            $table->string('declaracaonegativa_vinculo')->nullable();
+            $table->string('declaracaoempregaticio_fapema')->nullable();
             $table->string('curriculo_lattes');
-            $table->string('declaracao_estagio');
-            $table->string('doc_comprobatorio');
+            $table->string('declaracao_conjuta_estagio')->nullable();
+            $table->string('doc_comprobatorio')->nullable();
 
             //Informações Bancarias
             $table->string('agencia_banco');
-            $table->string('conta_corrente');
+            $table->string('numero_conta_corrente');
             $table->string('comprovante_conta_corrente');
 
             //Documentação Orientador
             $table->string('termocompromisso_orientador');
+            $table->softDeletes();
             $table->timestamps();
 
 

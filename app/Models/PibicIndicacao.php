@@ -23,6 +23,10 @@ class PibicIndicacao extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function pibicIndicacao_Inscricao()
+    {
+        return $this->hasMany(PibicIndicacaoInscricao::class, 'pibicindicacao_id')->withTrashed();
+    }
     public function percentual()
     {
         // Obtém a data atual
