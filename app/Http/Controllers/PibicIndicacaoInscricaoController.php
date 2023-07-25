@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PibicIndicacao\StorePibicIndicacaoInscricaoRequest;
+use App\Http\Requests\PibicIndicacao\UpdatePibicIndicacaoInscricaoRequest;
 use App\Models\Centro;
 use App\Models\Curso;
 use App\Models\PibicIndicacao;
 use App\Models\PibicIndicacaoInscricao;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
 
 class PibicIndicacaoInscricaoController extends Controller
 {
@@ -43,6 +47,7 @@ class PibicIndicacaoInscricaoController extends Controller
         $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes', 'pibicindicacao_inscricoes.pibicindicacao_id', '=', 'pibic_indicacoes.pibicindicacao_id')
             ->where('pibic_indicacoes.pibicindicacao_id', '=', $pibic_indicacao_id)
             ->select([
+                'pibicindicacao_inscricoes.pi_inscricao_id',
                 'pibicindicacao_inscricoes.numero_inscricao',
                 'pibicindicacao_inscricoes.nome_orientador', 
                 'pibicindicacao_inscricoes.cpf_orientador',
@@ -54,6 +59,49 @@ class PibicIndicacaoInscricaoController extends Controller
         $links = $listaInscritos->appends($request->except('page'));
 
         return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'pibic_indicacao'));
+    }
+
+    public function espelho($pibic_indicacao_id, $pibic_i_inscricao_id)
+    {
+
+        //Verificando se o pp_indicacao_bolsista_id existe
+        $pibic_indicacao = $this->pibicIndicacao->findOrfail($pibic_indicacao_id);
+
+        $dadosInscrito = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', '=', $pibic_indicacao_id)->findOrfail($pibic_i_inscricao_id);
+
+        $endereco = json_decode($dadosInscrito->endereco_bolsista, true);
+
+        //Buscando o centro do candidato
+        $centro_bolsista = $this->centros->findOrfail($dadosInscrito->centro_bolsista);
+
+        //Buscando o centro do orientador
+        $centro_orientador = $this->centros->findOrfail($dadosInscrito->centro_orientador);
+
+        //Buscando o curso do candidato
+        $curso = $this->curso->findOrfail($dadosInscrito->curso_bolsista);
+
+        return view('admin.pibic.espelho', compact('dadosInscrito', 'endereco', 'centro_bolsista', 'centro_orientador', 'curso', 'pibic_indicacao'));
+    }
+
+    public function analise(UpdatePibicIndicacaoInscricaoRequest $request,  $pibic_indicacao_id, $pibic_i_inscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', $pibic_indicacao_id)->find($pibic_i_inscricao_id);
+                if ($inscricao['pibicindicacao_id'] == $pibic_indicacao_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -297,6 +345,31 @@ class PibicIndicacaoInscricaoController extends Controller
         $curso = $this->curso->findOrfail($dadosInscrito->curso_bolsista);
 
         return view('pdf.pibicindicacao', compact('indicacao_bolsista', 'dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
+    }
+
+    public function docshow($diretorio)
+    {
+        try {
+
+            $diretorio = Crypt::decrypt($diretorio);
+            
+            $path = storage_path('app/public/' . $diretorio);
+            
+            if (!File::exists($path)) {
+                abort(404);
+            }
+            
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+        } catch (\Throwable $th) {
+            alert()->error(config($this->bag['msg'] . '.error.diretorio'));
+            return redirect()->back();
+        }
     }
 
     /**
