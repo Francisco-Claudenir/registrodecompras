@@ -22,8 +22,14 @@ class Curso extends Model
         return $this->belongsTo(Modalidade::class, 'modalidade_id');
     }
 
+
     public function ppindicacao_inscricao()
     {
         return $this->hasMany(PP_IndicacaoBolsistasInscricao::class, 'curso_id');
+    }
+
+    public function pibicIndicacaoInscricao_bolsista()
+    {
+        return $this->hasMany(PibicIndicacaoInscricao::class, 'curso_bolsista');
     }
 }
