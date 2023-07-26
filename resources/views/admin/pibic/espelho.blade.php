@@ -21,7 +21,7 @@
                         <label class="col-form-label col-sm-3 pt-0">Resultado</label>
                         <div class="col-sm-9">
                             <form
-                                action="{{ route('pp-i-bolsistas-inscricao.analise', ['pp_indicacao_bolsista_id' => $dadosInscrito->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dadosInscrito->pp_i_bolsista_inscricao_id]) }}"
+                                action="{{ route('pibicindicacao.analise', ['pibic_indicacao_id' => $pibic_indicacao->pibicindicacao_id, 'pibic_i_inscricao_id' => $dadosInscrito->pi_inscricao_id]) }}"
                                 method="post">
                                 @csrf
                                 @foreach (config('status.status') as $item)
@@ -51,14 +51,13 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">{{ $ppIndicacaoBolsista->nome }}</h4>
+                    <h4 class="card-title">{{ $pibic_indicacao->nome }}</h4>
 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a
-                            href="{{ route('pp-i-bolsistas-inscricao.index', ['pp_indicacao_bolsista_id' => $dadosInscrito->pp_i_bolsista_id]) }}">Lista
+                    <li class="breadcrumb-item"><a href="{{ route('pibicindicacao.inscricao.index', ['pibicindicacao_id' => $pibic_indicacao->pibicindicacao_id]) }}">Lista
                             de Inscritos</a></li>
                     <li class="breadcrumb-item active">Espelho<a href=""></a>
                     </li>
@@ -75,8 +74,7 @@
                                 data-bs-target="#analiseModal" class="btn btn-xs btn-info" title="">
                                 Analisar
                             </a>
-                            <a href="{{ route('pp-i-bolsistas-inscricao.pdf', ['pp_indicacao_bolsista_id' => $dadosInscrito->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dadosInscrito->pp_i_bolsista_inscricao_id]) }}"
-                                class="btn btn-xs btn-info" title="">
+                            <a href="" class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>
@@ -112,7 +110,8 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Telefone</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_bolsista) }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_bolsista) }}
+                            </dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -142,7 +141,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Centro</dt>
-                            <dd class="text-justify">{{ $centro_candidato->centros }}</dd>
+                            <dd class="text-justify">{{ $centro_bolsista->centros }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -161,7 +160,7 @@
                         <dl>
                             <dt>Documento de Identidade</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_identidade)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_identidade)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -169,7 +168,7 @@
                         <dl>
                             <dt>Documento CPF</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_cpf)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->documento_cpf)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -184,7 +183,8 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Telefone</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_orientador) }}</dd>
+                            <dd class="text-justify">
+                                {{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_orientador) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -209,16 +209,32 @@
                         <dl>
                             <dt>Título do Projeto do
                                 Orientador(a)</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->titulo_projeto_orientador }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->tituloprojeto_orientador }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Título do Plano de Trabalho
                                 Bolsista</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->titulo_plano_orientador }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->tituloplano_bolsista }}</dd>
                         </dl>
                     </div>
+                    @if ($pibic_indicacao->tipo == 'Ações Afirmativas' || $pibic_indicacao->tipo == 'Cnpq')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>3 Palavras Chave</dt>
+                                <dd class="text-justify">{{ $dadosInscrito->palavras_chave }}</dd>
+                            </dl>
+                        </div>
+                    @endif
+                    @if ($pibic_indicacao->tipo == 'Cnpq')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>Link do Currículo Lattes do Orientador</dt>
+                                <dd class="text-justify">{{ $dadosInscrito->curriculolattes_orientador }}</dd>
+                            </dl>
+                        </div>
+                    @endif
                     <h5>Dados Acadêmicos</h5>
                     <div class="col-sm-12">
                         <dl>
@@ -226,7 +242,7 @@
                                 disponível do
                                 SIGUEMA (formato PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->historico_escolar)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->historico_escolar)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -235,37 +251,75 @@
                             <dt>Declaração de vínculo do aluno à UEMA
                                 atualizado (formato PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_vinculo)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_vinculo)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Termo de Compromisso do bolsista
+                                @if ($pibic_indicacao->tipo == 'Fapema')
+                                    MODELO UEMA
+                                @endif
                                 (formato
-                                PDF)</dt>
+                                PDF)
+                            </dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromisso_bolsista)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Declaração Negativa de Vínculo
-                                Empregatício
-                                (formato PDF)</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_negativa_vinculo)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div>
+                    @if ($pibic_indicacao->tipo == 'Fapema')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>Termo de Compromisso do(a) bolsista modelo Fapema
+                                    (formato
+                                    PDF)</dt>
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromissobolsista_fapema)]) }}">Arquivo</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    @endif
+                    @if (
+                        $pibic_indicacao->tipo == 'Ações Afirmativas' ||
+                            $pibic_indicacao->tipo == 'Cnpq' ||
+                            $pibic_indicacao->tipo == 'Pibic' ||
+                            $pibic_indicacao->tipo == 'Fapema')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>Declaração Negativa de Vínculo
+                                    Empregatício
+                                    @if ($pibic_indicacao->tipo == 'Fapema')
+                                        MODELO UEMA
+                                    @endif
+                                    (formato PDF)
+                                </dt>
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaonegativa_vinculo)]) }}">Arquivo</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    @endif
+                    @if ($pibic_indicacao->tipo == 'Fapema')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>Declaração Negativa de Vínculo
+                                    Empregatício modelo Fapema
+                                    (formato PDF)</dt>
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaoempregaticio_fapema)]) }}">Arquivo</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    @endif
                     <div class="col-sm-12">
                         <dl>
                             <dt>Currículo atualizado, gerado na
                                 Plataforma
                                 Lattes (formato PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -276,7 +330,7 @@
                                 caso) (formato PDF)</dt>
                             @if ($dadosInscrito->declaracao_conjuta_estagio != null)
                                 <dd class="text-justify"><a style="color: red;"
-                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_conjuta_estagio)]) }}">Arquivo</a>
+                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_conjuta_estagio)]) }}">Arquivo</a>
                                 </dd>
                             @else
                                 <dd>Sem Arquivo</dd>
@@ -284,6 +338,17 @@
 
                         </dl>
                     </div>
+                    @if ($pibic_indicacao->tipo == 'Ações Afirmativas')
+                        <div class="col-sm-12">
+                            <dl>
+                                <dt>Documento comprobatório de ingresso UEMA por meio de ações
+                                    afirmativas (formato PDF)</dt>
+                                <dd class="text-justify"><a style="color: red;"
+                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->doc_comprobatorio)]) }}">Arquivo</a>
+                                </dd>
+                            </dl>
+                        </div>
+                    @endif
                     <h5>Informações Bancárias</h5>
                     <div class="col-sm-12">
                         <dl>
@@ -304,7 +369,7 @@
                                 do
                                 Brasil (formato PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->comprovante_conta_corrente)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->comprovante_conta_corrente)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -315,7 +380,7 @@
                             <dt>Termo de Compromisso (formato
                                 PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_orientador)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
