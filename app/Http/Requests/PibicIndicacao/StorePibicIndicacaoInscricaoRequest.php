@@ -51,8 +51,8 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'email_orientador' => ['required', 'string', 'email', 'max:255'],
             'cpf_orientador' => ['required', 'string', 'cpf', 'size:14'],
             'centro_orientador' => ['required', 'exists:centros,id'],
-            'tituloprojeto_orientador' => ['required', 'string', 'min:2', 'max:200'],
-            'tituloplano_bolsista' => ['required', 'string', 'min:2', 'max:200'],
+            'tituloprojeto_orientador' => ['required', 'string', 'min:2'],
+            'tituloplano_bolsista' => ['required', 'string', 'min:2'],
             'palavras_chave' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq', 'string', 'min:2', 'max:200'],
             'curriculolattes_orientador' => ['required_if:pibic_tipo,Cnpq', 'string', 'min:2', 'max:200'],
 
