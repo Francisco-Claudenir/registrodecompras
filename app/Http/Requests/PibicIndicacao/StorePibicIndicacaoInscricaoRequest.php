@@ -44,6 +44,7 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'documento_identidade' => ['required', 'mimes:pdf', 'max:5000'],
             'documento_cpf' => ['required', 'mimes:pdf'],
 
+
             //Identificação do Orientador
             'nome_orientador' => ['required', 'string', 'min:2', 'max:150'],
             'telefone_orientador' => ['required', 'string', 'size:15'],
@@ -54,6 +55,7 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'tituloplano_bolsista' => ['required', 'string', 'min:2', 'max:200'],
             'palavras_chave' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq', 'string', 'min:2', 'max:200'],
             'curriculolattes_orientador' => ['required_if:pibic_tipo,Cnpq', 'string', 'min:2', 'max:200'],
+
 
             //Dados Acadêmicos
             'historico_escolar' => ['required', 'mimes:pdf'],
@@ -66,10 +68,11 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'declaracao_conjuta_estagio' => ['nullable', 'mimes:pdf'],
             'doc_comprobatorio' => ['required_if:pibic_tipo,Ações Afirmativas', 'mimes:pdf'],
 
+
             //Informações Bancarias
-            'agencia_banco' => ['required', 'string', 'min:2', 'max:100'],
-            'numero_conta_corrente' => ['required', 'string', 'min:2', 'max:100'],
-            'comprovante_conta_corrente' => ['required', 'mimes:pdf'],
+            'agencia_banco' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'string', 'min:2', 'max:100'],
+            'numero_conta_corrente' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'string', 'min:2', 'max:100'],
+            'comprovante_conta_corrente' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'mimes:pdf'],
 
             //Documentação do Orientador
             'termocompromisso_orientador' => ['required', 'mimes:pdf']

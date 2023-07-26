@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="d-flex flex-column">
                     <img src="{{ asset('images/pibic/LOGO PIBIC 2023.png') }}" alt="" srcset="" width="full"
-                        height="full">
+                         height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
@@ -21,27 +21,36 @@
     @include('sweet::alert')
     <div class="container-fluid vh- ">
         <div class="card">
-            @foreach ($pibics as $dados)
-                <div class="col-xl-12 p-lg-4 p-2">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7 col-md-9 col-sm-10">
+            <div class="col-xl-12 p-lg-4 p-2">
+                <div class="row justify-content-center">
+                    @foreach ($pibics as $dados)
+                        <div class="col-lg-5 col-md-9 col-sm-10">
                             <div class="card border shadow-sm">
-                                <img src="{{ asset('images/pibic/PAINEL PIBIC23.png') }}" alt=""
-                                    class="img-fluid w-100 rounded" width="80" height="60">
+                                <img src="{{ url('../storage/' . $dados->banner)}}" alt=""
+                                     class="img-fluid w-100 rounded" width="80" height="70">
                                 <div class="card-body">
 
                                     <h3 class="text-black">{{ $dados->nome }}</h3>
-                                    <h5 class="text-muted">{{ $dados->tipo }}</h5>
+                                    @if($dados->tipo == 'Cnpq')
+                                        @php
+                                        $upper = strtoupper(substr($dados->tipo,0,3));
+                                        $down = strtolower(substr($dados->tipo,3,1));
+                                        @endphp
+                                        <h4 class="text-muted">{{$upper . $down}}</h4>
+                                    @else
+                                        <h4 class="text-muted">{{ strtoupper($dados->tipo) }}</h4>
+                                    @endif
 
                                     <p>{{ $dados->descricao }}</p>
-                                    <a class="btn btn-info" href="{{ route('pibicindicacao.page',['pibicindicacao_id'=> $dados->pibicindicacao_id])}}">Ver
+                                    <a class="btn btn-sm btn-info"
+                                       href="{{ route('pibicindicacao.page',['pibicindicacao_id'=> $dados->pibicindicacao_id])}}">Ver
                                         Mais</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 @endsection

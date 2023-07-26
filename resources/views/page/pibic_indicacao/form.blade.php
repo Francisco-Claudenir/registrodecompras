@@ -14,20 +14,20 @@
             {!! $errors->default->first('nome_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">E-mail</label>
+            <label class="form-label fw-normal">E-mail do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('email_bolsista')) is-invalid @endif"
                    placeholder="E-mail" name="email_bolsista" value="{{ old('email_bolsista') }}">
             {!! $errors->default->first('email_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">CPF</label>
+            <label class="form-label fw-normal">CPF do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('cpf_bolsista')) is-invalid @endif"
                    placeholder="CPF" name="cpf_bolsista" value="{{ old('cpf_bolsista') }}" autocomplete="cpf"
                    autofocus id="cpf_bolsista">
             {!! $errors->default->first('cpf_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4 col-sm-4">
-            <label class="form-label fw-normal">Documento CPF</label>
+            <label class="form-label fw-normal">Documento CPF do(a) bolsista</label>
             <div class="input-group mb-3">
                 <span class="input-group-text bg-primary text-white">Upload</span>
                 <div class="form-file">
@@ -39,13 +39,13 @@
             {!! $errors->default->first('documento_cpf', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Numero de Identidade</label>
+            <label class="form-label fw-normal">Numero de Identidade do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('numero_identidade')) is-invalid @endif"
                    placeholder="Identidade" name="numero_identidade" value="{{ old('numero_identidade') }}">
             {!! $errors->default->first('numero_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4 col-sm-4">
-            <label class="form-label fw-normal">Documento de Identidade</label>
+            <label class="form-label fw-normal">Documento de Identidade do(a) bolsista</label>
             <div class="input-group mb-3">
                 <span class="input-group-text bg-primary text-white">Upload</span>
                 <div class="form-file">
@@ -57,14 +57,14 @@
             {!! $errors->default->first('documento_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Telefone</label>
+            <label class="form-label fw-normal">Telefone do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('telefone_bolsista')) is-invalid @endif"
                    placeholder="(99) 99999-9999" name="telefone_bolsista" value="{{ old('telefone_bolsista') }}"
                    autocomplete="phone" id="telefone_bolsista">
             {!! $errors->default->first('telefone_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Cep</label>
+            <label class="form-label fw-normal">Cep do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[cep]" id="cep"
                        class="form-control @error('endereco_bolsista.cep') is-invalid @enderror" placeholder="00000-000"
@@ -81,7 +81,7 @@
             ) !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Endereço</label>
+            <label class="form-label fw-normal">Endereço do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[endereco]" id="endereco"
                        class="form-control @error('endereco_bolsista.endereco') is-invalid @enderror"
@@ -94,7 +94,7 @@
             ) !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Número</label>
+            <label class="form-label fw-normal">Número do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[numero]"
                        class="form-control @error('endereco_bolsista.numero') is-invalid @enderror" placeholder="Ex 01"
@@ -106,7 +106,7 @@
             ) !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="mb-1" for="endereco_bolsista[bairro]">Bairro</label>
+            <label class="mb-1" for="endereco_bolsista[bairro]">Bairro do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[bairro]" id="bairro"
                        class="form-control @error('endereco_bolsista.bairro') is-invalid @enderror" placeholder="Bairro"
@@ -115,9 +115,10 @@
             {!! $errors->default->first('endereco_bolsista.bairro', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-6">
-            <label class="form-label fw-normal @error('centro_bolsista') is-invalid @enderror">Centro</label>
-            <select class="default-select form-control form-custom wide @if ($errors->first('centro_bolsista')) is-invalid @endif"
-                    name="centro_bolsista"
+            <label class="form-label fw-normal @error('centro_bolsista') is-invalid @enderror">Centro do(a) bolsista</label>
+            <select
+                class="default-select form-control form-custom wide @if ($errors->first('centro_bolsista')) is-invalid @endif"
+                name="centro_bolsista"
             >
                 <option value="{{ null }}" selected hidden>
                     Selecione
@@ -131,7 +132,7 @@
             {!! $errors->default->first('centro_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-6">
-            <label class="form-label fw-normal">Curso</label>
+            <label class="form-label fw-normal">Curso do(a) bolsista</label>
             <select class="form-control form-select" name="curso_bolsista" id="curso_id">
             </select>
             {!! $errors->default->first('curso_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
@@ -147,21 +148,21 @@
 <div class="basic-form">
     <div class="row mt-3">
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Nome Completo</label>
+            <label class="form-label fw-normal">Nome Completo do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('nome_orientador')) is-invalid @endif"
                    placeholder="Nome Completo" name="nome_orientador" value="{{ old('nome_orientador') }}">
             {!! $errors->default->first('nome_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">CPF Orientador</label>
+            <label class="form-label fw-normal">CPF do Orientador(a)</label>
             <input type="text" class="form-control @if ($errors->first('cpf_orientador')) is-invalid @endif"
                    placeholder="CPF Orientador" name="cpf_orientador" value="{{ old('cpf_orientador') }}"
                    autocomplete="cpf" autofocus id="cpf_orientador">
             {!! $errors->default->first('cpf_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Telefone</label>
+            <label class="form-label fw-normal">Telefone do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('telefone_orientador')) is-invalid @endif"
                    name="telefone_orientador" value="{{ old('telefone_orientador') }}" id="telefone_orientador"
@@ -169,15 +170,16 @@
             {!! $errors->default->first('telefone_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">E-mail</label>
+            <label class="form-label fw-normal">E-mail do Orientador(a)</label>
             <input type="text" class="form-control @if ($errors->first('email_orientador')) is-invalid @endif"
                    placeholder="E-mail" name="email_orientador" value="{{ old('email_orientador') }}">
             {!! $errors->default->first('email_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Campus/Centros</label>
-            <select class="default-select form-control form-custom wide @if ($errors->first('centro_orientador')) is-invalid @endif"
-                    name="centro_orientador">
+            <label class="form-label fw-normal">Campus/Centros do Orientador(a)</label>
+            <select
+                class="default-select form-control form-custom wide @if ($errors->first('centro_orientador')) is-invalid @endif"
+                name="centro_orientador">
                 <option value="{{ null }}" selected hidden>Selecione...
                 </option>
                 @foreach ($centros as $dados)
@@ -188,8 +190,7 @@
             {!! $errors->default->first('centro_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Título do Projeto do
-                Orientador(a)</label>
+            <label class="form-label fw-normal">Título do Projeto do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('tituloprojeto_orientador')) is-invalid @endif"
                    placeholder="Título do Projeto do Orientador(a)" name="tituloprojeto_orientador"
@@ -200,8 +201,7 @@
             ) !!}
         </div>
         <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Título do Plano de Trabalho
-                Bolsista</label>
+            <label class="form-label fw-normal">Título do Plano de Trabalho do(a) Bolsista</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('tituloplano_bolsista')) is-invalid @endif"
                    placeholder="Título do Plano de Trabalho Bolsista" name="tituloplano_bolsista"
@@ -213,7 +213,7 @@
         </div>
         @if ($pibics->tipo == 'Cnpq')
             <div class="mb-3 col-md-6">
-                <label class="form-label fw-normal">Link do Currículo Lattes do Orientador</label>
+                <label class="form-label fw-normal">Link do Currículo Lattes do Orientador(a)</label>
                 <input type="text"
                        class="form-control form-control-sm @if ($errors->first('curriculolattes_orientador')) is-invalid @endif"
                        placeholder="Título do Plano de Trabalho Bolsista" name="curriculolattes_orientador"
@@ -242,7 +242,7 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <h4 class=" text-muted d-inline text-center px-4 pb-2">Dados Acadêmicos
+    <h4 class=" text-muted d-inline text-center px-4 pb-2">Dados Acadêmicos do Bolsista
     </h4>
 </div>
 <hr class="mt-3 mb-3">
@@ -411,51 +411,56 @@
         @endif
     </div>
 </div>
-<div class="row justify-content-center">
-    <h4 class=" text-muted d-inline text-center px-4 pb-2">Informações Bancárias
-    </h4>
-</div>
-<hr class="mt-3 mb-3">
-<div class="basic-form">
-    <div class="row mt-3">
-        <div class="mb-3 col-md-6">
-            <label class="form-label fw-normal">Agência do Banco do Brasil n°</label>
-            <input type="text"
-                   class="form-control form-control-sm @if ($errors->first('agencia_banco')) is-invalid @endif"
-                   placeholder="Agência do Banco" name="agencia_banco" value="{{ old('agencia_banco') }}">
-            {!! $errors->default->first('agencia_banco', '<span style="color:red" class="form-text">:message</span>') !!}
-        </div>
-        <div class="mb-3 col-md-6">
-            <label class="form-label fw-normal">Número da Conta Corrente do Banco do
-                Brasil</label>
-            <input type="text"
-                   class="form-control form-control-sm @if ($errors->first('numero_conta_corrente')) is-invalid @endif"
-                   placeholder="Número da Conta" name="numero_conta_corrente"
-                   value="{{ old('conta_corrente') }}">
-            {!! $errors->default->first(
-                'numero_conta_corrente',
-                '<span style="color:red" class="form-text">:message</span>',
-            ) !!}
-        </div>
-        <div class="mb-3 col-md-6 col-sm-6">
-            <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
-                do
-                Brasil (formato PDF)</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-primary text-white">Upload</span>
-                <div class="form-file">
-                    <input type="file"
-                           class="form-file-input form-control @if ($errors->first('comprovante_conta_corrente')) is-invalid @endif"
-                           name="comprovante_conta_corrente">
-                </div>
+
+@if($pibics->tipo !== 'Pivic')
+    <div class="row justify-content-center">
+        <h4 class=" text-muted d-inline text-center px-4 pb-2">Informações Bancárias do Bolsista
+        </h4>
+    </div>
+    <hr class="mt-3 mb-3">
+    <div class="basic-form">
+        <div class="row mt-3">
+            <div class="mb-3 col-md-6">
+                <label class="form-label fw-normal">Agência do Banco do Brasil n°</label>
+                <input type="text"
+                       class="form-control form-control-sm @if ($errors->first('agencia_banco')) is-invalid @endif"
+                       placeholder="Agência do Banco" name="agencia_banco" value="{{ old('agencia_banco') }}">
+                {!! $errors->default->first('agencia_banco', '<span style="color:red" class="form-text">:message</span>') !!}
             </div>
-            {!! $errors->default->first(
-                'comprovante_conta_corrente',
-                '<span style="color:red" class="form-text">:message</span>',
-            ) !!}
+            <div class="mb-3 col-md-6">
+                <label class="form-label fw-normal">Número da Conta Corrente do Banco do
+                    Brasil</label>
+                <input type="text"
+                       class="form-control form-control-sm @if ($errors->first('numero_conta_corrente')) is-invalid @endif"
+                       placeholder="Número da Conta" name="numero_conta_corrente"
+                       value="{{ old('numero_conta_corrente') }}">
+                {!! $errors->default->first(
+                    'numero_conta_corrente',
+                    '<span style="color:red" class="form-text">:message</span>',
+                ) !!}
+            </div>
+            <div class="mb-3 col-md-6 col-sm-6">
+                <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
+                    do
+                    Brasil (formato PDF)</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-primary text-white">Upload</span>
+                    <div class="form-file">
+                        <input type="file"
+                               class="form-file-input form-control @if ($errors->first('comprovante_conta_corrente')) is-invalid @endif"
+                               name="comprovante_conta_corrente">
+                    </div>
+                </div>
+                {!! $errors->default->first(
+                    'comprovante_conta_corrente',
+                    '<span style="color:red" class="form-text">:message</span>',
+                ) !!}
+            </div>
         </div>
     </div>
-</div>
+@endif
+
+
 <div class="row justify-content-center">
     <h4 class=" text-muted d-inline text-center px-4 pb-2">Documentação do
         Orientador(a)

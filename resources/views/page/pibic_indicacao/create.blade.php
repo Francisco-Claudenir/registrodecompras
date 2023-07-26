@@ -10,10 +10,9 @@
             <div class="container">
                 <div class="d-flex flex-column ">
 
-                    <img src="{{ asset('images/pibic/LOGO-PIBIC-2022.png') }}" alt="" srcset="" width="full"
+                    <img src="{{ asset('images/pibic/LOGO PIBIC 2023.png') }}" alt="" srcset="" width="full"
                          height="full">
-                    <div class="pt-4 pb-4">
-                        <span class="mt-4"><strong>{{ $pibics->nome }}</strong></span>
+                    <div class="pt-2 pb-2">
                     </div>
                 </div>
             </div>
@@ -23,7 +22,7 @@
                 @csrf
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
-                        <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
+                        <h3 class="text-primary d-inline text-center p-4">Inscrição {{ $pibics->nome }} </h3>
                         <div class="col-lg-8 col-md-11 col-sm-11">
                             <div class="card border shadow-sm">
                                 <div class="card-body">
@@ -70,7 +69,7 @@
                 height: 40px !important;
             }
 
-            ..bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+            .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
                 height: 2.2rem !important;
             }
 
