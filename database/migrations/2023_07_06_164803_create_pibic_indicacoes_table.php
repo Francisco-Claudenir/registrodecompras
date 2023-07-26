@@ -17,6 +17,7 @@ class CreatePibicIndicacoesTable extends Migration
             $table->bigIncrements('pibicindicacao_id')->autoIncrement()->unique();
             $table->string('nome');
             $table->string('tipo');
+            $table->string('banner');
             $table->string('descricao');
             $table->boolean('visivel')->default(false);
             $table->dateTime('data_inicio');

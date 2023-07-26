@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PibicIndicacao\StorePibicIndicacaoInscricaoRequest;
+use App\Http\Requests\PibicIndicacao\UpdatePibicIndicacaoInscricaoRequest;
 use App\Models\Centro;
 use App\Models\Curso;
 use App\Models\PibicIndicacao;
 use App\Models\PibicIndicacaoInscricao;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
 
 class PibicIndicacaoInscricaoController extends Controller
 {
@@ -43,8 +47,9 @@ class PibicIndicacaoInscricaoController extends Controller
         $listaInscritos = $this->pibicIndicacaoInscricao->join('pibic_indicacoes', 'pibicindicacao_inscricoes.pibicindicacao_id', '=', 'pibic_indicacoes.pibicindicacao_id')
             ->where('pibic_indicacoes.pibicindicacao_id', '=', $pibic_indicacao_id)
             ->select([
+                'pibicindicacao_inscricoes.pi_inscricao_id',
                 'pibicindicacao_inscricoes.numero_inscricao',
-                'pibicindicacao_inscricoes.nome_orientador', 
+                'pibicindicacao_inscricoes.nome_orientador',
                 'pibicindicacao_inscricoes.cpf_orientador',
                 'pibicindicacao_inscricoes.nome_bolsista',
                 'pibicindicacao_inscricoes.cpf_bolsista',
@@ -54,6 +59,49 @@ class PibicIndicacaoInscricaoController extends Controller
         $links = $listaInscritos->appends($request->except('page'));
 
         return view($this->bag['view'] . '.index', compact('listaInscritos', 'links', 'pibic_indicacao'));
+    }
+
+    public function espelho($pibic_indicacao_id, $pibic_i_inscricao_id)
+    {
+
+        //Verificando se o pp_indicacao_bolsista_id existe
+        $pibic_indicacao = $this->pibicIndicacao->findOrfail($pibic_indicacao_id);
+
+        $dadosInscrito = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', '=', $pibic_indicacao_id)->findOrfail($pibic_i_inscricao_id);
+
+        $endereco = json_decode($dadosInscrito->endereco_bolsista, true);
+
+        //Buscando o centro do candidato
+        $centro_bolsista = $this->centros->findOrfail($dadosInscrito->centro_bolsista);
+
+        //Buscando o centro do orientador
+        $centro_orientador = $this->centros->findOrfail($dadosInscrito->centro_orientador);
+
+        //Buscando o curso do candidato
+        $curso = $this->curso->findOrfail($dadosInscrito->curso_bolsista);
+
+        return view('admin.pibic.espelho', compact('dadosInscrito', 'endereco', 'centro_bolsista', 'centro_orientador', 'curso', 'pibic_indicacao'));
+    }
+
+    public function analise(UpdatePibicIndicacaoInscricaoRequest $request,  $pibic_indicacao_id, $pibic_i_inscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->pibicIndicacaoInscricao->where('pibicindicacao_id', $pibic_indicacao_id)->find($pibic_i_inscricao_id);
+                if ($inscricao['pibicindicacao_id'] == $pibic_indicacao_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -198,12 +246,16 @@ class PibicIndicacaoInscricaoController extends Controller
                     $dados_inscricao['declaracao_conjuta_estagio'] = null;
                 }
 
-                //Comprovante Conta Corrente
-                $extensao = $request['comprovante_conta_corrente']->extension();
-                $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/comprovante_conta_corrente' . '/' . Auth::user()->cpf . '';
-                $nome = 'comprovante_conta_corrente' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                $dados_inscricao['comprovante_conta_corrente'] = $request['comprovante_conta_corrente']->storeAs($path, $nome);
+                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic') {
 
+                    //Comprovante Conta Corrente
+                    $extensao = $request['comprovante_conta_corrente']->extension();
+                    $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/comprovante_conta_corrente' . '/' . Auth::user()->cpf . '';
+                    $nome = 'comprovante_conta_corrente' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                    $dados_inscricao['comprovante_conta_corrente'] = $request['comprovante_conta_corrente']->storeAs($path, $nome);
+                }else{
+                    $dados_inscricao['comprovante_conta_corrente'] = null;
+                }
 
                 //Termo compromisso orientador
                 $extensao = $request['termocompromisso_orientador']->extension();
@@ -255,8 +307,8 @@ class PibicIndicacaoInscricaoController extends Controller
                     'curriculo_lattes' => $dados_inscricao['curriculo_lattes'],
                     'declaracao_conjuta_estagio' => $dados_inscricao['declaracao_conjuta_estagio'],
                     'doc_comprobatorio' => $dados_inscricao['doc_comprobatorio'],
-                    'agencia_banco' => $dados_inscricao['agencia_banco'],
-                    'numero_conta_corrente' => $dados_inscricao['numero_conta_corrente'],
+                    'agencia_banco' => $dados_inscricao['agencia_banco'] ?? null,
+                    'numero_conta_corrente' => $dados_inscricao['numero_conta_corrente'] ?? null,
                     'comprovante_conta_corrente' => $dados_inscricao['comprovante_conta_corrente'],
                     'termocompromisso_orientador' => $dados_inscricao['termocompromisso_orientador'],
                 ]);
@@ -270,6 +322,7 @@ class PibicIndicacaoInscricaoController extends Controller
                 return redirect()->route('pibicindicacao.page', ['pibicindicacao_id' => $pibicindicacao_id]);
             }
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
@@ -299,6 +352,31 @@ class PibicIndicacaoInscricaoController extends Controller
         return view('pdf.pibicindicacao', compact('indicacao_bolsista', 'dadosInscrito', 'endereco', 'centro_candidato', 'centro_orientador', 'curso'));
     }
 
+    public function docshow($diretorio)
+    {
+        try {
+
+            $diretorio = Crypt::decrypt($diretorio);
+            
+            $path = storage_path('app/public/' . $diretorio);
+            
+            if (!File::exists($path)) {
+                abort(404);
+            }
+            
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+        } catch (\Throwable $th) {
+            alert()->error(config($this->bag['msg'] . '.error.diretorio'));
+            return redirect()->back();
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -309,7 +387,7 @@ class PibicIndicacaoInscricaoController extends Controller
     {
 
         //Verificando se o primeiropasso_id existe
-        $this->pibicIndicacao->findOrfail($pibicindicacao_id);
+        $pibic = $this->pibicIndicacao->findOrfail($pibicindicacao_id);
 
 
         //Verificando se o user_id existe
@@ -328,7 +406,7 @@ class PibicIndicacaoInscricaoController extends Controller
 
 //        dd($dadosInscrito);
         $links = $dadosInscrito->appends($request->except('page'));
-        return view('page.pibic_indicacao.show', compact('dadosInscrito', 'links'));
+        return view('page.pibic_indicacao.show', compact('dadosInscrito', 'links','pibic'));
         //
     }
 

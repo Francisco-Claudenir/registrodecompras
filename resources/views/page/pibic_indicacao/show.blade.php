@@ -8,7 +8,8 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pibic/LOGO PIBIC 2023.png') }}" alt="" srcset="" width="full"
+                         height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
@@ -46,12 +47,12 @@
                                                     @case('Deferido')
                                                         <span
                                                             class="badge badge-outline-success d-sm-inline-block ">{{ $dados->status }}</span>
-                                                    @break
+                                                        @break
 
                                                     @case('Indeferido')
                                                         <span
                                                             class="badge badge-outline-danger d-sm-inline-block ">{{ $dados->status }}</span>
-                                                    @break
+                                                        @break
 
                                                     @default
                                                         <span
@@ -60,8 +61,8 @@
                                             </div>
                                         </div>
                                         <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#detalheModal-{{ $dados->numero_inscricao }}"
-                                            class="btn btn-xs btn-info" title="">
+                                           data-bs-target="#detalheModal-{{ $dados->numero_inscricao }}"
+                                           class="btn btn-xs btn-info" title="">
                                             Detalhes
                                         </a>
                                     </div>
@@ -69,13 +70,14 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="detalheModal-{{ $dados->numero_inscricao }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Detalhes da Inscrição</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Detalhes da
+                                                    Inscrição</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                        aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <h5>Número de Inscrição</h5>
@@ -158,8 +160,9 @@
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Documento de Identidade</dt>
-                                                            <dd class="text-justify"><a style="color: red;" target="_blank"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_identidade)]) }}">Arquivo</a>
+                                                            <dd class="text-justify"><a style="color: red;"
+                                                                                        target="_blank"
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_identidade)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -167,7 +170,7 @@
                                                         <dl>
                                                             <dt>Documento CPF</dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_cpf)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_cpf)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -214,37 +217,61 @@
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Título do Projeto do
-                                                                Orientador(a)</dt>
+                                                                Orientador(a)
+                                                            </dt>
                                                             <dd class="text-justify">
-                                                                {{ $dados->titulo_projeto_orientador }}</dd>
+                                                                {{ $dados->tituloprojeto_orientador }}</dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <dl>
                                                             <dt>Título do Plano de Trabalho
-                                                                Orientador(a)</dt>
+                                                                Bolsista
+                                                            </dt>
                                                             <dd class="text-justify">
-                                                                {{ $dados->titulo_plano_orientador }}</dd>
+                                                                {{ $dados->tituloplano_bolsista }}</dd>
                                                         </dl>
                                                     </div>
+                                                    @if ($pibic->tipo == 'Cnpq' || $pibic->tipo == 'Ações Afirmativas')
+                                                        <div class="col-sm-6">
+                                                            <dl>
+                                                                <dt>3 Palavras chave</dt>
+                                                                <dd class="text-justify">
+                                                                    {{ $dados->palavras_chave }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
+                                                    @if ($pibic->tipo == 'Cnpq')
+                                                        <div class="col-sm-6">
+                                                            <dl>
+                                                                <dt>Link do Currículo Lattes do Orientador</dt>
+                                                                <dd class="text-justify">
+                                                                    {{ $dados->curriculolattes_orientador }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
+
+
                                                     <hr>
                                                     <h5>Dados Acadêmicos</h5>
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Histórico Escolar atualizado,
                                                                 disponível do
-                                                                SIGUEMA (formato PDF)</dt>
+                                                                SIGUEMA (formato PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->historico_escolar)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->historico_escolar)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Declaração de vínculo do aluno à UEMA
-                                                                atualizado (formato PDF)</dt>
+                                                                atualizado (formato PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_vinculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_vinculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -252,82 +279,141 @@
                                                         <dl>
                                                             <dt>Termo de Compromisso do bolsista
                                                                 (formato
-                                                                PDF)</dt>
+                                                                PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
+
+                                                    @if ($pibic->tipo == 'Fapema')
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Termo de Compromisso do(a) bolsista modelo Fapema
+                                                                    (formato
+                                                                    PDF)
+                                                                </dt>
+                                                                <dd class="text-justify"><a style="color: red;"
+                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
+
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Declaração Negativa de Vínculo
                                                                 Empregatício
-                                                                (formato PDF)</dt>
+                                                                (formato PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
+
+                                                    @if ($pibic->tipo == 'Fapema')
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Declaração Negativa de Vínculo
+                                                                    Empregatício modelo Fapema
+                                                                    (formato PDF)
+                                                                </dt>
+                                                                <dd class="text-justify"><a style="color: red;"
+                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
+
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Currículo atualizado, gerado na
                                                                 Plataforma
-                                                                Lattes (formato PDF)</dt>
+                                                                Lattes (formato PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <dl>
-                                                            <dt>Declaração conjuta de estágio (quando
-                                                                for o
-                                                                caso) (formato PDF)</dt>
-                                                            @if ($dados->declaracao_conjuta_estagio != null)
-                                                                <dd class="text-justify"><a style="color: red;"
-                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_conjuta_estagio)]) }}">Arquivo</a>
-                                                                </dd>
-                                                            @else
-                                                                <dd>Sem Arquivo</dd>
-                                                            @endif
+                                                    @if($pibic->tipo !== 'Pivic')
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Declaração conjuta de estágio (quando
+                                                                    for o
+                                                                    caso) (formato PDF)
+                                                                </dt>
+                                                                @if ($dados->declaracao_conjuta_estagio != null)
+                                                                    <dd class="text-justify"><a style="color: red;"
+                                                                                                href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_conjuta_estagio)]) }}">Arquivo</a>
+                                                                    </dd>
+                                                                @else
+                                                                    <dd>Sem Arquivo</dd>
+                                                                @endif
 
-                                                        </dl>
-                                                    </div>
-                                                    <hr>
-                                                    <h5>Informações Bancárias</h5>
-                                                    <div class="col-6">
-                                                        <dl>
-                                                            <dt>Agência do Banco do Brasil n°</dt>
-                                                            <dd>{{ $dados->agencia_banco }}</dd>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <dl>
-                                                            <dt>Número da Conta Corrente do Banco do
-                                                                Brasil</dt>
-                                                            <dd class="text-justify">
-                                                                {{ $dados->numero_conta_corrente }}</dd>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <dl>
-                                                            <dt>Comprovante de Conta Corrente do Banco
-                                                                do
-                                                                Brasil (formato PDF)</dt>
-                                                            <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->comprovante_conta_corrente)]) }}">Arquivo</a>
-                                                            </dd>
-                                                        </dl>
-                                                    </div>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
+
+                                                    @if ($pibic->tipo == 'Ações Afirmativas')
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Documento comprobatório de ingresso UEMA por meio de
+                                                                    ações
+                                                                    afirmativas (formato PDF)
+                                                                </dt>
+                                                                <dd class="text-justify"><a style="color: red;"
+                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+
+                                                    @endif
+
+
+
+                                                    @if($pibic->tipo !== 'Pivic')
+                                                        <hr>
+                                                        <h5>Informações Bancárias</h5>
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Agência do Banco do Brasil n°</dt>
+                                                                <dd>{{ $dados->agencia_banco }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Número da Conta Corrente do Banco do
+                                                                    Brasil
+                                                                </dt>
+                                                                <dd class="text-justify">
+                                                                    {{ $dados->numero_conta_corrente }}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <dl>
+                                                                <dt>Comprovante de Conta Corrente do Banco
+                                                                    do
+                                                                    Brasil (formato PDF)
+                                                                </dt>
+                                                                <dd class="text-justify"><a style="color: red;"
+                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->comprovante_conta_corrente)]) }}">Arquivo</a>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                    @endif
                                                     <hr>
                                                     <h5>Documentação do
                                                         Orientador(a)</h5>
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Termo de Compromisso (formato
-                                                                PDF)</dt>
+                                                                PDF)
+                                                            </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                    href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_orientador)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -336,11 +422,12 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="{{ route('pibicindicacao.inscricao.pdf', ['pibicindicacao_id' => $dados->pibicindicacao_id, 'pi_inscricao_id' => $dados->pi_inscricao_id]) }}"
-                                                    class="btn btn-xs btn-info" target="_blank" title="">
+                                                   class="btn btn-xs btn-info" target="_blank" title="">
                                                     PDF
                                                 </a>
                                                 <button type="button" class="btn btn-xs btn-danger"
-                                                    data-bs-dismiss="modal">Fechar</button>
+                                                        data-bs-dismiss="modal">Fechar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -352,7 +439,7 @@
                     <div class="row">
                         <div class="col-sm-5 col-md-5">
                             <div class="dataTables_info" id="responsive-datatable_info" role="status"
-                                aria-live="polite">
+                                 aria-live="polite">
                                 Exibindo {{ $dadosInscrito->firstItem() }} a {{ $dadosInscrito->lastItem() }} de
                                 {{ $dadosInscrito->total() }}.
                             </div>

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\PibicIndicacao;
 use App\Models\PibicIndicacaoInscricao;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PibicIndicacaoController extends Controller
 {
@@ -23,6 +25,7 @@ class PibicIndicacaoController extends Controller
         $this->pibicIndicacao = $pibicIndicacao;
         $this->pibicIndicacaoInscricao = $pibicIndicacaoInscricao;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +34,11 @@ class PibicIndicacaoController extends Controller
     public function index()
     {
         $pibicIndicacao = $this->pibicIndicacao->withCount('pibicIndicacao_Inscricao')->paginate(20);
+//        foreach ($pibicIndicacao as $item){
+//
+//        dd($item['caminhoBanner'] =$pibicIndicacao );
+//        }
+
         $pibic = $this->pibicIndicacao->where('tipo', 'Pibic')->paginate(20);
         $acoes = $this->pibicIndicacao->where('tipo', 'Ações Afirmativas')->paginate(20);
         $cnpq = $this->pibicIndicacao->where('tipo', 'Cnpq')->paginate(20);
@@ -84,17 +92,26 @@ class PibicIndicacaoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try {
+
+
             DB::beginTransaction();
             $dados = $request->all();
+            //Termo compromisso orientador
+            $extensao = $request['banner']->extension();
+            $path = 'PibicIndicacaoBolsista/Evento' . '/Banner' . '';
+            $nome = 'bannerpibic' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+            $dados['banner'] = $request['banner']->storeAs($path, $nome);
+
             $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
             $dados['status'] = 'Aberto';
-            $this->pibicIndicacao->create($dados);
+            $dados['banner'] = $dados['banner'];
+            $pibicindicacao = $this->pibicIndicacao->create($dados);
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
@@ -110,7 +127,7 @@ class PibicIndicacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PibicIndicacao  $pibic
+     * @param \App\Models\PibicIndicacao $pibic
      * @return \Illuminate\Http\Response
      */
     public function show(PibicIndicacao $pibic)
@@ -121,7 +138,7 @@ class PibicIndicacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PibicIndicacao  $pibicinscricao
+     * @param \App\Models\PibicIndicacao $pibicinscricao
      * @return \Illuminate\Http\Response
      */
     public function edit(PibicIndicacao $pibic)
@@ -132,8 +149,8 @@ class PibicIndicacaoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pibic  $pibic
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Pibic $pibic
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PibicIndicacao $pibic)
@@ -144,7 +161,7 @@ class PibicIndicacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PibicIndicacao  $pibic
+     * @param \App\Models\PibicIndicacao $pibic
      * @return \Illuminate\Http\Response
      */
     public function destroy(PibicIndicacao $pibic)

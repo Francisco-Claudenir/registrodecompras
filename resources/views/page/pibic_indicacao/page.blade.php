@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="d-flex flex-column">
 
-                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full"
+                    <img src="{{ asset('images/pibic/LOGO PIBIC 2023.png') }}" alt="" srcset="" width="full"
                         height="full">
                     <div class="pt-4 pb-4">
                         <h3 class="mt-4 text-dark"><strong>{{ $pindicacao->nome }}</strong></h3>

@@ -3,7 +3,7 @@
     'plugins' => ['wizard'],
 ])
 
-@section('title', ' - Espelho de aluno')
+@section('title', ' - Espelho da Inscricao')
 
 @section('content')
     @include('sweet::alert')

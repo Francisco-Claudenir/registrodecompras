@@ -55,15 +55,15 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->string('doc_comprobatorio')->nullable();
 
             //Informações Bancarias
-            $table->string('agencia_banco');
-            $table->string('numero_conta_corrente');
-            $table->string('comprovante_conta_corrente');
+            $table->string('agencia_banco')->nullable();
+            $table->string('numero_conta_corrente')->nullable();
+            $table->string('comprovante_conta_corrente')->nullable();
 
             //Documentação Orientador
             $table->string('termocompromisso_orientador');
             $table->softDeletes();
             $table->timestamps();
-            
+
 
 
             ////Relacionando com a tabela Pibic Indicação

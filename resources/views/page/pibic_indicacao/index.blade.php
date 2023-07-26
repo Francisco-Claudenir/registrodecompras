@@ -78,7 +78,7 @@
                                                 @endswitch
                                             @else
                                             @endif
-                                             <td><a href="#"
+                                             <td><a href="{{ route('pibicindicacao.inscricao.espelho', ['pibic_indicacao_id' => $pibic_indicacao->pibicindicacao_id, 'pibic_i_inscricao_id' => $dados->pi_inscricao_id]) }}"
                                                 class="badge badge-circle badge-dark"><i
                                                     class="flaticon-381-file-2"></i></a></td>
                                         </tr>

@@ -13,7 +13,7 @@ class PibicIndicacao extends Model
 
     protected $table = 'pibic_indicacoes';
 
-    protected $fillable = ['nome', 'tipo', 'descricao', 'data_inicio', 'data_fim', 'visivel', 'status'];
+    protected $fillable = ['nome', 'tipo', 'banner', 'descricao', 'data_inicio', 'data_fim', 'visivel', 'status'];
 
     protected $primaryKey = 'pibicindicacao_id';
 
