@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('pibic-indicacao.store') }}" method="post">
+                        <form action="{{ route('pibic-indicacao.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="mb-4 col-md-4">
@@ -59,7 +59,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="mb-3 col-md-5 col-sm-4">
+                                    <label class="form-label fw-normal">Banner</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-primary text-white">Upload</span>
+                                        <div class="form-file">
+                                            <input type="file"
+                                                   class="form-file-input form-control @if ($errors->first('documento_identidade')) is-invalid @endif"
+                                                   name="banner">
+                                        </div>
+                                    </div>
+                                    {!! $errors->default->first('banner', '<span style="color:red" class="form-text">:message</span>') !!}
+                                </div>
+                                <div class="col-md-3">
                                     <label class="form-label">Tipo</label>
                                     <select
                                         class="default-select form-control @error('tipo') is-invalid @enderror wide mb-3"
@@ -73,7 +85,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-4 col-md-6">
+                                <div class="mb-4 col-md-4">
                                     <label class="form-label">Descrição</label>
                                     <textarea class="form-control @if ($errors->first('descricao')) is-invalid @endif" cols="30" rows="10"
                                         id="comment" name="descricao" required="">{{ old('descricao') }}</textarea>
@@ -106,6 +118,34 @@
             </div>
         </div>
     </div>
+@endsection
+@section('css')
+    <style>
+        .bootstrap-select .btn {
+            height: 3.5rem !important;
+        }
+
+        @media (max-width: 1402px) {
+            .bootstrap-select .btn {
+                height: 2.5rem !important;
+            }
+        }
+
+        .form-control::-webkit-file-upload-button {
+            height: 55px !important;
+        }
+
+        @media (max-width: 1400px) {
+            .form-control::-webkit-file-upload-button {
+                height: 40px !important;
+            }
+
+            .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+                height: 2.2rem !important;
+            }
+
+        }
+    </style>
 @endsection
 @section('scripts')
     <script>

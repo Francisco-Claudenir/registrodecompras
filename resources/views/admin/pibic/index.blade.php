@@ -67,7 +67,7 @@
                                     <div class="card-body">
                                         <div class="d-flex mb-4 align-items-start">
                                             <div class="dz-media me-3">
-                                                <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
+                                                <img src="{{ url('../storage/' . $dados->banner)}}" class="img-fluid" alt="">
                                             </div>
                                             <div class="me-auto">
                                                 <h4 class="title mb-2 mt-1">{{ $dados->nome }}</h4>
