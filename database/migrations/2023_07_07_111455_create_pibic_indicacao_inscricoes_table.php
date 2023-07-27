@@ -47,9 +47,7 @@ class CreatePibicIndicacaoInscricoesTable extends Migration
             $table->string('historico_escolar');
             $table->string('declaracao_vinculo');
             $table->string('termocompromisso_bolsista');
-            $table->string('termocompromissobolsista_fapema')->nullable();
             $table->string('declaracaonegativa_vinculo')->nullable();
-            $table->string('declaracaoempregaticio_fapema')->nullable();
             $table->string('curriculo_lattes');
             $table->string('declaracao_conjuta_estagio')->nullable();
             $table->string('doc_comprobatorio')->nullable();

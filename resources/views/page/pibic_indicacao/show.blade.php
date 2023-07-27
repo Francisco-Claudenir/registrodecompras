@@ -287,20 +287,6 @@
                                                         </dl>
                                                     </div>
 
-                                                    @if ($pibic->tipo == 'Fapema')
-                                                        <div class="col-6">
-                                                            <dl>
-                                                                <dt>Termo de Compromisso do(a) bolsista modelo Fapema
-                                                                    (formato
-                                                                    PDF)
-                                                                </dt>
-                                                                <dd class="text-justify"><a style="color: red;"
-                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
-                                                                </dd>
-                                                            </dl>
-                                                        </div>
-                                                    @endif
-
                                                     <div class="col-6">
                                                         <dl>
                                                             <dt>Declaração Negativa de Vínculo
@@ -312,20 +298,6 @@
                                                             </dd>
                                                         </dl>
                                                     </div>
-
-                                                    @if ($pibic->tipo == 'Fapema')
-                                                        <div class="col-6">
-                                                            <dl>
-                                                                <dt>Declaração Negativa de Vínculo
-                                                                    Empregatício modelo Fapema
-                                                                    (formato PDF)
-                                                                </dt>
-                                                                <dd class="text-justify"><a style="color: red;"
-                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
-                                                                </dd>
-                                                            </dl>
-                                                        </div>
-                                                    @endif
 
                                                     <div class="col-6">
                                                         <dl>

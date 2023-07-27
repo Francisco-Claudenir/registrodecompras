@@ -441,9 +441,7 @@
                         <strong>
                             <h6>
                                 <dt style="font-size: 14px">Termo de Compromisso do
-                                    bolsista @if ($indicacao_bolsista->tipo == 'Fapema')
-                                        Modelo Uema
-                                    @endif </dt>
+                                    bolsista</dt>
                             </h6>
                         </strong>
                         <small>
@@ -454,54 +452,17 @@
                         </small>
                     </th>
 
-                    @if($indicacao_bolsista->tipo == 'Fapema')
-                        <th>
-                            <strong>
-                                <h6>
-                                    <dt style="font-size: 14px">Termo de Compromisso do(a) bolsista modelo Fapema
-                                        (formato
-                                        PDF)
-                                    </dt>
-                                </h6>
-                            </strong>
-                            <small>
-                                <dd class="text-justify"><a style="color: red;"
-                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromissobolsista_fapema)]) }}">Arquivo</a>
-                                    </p>
-                                </dd>
-                            </small>
-                        </th>
-
-                    @endif
                     @if($indicacao_bolsista->tipo !== 'Pivic')
                         <th>
                             <strong>
                                 <h6>
                                     <dt style="font-size: 14px">Declaração Negativa de Vínculo
-                                        Empregatício @if($indicacao_bolsista->tipo == 'Fapema')
-                                            modelo UEMA
-                                        @endif</dt>
+                                        Empregatício</dt>
                                 </h6>
                             </strong>
                             <small>
                                 <dd class="text-justify"><a style="color: red;"
                                                             href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaonegativa_vinculo)]) }}">Arquivo</a>
-                                    </p>
-                                </dd>
-                            </small>
-                        </th>
-                    @endif
-                    @if ($indicacao_bolsista->tipo == 'Fapema')
-                        <th>
-                            <strong>
-                                <h6>
-                                    <dt style="font-size: 14px">Declaração Negativa de Vínculo Empregatício modelo
-                                        Fapema
-                                </h6>
-                            </strong>
-                            <small>
-                                <dd class="text-justify"><a style="color: red;"
-                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaoempregaticio_fapema)]) }}">Arquivo</a>
                                     </p>
                                 </dd>
                             </small>
