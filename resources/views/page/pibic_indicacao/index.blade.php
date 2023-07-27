@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
-                        <a href=""
+                        <a href="{{route('lista.pibicindicacao.excel',['pibicindicacao_id' =>  $pibic_indicacao->pibicindicacao_id])}}"
                             class="btn btn-success pull-right">Exportar Excel</a>
                     </div>
 
