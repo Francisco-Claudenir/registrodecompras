@@ -18,6 +18,8 @@ class User extends Authenticatable
     protected $fillable = [
         'nome', 'email', 'cpf', 'telefone', 'endereco', 'password', 'perfil_id'
     ];
+    protected $table = 'users';
+
     protected $casts = [
         'endereco' => 'array'
     ];
