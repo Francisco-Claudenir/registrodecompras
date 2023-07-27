@@ -7,7 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Export\ExportsController;
 use App\Http\Controllers\GrandeAreaController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\CentroController;
 use App\Http\Controllers\Bati\BatiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +75,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Analise Primeiros Passos Inscrição
     Route::post('/primeirospassos/analise/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
-
     //User
     Route::resource('users', UserController::class);
 
@@ -82,6 +83,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //bati
     Route::resource('bati', BatiController::class);
+
+    //Cursos
+    Route::resource('curso', CursoController::class);
+
+   
+
+    //Centro
+    Route::resource('centro', CentroController::class);
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -97,6 +106,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 });
 
 
+ //Profile
+    Route::resource('profile', ProfileController::class);
 
 
 
