@@ -3,7 +3,7 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Edição Semic')
+@section('title', ' - Edição Pibic Indicação')
 
 @section('content')
     <div class="container-fluid">
@@ -11,13 +11,13 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">Editar Semic</h4>
+                    <h4 class="card-title">Editar Pibic Indicacão</h4>
 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Semic</a></li>
+                    <li class="breadcrumb-item"><a href="">Pibic Indicação</a></li>
                     <li class="breadcrumb-item active"><a href="">Editar</a></li>
                 </ol>
             </div>
@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('semic.update', $semic->semic_id) }}" method="post">
+                        <form action="{{ route('pibic-indicacao.update', $pibicindicacao->pibicindicacao_id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="row">
@@ -34,7 +34,7 @@
                                     <label class="form-label">Nome</label>
                                     <input type="text"
                                         class="form-control @if ($errors->first('nome')) is-invalid @endif"
-                                        name="nome" required="" value="{{ $semic->nome }}">
+                                        name="nome" required="" value="{{ $pibicindicacao->nome }}">
                                     @if ($errors->has('nome'))
                                         <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                                     @endif
@@ -44,7 +44,7 @@
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_inicio')) is-invalid @endif"
                                         name="data_inicio" required=""
-                                        value="{{ date('Y-m-d', strtotime($semic->data_inicio)) }}" id="data_inicio">
+                                        value="{{ date('Y-m-d', strtotime($pibicindicacao->data_inicio)) }}" id="data_inicio">
                                     @if ($errors->has('data_inicio'))
                                         <div class="invalid-feedback">{{ $errors->first('data_inicio') }}</div>
                                     @endif
@@ -54,7 +54,7 @@
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_fim')) is-invalid @endif"
                                         name="data_fim" required=""
-                                        value="{{ date('Y-m-d', strtotime($semic->data_fim)) }}" id="data_fim">
+                                        value="{{ date('Y-m-d', strtotime($pibicindicacao->data_fim)) }}" id="data_fim">
                                     @if ($errors->has('data_fim'))
                                         <div class="invalid-feedback">{{ $errors->first('data_fim') }}</div>
                                     @endif
@@ -64,7 +64,7 @@
                                 <div class="mb-4 col-md-12">
                                     <label class="form-label">Descrição</label>
                                     <textarea class="form-control @if ($errors->first('descricao')) is-invalid @endif" cols="30" rows="10"
-                                        id="comment" name="descricao" required="">{{ $semic->descricao }}</textarea>
+                                        id="comment" name="descricao" required="">{{ $pibicindicacao->descricao }}</textarea>
                                     @if ($errors->has('descricao'))
                                         <div class="invalid-feedback">{{ $errors->first('descricao') }}</div>
                                     @endif
@@ -73,8 +73,24 @@
                             <div class="row">
                                 <label for="">Status</label>
                                 <div class="mb-3 mb-0 mt-2">
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($semic->status == "Aberto") checked @endif> Aberto</label>
-                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($semic->status == "Fechado") checked @endif> Fechado</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($pibicindicacao->status == "Aberto") checked @endif> Aberto</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($pibicindicacao->status == "Fechado") checked @endif> Fechado</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4 col-md-12">
+                                    <label class="form-label">Visibilidade do Evento</label>
+                                    <div class="form-check custom-checkbox mb-3 checkbox-info">
+                                        <input type="checkbox"
+                                               class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
+                                               @if ($pibicindicacao->visivel == true) checked @endif value="{{ true }}"
+                                               id="customCheckBox2" name="visivel">
+
+                                        <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
+                                        @if ($errors->has('visivel'))
+                                            <div class="invalid-feedback">{{ $errors->first('visivel') }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
@@ -110,7 +126,6 @@
         today = yyyy + '-' + mm + '-' + dd;
 
         // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
-        document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
 @endsection

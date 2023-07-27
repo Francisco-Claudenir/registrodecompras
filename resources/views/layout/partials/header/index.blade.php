@@ -2,7 +2,7 @@
     <div class="header-content">
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
-                <div class="header-left">
+                   <div class="header-left">
                     @if (config($layout . '.topnavSearchbar'))
                         <div class="input-group search-area right d-lg-inline-flex d-none">
                             <input type="text" class="form-control" placeholder="Find something here...">
@@ -33,7 +33,6 @@
                                     @isset(Auth::user()->perfil)
                                         <small>{{ Auth::user()->perfil->nome }}</small>
                                     @endisset
-
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -49,13 +48,18 @@
                                 </a> --}}
                                 @if (isset(Auth::user()->perfil) ||
                                         auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
-                                
+
 
                                 <a href="{{route('admin.home')}}" class="dropdown-item ai-icon">
                                     <i class="flaticon-073-settings text-dark" aria-hidden="true"></i>
                                     <span class="ms-2">Admin </span>
                                 </a>
                                 @endif
+{{--                                <a href="{{ route('profile.index') }}" class="dropdown-item ai-icon">--}}
+{{--                                    <i class="flaticon-028-user-1 text-primary" aria-hidden="true"></i>--}}
+{{--                                    <span class="ms-2">Profile</span>--}}
+{{--                                </a>--}}
+
                                 <a href="{{ route('logout') }}" class="dropdown-item ai-icon"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
@@ -71,7 +75,6 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-
                             </div>
                         </li>
                     @else

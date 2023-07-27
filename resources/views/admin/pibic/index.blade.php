@@ -79,7 +79,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">
@@ -167,8 +167,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary"
-                                                    aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">
@@ -256,8 +255,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary"
-                                                    aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">
@@ -346,8 +344,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary"
-                                                    aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">
@@ -437,8 +434,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary"
-                                                    aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">
@@ -528,8 +524,7 @@
                                                         class="badge badge-sm badge-danger d-sm-inline-block d-none mt-2">Fechado</span>
                                                 @endif
                                             </div>
-                                            <a href=""><i class="fa fa-cog text-primary"
-                                                    aria-hidden="true"></i></a>
+                                            <a href="{{ route('pibic-indicacao.edit', $dados->pibicindicacao_id) }}"><i class="fa fa-cog text-primary" aria-hidden="true"></i></a>
                                         </div>
                                         <p class="mb-4">{{ $dados->descricao }}</p>
                                         <div class="row mb-4">

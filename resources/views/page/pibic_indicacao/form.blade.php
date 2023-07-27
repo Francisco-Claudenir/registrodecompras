@@ -295,32 +295,10 @@
             ) !!}
         </div>
 
-        @if ($pibics->tipo == 'Fapema')
-            <div class="mb-3 col-md-6 col-sm-6">
-                <label class="form-label fw-normal">Termo de Compromisso do(a) bolsista modelo Fapema
-                    (formato
-                    PDF)</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-primary text-white">Upload</span>
-                    <div class="form-file">
-                        <input type="file"
-                               class="form-file-input form-control @if ($errors->first('termocompromissobolsista_fapema')) is-invalid @endif"
-                               name="termocompromissobolsista_fapema">
-                    </div>
-                </div>
-                {!! $errors->default->first(
-                    'termocompromissobolsista_fapema',
-                    '<span style="color:red" class="form-text">:message</span>',
-                ) !!}
-            </div>
-        @endif
         @if($pibics->tipo !== 'Pivic')
             <div class="mb-3 col-md-6 col-sm-6">
                 <label class="form-label fw-normal">Declaração Negativa de Vínculo
-                    Empregatício @if($pibics->tipo == 'Fapema')
-                        modelo UEMA
-                    @endif
-                                   (formato PDF)</label>
+                    Empregatício (formato PDF)</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text bg-primary text-white">Upload</span>
                     <div class="form-file">
@@ -336,26 +314,6 @@
             </div>
         @endif
 
-
-        @if ($pibics->tipo == 'Fapema')
-            <div class="mb-3 col-md-6 col-sm-6">
-                <label class="form-label fw-normal">Declaração Negativa de Vínculo
-                    Empregatício modelo Fapema
-                    (formato PDF)</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-primary text-white">Upload</span>
-                    <div class="form-file">
-                        <input type="file"
-                               class="form-file-input form-control @if ($errors->first('declaracaoempregaticio_fapema')) is-invalid @endif"
-                               name="declaracaoempregaticio_fapema">
-                    </div>
-                </div>
-                {!! $errors->default->first(
-                    'declaracaoempregaticio_fapema',
-                    '<span style="color:red" class="form-text">:message</span>',
-                ) !!}
-            </div>
-        @endif
         <div class="mb-3 col-md-6 col-sm-6">
             <label class="form-label fw-normal">Currículo atualizado, gerado na
                 Plataforma

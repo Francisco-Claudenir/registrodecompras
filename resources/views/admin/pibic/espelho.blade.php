@@ -258,9 +258,6 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Termo de Compromisso do bolsista
-                                @if ($pibic_indicacao->tipo == 'Fapema')
-                                    MODELO UEMA
-                                @endif
                                 (formato
                                 PDF)
                             </dt>
@@ -269,18 +266,6 @@
                             </dd>
                         </dl>
                     </div>
-                    @if ($pibic_indicacao->tipo == 'Fapema')
-                        <div class="col-sm-12">
-                            <dl>
-                                <dt>Termo de Compromisso do(a) bolsista modelo Fapema
-                                    (formato
-                                    PDF)</dt>
-                                <dd class="text-justify"><a style="color: red;"
-                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromissobolsista_fapema)]) }}">Arquivo</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    @endif
                     @if (
                         $pibic_indicacao->tipo == 'Ações Afirmativas' ||
                             $pibic_indicacao->tipo == 'Cnpq' ||
@@ -290,25 +275,10 @@
                             <dl>
                                 <dt>Declaração Negativa de Vínculo
                                     Empregatício
-                                    @if ($pibic_indicacao->tipo == 'Fapema')
-                                        MODELO UEMA
-                                    @endif
                                     (formato PDF)
                                 </dt>
                                 <dd class="text-justify"><a style="color: red;"
                                         href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaonegativa_vinculo)]) }}">Arquivo</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    @endif
-                    @if ($pibic_indicacao->tipo == 'Fapema')
-                        <div class="col-sm-12">
-                            <dl>
-                                <dt>Declaração Negativa de Vínculo
-                                    Empregatício modelo Fapema
-                                    (formato PDF)</dt>
-                                <dd class="text-justify"><a style="color: red;"
-                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaoempregaticio_fapema)]) }}">Arquivo</a>
                                 </dd>
                             </dl>
                         </div>

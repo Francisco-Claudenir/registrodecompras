@@ -141,21 +141,38 @@ class PibicIndicacaoController extends Controller
      * @param \App\Models\PibicIndicacao $pibicinscricao
      * @return \Illuminate\Http\Response
      */
-    public function edit(PibicIndicacao $pibic)
+    public function edit($id)
     {
-        //
+        $pibicindicacao = $this->pibicIndicacao->findOrfail($id);
+        return view($this->bag['view'] . '.edit', compact('pibicindicacao'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Pibic $pibic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PibicIndicacao $pibic)
+    public function update(Request $request, $id)
     {
-        //
+
+        try {
+
+            DB::beginTransaction();
+            $pibicindicacao = $this->pibicIndicacao->findOrfail($id);
+            $dados = $request->all();
+            $dados['visivel'] = $request['visivel'] ?? 0;
+            $dados['data_fim'] = $dados['data_fim'] . ' 23:59:59';
+            $pibicindicacao->update($dados);
+
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.update'));
+            return redirect()->route($this->bag['route'] . '.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
     /**

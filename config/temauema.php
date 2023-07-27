@@ -250,6 +250,42 @@ return [
 
 			],
 		],
+        [
+            'title' => 'Centros',
+            'icon' => 'flaticon-381-networking-1',
+            'can' => 'Administrador',
+            'submenu' => [
+                [
+                    'title' => 'Lista',
+                    'icon' => 'flaticon-381-list-1',
+                    'route' => 'centro.index',
+                ],
+                [
+                    'title' => 'Adicionar',
+                    'icon' => 'flaticon-381-plus',
+                    'route' => 'centro.create'
+                ]
+
+            ],
+        ],
+        [
+            'title' => 'Cursos',
+            'icon' => 'flaticon-381-networking-1',
+            'can' => 'Administrador',
+            'submenu' => [
+                [
+                    'title' => 'Lista',
+                    'icon' => 'flaticon-381-list-1',
+                    'route' => 'curso.index',
+                ],
+                [
+                    'title' => 'Adicionar',
+                    'icon' => 'flaticon-381-plus',
+                    'route' => 'curso.create'
+                ]
+
+            ],
+        ],
 
 		['header' => 'Eventos'],
 		[
