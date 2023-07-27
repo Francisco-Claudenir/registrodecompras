@@ -152,6 +152,7 @@ return [
 		[
 			'title' => 'Auditoria ',
 			'icon' => 'flaticon-381-search-3',
+			'can' => 'Administrador',
 			'route' => 'auditoria.index'
 		],
 		[
@@ -252,19 +253,19 @@ return [
 
 		['header' => 'Eventos'],
 		[
-			'title' => 'Semic',
-			'icon' => 'flaticon-381-trash',
+			'title' => 'Pibic',
+			'icon' => 'flaticon-381-notepad-1',
 			'submenu' => [
 				[
 					'title' => 'Lista',
 					'icon' => 'flaticon-381-list-1',
-					'route' => 'semic.index'
+					'route' => 'pibic-indicacao.index'
 
 				],
 				[
 					'title' => 'Adcionar',
 					'icon' => 'flaticon-381-plus',
-					'route' => 'semic.create'
+					'route' => 'pibic-indicacao.create'
 
 				]
 
@@ -272,7 +273,7 @@ return [
 		],
 		[
 			'title' => 'Primeiros Passos',
-			'icon' => 'flaticon-381-trash',
+			'icon' => 'flaticon-381-notepad-1',
 			'can' => 'Administrador|Coordenação de Pesquisa',
 			'submenu' => [
 				[
@@ -292,7 +293,7 @@ return [
 		],
 		[
 			'title' => 'PP-Indicacao Bolsistas',
-			'icon' => 'flaticon-381-trash',
+			'icon' => 'flaticon-381-notepad-1',
 			'submenu' => [
 				[
 					'title' => 'Lista',
@@ -302,7 +303,7 @@ return [
 				],
 				[
 					'title' => 'Adicionar',
-					'icon' => 'flaticon-381-key',
+					'icon' => 'flaticon-381-plus',
 					'route' => 'pp-indicacao-bolsistas.create'
 
 				]
@@ -312,16 +313,22 @@ return [
 		['header' => 'Sites'],
 		[
 			'title' => 'Semic',
-			'icon' => 'flaticon-381-user',
+			'icon' => 'flaticon-381-internet',
+			''
+		],
+		[
+			'title' => 'Pibic Indicação',
+			'icon' => 'flaticon-381-internet',
+			'route' => 'site.pibic-indicacao'
 		],
 		[
 			'title' => 'Primeiros Passos',
-			'icon' => 'flaticon-381-user',
+			'icon' => 'flaticon-381-internet',
 			'route' => 'site.primeiropasso'
 		],
 		[
 			'title' => 'PP-Indicacao Bolsistas',
-			'icon' => 'flaticon-381-user',
+			'icon' => 'flaticon-381-internet',
 			'route' => 'site.pp-indicacao-bolsistas'
 		]
 	],

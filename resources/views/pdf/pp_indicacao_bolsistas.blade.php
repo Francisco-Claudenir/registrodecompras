@@ -145,7 +145,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone_bolsista }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_bolsista) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -157,7 +157,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $endereco['cep'] }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->mask_cep($endereco['cep']) }}</p>
                                     </dd>
                                 </small>
                             </th>
@@ -294,7 +294,7 @@
                                 </strong>
                                 <small>
                                     <dd>
-                                        <p style="font-size: 14px">{{ $dadosInscrito->telefone_orientador }}</p>
+                                        <p style="font-size: 14px">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_orientador) }}</p>
                                     </dd>
                                 </small>
                             </th>

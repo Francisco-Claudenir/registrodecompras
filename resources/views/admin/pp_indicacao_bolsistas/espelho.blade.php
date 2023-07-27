@@ -3,7 +3,7 @@
     'plugins' => ['wizard'],
 ])
 
-@section('title', ' - Cadastro de alunno')
+@section('title', ' - Espelho da Inscricao')
 
 @section('content')
     @include('sweet::alert')
@@ -106,19 +106,19 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Cpf</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->cpf_bolsista }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_cpf($dadosInscrito->cpf_bolsista) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Telefone</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->telefone_bolsista }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_bolsista) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Cep</dt>
-                            <dd class="text-justify">{{ $endereco['cep'] }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_cep($endereco['cep']) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -184,7 +184,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Telefone</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->telefone_orientador }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_telefone($dadosInscrito->telefone_orientador) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
@@ -196,7 +196,7 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>CPF</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->cpf_orientador }}</dd>
+                            <dd class="text-justify">{{ $dadosInscrito->mask_cpf($dadosInscrito->cpf_orientador) }}</dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">

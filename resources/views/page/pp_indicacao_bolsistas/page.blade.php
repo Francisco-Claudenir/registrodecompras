@@ -3,7 +3,7 @@
     'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - ' . $pp_indicacao_bolsista->nome)
 @section('content-header')
     @include('sweet::alert')
     <div class="container-fluid ">

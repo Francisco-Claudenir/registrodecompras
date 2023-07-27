@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <a href="{!! url('/page-forgot-password') !!}">Esqueci minha senha</a>
+                                        <a href="{{route('password.request')}}">Esqueci minha senha</a>
                                     </div>
                                 </div>
                                 <div class="text-center">

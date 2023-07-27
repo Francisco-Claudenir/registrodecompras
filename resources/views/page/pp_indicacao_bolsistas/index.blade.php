@@ -3,7 +3,7 @@
     'plugins' => ['wizard'],
 ])
 
-@section('title', ' - Cadastro de alunno')
+@section('title', ' - Lista de Inscritos')
 
 @section('content')
     <div class="container-fluid">
@@ -50,9 +50,9 @@
                                         <tr>
                                             <th>{{ $dados->numero_inscricao }}</th>
                                             <th>{{ $dados->nome_orientador }}</th>
-                                            <td>{{ $dados->cpf_orientador }}</td>
+                                            <td>{{ $dados->mask_cpf($dados->cpf_orientador) }}</td>
                                             <td>{{ $dados->nome_bolsista }}</td>
-                                            <td>{{ $dados->cpf_orientador }}</td>
+                                            <td>{{ $dados->mask_cpf($dados->cpf_bolsista) }}</td>
                                             @if (!$dados->status !== 'Em Analise')
                                                 @switch($dados->status)
                                                     @case('Indeferido')

@@ -3,13 +3,13 @@
     'plugins' => ['lightgallery'],
 ])
 
-@section('title', ' - Login')
+@section('title', ' - Primeiros Passos Indicação Bolsista')
 @section('content-header')
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/pp_na_ciencia/topo.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>
@@ -21,14 +21,14 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-md-12 col-sm-12">
                             <div class="card border shadow-sm">
-                                <img src="{{ asset('images/semicbg.jpg') }}" alt="" class="img-fluid w-100 rounded"
+                                <img src="{{ asset('images/pp_na_ciencia/card-logo.jpg') }}" alt="" class="img-fluid w-100 rounded"
                                     width="100" height="100">
                                 <div class="card-body">
 
                                     <h3 class="text-black">{{ $dados->nome }}</h3>
 
                                     <p>{{ $dados->descricao }}</p>
-                                    <a class="btn btn-secondary"
+                                    <a class="btn btn-info"
                                         href="{{ route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $dados->pp_i_bolsista_id]) }}">Ver
                                         Mais</a>
                                 </div>
