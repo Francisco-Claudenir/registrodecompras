@@ -11,6 +11,7 @@ use App\Http\Controllers\ModalidadeBolsaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CentroController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PibicIndicacaoController;
 use App\Http\Controllers\PibicIndicacaoInscricaoController;
@@ -72,6 +73,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Analise Primeiros Passos Inscrição
     Route::post('/primeirospassos/analise/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+//Pibic Indicação Inscricão Execel
+    Route::get('/pibicindicacao/inscritos/{pibicindicacao_id}', [ExportsController::class, 'pibicIndicacaoInscricao'])->name('lista.pibicindicacao.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //User
     Route::resource('users', UserController::class);
