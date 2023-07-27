@@ -216,7 +216,7 @@
                 <label class="form-label fw-normal">Link do Currículo Lattes do Orientador(a)</label>
                 <input type="text"
                        class="form-control form-control-sm @if ($errors->first('curriculolattes_orientador')) is-invalid @endif"
-                       placeholder="Título do Plano de Trabalho Bolsista" name="curriculolattes_orientador"
+                       placeholder="Link do Currículo Lattes do Orientador(a)" name="curriculolattes_orientador"
                        value="{{ old('curriculolattes_orientador') }}">
                 {!! $errors->default->first(
                     'curriculolattes_orientador',

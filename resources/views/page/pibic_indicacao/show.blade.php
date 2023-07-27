@@ -23,10 +23,12 @@
         <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Inscrições</h3>
+                    <h3 class="card-title ">Inscrições</h3>
+                    <a type="button" href="{{route('pibicindicacao.page',$pibic->pibicindicacao_id)}}" class="btn btn-xs btn-outline-danger light">Voltar</a>
                 </div>
 
                 <div class="card-body pt-2 pb-0">
+
                     @foreach ($dadosInscrito as $dados)
                         <div class="row justify-content-center p-4">
                             <div class="col-sm-12 col-lg-10">
@@ -34,7 +36,6 @@
                                 <div class="card project-card">
                                     <div class="card-body">
                                         <div class="d-flex mb-4 align-items-start">
-
                                             <div class="me-auto">
                                                 <span class="font-w600">
                                                     Número de Inscrição :
