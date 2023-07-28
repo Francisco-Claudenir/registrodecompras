@@ -26,7 +26,7 @@
                     @foreach ($pibics as $dados)
                         <div class="col-lg-5 col-md-9 col-sm-10">
                             <div class="card border shadow-sm">
-                                <img src="{{ url('../storage/' . $dados->banner)}}" alt=""
+                                <img src="{{asset('storage/' .$dados->banner)}}" alt=""
                                      class="img-fluid w-100 rounded" width="80" height="70">
                                 <div class="card-body">
 
