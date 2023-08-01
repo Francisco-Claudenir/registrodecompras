@@ -7,26 +7,32 @@
     <div class="row">
         <input type="text" class="form-control"
                hidden name="pibic_tipo" value="{{ $pibics->tipo }}">
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-5 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Nome completo do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('nome_bolsista')) is-invalid @endif"
                    placeholder="Nome Bolsista" name="nome_bolsista" value="{{ old('nome_bolsista') }}">
             {!! $errors->default->first('nome_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">E-mail do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('email_bolsista')) is-invalid @endif"
                    placeholder="E-mail" name="email_bolsista" value="{{ old('email_bolsista') }}">
             {!! $errors->default->first('email_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">CPF do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('cpf_bolsista')) is-invalid @endif"
                    placeholder="CPF" name="cpf_bolsista" value="{{ old('cpf_bolsista') }}" autocomplete="cpf"
                    autofocus id="cpf_bolsista">
             {!! $errors->default->first('cpf_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4 col-sm-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <label class="form-label fw-normal">Numero de Identidade do(a) bolsista</label>
+            <input type="text" class="form-control @if ($errors->first('numero_identidade')) is-invalid @endif"
+                   placeholder="Identidade" name="numero_identidade" value="{{ old('numero_identidade') }}">
+            {!! $errors->default->first('numero_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
+        </div>
+        <div class="mb-3 col-xl-6 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Documento CPF do(a) bolsista</label>
             <div class="input-group mb-3">
                 <span class="input-group-text bg-primary text-white">Upload</span>
@@ -38,13 +44,8 @@
             </div>
             {!! $errors->default->first('documento_cpf', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">Numero de Identidade do(a) bolsista</label>
-            <input type="text" class="form-control @if ($errors->first('numero_identidade')) is-invalid @endif"
-                   placeholder="Identidade" name="numero_identidade" value="{{ old('numero_identidade') }}">
-            {!! $errors->default->first('numero_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
-        </div>
-        <div class="mb-3 col-md-4 col-sm-4">
+
+        <div class="mb-3 col-xl-6 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Documento de Identidade do(a) bolsista</label>
             <div class="input-group mb-3">
                 <span class="input-group-text bg-primary text-white">Upload</span>
@@ -56,14 +57,14 @@
             </div>
             {!! $errors->default->first('documento_identidade', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Telefone do(a) bolsista</label>
             <input type="text" class="form-control @if ($errors->first('telefone_bolsista')) is-invalid @endif"
                    placeholder="(99) 99999-9999" name="telefone_bolsista" value="{{ old('telefone_bolsista') }}"
                    autocomplete="phone" id="telefone_bolsista">
             {!! $errors->default->first('telefone_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Cep do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[cep]" id="cep"
@@ -80,7 +81,7 @@
                 '<span style="color:red" class="form-text">:message</span>',
             ) !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Endereço do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[endereco]" id="endereco"
@@ -93,7 +94,16 @@
                 '<span style="color:red" class="form-text">:message</span>',
             ) !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <label class="mb-1" for="endereco_bolsista[bairro]">Bairro do(a) bolsista</label>
+            <div class="input-group">
+                <input type="text" name="endereco_bolsista[bairro]" id="bairro"
+                       class="form-control @error('endereco_bolsista.bairro') is-invalid @enderror" placeholder="Bairro"
+                       autocomplete="bairro" value="{{ old('endereco_bolsista.bairro') }}">
+            </div>
+            {!! $errors->default->first('endereco_bolsista.bairro', '<span style="color:red" class="form-text">:message</span>') !!}
+        </div>
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Número do(a) bolsista</label>
             <div class="input-group">
                 <input type="text" name="endereco_bolsista[numero]"
@@ -105,17 +115,9 @@
                 '<span style="color:red" class="form-text">:message</span>',
             ) !!}
         </div>
-        <div class="mb-3 col-md-4">
-            <label class="mb-1" for="endereco_bolsista[bairro]">Bairro do(a) bolsista</label>
-            <div class="input-group">
-                <input type="text" name="endereco_bolsista[bairro]" id="bairro"
-                       class="form-control @error('endereco_bolsista.bairro') is-invalid @enderror" placeholder="Bairro"
-                       autocomplete="bairro" value="{{ old('endereco_bolsista.bairro') }}">
-            </div>
-            {!! $errors->default->first('endereco_bolsista.bairro', '<span style="color:red" class="form-text">:message</span>') !!}
-        </div>
-        <div class="mb-3 col-md-6">
-            <label class="form-label fw-normal @error('centro_bolsista') is-invalid @enderror">Centro do(a) bolsista</label>
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
+            <label class="form-label fw-normal @error('centro_bolsista') is-invalid @enderror">Centro do(a)
+                bolsista</label>
             <select
                 class="default-select form-control form-custom wide @if ($errors->first('centro_bolsista')) is-invalid @endif"
                 name="centro_bolsista"
@@ -131,7 +133,7 @@
             </select>
             {!! $errors->default->first('centro_bolsista', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-6">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Curso do(a) bolsista</label>
             <select class="form-control form-select" name="curso_bolsista" id="curso_id">
             </select>
@@ -147,21 +149,27 @@
 <hr class="mt-3 mb-3">
 <div class="basic-form">
     <div class="row mt-3">
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Nome Completo do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('nome_orientador')) is-invalid @endif"
                    placeholder="Nome Completo" name="nome_orientador" value="{{ old('nome_orientador') }}">
             {!! $errors->default->first('nome_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <label class="form-label fw-normal">E-mail do Orientador(a)</label>
+            <input type="text" class="form-control @if ($errors->first('email_orientador')) is-invalid @endif"
+                   placeholder="E-mail" name="email_orientador" value="{{ old('email_orientador') }}">
+            {!! $errors->default->first('email_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
+        </div>
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">CPF do Orientador(a)</label>
             <input type="text" class="form-control @if ($errors->first('cpf_orientador')) is-invalid @endif"
                    placeholder="CPF Orientador" name="cpf_orientador" value="{{ old('cpf_orientador') }}"
                    autocomplete="cpf" autofocus id="cpf_orientador">
             {!! $errors->default->first('cpf_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
             <label class="form-label fw-normal">Telefone do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('telefone_orientador')) is-invalid @endif"
@@ -169,13 +177,7 @@
                    placeholder="(99) 99999-9999">
             {!! $errors->default->first('telefone_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
-            <label class="form-label fw-normal">E-mail do Orientador(a)</label>
-            <input type="text" class="form-control @if ($errors->first('email_orientador')) is-invalid @endif"
-                   placeholder="E-mail" name="email_orientador" value="{{ old('email_orientador') }}">
-            {!! $errors->default->first('email_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
-        </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Campus/Centros do Orientador(a)</label>
             <select
                 class="default-select form-control form-custom wide @if ($errors->first('centro_orientador')) is-invalid @endif"
@@ -189,7 +191,7 @@
             </select>
             {!! $errors->default->first('centro_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Título do Projeto do Orientador(a)</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('tituloprojeto_orientador')) is-invalid @endif"
@@ -200,7 +202,7 @@
                 '<span style="color:red" class="form-text">:message</span>',
             ) !!}
         </div>
-        <div class="mb-3 col-md-4">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Título do Plano de Trabalho do(a) Bolsista</label>
             <input type="text"
                    class="form-control form-control-sm @if ($errors->first('tituloplano_bolsista')) is-invalid @endif"
@@ -212,7 +214,7 @@
             ) !!}
         </div>
         @if ($pibics->tipo == 'Cnpq')
-            <div class="mb-3 col-md-6">
+            <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
                 <label class="form-label fw-normal">Link do Currículo Lattes do Orientador(a)</label>
                 <input type="text"
                        class="form-control form-control-sm @if ($errors->first('curriculolattes_orientador')) is-invalid @endif"
@@ -227,7 +229,7 @@
 
 
         @if ($pibics->tipo == 'Cnpq' || $pibics->tipo == 'Ações Afirmativas')
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-xl-4 col-lg-6 col-md-6 col-sm-12">
                 <label class="form-label fw-normal">3 Palavras chave</label>
                 <input type="text"
                        class="form-control form-control-sm @if ($errors->first('palavras_chave')) is-invalid @endif"
@@ -248,7 +250,7 @@
 <hr class="mt-3 mb-3">
 <div class="basic-form">
     <div class="row mt-2">
-        <div class="mb-3 col-md-6 col-sm-6">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Histórico Escolar atualizado,
                 disponível do
                 SIGUEMA (formato PDF)</label>
@@ -262,7 +264,7 @@
             </div>
             {!! $errors->default->first('historico_escolar', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-6 col-sm-6">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Declaração de vínculo do aluno à UEMA
                 atualizado (formato PDF)</label>
             <div class="input-group mb-3">
@@ -275,7 +277,7 @@
             </div>
             {!! $errors->default->first('declaracao_vinculo', '<span style="color:red" class="form-text">:message</span>') !!}
         </div>
-        <div class="mb-3 col-md-6 col-sm-6">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Termo de Compromisso do(a) bolsista @if($pibics->tipo == 'Fapema')
                     modelo UEMA
                 @endif
@@ -296,7 +298,7 @@
         </div>
 
         @if($pibics->tipo !== 'Pivic')
-            <div class="mb-3 col-md-6 col-sm-6">
+            <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
                 <label class="form-label fw-normal">Declaração Negativa de Vínculo
                     Empregatício (formato PDF)</label>
                 <div class="input-group mb-3">
@@ -314,7 +316,7 @@
             </div>
         @endif
 
-        <div class="mb-3 col-md-6 col-sm-6">
+        <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Currículo atualizado, gerado na
                 Plataforma
                 Lattes (formato PDF)</label>
@@ -331,7 +333,7 @@
 
 
         @if($pibics->tipo !== 'Pivic')
-            <div class="mb-3 col-md-6 col-sm-6">
+            <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
                 <label class="form-label fw-normal">Declaração conjuta de estágio (quando
                     for o
                     caso) (formato PDF)</label>
@@ -350,7 +352,7 @@
             </div>
         @endif
         @if ($pibics->tipo == 'Ações Afirmativas')
-            <div class="mb-3 col-md-6 col-sm-6">
+            <div class="mb-3 col-xl-4 col-lg-12 col-md-12 col-sm-12">
                 <label class="form-label fw-normal">Documento comprobatório de ingresso UEMA por meio de ações
                     afirmativas (formato PDF)</label>
                 <div class="input-group mb-3">
@@ -397,7 +399,7 @@
                     '<span style="color:red" class="form-text">:message</span>',
                 ) !!}
             </div>
-            <div class="mb-3 col-md-6 col-sm-6">
+            <div class="mb-3 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <label class="form-label fw-normal">Comprovante de Conta Corrente do Banco
                     do
                     Brasil (formato PDF)</label>
@@ -427,7 +429,7 @@
 <hr class="mt-3 mb-3">
 <div class="basic-form">
     <div class="row mt-3">
-        <div class="mb-3 col-md-6 col-sm-6">
+        <div class="mb-3 col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <label class="form-label fw-normal">Termo de Compromisso (formato
                 PDF)</label>
             <div class="input-group mb-3">

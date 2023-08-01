@@ -289,7 +289,7 @@
                                 Plataforma
                                 Lattes (formato PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo_lattes)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
@@ -319,6 +319,7 @@
                             </dl>
                         </div>
                     @endif
+                    @if($pibic_indicacao->tipo !== 'Pivic')
                     <h5>Informações Bancárias</h5>
                     <div class="col-sm-12">
                         <dl>
@@ -343,6 +344,7 @@
                             </dd>
                         </dl>
                     </div>
+                    @endif
                     <h5>Documentação do
                         Orientador(a)</h5>
                     <div class="col-sm-12">
@@ -350,7 +352,7 @@
                             <dt>Termo de Compromisso (formato
                                 PDF)</dt>
                             <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                    href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromisso_orientador)]) }}">Arquivo</a>
                             </dd>
                         </dl>
                     </div>
