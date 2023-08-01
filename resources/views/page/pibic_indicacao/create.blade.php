@@ -20,10 +20,10 @@
         <div class="card">
             <form action="{{route('pibicindicacao.inscricao.store',['pibicindicacao_id' => $pibics->pibicindicacao_id])}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="col-xl-12 p-lg-4 ">
+                <div class="col-xl-12 p-lg-4 p-md-2 ">
                     <div class="row justify-content-center">
                         <h3 class="text-primary d-inline text-center p-4">Inscrição {{ $pibics->nome }} </h3>
-                        <div class="col-lg-8 col-md-11 col-sm-11">
+                        <div class="col-xl-11 col-lg-10 col-md-11 col-sm-11">
                             <div class="card border shadow-sm">
                                 <div class="card-body">
                                     @include('page.pibic_indicacao.form')

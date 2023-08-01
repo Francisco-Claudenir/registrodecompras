@@ -200,23 +200,6 @@ class PibicIndicacaoInscricaoController extends Controller
                 $nome = 'termocompromisso_bolsista' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                 $dados_inscricao['termocompromisso_bolsista'] = $request['termocompromisso_bolsista']->storeAs($path, $nome);
 
-                if ($pibicIndicacao_bolsistas->tipo == 'Fapema') {
-                    //Termo compromisso bolsista Fapema
-                    $extensao = $request['termocompromissobolsista_fapema']->extension();
-                    $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/termocompromissobolsista_fapema' . '/' . Auth::user()->cpf . '';
-                    $nome = 'termocompromissobolsista_fapema' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                    $dados_inscricao['termocompromissobolsista_fapema'] = $request['termocompromissobolsista_fapema']->storeAs($path, $nome);
-
-                    //Declaracao Vinculo Fapema
-                    $extensao = $request['declaracaoempregaticio_fapema']->extension();
-                    $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/declaracaoempregaticio_fapema' . '/' . Auth::user()->cpf . '';
-                    $nome = 'declaracaoempregaticio_fapema' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                    $dados_inscricao['declaracaoempregaticio_fapema'] = $request['declaracaoempregaticio_fapema']->storeAs($path, $nome);
-
-                } else {
-                    $dados_inscricao['termocompromissobolsista_fapema'] = null;
-                    $dados_inscricao['declaracaoempregaticio_fapema'] = null;
-                }
 
                 if ($pibicIndicacao_bolsistas->tipo !== 'Pivic') {
                     //Declaracao negativa vinculo
@@ -302,8 +285,6 @@ class PibicIndicacaoInscricaoController extends Controller
                     'declaracao_vinculo' => $dados_inscricao['declaracao_vinculo'],
                     'termocompromisso_bolsista' => $dados_inscricao['termocompromisso_bolsista'],
                     'declaracaonegativa_vinculo' => $dados_inscricao['declaracaonegativa_vinculo'],
-                    'termocompromissobolsista_fapema' => $dados_inscricao['termocompromissobolsista_fapema'],
-                    'declaracaoempregaticio_fapema' => $dados_inscricao['declaracaoempregaticio_fapema'],
                     'curriculo_lattes' => $dados_inscricao['curriculo_lattes'],
                     'declaracao_conjuta_estagio' => $dados_inscricao['declaracao_conjuta_estagio'],
                     'doc_comprobatorio' => $dados_inscricao['doc_comprobatorio'],
@@ -322,7 +303,7 @@ class PibicIndicacaoInscricaoController extends Controller
                 return redirect()->route('pibicindicacao.page', ['pibicindicacao_id' => $pibicindicacao_id]);
             }
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
@@ -357,13 +338,13 @@ class PibicIndicacaoInscricaoController extends Controller
         try {
 
             $diretorio = Crypt::decrypt($diretorio);
-            
+
             $path = storage_path('app/public/' . $diretorio);
-            
+
             if (!File::exists($path)) {
                 abort(404);
             }
-            
+
             $file = File::get($path);
             $type = File::mimeType($path);
 
@@ -401,7 +382,7 @@ class PibicIndicacaoInscricaoController extends Controller
 
         foreach ($dadosInscrito as $key => $dados) {
 
-            $dados->endereco_bolsista = json_decode($dados->endereco, true);
+            $dados->endereco_bolsista = json_decode($dados->endereco_bolsista, true);
         }
 
 //        dd($dadosInscrito);

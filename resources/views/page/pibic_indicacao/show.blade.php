@@ -163,7 +163,7 @@
                                                             <dt>Documento de Identidade</dt>
                                                             <dd class="text-justify"><a style="color: red;"
                                                                                         target="_blank"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_identidade)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_identidade)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -171,7 +171,7 @@
                                                         <dl>
                                                             <dt>Documento CPF</dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_cpf)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->documento_cpf)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -262,7 +262,7 @@
                                                                 SIGUEMA (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->historico_escolar)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->historico_escolar)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -272,7 +272,7 @@
                                                                 atualizado (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_vinculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_vinculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -283,7 +283,7 @@
                                                                 PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -295,7 +295,7 @@
                                                                 (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -307,7 +307,7 @@
                                                                 Lattes (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -320,7 +320,7 @@
                                                                 </dt>
                                                                 @if ($dados->declaracao_conjuta_estagio != null)
                                                                     <dd class="text-justify"><a style="color: red;"
-                                                                                                href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_conjuta_estagio)]) }}">Arquivo</a>
+                                                                                                href="{{ route('ppibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_conjuta_estagio)]) }}">Arquivo</a>
                                                                     </dd>
                                                                 @else
                                                                     <dd>Sem Arquivo</dd>
@@ -338,7 +338,7 @@
                                                                     afirmativas (formato PDF)
                                                                 </dt>
                                                                 <dd class="text-justify"><a style="color: red;"
-                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
+                                                                                            href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
                                                                 </dd>
                                                             </dl>
                                                         </div>
@@ -372,7 +372,7 @@
                                                                     Brasil (formato PDF)
                                                                 </dt>
                                                                 <dd class="text-justify"><a style="color: red;"
-                                                                                            href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->comprovante_conta_corrente)]) }}">Arquivo</a>
+                                                                                            href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->comprovante_conta_corrente)]) }}">Arquivo</a>
                                                                 </dd>
                                                             </dl>
                                                         </div>
@@ -386,7 +386,7 @@
                                                                 PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pp-i-bolsistas-inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_orientador)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
