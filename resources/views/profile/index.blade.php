@@ -45,7 +45,7 @@
                                 <div class="card-body pt-4" style="background-color: #fafafa">
 
                                     <li><strong>Nome: </strong><span> {{ $dadosUser->nome }}</span></li><br>
-                                    <li><strong>Cpf: </strong><span id="cpf"> {{ $dadosUser->cpf }}</span></li><br>
+                                    <li><strong>Cpf: </strong><span id="cpf"> {{ $dadosUser->cpf($dadosUser->cpf) }}</span></li><br>
                                     <li><strong>Email: </strong><span></span> {{ $dadosUser->email }}</li><br>
                                     <li><strong>Telefone: </strong><span id="telefone"> {{ $dadosUser->telefone }}</span>
                                     </li><br>
@@ -53,7 +53,6 @@
                                     <li><strong>Bairro: </strong>{{ $endereco['bairro'] }}<span></span></li><br>
                                     <li><strong>Número: </strong><span>{{ $endereco['numero'] }}</span></li><br>
                                     <li><strong>Cep: </strong><span>{{ $endereco['cep'] }}</span></li><br>
-                                    <li><strong>Perfil: </strong><span>{{ $dadosUser->perfil->nome }}</span></li><br>
                                     <li><strong>Perfil criado em:
                                         </strong><span>{{ date_format($dadosUser->created_at, 'd/m/Y - H:i:s') }}</span>
                                     </li><br>
