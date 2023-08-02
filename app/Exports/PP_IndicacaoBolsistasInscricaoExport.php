@@ -48,6 +48,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         $inscricoes = PP_IndicacaoBolsistasInscricao::where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->orderby('numero_inscricao', 'asc')->get();
 
+
         foreach ($inscricoes as $key => $dados) {
 
             $endereco = json_decode($dados['endereco_bolsista'], true);
@@ -57,6 +58,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
             $centro_orientador = Centro::findOrfail($dados['centro_orientador_id']);
 
             $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
+            $lista[$key]['status'] = $dados['status'];
             $lista[$key]['nome_bolsista'] = $dados['nome_bolsista'];
             $lista[$key]['email_bolsista'] = $dados['email_bolsista'];
             $lista[$key]['cpf_bolsista'] = $dados['cpf_bolsista'];
@@ -110,6 +112,7 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         // Defina os nomes personalizados para as colunas
         return [
             'N° Inscrição',
+            'Status',
             'Nome Bolsista',
             'E-mail Bolsista',
             'Cpf Bolsista',
@@ -216,6 +219,24 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
         // Aplicar estilo para as demais colunas
         // Estilizar as demais linhas
         $lastRow = $sheet->getHighestRow();
+
+        for ($row = 2; $row <= $lastRow; $row++) {
+            $statusCell = $sheet->getCell('B' . $row);
+            $status = $statusCell->getValue();
+
+            // Defina a cor de fundo com base no valor do status
+            if ($status == 'Em Analise') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('B2B2B2'); // Amarelo
+            } elseif ($status == 'Deferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('00FF00'); // Verde
+            } elseif ($status == 'Indeferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000'); // Vermelho
+            }
+        }
+
         for ($row = 2; $row <= $lastRow; $row++) {
             $sheet->getRowDimension($row)->setRowHeight(20);
             $sheet->getStyle("A{$row}:Z{$row}")->applyFromArray([
@@ -239,10 +260,11 @@ class PP_IndicacaoBolsistasInscricaoExport implements FromCollection, WithHeadin
     {
         return [
             'A' => 20,
-            'B' => 55,
+            'B' => 15,
             'C' => 55,
-            'D' => 20,
+            'D' => 55,
             'E' => 20,
+            'F' => 20
             // 'T' => 75,
             // 'U' => 65,
             // 'Y' => 85,

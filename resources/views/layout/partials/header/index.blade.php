@@ -2,7 +2,7 @@
     <div class="header-content">
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
-                   <div class="header-left">
+                <div class="header-left">
                     @if (config($layout . '.topnavSearchbar'))
                         <div class="input-group search-area right d-lg-inline-flex d-none">
                             <input type="text" class="form-control" placeholder="Find something here...">
@@ -36,36 +36,35 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                {{-- <a href="{!! url('/app-profile') !!}" class="dropdown-item ai-icon">
+                                <a href="{{route('profile.index')}}" class="dropdown-item ai-icon">
                                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                        width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
+                                         width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                     <span class="ms-2">Profile </span>
-                                </a> --}}
+                                </a>
                                 @if (isset(Auth::user()->perfil) ||
                                         auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
 
-
-                                <a href="{{route('admin.home')}}" class="dropdown-item ai-icon">
-                                    <i class="flaticon-073-settings text-dark" aria-hidden="true"></i>
-                                    <span class="ms-2">Admin </span>
-                                </a>
+                                    <a href="{{route('admin.home')}}" class="dropdown-item ai-icon">
+                                        <i class="flaticon-073-settings text-dark" aria-hidden="true"></i>
+                                        <span class="ms-2">Admin </span>
+                                    </a>
                                 @endif
-{{--                                <a href="{{ route('profile.index') }}" class="dropdown-item ai-icon">--}}
-{{--                                    <i class="flaticon-028-user-1 text-primary" aria-hidden="true"></i>--}}
-{{--                                    <span class="ms-2">Profile</span>--}}
-{{--                                </a>--}}
+                                {{--                                <a href="{{ route('profile.index') }}" class="dropdown-item ai-icon">--}}
+                                {{--                                    <i class="flaticon-028-user-1 text-primary" aria-hidden="true"></i>--}}
+                                {{--                                    <span class="ms-2">Profile</span>--}}
+                                {{--                                </a>--}}
 
                                 <a href="{{ route('logout') }}" class="dropdown-item ai-icon"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
-                                        width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
+                                         width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                         <polyline points="16 17 21 12 16 7"></polyline>
                                         <line x1="21" y1="12" x2="9" y2="12"></line>

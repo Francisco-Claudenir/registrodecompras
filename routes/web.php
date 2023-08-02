@@ -115,6 +115,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
  //Profile
+    Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
     Route::resource('profile', ProfileController::class);
 
 

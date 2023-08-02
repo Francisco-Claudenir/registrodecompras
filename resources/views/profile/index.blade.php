@@ -9,6 +9,7 @@
     <div class="container-fluid">
         <!-- Add Project -->
         @include('sweet::alert')
+
         <div class="row page-titles mx-0">
 
             <div class="col-sm-6 p-md-0 ">
@@ -21,13 +22,20 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li active">
-                        <h5 class="btn btn-primary btn-sm" onclick="history.back()"><i class="fas fa-arrow-left"></i>
-                            Voltar</h5>
-                    </li>
+
+                    <a class="btn btn-sm btn-primary" type="button" href="{{ route('home') }}"><i
+                            class="fas fa-arrow-left"></i>
+                        Voltar</a>
                 </ol>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            </div>
+        @endif
         <div class="row">
             <div class="col-lg-5 col-md-12 col-sm-12">
                 <div class="card">
@@ -37,7 +45,7 @@
                                 <div class="card-body pt-4" style="background-color: #fafafa">
 
                                     <li><strong>Nome: </strong><span> {{ $dadosUser->nome }}</span></li><br>
-                                    <li><strong>Cpf: </strong><span id="cpf"> {{ $dadosUser->cpf }}</span></li><br>
+                                    <li><strong>Cpf: </strong><span id="cpf"> {{ $dadosUser->cpf($dadosUser->cpf) }}</span></li><br>
                                     <li><strong>Email: </strong><span></span> {{ $dadosUser->email }}</li><br>
                                     <li><strong>Telefone: </strong><span id="telefone"> {{ $dadosUser->telefone }}</span>
                                     </li><br>
@@ -45,7 +53,6 @@
                                     <li><strong>Bairro: </strong>{{ $endereco['bairro'] }}<span></span></li><br>
                                     <li><strong>Número: </strong><span>{{ $endereco['numero'] }}</span></li><br>
                                     <li><strong>Cep: </strong><span>{{ $endereco['cep'] }}</span></li><br>
-                                    <li><strong>Perfil: </strong><span>{{ $dadosUser->perfil->nome }}</span></li><br>
                                     <li><strong>Perfil criado em:
                                         </strong><span>{{ date_format($dadosUser->created_at, 'd/m/Y - H:i:s') }}</span>
                                     </li><br>
@@ -58,7 +65,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-7 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-body">
@@ -74,7 +80,7 @@
                                             <div class="col-sm-12 col-md-7 col-lg-8">
                                                 <label class="mb-1"><strong>Nome</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input1" name="nome"
+                                                    <input type="text" name="nome" id="nome"
                                                         class="form-control @error('nome') is-invalid @enderror"
                                                         value="{{ $dadosUser->nome }}" placeholder="Nome" required
                                                         autocomplete="Nome" autofocus disabled>
@@ -87,7 +93,7 @@
                                             <div class="col-sm-12 col-md-5 col-lg-4">
                                                 <label class="mb-1" for="telefone"><strong>Telefone</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input2" name="telefone"
+                                                    <input type="text" name="telefone" id="telefone1"
                                                         class="form-control @error('telefone') is-invalid @enderror"
                                                         value="{{ $dadosUser->telefone }}" placeholder="00 00000-00000"
                                                         required autocomplete="phone" disabled>
@@ -105,13 +111,13 @@
                                             <div class="col-sm-12 col-md-3 col-lg-4">
                                                 <label class="mb-1" for="cep"><strong>Cep</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input3" name="endereco[cep]" id="cep"
+                                                    <input type="text" name="endereco[cep]" id="cep"
                                                         class="form-control @error('endereco.cep') is-invalid @enderror"
                                                         placeholder="0000000" required value="{{ $endereco['cep'] }}"
                                                         maxlength="9" pattern="/^[0-9]{5}\-[0-9]{3}$/" disabled>
                                                     {{-- <div class="input-group-text"> --}}
-                                                    <button type="button" class="input-group-text"
-                                                        onclick="pesquisacep(cep.value)">
+                                                    <button type="button" class="input-group-text" id="pesquisarcep"
+                                                        onclick="pesquisacep(cep.value)" disabled>
                                                         <span class="flaticon-381-search-1"></span>
                                                     </button>
                                                 </div>
@@ -120,8 +126,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4">
                                                 <label class="mb-1" for="endereco[bairro]"><strong>Bairro</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input4" name="endereco[bairro]"
-                                                        id="bairro"
+                                                    <input type="text" name="endereco[bairro]" id="bairro"
                                                         class="form-control @error('endereco.bairro') is-invalid @enderror"
                                                         placeholder="" autocomplete="email" required
                                                         value="{{ $endereco['bairro'] }}" disabled>
@@ -134,7 +139,7 @@
                                             <div class="col-sm-12 col-md-3 col-lg-4">
                                                 <label class="mb-1" for="endereco[numero]"><strong>Número</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input5" name="endereco[numero]"
+                                                    <input type="text" name="endereco[numero]" id="numero"
                                                         class="form-control @error('endereco.numero') is-invalid @enderror"
                                                         placeholder="Ex 01" value="{{ $endereco['numero'] ?: '' }}"
                                                         disabled>
@@ -151,8 +156,7 @@
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="mb-1" for="endereco"><strong>Endereço</strong></label>
                                                 <div class="input-group">
-                                                    <input type="text" id="input6" name="endereco[endereco]"
-                                                        id="endereco"
+                                                    <input type="text" name="endereco[endereco]" id="endereco"
                                                         class="form-control @error('endereco.endereco') is-invalid @enderror"
                                                         placeholder="Rua Teste" required autocomplete="endereco"
                                                         value="{{ $endereco['endereco'] }}" disabled>
@@ -164,28 +168,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- EMAIL --}}
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-7 col-lg-8">
-                                                <label class="mb-1" for="email"><strong>Email</strong></label>
-                                                <div class="input-group">
-                                                    <input type="email" id="input7" name="email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        placeholder="seuemail@email.com" required autocomplete="email"
-                                                        value="{{ $dadosUser->email-- }}" disabled>
-                                                    <div class="input-group-text">
-                                                        <span class="flaticon-159-email"></span>
-                                                    </div>
-                                                </div>
-                                                {!! $errors->default->first('email', '<span style="color:red" class="form-text">:message</span>') !!}
-                                            </div>
-
-                                        </div>
-                                    </div>
                                     <button class="btn btn-success float-end mt-3" ; type="submit">Salvar</button>
-                                    <a class="btn btn-info float-end mt-3 me-2" type="button"
-                                        id="botaoDesabilitarHabilitar">Habilitar Campos</a>
+
+                                    <a class="btn btn-info float-end mt-3 me-2"type="button" id="habilitarDesabilitar"
+                                        onclick="alternarHabilitacaoElementos(['nome', 'cep', 'bairro', 'numero', 'endereco', 'telefone1', 'pesquisarcep'])">Habilitar
+                                        Campos</a>
 
                                     <button type="button" class="btn btn-warning float-end mt-3 me-2"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -204,85 +191,101 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Alterar senha</h1>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
-                </div>
-                <div class="modal-body">
-                    <form>
+                <form action="{{ route('profile.updateSenha') }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Alterar senha ({{ $dadosUser->nome }})</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Senha atual:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="password" id="recipient-name"
+                                class="form-control {{ $errors->has('old_password') ? 'is-invalid' : '' }}"
+                                name="old_password" placeholder="" required>
+                            @if ($errors->has('old_password'))
+                                <strong class="text-red">
+                                    <small>
+                                        {{ $errors->first('old_password') }}
+                                    </small>
+                                </strong>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nova senha:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="password" id="recipient-name"
+                                class="form-control {{ $errors->has('new_password') ? 'is-invalid' : '' }}"
+                                name="new_password" placeholder="" required>
+                            @if ($errors->has('new_password'))
+                                <strong class="text-red">
+                                    <small>
+                                        {{-- $errors->first('new_password') --}}
+                                        {!! $errors->default->first('new_password', '<span style="color:red" class="form-text">:message</span>') !!}
+                                    </small>
+                                </strong>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Confirme sua nova senha:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="password" id="recipient-name"
+                                class="form-control {{ $errors->has('new_password_confirmation') ? 'is-invalid' : '' }}"
+                                name="new_password_confirmation" placeholder="" required>
+                            @if ($errors->has('new_password_confirmation'))
+                                <strong class="text-red">
+                                    <small>
+                                        {{ $errors->first('new_password_confirmation') }}
+                                    </small>
+                                </strong>
+                            @endif
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger float-end mt-3" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary float-end mt-3">Salvar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger float-end mt-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary float-end mt-3">Salvar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    {{-- Script alteração de senha--}}
-    <script>
-        const exampleModal = document.getElementById('exampleModal')
-        exampleModal.addEventListener('show.bs.modal', event => {
-            // Button that triggered the modal
-            const button = event.relatedTarget
-            // Extract info from data-bs-* attributes
-            const recipient = button.getAttribute('data-bs-whatever')
-            // If necessary, you could initiate an AJAX request here
-            // and then do the updating in a callback.
-            //
-            // Update the modal's content.
-            const modalTitle = exampleModal.querySelector('.modal-title')
-            const modalBodyInput = exampleModal.querySelector('.modal-body input')
+@endsection
 
 
-            modalTitle.textContent = `Alterar senha ( ${recipient} )`
-           
+@section('scripts')
+
+    <script src="/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#cep").mask("99999-999", {});
+            $("#telefone1").mask("(99) 99999-9999", {});
         })
     </script>
 
     <script>
-        const botaoDesabilitarHabilitar = document.getElementById('botaoDesabilitarHabilitar');
-        const inputs = [];
+        function alternarHabilitacaoElementos(elementIds) {
 
-        for (let i = 1; i <= 7; i++) {
-            const input = document.getElementById('input' + i);
-            inputs.push(input);
-        }
+            var todosDesabilitados = true;
 
-        botaoDesabilitarHabilitar.addEventListener('click', function() {
-            for (const input of inputs) {
-                if (input.disabled) {
-                    input.disabled = false;
-                    botaoDesabilitarHabilitar.textContent = 'Desabilitar Campos';
-                } else {
-                    input.disabled = true;
-                    botaoDesabilitarHabilitar.textContent = 'Habilitar Todos';
+            for (var i = 0; i < elementIds.length; i++) {
+                var elemento = document.getElementById(elementIds[i]);
+
+                if (elemento) { // Verifica se o elemento com o id existe
+                    if (elemento.hasAttribute('disabled')) {
+                        elemento.removeAttribute('disabled');
+                    } else {
+                        elemento.setAttribute('disabled', 'true');
+                        todosDesabilitados = false;
+                    }
                 }
             }
-        });
+
+            var botaoElement = document.getElementById('habilitarDesabilitar');
+            botaoElement.innerText = todosDesabilitados ? 'Desabilitar Campos' : 'Habilitar Campos';
+        }
     </script>
-@endsection
 
-{{-- Modal Alterar Senha --}}
-
-@section('modal')
-    
-@endsection
-
-@section('scripts')
     <script>
         //CEP
         function limpa_formulario_cep() {
@@ -291,7 +294,6 @@
             document.getElementById('bairro').value = ("");
 
         }
-
 
 
         function meu_callback(conteudo) {
@@ -307,8 +309,6 @@
                 document.getElementById('cep').value = ("");
             }
         }
-
-
 
         function pesquisacep(valor) {
 
