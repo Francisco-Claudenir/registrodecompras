@@ -74,7 +74,7 @@
                                 data-bs-target="#analiseModal" class="btn btn-xs btn-info" title="">
                                 Analisar
                             </a>
-                            <a href="" class="btn btn-xs btn-info" title="">
+                            <a href="{{route('pibicindicacao.inscricao.pdf',['pibicindicacao_id' => $pibic_indicacao->pibicindicacao_id,'pi_inscricao_id' => $dadosInscrito->pi_inscricao_id])}}" class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>

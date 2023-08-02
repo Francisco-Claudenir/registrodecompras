@@ -44,6 +44,7 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
         $inscricoes = PibicIndicacaoInscricao::where('pibicindicacao_inscricoes.pibicindicacao_id', '=', $pibicindicacao_id)
             ->orderby('numero_inscricao', 'asc')->get();
 
+
         foreach ($inscricoes as $key => $dados) {
 
             $endereco = json_decode($dados['endereco_bolsista'], true);
@@ -53,6 +54,7 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
             $centro_orientador = Centro::findOrfail($dados['centro_orientador']);
 
             $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
+            $lista[$key]['status'] = $dados['status'];
             $lista[$key]['nome_bolsista'] = $dados['nome_bolsista'];
             $lista[$key]['email_bolsista'] = $dados['email_bolsista'];
             $lista[$key]['cpf_bolsista'] = $dados['cpf_bolsista'];
@@ -124,6 +126,7 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
         // Defina os nomes personalizados para as colunas
         $colunas = [
             'N° Inscrição',
+            'Status',
             'Nome Bolsista',
             'E-mail Bolsista',
             'Cpf Bolsista',
@@ -272,33 +275,53 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
         // Aplicar estilo para as demais colunas
         // Estilizar as demais linhas
         $lastRow = $sheet->getHighestRow();
+
         for ($row = 2; $row <= $lastRow; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(20);
-            $sheet->getStyle("A{$row}:Z{$row}")->applyFromArray([
-                'font' => [
-                    'size' => 12,
-                ]
-            ]);
-            $sheet->getStyle("A{$row}:Z{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
-        }
-        for ($row = 2; $row <= $lastRow; $row++) {
-            $sheet->getRowDimension($row)->setRowHeight(20);
-            $sheet->getStyle("AA{$row}:AZ{$row}")->applyFromArray([
-                'font' => [
-                    'size' => 12,
-                ]
-            ]);
-            $sheet->getStyle("AA{$row}:AZ{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+            $statusCell = $sheet->getCell('B' . $row);
+            $status = $statusCell->getValue();
+
+            // Defina a cor de fundo com base no valor do status
+            if ($status == 'Em Analise') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('B2B2B2'); // Amarelo
+            } elseif ($status == 'Deferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('00FF00'); // Verde
+            } elseif ($status == 'Indeferido') {
+                $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
+                $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000'); // Vermelho
+            }
+
+
+            for ($row = 2; $row <= $lastRow; $row++) {
+                $sheet->getRowDimension($row)->setRowHeight(20);
+                $sheet->getStyle("A{$row}:Z{$row}")->applyFromArray([
+                    'font' => [
+                        'size' => 12,
+                    ]
+                ]);
+                $sheet->getStyle("A{$row}:Z{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+            }
+            for ($row = 2; $row <= $lastRow; $row++) {
+                $sheet->getRowDimension($row)->setRowHeight(20);
+                $sheet->getStyle("AA{$row}:AZ{$row}")->applyFromArray([
+                    'font' => [
+                        'size' => 12,
+                    ]
+                ]);
+                $sheet->getStyle("AA{$row}:AZ{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+            }
         }
     }
     public function columnWidths(): array
     {
         return [
             'A' => 20,
-            'B' => 55,
+            'B' => 15,
             'C' => 55,
-            'D' => 20,
+            'D' => 55,
             'E' => 20,
+            'F'=> 20
             // 'T' => 75,
             // 'U' => 65,
             // 'Y' => 85,
