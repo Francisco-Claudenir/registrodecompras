@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Requests\Profile\UpdateSenhaProfileRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class ProfileController extends Controller
 {
-    // protected $currentuser;
-    // protected $documentos;
-    // protected $especificas;
+   
      protected $user;
 
     protected $bag = [
@@ -46,8 +42,7 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try {
             $user = $this->user->findOrfail($profile);
-            $request['endereco'] = json_encode($request['endereco']);
-                  
+            $request['endereco'] = json_encode($request['endereco']);    
             $user->update($request->all());
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.update'));
@@ -58,4 +53,34 @@ class ProfileController extends Controller
             return redirect()->back();
         }
     }
+
+    public function updateSenha (UpdateSenhaProfileRequest $request)
+    {
+        $dadosUser = Auth::User();
+
+        if (!Hash::check($request->old_password, $dadosUser->password)) {
+            alert()->error('A senha não confere com a cadastrada');
+            return redirect()->route('profile.index');
+        }
+
+
+        DB::beginTransaction();
+
+        try {
+            $dadosUser->update([
+                'password' => Hash::make($request->all()['new_password'])
+            ]);
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.update'));
+            return redirect()->route('profile.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
+
+
+    }
+
+    
 }
