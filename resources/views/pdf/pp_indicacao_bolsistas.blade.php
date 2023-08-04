@@ -319,7 +319,7 @@
                                 <small>
                                     <dd>
                                         <p style="font-size: 14px">
-                                            {{ $dadosInscrito->cPF($dadosInscrito->cpf_bolsista) }}</p>
+                                            {{ $dadosInscrito->cPF($dadosInscrito->cpf_orientador) }}</p>
                                     </dd>
                                 </small>
                             </th>

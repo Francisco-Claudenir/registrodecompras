@@ -291,7 +291,7 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
                 $statusCell->getStyle()->getFont()->setBold(true)->getColor()->setRGB('FFFFFF');
                 $statusCell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000'); // Vermelho
             }
-
+        }
 
             for ($row = 2; $row <= $lastRow; $row++) {
                 $sheet->getRowDimension($row)->setRowHeight(20);
@@ -311,7 +311,7 @@ class PibicIndicacaoExport implements FromCollection, WithHeadings, WithStyles, 
                 ]);
                 $sheet->getStyle("AA{$row}:AZ{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
             }
-        }
+
     }
     public function columnWidths(): array
     {
