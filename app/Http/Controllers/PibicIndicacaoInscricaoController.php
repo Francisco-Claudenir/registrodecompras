@@ -303,7 +303,6 @@ class PibicIndicacaoInscricaoController extends Controller
                 return redirect()->route('pibicindicacao.page', ['pibicindicacao_id' => $pibicindicacao_id]);
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();

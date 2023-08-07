@@ -317,7 +317,6 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
                 return redirect()->route('pp-i-bolsistas.page', ['pp_indicacao_bolsista_id' => $pp_indicacao_bolsista_id]);
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
@@ -371,7 +370,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
             ->where('pp_indicacao_bolsistas_inscricao.pp_i_bolsista_id', '=', $pp_indicacao_bolsista_id)
             ->paginate(10);
 
-    
+
         if ($dadosInscrito == null) {
             alert()->error(config('Você não está inscrito nesse Evento'));
             return redirect()->back();
@@ -426,7 +425,7 @@ class PP_IndicacaoBolsistasInscricaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**

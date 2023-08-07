@@ -273,7 +273,6 @@ class PrimeirosPassosInscricaoController extends Controller
                 alert()->error(config($this->bag['msg'] . 'Fora da data de inscrição'));
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
