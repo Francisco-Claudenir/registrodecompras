@@ -283,7 +283,7 @@
                                                                 PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_bolsista)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termocompromisso_bolsista)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -295,7 +295,7 @@
                                                                 (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracao_negativa_vinculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->declaracaonegativa_vinculo)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -307,7 +307,7 @@
                                                                 Lattes (formato PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->curriculo_lattes)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -353,6 +353,7 @@
                                                         <div class="col-6">
                                                             <dl>
                                                                 <dt>Agência do Banco do Brasil n°</dt>
+
                                                                 <dd>{{ $dados->agencia_banco }}</dd>
                                                             </dl>
                                                         </div>
@@ -371,9 +372,13 @@
                                                                     do
                                                                     Brasil (formato PDF)
                                                                 </dt>
+                                                                @if ($dados->comprovante_conta_corrente != null)
                                                                 <dd class="text-justify"><a style="color: red;"
                                                                                             href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->comprovante_conta_corrente)]) }}">Arquivo</a>
                                                                 </dd>
+                                                                @else
+                                                                    <dd>Sem Arquivo</dd>
+                                                                @endif
                                                             </dl>
                                                         </div>
                                                     @endif
@@ -386,7 +391,7 @@
                                                                 PDF)
                                                             </dt>
                                                             <dd class="text-justify"><a style="color: red;"
-                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termo_compromisso_orientador)]) }}">Arquivo</a>
+                                                                                        href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados->termocompromisso_orientador)]) }}">Arquivo</a>
                                                             </dd>
                                                         </dl>
                                                     </div>

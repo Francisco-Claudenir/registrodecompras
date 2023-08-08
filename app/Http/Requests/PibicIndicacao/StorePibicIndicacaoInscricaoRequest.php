@@ -51,8 +51,8 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'email_orientador' => ['required', 'string', 'email', 'max:255'],
             'cpf_orientador' => ['required', 'string', 'cpf', 'size:14'],
             'centro_orientador' => ['required', 'exists:centros,id'],
-            'tituloprojeto_orientador' => ['required', 'string', 'min:2'],
-            'tituloplano_bolsista' => ['required', 'string', 'min:2'],
+            'tituloprojeto_orientador' => ['required', 'string', 'min:2','max:254'],
+            'tituloplano_bolsista' => ['required', 'string', 'min:2','max:255'],
             'palavras_chave' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq', 'string', 'min:2', 'max:200'],
             'curriculolattes_orientador' => ['required_if:pibic_tipo,Cnpq', 'string', 'min:2', 'max:200'],
 
@@ -61,16 +61,16 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'historico_escolar' => ['required', 'mimes:pdf'],
             'declaracao_vinculo' => ['required', 'mimes:pdf'],
             'termocompromisso_bolsista' => ['required', 'mimes:pdf'],
-            'declaracaonegativa_vinculo' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'mimes:pdf'],
+            'declaracaonegativa_vinculo' => ['required_if:pibic_tipo,Cnpq,Pibic,Fapema', 'mimes:pdf'],
             'curriculo_lattes' => ['required', 'mimes:pdf'],
             'declaracao_conjuta_estagio' => ['nullable', 'mimes:pdf'],
             'doc_comprobatorio' => ['required_if:pibic_tipo,Ações Afirmativas', 'mimes:pdf'],
 
 
             //Informações Bancarias
-            'agencia_banco' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'string', 'min:2', 'max:100'],
-            'numero_conta_corrente' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'string', 'min:2', 'max:100'],
-            'comprovante_conta_corrente' => ['required_if:pibic_tipo,Ações Afirmativas,Cnpq,Pibic,Fapema', 'mimes:pdf'],
+            'agencia_banco' => ['required_if:pibic_tipo,Cnpq,Pibic,Fapema', 'max:100'],
+            'numero_conta_corrente' => ['required_if:pibic_tipo,Cnpq,Pibic,Fapema', 'max:100'],
+            'comprovante_conta_corrente' => ['required_if:pibic_tipo,Cnpq,Pibic,Fapema', 'mimes:pdf'],
 
             //Documentação do Orientador
             'termocompromisso_orientador' => ['required', 'mimes:pdf']
@@ -107,6 +107,10 @@ class StorePibicIndicacaoInscricaoRequest extends FormRequest
             'doc_comprobatorio.required_if' => 'O campo :attribute é obrigatório.',
 
 
+            //Informações Bancarias
+            'agencia_banco.required_if' => 'O campo :attribute é obrigatório.',
+            'numero_conta_corrente.required_if' => 'O campo :attribute é obrigatório.',
+            'comprovante_conta_corrente.required_if' => 'O campo :attribute é obrigatório.',
         ];
     }
 

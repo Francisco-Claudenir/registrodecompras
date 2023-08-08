@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 class PibicIndicacaoInscricaoController extends Controller
 {
-    protected $pibicIndicacao, $pibicIndicacaoInscricao, $user, $centros,$curso;
+    protected $pibicIndicacao, $pibicIndicacaoInscricao, $user, $centros, $curso;
     protected $bag = [
         'view' => 'page.pibic_indicacao',
         'route' => 'pibicindicacao',
@@ -34,6 +34,7 @@ class PibicIndicacaoInscricaoController extends Controller
         $this->curso = $curso;
         $this->user = $user;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -83,7 +84,7 @@ class PibicIndicacaoInscricaoController extends Controller
         return view('admin.pibic.espelho', compact('dadosInscrito', 'endereco', 'centro_bolsista', 'centro_orientador', 'curso', 'pibic_indicacao'));
     }
 
-    public function analise(UpdatePibicIndicacaoInscricaoRequest $request,  $pibic_indicacao_id, $pibic_i_inscricao_id)
+    public function analise(UpdatePibicIndicacaoInscricaoRequest $request, $pibic_indicacao_id, $pibic_i_inscricao_id)
     {
         try {
             if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
@@ -201,17 +202,18 @@ class PibicIndicacaoInscricaoController extends Controller
                 $dados_inscricao['termocompromisso_bolsista'] = $request['termocompromisso_bolsista']->storeAs($path, $nome);
 
 
-                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic') {
+
+                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic' && isset($dados_inscricao['declaracaonegativa_vinculo'])) {
+
                     //Declaracao negativa vinculo
                     $extensao = $request['declaracaonegativa_vinculo']->extension();
                     $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/declaracaonegativa_vinculo' . '/' . Auth::user()->cpf . '';
                     $nome = 'declaracaonegativa_vinculo' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                     $dados_inscricao['declaracaonegativa_vinculo'] = $request['declaracaonegativa_vinculo']->storeAs($path, $nome);
 
-                }else{
+                } else {
                     $dados_inscricao['declaracaonegativa_vinculo'] = null;
                 }
-
 
                 //Curriculo Lattes
                 $extensao = $request['curriculo_lattes']->extension();
@@ -229,14 +231,14 @@ class PibicIndicacaoInscricaoController extends Controller
                     $dados_inscricao['declaracao_conjuta_estagio'] = null;
                 }
 
-                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic') {
+                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic' && isset($dados_inscricao['declaracaonegativa_vinculo'])) {
 
                     //Comprovante Conta Corrente
                     $extensao = $request['comprovante_conta_corrente']->extension();
                     $path = 'PibicIndicacaoBolsista/' . Carbon::create($pibicIndicacao_bolsistas->created_at)->format('Y') . '/' . $pibicindicacao_id . '/comprovante_conta_corrente' . '/' . Auth::user()->cpf . '';
                     $nome = 'comprovante_conta_corrente' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                     $dados_inscricao['comprovante_conta_corrente'] = $request['comprovante_conta_corrente']->storeAs($path, $nome);
-                }else{
+                } else {
                     $dados_inscricao['comprovante_conta_corrente'] = null;
                 }
 
@@ -255,7 +257,6 @@ class PibicIndicacaoInscricaoController extends Controller
                 } else {
                     $dados_inscricao['doc_comprobatorio'] = null;
                 }
-
 
                 $this->pibicIndicacaoInscricao->create([
                     'pibicindicacao_id' => $pibicindicacao_id,
@@ -303,6 +304,7 @@ class PibicIndicacaoInscricaoController extends Controller
                 return redirect()->route('pibicindicacao.page', ['pibicindicacao_id' => $pibicindicacao_id]);
             }
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
@@ -386,7 +388,7 @@ class PibicIndicacaoInscricaoController extends Controller
 
 //        dd($dadosInscrito);
         $links = $dadosInscrito->appends($request->except('page'));
-        return view('page.pibic_indicacao.show', compact('dadosInscrito', 'links','pibic'));
+        return view('page.pibic_indicacao.show', compact('dadosInscrito', 'links', 'pibic'));
         //
     }
 
