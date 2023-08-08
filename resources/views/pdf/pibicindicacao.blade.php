@@ -415,7 +415,7 @@
                         <small>
                             <dd class="text-justify"><a style="color: red;"
                                                         href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->historico_escolar)]) }}">Arquivo</a>
-                                </p>
+
                             </dd>
                         </small>
                     </th>
@@ -429,7 +429,7 @@
                         <small>
                             <dd class="text-justify"><a style="color: red;"
                                                         href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_vinculo)]) }}">Arquivo</a>
-                                </p>
+
                             </dd>
                         </small>
                     </th>
@@ -447,7 +447,7 @@
                         <small>
                             <dd class="text-justify"><a style="color: red;"
                                                         href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->termocompromisso_bolsista)]) }}">Arquivo</a>
-                                </p>
+
                             </dd>
                         </small>
                     </th>
@@ -463,7 +463,7 @@
                             <small>
                                 <dd class="text-justify"><a style="color: red;"
                                                             href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracaonegativa_vinculo)]) }}">Arquivo</a>
-                                    </p>
+
                                 </dd>
                             </small>
                         </th>
@@ -482,7 +482,7 @@
                         <small>
                             <dd class="text-justify"><a style="color: red;"
                                                         href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculo_lattes)]) }}">Arquivo</a>
-                                </p>
+
                             </dd>
                         </small>
                     </th>
@@ -497,7 +497,7 @@
                                 @if ($dadosInscrito->declaracao_estagio != null)
                                     <dd class="text-justify"><a style="color: red;"
                                                                 href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->declaracao_estagio)]) }}">Arquivo</a>
-                                        </p>
+
                                     </dd>
                                 @else
                                     Sem Arquivo
@@ -518,7 +518,7 @@
                                 @if ($dadosInscrito->doc_comprobatorio != null)
                                     <dd class="text-justify"><a style="color: red;"
                                                                 href="{{ route('pibicindicacao.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->doc_comprobatorio)]) }}">Arquivo</a>
-                                        </p>
+
                                     </dd>
                                 @else
                                     Sem Arquivo
