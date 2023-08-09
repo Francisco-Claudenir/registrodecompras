@@ -88,7 +88,7 @@
                                             <div class="input-group">
                                                 <input type="text" name="endereco[endereco]" id="endereco"
                                                     class="form-control @error('endereco.endereco') is-invalid @enderror"
-                                                    placeholder="Rua Teste" required autocomplete="endereco"
+                                                    placeholder="Rua Exemplo" required autocomplete="endereco"
                                                     value="{{ old('endereco.endereco') }}">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-381-location"></span>
@@ -118,7 +118,7 @@
                                             <div class="input-group">
                                                 <input type="text" name="endereco[bairro]" id="bairro"
                                                     class="form-control @error('endereco.bairro') is-invalid @enderror"
-                                                    placeholder="" autocomplete="email" required
+                                                    placeholder="Seu Bairro" autocomplete="bairro" required
                                                     value="{{ old('endereco.bairro') }}">
                                                 <div class="input-group-text">
                                                     <span class="flaticon-381-location"></span>

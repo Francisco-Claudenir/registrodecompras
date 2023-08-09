@@ -23,7 +23,7 @@
                                     <div class="input-group">
                                         <input type="text" name="cpf"
                                             class="form-control @error('cpf') is-invalid @enderror"
-                                            value="{{ old('cpf') }}" placeholder="cpf" autofocus>
+                                            value="{{ old('cpf') }}" placeholder="cpf" autocomplete="cpf" autofocus>
                                         <div class="input-group-text">
                                             <span class="flaticon-381-user"></span>
                                         </div>
