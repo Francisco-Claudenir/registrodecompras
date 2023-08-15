@@ -231,7 +231,7 @@ class PibicIndicacaoInscricaoController extends Controller
                     $dados_inscricao['declaracao_conjuta_estagio'] = null;
                 }
 
-                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic' && isset($dados_inscricao['declaracaonegativa_vinculo'])) {
+                if ($pibicIndicacao_bolsistas->tipo !== 'Pivic' && isset($dados_inscricao['comprovante_conta_corrente'])) {
 
                     //Comprovante Conta Corrente
                     $extensao = $request['comprovante_conta_corrente']->extension();
