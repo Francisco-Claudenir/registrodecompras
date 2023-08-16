@@ -341,12 +341,12 @@
                     <span class="input-group-text bg-primary text-white">Upload</span>
                     <div class="form-file">
                         <input type="file"
-                               class="form-file-input form-control @if ($errors->first('declaracao_estagio')) is-invalid @endif"
-                               name="declaracao_estagio">
+                               class="form-file-input form-control @if ($errors->first('declaracao_conjuta_estagio')) is-invalid @endif"
+                               name="declaracao_conjuta_estagio">
                     </div>
                 </div>
                 {!! $errors->default->first(
-                    'declaracao_estagio',
+                    'declaracao_conjuta_estagio',
                     '<span style="color:red" class="form-text">:message</span>',
                 ) !!}
             </div>
