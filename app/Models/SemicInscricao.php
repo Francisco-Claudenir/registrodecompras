@@ -12,24 +12,30 @@ class SemicInscricao extends Model
 
     protected $table = 'semic_inscricaos';
     
-    protected $fillable = ['semic_id', 'area_id', 'genero', 'nomeorientador',
-                            'cpf', 'email', 'matricula', 'titulacao', 'tituloprojetoorient', 'titulocapitulo',
+    protected $fillable = ['semic_id', 'user_id', 'areaconhecimento_id', 'genero', 'nomeorientador', 'numero_inscricao',
+                            'cpf', 'status', 'email', 'matricula', 'titulacao', 'tituloprojetoorient', 'titulocapitulo',
                             'capitulo'];
 
     protected $primaryKey = 'semic_inscricao_id';
 
     protected $dates = ['deleted_at'];
 
-    //Relacionamento com a tabela Semic
+    //Relacionamento com a tabela Semics
     public function semicInscricao_semic()
     {
         return $this->belongsTo(Semic::class, 'semic_id')->withTrashed();
     }
 
-    //Relacionamento com a tabela GrandeArea
-    public function semicInscricao_grandeArea()
+    //Relacionamento com a tabela SubArea
+    public function semicInscricao_subArea()
     {
-        return $this->belongsTo(GrandeArea::class, 'area_id')->withTrashed();
+        return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
+    }
+
+    //Relacionamento com a tabela Users
+    public function semic_inscricao_user()
+    {
+        return $this->belongsTo(User::class,'user_id', 'id');
     }
 
 }

@@ -19,6 +19,7 @@ use App\Http\Controllers\PibicIndicacaoInscricaoController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
+use App\Http\Controllers\Semic\SemicInscricaoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
@@ -56,6 +57,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //PrimeiroPassos
     Route::resource('primeiropasso', PrimeiroPassoController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+    //SemicInscricao
+    Route::resource('semicinscricao', SemicInscricaoController::class);
+
     //GrandeArea
     Route::resource('grandearea', GrandeAreaController::class)->middleware(['check-role:Administrador']);
 
@@ -71,9 +75,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //PrimeirosPassos Inscricão Espelho ADMIN
     Route::get('primeirospassos/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+    //Semic Inscricão Espelho ADMIN
+    Route::get('semic/espelho/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'espelho'])->name('semic.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //Analise Semic Inscrição
+    Route::post('semic/analise/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'analise'])->name('semic.inscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
     //Analise Primeiros Passos Inscrição
     Route::post('/primeirospassos/analise/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'analise'])->name('primeirospassosinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-
 
     //PP_IndicacaoBolsistas Inscricão Execel
     Route::get('/pibic-indicacao/inscritos/{pibicindicacao_id}', [ExportsController::class, 'pibicIndicacaoInscricao'])->name('lista.pibicindicacao.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -124,14 +133,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 Route::prefix('site')->group(function () {
 
     //Semic
-    //Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
+    Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
 
     //Pibic
     Route::get('/pibic-indicacao', [PibicIndicacaoController::class, 'site'])->name('site.pibic-indicacao');
 
     //PrimeiroPassos
     Route::get('/primeiropasso', [PrimeiroPassoController::class, 'site'])->name('site.primeiropasso');
-
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::get('/pp-indicacao-bolsistas', [PP_IndicacaoBolsistasController::class, 'site'])->name('site.pp-indicacao-bolsistas');
@@ -169,6 +177,17 @@ Route::prefix('pp-indicacao-bolsistas')->group(function () {
     Route::get('/pdf/{pp_indicacao_bolsista_id}/{pp_i_bolsista_inscricao_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'gerarPDF'])->name('pp-i-bolsistas-inscricao.pdf')->middleware(['auth']);
     Route::get('/docshow/{diretorio}', [PP_IndicacaoBolsistasInscricaoController::class, 'docshow'])->name('pp-i-bolsistas-inscricao.docshow')->middleware(['auth']);
     Route::get('/verinscricao/{pp_indicacao_bolsista_id}', [PP_IndicacaoBolsistasInscricaoController::class, 'show'])->name('pp-i-bolsistas-inscricao.show')->middleware(['auth']);
+});
+
+//Inscrições de Eventos -  VIEW CANDIDATOS SEMIC
+Route::prefix('semic')->group(function () {
+    Route::get('/{semic_id}', [SemicController::class, 'page'])->name('semic.page');
+    Route::get('/inscricao/{semic_id}', [SemicInscricaoController::class, 'create'])->name('semic.inscricao.create')->middleware(['auth']);
+    Route::post('/inscricao/{semic_id}', [SemicInscricaoController::class, 'store'])->name('semic.inscricao.store')->middleware(['auth']);
+    Route::get('/lista-inscricao/{semic_id}', [SemicInscricaoController::class, 'index'])->name('semic.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/pdf/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'gerarPDF'])->name('semic.inscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [SemicInscricaoController::class, 'docshow'])->name('semic.inscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{semic_id}/{user_id}', [SemicInscricaoController::class, 'show'])->name('semic.inscricao.show')->middleware(['auth']);
 });
 
 Route::post('/getcursos', [CursoController::class, 'getCurso'])->name('getCurso');

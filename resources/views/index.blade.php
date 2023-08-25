@@ -66,6 +66,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <!--Primeiros Passos -->
+                    <div class="card-bx stacked card">
+                        <div class="card-info  ">
+                            <h2 class="num-text text-dark mb-2 font-w500">Semic</h2>
+                            <div class="d-flex">
+                                <div class="me-4 text-dark">
+                                    <p class="fs-12 mb-4 op6">O Programa Semic</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('site.semic') }}"
+                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
