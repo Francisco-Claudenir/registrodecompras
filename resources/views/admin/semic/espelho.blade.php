@@ -13,7 +13,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{-- $dadosInscrito->nome --}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{$dadosInscrito->nomeorientador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -21,14 +21,16 @@
                     <div class="row">
                         <label class="col-form-label col-sm-3 pt-0">Resultado</label>
                         <div class="col-sm-9">
-                            <form action="{{-- route('semic.inscricao.analise', ['pp_indicacao_bolsista_id' => $dadosInscrito->pp_i_bolsista_id, 'pp_i_bolsista_inscricao_id' => $dadosInscrito->pp_i_bolsista_inscricao_id]) --}}" method="post">
+                            <form
+                                action="{{ route('semic.inscricao.analise', ['semic_id' => $dadosInscrito->semic_id, 'semic_inscricao_id' => $dadosInscrito->semic_inscricao_id]) }}"
+                                method="post">
                                 @csrf
                                 @foreach (config('status.status') as $item)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="status"
-                                            value="{{-- $item --}}" checked="">
+                                            value="{{ $item }}" checked="">
                                         <label class="form-check-label">
-                                            {{-- $item --}}
+                                            {{ $item }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -56,9 +58,9 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{-- route('primeirospassos.inscricao.index', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id]) --}}">Lista
+                    <li class="breadcrumb-item"><a href="{{ route('semic.inscricao.index', ['semic_id' => $dadosInscrito->semic_id]) }}">Lista
                             de Inscritos</a></li>
-                    <li class="breadcrumb-item active"><a href="">{{-- explode(' ', $dadosInscrito->nome)[0] --}}</a>
+                    <li class="breadcrumb-item active"><a href="">{{ $evento->nome }}</a>
                     </li>
                 </ol>
             </div>
@@ -73,7 +75,7 @@
                                 data-bs-target="#analiseModal" class="btn btn-xs btn-info" title="">
                                 Analisar
                             </a>
-                            <a href="{{-- route('primeirospassos.inscricao.pdf', ['primeiropasso_id' => $dadosInscrito->primeiropasso_id, 'passos_inscricao_id' => $dadosInscrito->passos_inscricao_id]) --}}" class="btn btn-xs btn-info" title="">
+                            <a href="{{ route('semic.inscricao.pdf', ['semic_id' => $dadosInscrito->semic_id, 'semic_inscricao_id' => $dadosInscrito->semic_inscricao_id]) }}" class="btn btn-xs btn-info" title="">
                                 PDF
                             </a>
                         </div>
@@ -85,10 +87,10 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Número de Inscrição</dt>
-                            <dd>{{ $dadosInscrito->numero_inscricao }}</dd>
+                            <dd>{{ $dadosInscrito->numero_inscricao }}</dd> 
                         </dl>
                         <dl>
-                            <dt>Nome Completo</dt>
+                            <dt>Nome Professor(a) Orientador</dt>
                             <dd>{{ $dadosInscrito->nomeorientador }}</dd>
                         </dl>
                     </div>
@@ -113,20 +115,20 @@
                     <div class="col-sm-12">
                         <dl>
                             <dt>Titulação</dt>
-                            <dd class="text-justify">{{ -$dadosInscrito->titulação }}</dd>
+                            <dd class="text-justify">{{ -$dadosInscrito->titulação }}</dd> 
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Vigência - Início</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($evento->data_inicio)) }}
                             </dd>
                         </dl>
                     </div>
                     <div class="col-sm-12">
                         <dl>
                             <dt>Vigência - Fim</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                            <dd class="text-justify">{{ date('d/m/Y', strtotime($evento->data_fim)) }}
                             </dd>
                         </dl>
                     </div>
@@ -142,7 +144,7 @@
                     <h5>Projetos</h5>
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Titulo do projeto do orientador cadastrado no PIBIC ciclo 2022-2023</dt>
+                            <dt>Titulo do projeto do orientador cadastrado no PIBIC ciclo {{now()->subYear()->format('Y')}}-{{ now()->format('Y')}}</dt>
                             <dd class="text-justify">{{ $dadosInscrito->tituloprojetoorient }}</dd>
                         </dl>
                     </div>

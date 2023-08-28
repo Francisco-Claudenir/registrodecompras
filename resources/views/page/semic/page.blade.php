@@ -9,9 +9,7 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full"
-                        height="full">
+                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                         <h3 class="mt-4 text-dark"><strong>{{ $semic->nome }}</strong></h3>
                     </div>
@@ -60,17 +58,7 @@
                                                         @if ($isInscrito)
                                                             <a href="{{ route('semic.inscricao.show', ['semic_id' => $semic->semic_id, 'user_id' => Auth::user()->id]) }}"
                                                                 class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
-                                                            @if (now()->gte($semic->data_inicio) && now()->lte($semic->data_fim))
-                                                                <a href="{{ route('semic.inscricao.create', ['semic_id' => $semic->semic_id]) }}"
-                                                                    class="btn btn-primary btn-xs mb-1">Realizar
-                                                                    Inscrição</a>
-                                                            @else
-                                                                <span class="text-danger"> Não é possível realizar a
-                                                                    inscrição !</span>
-                                                            @endif
-                                                        @else
-                                                            @if (Auth::check())
-
+                                                            @if ($semic->status === 'Aberto')
                                                                 @if (now()->gte($semic->data_inicio) && now()->lte($semic->data_fim))
                                                                     <a href="{{ route('semic.inscricao.create', ['semic_id' => $semic->semic_id]) }}"
                                                                         class="btn btn-primary btn-xs mb-1">Realizar
@@ -79,7 +67,27 @@
                                                                     <span class="text-danger"> Não é possível realizar a
                                                                         inscrição !</span>
                                                                 @endif
-
+                                                            @else
+                                                                <br>
+                                                                <span class="text-danger"> Não é possível realizar a
+                                                                    inscrição !</span>
+                                                            @endif
+                                                        @else
+                                                            @if (Auth::check())
+                                                                @if ($semic->status === 'Aberto')
+                                                                    @if (now()->gte($semic->data_inicio) && now()->lte($semic->data_fim))
+                                                                        <a href="{{ route('semic.inscricao.create', ['semic_id' => $semic->semic_id]) }}"
+                                                                            class="btn btn-primary btn-xs mb-1">Realizar
+                                                                            Inscrição</a>
+                                                                    @else
+                                                                        <span class="text-danger"> Não é possível realizar a
+                                                                            inscrição !</span>
+                                                                    @endif
+                                                                @else
+                                                                    <br>
+                                                                    <span class="text-danger"> Não é possível realizar a
+                                                                        inscrição !</span>
+                                                                @endif
                                                             @endif
                                                         @endif
                                                     </div>
@@ -138,7 +146,7 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="auth-form">
-                                                                <form action="{{-- route('login.eventos') --}}" method="post">
+                                                                <form action="{{ route('login.eventos') }}" method="post">
                                                                     @csrf
                                                                     <div class="form-group">
                                                                         <label class="mb-1"><strong>Cpf</strong></label>
@@ -207,101 +215,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-xl-12">
-                            <div class="card bg-light border">
-                                <div class="card-body">
-                                    <div class="profile-interest">
-                                        <h5 class="text-primary d-inline">Galeria</h5>
-                                        <div class="row mt-4 sp4" id="lightgallery">
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                    alt="" class="img-fluid rounded">
-                                            </a>
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                    alt="" class="img-fluid">
-                                            </a>
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                    alt="" class="img-fluid">
-                                            </a>
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                    alt="" class="img-fluid">
-                                            </a>
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                    alt="" class="img-fluid">
-                                            </a>
-                                            <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                    alt="" class="img-fluid">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-xl-12">
-                            <div class="card bg-light border">
-                                <div class="card-body">
-                                    <div class="profile-news">
-                                        <h5 class="text-primary d-inline">Posts</h5>
-                                        <div class="media pt-3 pb-3">
-                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/5.jpg"
-                                                alt="image" class="me-3 rounded" width="75">
-                                            <div class="media-body">
-                                                <h5 class="m-b-5"><a
-                                                        href="https://zenix.dexignzone.com/laravel/demo/post-details"
-                                                        class="text-black">Collection of textile samples</a></h5>
-                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
-                                                    thought.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media pt-3 pb-3">
-                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/6.jpg"
-                                                alt="image" class="me-3 rounded" width="75">
-                                            <div class="media-body">
-                                                <h5 class="m-b-5"><a
-                                                        href="https://zenix.dexignzone.com/laravel/demo/post-details"
-                                                        class="text-black">Collection of textile samples</a></h5>
-                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
-                                                    thought.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media pt-3 pb-3">
-                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/7.jpg"
-                                                alt="image" class="me-3 rounded" width="75">
-                                            <div class="media-body">
-                                                <h5 class="m-b-5"><a
-                                                        href="https://zenix.dexignzone.com/laravel/demo/post-details"
-                                                        class="text-black">Collection of textile samples</a></h5>
-                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
-                                                    thought.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-8">
@@ -313,171 +226,17 @@
                                         <li class="nav-item"><a href="#about-me" data-bs-toggle="tab"
                                                 class="nav-link active">Sobre</a>
                                         </li>
-                                        {{-- <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
-                                                class="nav-link show">Posts</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
-                                                class="nav-link ">Galeria</a>
-                                        </li> --}}
+
                                     </ul>
                                     <div class="tab-content">
                                         <div id="about-me" class="tab-pane fade active show">
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
                                                     <h4 class="text-primary">Descrição</h4>
-                                                    <p class="mb-2">{{ $semic->descricao --}}</p>
+                                                    <p class="mb-2">{{ $semic->descricao-- }}</p>
                                                 </div>
-                                            </div>
-
-                                            {{-- <div class="profile-personal-info">
-                                                <h4 class="text-primary mb-4">Personal Information</h4>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Name <span class="pull-end">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>Mitchell C.Shay</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Email <span class="pull-end">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>example@examplel.com</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Availability <span class="pull-end">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>Full Time (Free Lancer)</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Age <span class="pull-end">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>27</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Location <span class="pull-end">:</span></h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>Rosemont Avenue Melbourne,
-                                                            Florida</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Year Experience <span
-                                                                class="pull-end">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                        </div>
-
-                                        {{-- <div id="my-posts" class="tab-pane fade">
-                                            <div class="my-post-content pt-3">
-                                                <div class="card p-4">
-                                                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                        <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/8.jpg"
-                                                            alt="" class="img-fluid w-100 rounded border">
-                                                        <a class="post-title"
-                                                            href="https://zenix.dexignzone.com/laravel/demo/post-details">
-                                                            <h3 class="text-black">Collection of textile samples lay spread
-                                                            </h3>
-                                                        </a>
-                                                        <p>A wonderful serenity has take possession of my entire soul like
-                                                            these
-                                                            sweet morning of spare which enjoy whole heart.A wonderful
-                                                            serenity
-                                                            has take possession of my entire soul like these sweet morning
-                                                            of spare which enjoy whole heart.</p>
-                                                        <div class="flex col-7">
-                                                            <div class="card border p-4">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div
-                                                                        class="col-2 p-4 border shadow-sm bg-bodyborder-light rounded d-flex justify-content-center  align-items-center">
-                                                                        <a href="#">
-                                                                            <i class="fas fa-download text-dark "></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div
-                                                                        class="col-8 p-4 justify-content-center  align-items-center">
-                                                                        <strong>Edital</strong><br>
-                                                                        <small>sdaihsdifhsadfhsadihfsdffdgdgdfgdfgdfgdfgdfgfdhs</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                                    class="fa fa-heart"></i></span>Like</button>
-                                                        <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                                    class="fa fa-reply"></i></span>Reply</button>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
-                                        <div id="profile-settings" class="tab-pane fade ">
-                                            <div class="pt-4">
-                                                <div class="settings-form">
-                                                    <h4 class="text-primary ">Galeria</h4>
-                                                    <div class="row mt-4 sp4" id="lightgallery2">
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                                alt="" class="img-fluid rounded">
-                                                        </a>
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                                alt="" class="img-fluid rounded">
-                                                        </a>
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                                alt="" class="img-fluid">
-                                                        </a>
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/3.jpg"
-                                                                alt="" class="img-fluid">
-                                                        </a>
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/4.jpg"
-                                                                alt="" class="img-fluid">
-                                                        </a>
-                                                        <a href="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            data-exthumbimage="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            data-src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                            class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                                            <img src="https://zenix.dexignzone.com/laravel/demo/images/profile/2.jpg"
-                                                                alt="" class="img-fluid">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                                 <!-- Modal -->

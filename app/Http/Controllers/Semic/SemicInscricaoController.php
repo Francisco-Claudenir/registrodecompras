@@ -54,6 +54,7 @@ class SemicInscricaoController extends Controller
         $this->subarea = $subarea;
     }
 
+
     public function index($semic_id, Request $request)
     {
         //Verificando se o id existe
@@ -72,7 +73,7 @@ class SemicInscricaoController extends Controller
                 'semic_inscricaos.numero_inscricao',
                 'semic_inscricaos.semic_id',
                 'semic_inscricaos.semic_inscricao_id',
-            ])->paginate(20);
+            ])->orderby('semic_inscricaos.numero_inscricao', 'asc')->paginate(20);
 
         $links = $listaInscritos->appends($request->except('page'));
 
@@ -82,18 +83,15 @@ class SemicInscricaoController extends Controller
 
     public function espelho($semic_id, $semic_inscricao_id)
     {
-        //Verificando se o primeiropasso_id existe
+        //Verificando se o semic_id existe
         $evento = $this->semic->findOrfail($semic_id);
 
         $dadosInscrito = $this->semicinscricao
-            ->join('users', 'users.id', '=', 'semic_inscricaos.user_id')
-            ->where('semic_inscricaos.semic_id', '=', $semic_id)
-            ->findOrfail($semic_inscricao_id);
 
-       
-        $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
+        ->where('semic_inscricaos.semic_id', '=', $semic_id)->findOrfail($semic_inscricao_id);
 
-       
+
+    $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
 
         return view('admin.semic.espelho', compact('evento', 'dadosInscrito', 'subArea'));
     }
@@ -161,10 +159,11 @@ class SemicInscricaoController extends Controller
                 //Caminho de arquirvos
                 //Documento Termo de compromisso orientador
                 $extensao =  $request['anexo_capitulo_semicinscricao']->extension();
-                $path = 'SemicIsncricao/' . Carbon::create($semic->created_at)->format('Y') . '/' . $semic_id . '/anexo_capitulo_semicinscricao' . '/' . Auth::user()->cpf . '';
+                $path = 'SemicIsncricao/' . Carbon::create($semic->created_at)->format('Y') . '/' . $request['semic_id'] . '/anexo_capitulo_semicinscricao' . '/' . Auth::user()->cpf . '';
                 $nome = 'anexo_capitulo_semicinscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                 $dados_inscricao['anexo_capitulo_semicinscricao'] = $request['anexo_capitulo_semicinscricao']->storeAs($path, $nome);
 
+               
                 $this->semicinscricao->create([
                     'semic_id' => $semic_id,
                     'user_id' => Auth::user()->id,
@@ -195,13 +194,34 @@ class SemicInscricaoController extends Controller
         }
     }
 
+    public function analise(UpdateSemicInscricaoRequest $request,  $semic_id, $semic_inscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->semicinscricao->where('semic_id', $semic_id)->find($semic_inscricao_id);
+                if ($inscricao['semic_id'] == $semic_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
+    }
+
     public function docshow($diretorio)
     {
         try {
 
             $diretorio = Crypt::decrypt($diretorio);
 
-            $path = storage_path('app/' . $diretorio);
+            $path = storage_path('app/public/' . $diretorio);
 
             if (!File::exists($path)) {
 
@@ -232,13 +252,13 @@ class SemicInscricaoController extends Controller
 
         $dadosInscrito = $this->semicinscricao->with('semicInscricao_subArea', 'semicInscricao_subArea.subArea_grandeArea', 'semic_inscricao_user', 'semicInscricao_semic')
             ->where('semic_inscricaos.user_id', '=', $user_id)
-            ->where('semic_inscricaos.semic_id', '=', $semic_id)
-
+            ->where('semic_inscricaos.semic_id', '=', $semic_id)->orderby('numero_inscricao', 'asc')
             ->paginate(10);
-        foreach ($dadosInscrito as $key => $dados) {
 
-            $dados->endereco = json_decode($dados->endereco, true);
-        }
+            if ($dadosInscrito == null) {
+                alert()->error(config('Você não está inscrito nesse Evento'));
+                return redirect()->back();
+            }
 
         $links = $dadosInscrito->appends($request->except('page'));
         return view('page.semic.show', compact('dadosInscrito', 'links'));
