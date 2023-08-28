@@ -32,7 +32,7 @@
                         <div class="row justify-content-center p-4">
                             <div class="col-sm-12 col-lg-10">
 
-                                <div class="card project-card">
+                               <div class="card project-card">
                                     <div class="card-body">
                                         <div class="d-flex mb-4 align-items-start">
 
@@ -103,7 +103,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <dl>
-                                                            <dt>Nome Completo</dt>
+                                                            <dt>Nome Professor(a) Orientador</dt>
                                                             <dd>{{ $dados->nomeorientador }}</dd>
                                                         </dl>
                                                     </div>
@@ -121,7 +121,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <dl>
-                                                            <dt>Matricula</dt>
+                                                            <dt>Matrícula</dt>
                                                             <dd class="text-justify">{{ $dados->matricula }}</dd>
                                                         </dl>
                                                     </div>
@@ -148,7 +148,7 @@
                                                         <h5>Projetos</h5>
                                                         <div class="col-6">
                                                             <dl>
-                                                                <dt>Titulo do projeto do orientador cadastrado no PIBIC ciclo 2022-2023</dt>
+                                                                <dt>Titulo do projeto do orientador cadastrado no PIBIC ciclo {{now()->subYear()->format('Y')}}-{{ now()->format('Y') }}</dt>
                                                                 <dd class="text-justify">
                                                                     {{ $dados->tituloprojetoorient }}
                                                                 </dd>
@@ -204,184 +204,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <h5>Identificação do Candidato</h5>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Numero de Inscrição</dt>
-                            <dd>{{ $dadosInscrito->numero_inscricao }}</dd>
-                        </dl>
-                        <dl>
-                            <dt>Nome Completo</dt>
-                            <dd>{{ $dadosInscrito->nome }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Email</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->email }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Cpf</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->cpf }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Telefone</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->telefone }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Cep</dt>
-                            <dd class="text-justify">{{ $endereco['cep'] }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Número</dt>
-                            <dd class="text-justify">{{ $endereco['numero'] }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Endereço</dt>
-                            <dd class="text-justify">{{ $endereco['endereco'] }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Bairro</dt>
-                            <dd class="text-justify">{{ $endereco['bairro'] }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Número de Identidade</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->identidade }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Matrícula</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->matricula }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Centro</dt>
-                            <dd class="text-justify">{{ $centro->centros }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Cópia do Contrato</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->copiacontrato)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Vigência - Início</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Vigência - Fim</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
-                            </dd>
-                        </dl>
-                    </div>
-                    <h5>Área do Projeto de Pesquisa</h5>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>{{ $subArea->subArea_grandeArea->nome }}</dt>
-                            <dd class="text-justify">{{ $subArea->nome }}</dd>
-                        </dl>
-                    </div>
-                    <h5>Projeto de Pesquisa</h5>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Título de Projeto de Pesquisa</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->tituloprojetopesquisa }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Projeto de Pesquisa</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->projetopesquisa)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Resumo do Projeto</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->resumoprojeto }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Chefe Imediato</dt>
-                            <dd class="text-justify">{{ $dadosInscrito->chefeimediato }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Anuência do Chefe Imediato</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->anuenciachefe)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Comitê de Ética</dt>
-                            @if ($dadosInscrito->parecercomite != null)
-                                <dd class="text-justify"><a style="color: red;"
-                                        href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->parecercomite)]) }}">Arquivo</a>
-                                </dd>
-                            @else
-                                <dd class="text-justify">Sem Arquivo</dd>
-                            @endif
-
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Currículo Lattes atualizado</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($dadosInscrito->curriculolattes)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <h5>Plano de Trabalho</h5>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Título do Plano de Trabalho</dt>
-                            <dd class="text-justify">{{ $planotrabalho->titulo }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Plano de Trabalho</dt>
-                            <dd class="text-justify">{{ $planotrabalho->resumo }}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Resumo do Plano de Trabalho</dt>
-                            <dd class="text-justify"><a style="color: red;"
-                                    href="{{ route('primeirospassos.inscricao.docshow', ['diretorio' => Crypt::encrypt($planotrabalho->arquivo)]) }}">Arquivo</a>
-                            </dd>
-                        </dl>
-                    </div> --}}
                 </div>
             </div>
         </div>
