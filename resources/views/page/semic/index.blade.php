@@ -39,7 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nª</th>
-                                        <th>Nome</th>
+                                        <th>Nome Professor(a) Orientador</th>
                                         <th>Email</th>
                                         <th>CPF</th>
                                         <th>Matrícula</th>

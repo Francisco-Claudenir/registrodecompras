@@ -61,12 +61,12 @@
                                                 {!! $errors->default->first('cpf_semicinscricao', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-4">
-                                                <label class="form-label fw-normal">Matricula *</label>
+                                                <label class="form-label fw-normal">Matrícula *</label>
                                                 <div class="input-group">
                                                     <input type="text" name="matricula_semicinscricao"
                                                         id="matricula_semicinscricao"
                                                         class="form-control @error('matricula_semicinscricao') is-invalid @enderror"
-                                                        placeholder="Matricula" required autocomplete="matricula"
+                                                        placeholder="Matrícula" required autocomplete="matricula"
                                                         value="{{ old('matricula_semicinscricao') }}">
                                                 </div>
                                                 {!! $errors->default->first(
@@ -140,7 +140,7 @@
                                     <hr class="mt-3 mb-3">
                                     <div class="mb-11 col-md-12">
                                         <label class="form-label fw-normal">Titulo do projeto do orientador cadastrado no
-                                            PIBIC ciclo 2022-2023 *</label>
+                                            PIBIC ciclo {{now()->subYear()->format('Y')}}-{{ now()->format('Y') }}*</label>
                                         <input type="text"
                                             class="form-control @if ($errors->first('titulo_capitulo_semicinscricao')) is-invalid @endif"
                                             placeholder="Titulo do projeto do orientador" required name="titulo_capitulo_semicinscricao"

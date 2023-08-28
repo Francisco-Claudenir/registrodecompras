@@ -86,7 +86,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Nome</dt>
+                                        <dt style="font-size: 14px">Nome Professor(a) Orientador</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -123,7 +123,7 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Matricula</dt>
+                                        <dt style="font-size: 14px">Matrícula</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -136,7 +136,7 @@
                     </thead>
                     <thead>
                         <tr>
-                            <th>
+                            <th colspan="2">
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Titulação</dt>
@@ -157,7 +157,7 @@
                                 <small>
                                     <dd class="text-justify">
                                         <p style="font-size: 14px">
-                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_inicio)) }}
+                                            {{ date('d/m/Y', strtotime($semic->data_inicio)) }}
                                         </p>
                                     </dd>
                                 </small>
@@ -171,7 +171,7 @@
                                 <small>
                                     <dd class="text-justify">
                                         <p style="font-size: 14px">
-                                            {{ date('d/m/Y', strtotime($dadosInscrito->vigencia_fim)) }}
+                                            {{ date('d/m/Y', strtotime($semic->data_fim)) }}
                                         </p>
                                     </dd>
                                 </small>
@@ -203,7 +203,7 @@
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Titulo do projeto do orientador cadastrado no PIBIC
-                                            ciclo 2022-2023</dt>
+                                            ciclo {{now()->subYear()->format('Y')}}-{{ now()->format('Y') }}</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -228,7 +228,7 @@
                     </thead>
                     <thead>
                         <tr>
-                            <th>
+                            <th colspan="4">
                                 <strong>
                                     <h6>
                                         <dt style="font-size: 14px">Capítulo</dt>

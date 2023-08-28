@@ -33,7 +33,7 @@ class SemicController extends Controller
 
     public function site()
     {
-        $semics = $this->semic->where('visivel', '=', 1)->orderBy('created_at', 'desc')->paginate(10);
+        $semics = $this->semic->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);
         return view('page.semic.site', compact('semics'));
     }
 

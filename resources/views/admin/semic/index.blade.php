@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <div class="d-flex mb-4 align-items-start">
                                 <div class="dz-media me-3">
-                                    <img src="{{ url('../storage/app/semic' . $semic->banner)}}" class="img-fluid" alt="">
+                                    <img src="{{ url('../storage/' . $semic->banner)}}" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
                                     <h4 class="title mb-2 mt-1">{{ $semic->nome }}</h4>
