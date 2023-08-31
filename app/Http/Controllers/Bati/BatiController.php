@@ -42,16 +42,24 @@ class BatiController extends Controller
 
     public function store(StoreBatiRequest $request)
     {
+        
         try {
             DB::beginTransaction();
             $batis = $request->validated();
+
+            $extensao = $request['banner']->extension();
+            $path = 'bati/Evento' . '/Banner' . '';
+            $nome = 'bannerbati' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+            $batis['banner'] = $request['banner']->storeAs($path, $nome);
+
             $batis['data_fim'] = $batis['data_fim'] . ' 23:59:59';
             $batis['status'] = 'Aberto';
+            $batis['banner'] = $batis['banner'];
             $this->bati->create($batis);
-
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('bati.index');
+
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
@@ -81,6 +89,7 @@ class BatiController extends Controller
             DB::beginTransaction();
             $batiUp = $this->bati->findOrfail($id);
             $batis = $request->validated();
+            $batis['visivel'] = $request['visivel'] ?? false;
             $batis['data_fim'] = $batis['data_fim'] . ' 23:59:59';
             $batiUp->update($batis);
             DB::commit();
