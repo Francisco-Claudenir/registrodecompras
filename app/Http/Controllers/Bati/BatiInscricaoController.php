@@ -1,86 +1,50 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bati;
 
-use App\Http\Requests\StoreBatiInscricaoRequest;
-use App\Http\Requests\UpdateBatiInscricaoRequest;
-use App\Models\BatiInscricao;
+use App\Http\Controllers\Controller;
+use App\Models\Bati;
+use App\Models\GrandeArea;
+use App\Models\Centro;
+use Carbon\Carbon;
 
 class BatiInscricaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    protected $bati;
+    protected $grandearea;
+    protected $centros;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBatiInscricaoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBatiInscricaoRequest $request)
-    {
-        //
-    }
+    protected $bag = [
+        'view' => 'page.bati',
+        'route' => 'bati',
+        'msg' => 'temauema.msg.register'
+    ];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BatiInscricao  $batiInscricao
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BatiInscricao $batiInscricao)
-    {
-        //
+    public function __construct(Bati $bati, GrandeArea $grandearea, Centro $centros){
+        $this->bati = $bati;
+        $this->grandearea = $grandearea;
+        $this->centros = $centros;
     }
+  
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BatiInscricao  $batiInscricao
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BatiInscricao $batiInscricao)
+    public function create($bati_id)
     {
-        //
-    }
+        $data_hoje = Carbon::now();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBatiInscricaoRequest  $request
-     * @param  \App\Models\BatiInscricao  $batiInscricao
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBatiInscricaoRequest $request, BatiInscricao $batiInscricao)
-    {
-        //
-    }
+        $bati = $this->bati->findOrfail($bati_id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BatiInscricao  $batiInscricao
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BatiInscricao $batiInscricao)
-    {
-        //
+        if (($data_hoje->gte($bati->data_inicio) && $data_hoje->lte($bati->data_fim))) {
+
+            $grandeArea = $this->grandearea->with('grandeArea_subArea')->get();
+            $centros = $this->centros->where('centros', 'not like', "%Polo%")->get();
+
+            return view('page.bati.create', compact('grandeArea', 'bati', 'centros'));
+        } else {
+
+            alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+            return redirect()->back();
+        }
     }
+   
 }

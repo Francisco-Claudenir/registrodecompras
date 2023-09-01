@@ -39,6 +39,32 @@ class BatiController extends Controller
         return view('admin.bati.create');
     }
 
+    public function site()
+    {
+        $batis = $this->bati->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);
+        return view('page.bati.site', compact('batis'));
+    }
+
+    public function page($bati_id)
+    {
+        //dd($bati_id);
+        $bati = $this->bati->findOrfail($bati_id);
+
+        if ($bati->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+
+      //  if (Auth::check()) {
+      //      $isInscrito = BatiInscricao::where('bati_id', $bati->bati_id)->where('user_id', Auth::user()->id)->exists();
+      //  } else {
+      //      $isInscrito = false;
+      //  }
+
+      // return view('page.bati.page', compact('bati', 'isInscrito'));
+       return view('page.bati.page', compact('bati'));
+       
+    }
 
     public function store(StoreBatiRequest $request)
     {
