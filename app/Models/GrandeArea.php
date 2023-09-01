@@ -27,4 +27,9 @@ class GrandeArea extends Model
     public function grandeArea_semicInscricao(){
         return $this->hasMany(SemicInscricao::class, 'area_id')->withTrashed();
     }
+
+    //Relacionamento com a tabela BatiInscricao
+    public function grandeArea_batiInscricao(){
+        return $this->hasMany(BatiInscricao::class, 'area_id')->withTrashed();
+    }
 }

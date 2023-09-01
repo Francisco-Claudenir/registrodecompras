@@ -20,10 +20,9 @@ class Bati extends Model
     protected $dates = ['deleted_at'];
 
     //Relacionamento com a tabela BatiInscrição
-
     public function bati_batiInscricao()
     {
-        return $this->hasMany(SemicInscricao::class, 'bati_id')->withTrashed();
+        return $this->hasMany(BatiInscricao::class, 'bati_id')->withTrashed();
     }
 
     public function percentual()

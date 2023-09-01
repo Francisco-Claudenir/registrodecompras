@@ -34,4 +34,14 @@ class SubArea extends Model
      {
          return $this->hasMany(PrimeirosPassosInscricao::class, 'areaconhecimento_id')->withTrashed();
      }
+     //Relacionamento de SubArea para BatiInscricao
+     public function subArea_bati_inscricao()
+     {
+         return $this->hasMany(BatiInscricao::class, 'areaconhecimento_id')->withTrashed();
+     }
+     //Relacionamento de SubArea para SemicInscricao
+     public function subArea_semic_inscricao()
+     {
+         return $this->hasMany(BatiInscricao::class, 'areaconhecimento_id')->withTrashed();
+     }
 }
