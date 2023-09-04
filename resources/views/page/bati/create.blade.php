@@ -166,14 +166,47 @@
                                                         placeholder="Titulacao/Categoria funcional" required
                                                         autocomplete="matricula"
                                                         value="{{ old('titulacao_categoria_funcional') }}">
-                                                </div>
+                                                </div> <br>
                                                 {!! $errors->default->first(
                                                     'titulacao_categoria_funcional',
                                                     '<span style="color:red" class="form-text">:message</span>',
                                                 ) !!}
                                             </div>
-
-
+                                            
+                                            <div  class="mb-10 col-md-12">
+                                                <div class="alert alert-primary">
+                                                        <label >Encontra-se vinculado a algum Programa de Pós-Graduação da UEMA na qualidade de Docente Permanente?</label><br>
+                                                    <label for="modalidade_bolsa1"><input type="radio"
+                                                            name="modalidade_bolsa" id="modalidade_bolsa1" value="BATI - I">
+                                                        Sim</label><br>
+                                                    <label for="modalidade_bolsa2"><input type="radio"
+                                                            name="modalidade_bolsa" id="modalidade_bolsa2" value="BATI - II">
+                                                        Não</label>
+        
+                                                </div>
+                                             {{--   <div>
+                                                    <h5 >Encontra-se vinculado a algum Programa de Pós-Graduação da UEMA na qualidade de Docente Permanente?</h5>
+                                                    <label for="modalidade_bolsa1"><input type="radio"
+                                                            name="modalidade_bolsa" id="modalidade_bolsa1" value="BATI - I">
+                                                        Sim</label><br>
+                                                    <label for="modalidade_bolsa2"><input type="radio"
+                                                            name="modalidade_bolsa" id="modalidade_bolsa2" value="BATI - II">
+                                                        Não</label>
+                                                </div>   --}}
+                                            </div>
+                                            <div class="mb-10 col-md-12">
+                                                <label class="form-label fw-normal" >Em caso afirmativo, indique o programa. Caso esteja vinculado a mais de um programa, indicar qual será utilizado 
+                                                    como referência para avaliar a produção docente.</ç>
+                                                @foreach (config('ppgraduacao.ppgraduacao') as $item)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="ppgraduacao"
+                                                            value="{{ $item }}" >
+                                                        <label class="form-check-label">
+                                                            {{ $item }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -262,69 +295,128 @@
                                         </h4>
                                     </div>
                                     <hr class="mt-3 mb-3">
-                                    <div class="mb-3 col-md-6 col-sm-6">
-                                        <label class="form-label fw-normal">Modalidade de Bolsa solicitada *</label>
-                                        <div>
-                                        <label for="modalidade_bolsa1"><input type="radio" name="modalidade_bolsa" id="modalidade_bolsa1" value="BATI - I"> BATI - I</label><br>
-                                        <label for="modalidade_bolsa2"><input type="radio" name="modalidade_bolsa" id="modalidade_bolsa2" value="BATI - II"> BATI - II</label>
+                                    <div class="shadow p-3 mb-5 bg-white rounded">
+                                        <div class="mb-3 col-md-6 col-sm-6">
+                                            <label class="form-label fw-normal">Modalidade de Bolsa solicitada *</label>
+                                            <div>
+                                                <label for="modalidade_bolsa1"><input type="radio"
+                                                        name="modalidade_bolsa" id="modalidade_bolsa1" value="BATI - I">
+                                                    BATI - I</label><br>
+                                                <label for="modalidade_bolsa2"><input type="radio"
+                                                        name="modalidade_bolsa" id="modalidade_bolsa2" value="BATI - II">
+                                                    BATI - II</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="alert alert-primary">
-                                        
-                                        <label class="form-label fw-normal" style="margin: 5px;">Plano de Trabalho 1</label>
-                                        
-                                    </div> 
-                                    <div class="mb-11 col-md-12">
-                                        <label class="form-label fw-normal">Título*</label>
-                                        <div class="input-group">
-                                            <input type="text" name="titulo"
-                                                id="titulo"
-                                                class="form-control @error('titulo') is-invalid @enderror"
-                                                placeholder="Título" required
-                                                autocomplete="Título"
-                                                value="{{-- old('titulo') --}}">
-                                        </div>
-                                        {!! $errors->default->first(
-                                            'titulo',
-                                            '<span style="color:red" class="form-text">:message</span>',
-                                        ) !!}
-                                    </div>
-                                    <div class="mb-11 col-md-12 ">
-                                        <br>
-                                        <label for="resumo">Resumo*</label>
-                                        <br>
-                                        
-                                            <textarea name="resumo" class="custom-textarea @error('resumo') is-invalid @enderror" id="" cols="87" rows="10" placeholder="Digite seu resumo aqui" ></textarea>
-                                        {!! $errors->default->first(
-                                            'resumo',
-                                            '<span style="color:red" class="form-text">:message</span>',
-                                        ) !!}
-                                        
-                                    </div>
-                                    <div class="basic-form">
-                                        <div class="row mt-3">
-                                            <div class="mb-12 col-md-12 col-sm-12">
-                                                <label class="form-label fw-normal">Anexar Arquivo (formato PDF) *</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text bg-primary text-white">Upload</span>
-                                                    <div class="form-file">
-                                                        <input type="file"
-                                                            class="form-file-input form-control @if ($errors->first('anexo_pdf_curriculolattes')) is-invalid @endif"
-                                                            required name="anexo_pdf_curriculolattes">
-                                                    </div>
-                                                </div>
-                                                {!! $errors->default->first(
-                                                    'anexo_pdf_curriculolattes',
-                                                    '<span style="color:red" class="form-text">:message</span>',
-                                                ) !!}
+                                        <div class="alert alert-primary">
 
+                                            <label class="form-label fw-normal" style="margin: 5px;">Plano de Trabalho
+                                                1</label>
+
+                                        </div>
+                                        <div class="mb-11 col-md-12">
+                                            <label class="form-label fw-normal">Título*</label>
+                                            <div class="input-group">
+                                                <input type="text" name="titulo" id="titulo"
+                                                    class="form-control @error('titulo') is-invalid @enderror"
+                                                    placeholder="Título" required autocomplete="Título"
+                                                    value="{{ old('titulo') }}">
+                                            </div>
+                                            {!! $errors->default->first('titulo', '<span style="color:red" class="form-text">:message</span>') !!}
+                                        </div>
+                                        <br>
+                                        <div class="mb-11 col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label fw-normal">Resumo*</label>
+                                                <textarea class="form-control" id=""resumotextarea rows="3" placeholder="Resumo" required></textarea>
+                                            </div>
+                                            {!! $errors->default->first('titulo', '<span style="color:red" class="form-text">:message</span>') !!}
+                                        </div>
+
+                                        <div class="basic-form">
+                                            <div class="row mt-3">
+                                                <div class="mb-12 col-md-12 col-sm-12">
+                                                    <label class="form-label fw-normal">Anexar Arquivo (formato PDF)
+                                                        *</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text bg-primary text-white">Upload</span>
+                                                        <div class="form-file">
+                                                            <input type="file"
+                                                                class="form-file-input form-control @if ($errors->first('anexo_pdf_curriculolattes')) is-invalid @endif"
+                                                                required name="anexo_pdf_curriculolattes">
+                                                        </div>
+                                                    </div>
+                                                    {!! $errors->default->first(
+                                                        'anexo_pdf_curriculolattes',
+                                                        '<span style="color:red" class="form-text">:message</span>',
+                                                    ) !!}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="shadow p-3 mb-5 bg-white rounded">
+                                        <div class="mb-3 col-md-6 col-sm-6">
+                                            <label class="form-label fw-normal">Modalidade de Bolsa solicitada </label>
+                                            <div>
+                                                <label for="modalidade_bolsa1"><input type="radio"
+                                                        name="modalidade_bolsa" id="modalidade_bolsa1" value="BATI - I">
+                                                    BATI - I</label><br>
+                                                <label for="modalidade_bolsa2"><input type="radio"
+                                                        name="modalidade_bolsa" id="modalidade_bolsa2" value="BATI - II">
+                                                    BATI - II</label>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-primary">
+
+                                            <label class="form-label fw-normal" style="margin: 5px;">Plano de Trabalho
+                                                2</label>
+
+                                        </div>
+                                        <div class="mb-11 col-md-12">
+                                            <label class="form-label fw-normal">Título</label>
+                                            <div class="input-group">
+                                                <input type="text" name="titulo" id="titulo"
+                                                    class="form-control @error('titulo') is-invalid @enderror"
+                                                    placeholder="Título" required autocomplete="Título"
+                                                    value="{{ old('titulo') }}">
+                                            </div>
+                                            {!! $errors->default->first('titulo', '<span style="color:red" class="form-text">:message</span>') !!}
+                                        </div>
+                                        <br>
+                                        <div class="mb-11 col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label fw-normal">Resumo</label>
+                                                <textarea class="form-control" id=""resumotextarea rows="3" placeholder="Resumo" required></textarea>
+                                            </div>
+                                            {!! $errors->default->first('titulo', '<span style="color:red" class="form-text">:message</span>') !!}
+                                        </div>
+
+                                        <div class="basic-form">
+                                            <div class="row mt-3">
+                                                <div class="mb-12 col-md-12 col-sm-12">
+                                                    <label class="form-label fw-normal">Anexar Arquivo (formato
+                                                        PDF)</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text bg-primary text-white">Upload</span>
+                                                        <div class="form-file">
+                                                            <input type="file"
+                                                                class="form-file-input form-control @if ($errors->first('anexo_pdf_curriculolattes')) is-invalid @endif"
+                                                                required name="anexo_pdf_curriculolattes">
+                                                        </div>
+                                                    </div>
+                                                    {!! $errors->default->first(
+                                                        'anexo_pdf_curriculolattes',
+                                                        '<span style="color:red" class="form-text">:message</span>',
+                                                    ) !!}
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-lg-8 col-md-12 col-sm-12">
                             <div class="card border shadow-sm">
                                 <div class="card-body">
