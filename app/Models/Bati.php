@@ -20,7 +20,7 @@ class Bati extends Model
     protected $dates = ['deleted_at'];
 
     //Relacionamento com a tabela BatiInscrição
-    public function bati_batiInscricao()
+    public function bati_bati_inscricao()
     {
         return $this->hasMany(BatiInscricao::class, 'bati_id')->withTrashed();
     }

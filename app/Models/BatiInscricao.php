@@ -28,32 +28,32 @@ class BatiInscricao extends Model
         return $this->belongsTo(PlanoTrabalho::class, 'bati_inscricao_id')->withTrashed();
     }
     //Relacionamento com a tabela batis
-    public function batiInscricao_bati()
+    public function bati_inscricao_bati()
     {
         return $this->belongsTo(Bati::class, 'bati_id')->withTrashed();
     }
     //Relacionamento com a tabela SubArea
-    public function batiInscricao_subArea()
+    public function bati_inscricao_subArea()
     {
         return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
     }
     //Relacionamento com a tabela GrandeArea
-    public function batiInscricao_grandeArea()
+    public function bati_inscricao_grandeArea()
     {
         return $this->belongsTo(GrandeArea::class, 'area_id')->withTrashed();
     }
     //Relacionamento com a tabela Users
-    public function batiInscricao_users()
+    public function bati_inscricao_users()
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
     //Relacionamento com a tabela Centros
-    public function batiInscricao_centros()
+    public function bati_inscricao_centros()
     {
         return $this->belongsTo(Centros::class, 'centro_id')->withTrashed();
     }
     //Relacionamento com a tabela Centros
-    public function batiInscricao_modalidade_Bolsas()
+    public function bati_inscricao_modalidade_bolsas()
     {
         return $this->belongsTo(ModalidadeBolsa::class, 'modalidade_id')->withTrashed();
     }
