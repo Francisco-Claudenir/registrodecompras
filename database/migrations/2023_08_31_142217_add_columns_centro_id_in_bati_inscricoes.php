@@ -24,6 +24,8 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->unsignedBigInteger('areaconhecimento_id');
             $table->unsignedBigInteger('centro_id');
             $table->unsignedBigInteger('modalidade_id');
+            $table->integer('numero_inscricao');
+            $table->string('status');
 
             //relacionamentos
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -57,6 +59,8 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->dropColumn('areaconhecimento_id'); 
             $table->dropColumn('centro_id'); 
             $table->dropColumn('modalidade_id'); 
+            $table->dropColumn('numero_inscricao'); 
+            $table->dropColumn('status'); 
 
         });
     }

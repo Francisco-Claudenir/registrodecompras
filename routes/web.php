@@ -202,7 +202,7 @@ Route::prefix('semic')->group(function () {
 Route::prefix('bati')->group(function () {
     Route::get('/{bati_id}', [BatiController::class, 'page'])->name('bati.page');
     Route::get('/inscricao/{bati_id}', [BatiInscricaoController::class, 'create'])->name('bati.inscricao.create')->middleware(['auth']);
-   // Route::post('/inscricao/{bati_id}', [BatiInscricaoController::class, 'store'])->name('bati.inscricao.store')->middleware(['auth']);
+    Route::post('/inscricao/{bati_id}', [BatiInscricaoController::class, 'store'])->name('bati.inscricao.store')->middleware(['auth']);
    // Route::get('/lista-inscricao/{semic_id}', [SemicInscricaoController::class, 'index'])->name('semic.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
    // Route::get('/pdf/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'gerarPDF'])->name('semic.inscricao.pdf')->middleware(['auth']);
    // Route::get('/docshow/{diretorio}', [SemicInscricaoController::class, 'docshow'])->name('semic.inscricao.docshow')->middleware(['auth']);

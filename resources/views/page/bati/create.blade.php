@@ -18,7 +18,8 @@
         </div>
         <div class="card">
 
-            <form action="{{-- route('semic.inscricao.store', ['semic_id' => $semic]) --}}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('bati.inscricao.store', ['bati_id' => $bati]) }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="col-xl-12 p-lg-4 ">
                     <div class="row justify-content-center">
@@ -38,8 +39,8 @@
                                                 <label class="form-label fw-normal">Nome completo *</label>
                                                 <input type="text"
                                                     class="form-control @if ($errors->first('nome_bati_inscricao')) is-invalid @endif"
-                                                    placeholder="Nome Professor Orientador" required
-                                                    name="nome_bati_inscricao" value="{{ old('nome_bati_inscricao') }}">
+                                                    placeholder="Nome" required name="nome_bati_inscricao"
+                                                    value="{{ old('nome_bati_inscricao') }}">
                                                 {!! $errors->default->first('nome_bati_inscricao', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
 
@@ -58,7 +59,7 @@
                                                     <input type="text" name=" bati_inscricao_identidade"
                                                         id=" bati_inscricao_identidade"
                                                         class="form-control @error(' bati_inscricao_identidade') is-invalid @enderror"
-                                                        placeholder="Titulação" autocomplete="bati_inscricao_identidade"
+                                                        placeholder="Identidade" autocomplete="bati_inscricao_identidade"
                                                         value="{{ old('bati_inscricao_identidade') }}">
                                                 </div>
                                                 {!! $errors->default->first(
@@ -72,8 +73,8 @@
                                                     <input type="text" name="bati_inscricao_endereco"
                                                         id="bati_inscricao_endereco"
                                                         class="form-control @error('bati_inscricao_endereco') is-invalid @enderror"
-                                                        placeholder="Matrícula" autocomplete="matricula"
-                                                        value="{{-- old('bati_inscricao_endereco') --}}">
+                                                        placeholder="Endereço" autocomplete="endereço"
+                                                        value="{{ old('bati_inscricao_endereco') }}">
                                                 </div>
                                                 {!! $errors->default->first(
                                                     'bati_inscricao_endereco',
@@ -86,8 +87,8 @@
                                                     <input type="text" name="telefone_bati_inscricao"
                                                         id="telefone_bati_inscricao"
                                                         class="form-control @error('telefone_bati_inscricao') is-invalid @enderror"
-                                                        placeholder="Matrícula" required autocomplete="matricula"
-                                                        value="{{-- old('telefone_bati_inscricao') --}}">
+                                                        placeholder="Telefone" required autocomplete="telefone"
+                                                        value="{{ old('telefone_bati_inscricao') }}">
                                                 </div>
                                                 {!! $errors->default->first(
                                                     'telefone_bati_inscricao',
@@ -195,11 +196,11 @@
                                                 <div class="alert alert-primary">
                                                     <label>Encontra-se vinculado a algum Programa de Pós-Graduação da UEMA
                                                         na qualidade de Docente Permanente?</label><br>
-                                                    <label for="opcao_sim"><input type="radio" name="opcao_1"
-                                                            id="opcao_sim" value="SIM">
+                                                    <label ><input type="radio" name="opcao_1"
+                                                             value="SIM">
                                                         Sim</label><br>
-                                                    <label for="opcao_nao"><input type="radio" name="opcao_2"
-                                                            id="opcao_nao" value="NAO">
+                                                    <label ><input type="radio" name="opcao_1"
+                                                             value="NAO">
                                                         Não</label>
                                                 </div>
                                             </div>
@@ -210,13 +211,14 @@
                                                     como referência para avaliar a produção docente.</h6>
                                                 @foreach (config('ppgraduacao.ppgraduacao') as $item)
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="ppgraduacao" value="{{ $item }}">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                            name="ppgraduacao[]" value="{{ $item }}">
                                                         <label class="form-check-label">
                                                             {{ $item }}
                                                         </label>
                                                     </div>
                                                 @endforeach
+                                                {!! $errors->default->first('ppgraduacao', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -328,18 +330,23 @@
                                         <div class="mb-11 col-md-12">
                                             <label class="form-label fw-normal">Título*</label>
                                             <div class="input-group">
-                                                <input type="text" name="titulo_bati_inscricao" id="titulo_bati_inscricao"
+                                                <input type="text" name="titulo_bati_inscricao"
+                                                    id="titulo_bati_inscricao"
                                                     class="form-control @error('titulo_bati_inscricao') is-invalid @enderror"
                                                     placeholder="Título" required autocomplete="Título"
                                                     value="{{ old('titulo_bati_inscricao') }}">
                                             </div>
-                                            {!! $errors->default->first('titulo_bati_inscricao', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            {!! $errors->default->first(
+                                                'titulo_bati_inscricao',
+                                                '<span style="color:red" class="form-text">:message</span>',
+                                            ) !!}
                                         </div>
                                         <br>
                                         <div class="mb-11 col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label fw-normal">Resumo*</label>
-                                                <textarea class="form-control" name="resumo_bati_incricao" id="resumo_bati_incricao" rows="3" placeholder="Resumo" required></textarea>
+                                                <textarea class="form-control" name="resumo_bati_incricao" id="resumo_bati_incricao" rows="3"
+                                                    placeholder="Resumo" required></textarea>
                                             </div>
                                             {!! $errors->default->first('resumo_bati_incricao', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
@@ -358,7 +365,7 @@
                                                         </div>
                                                     </div>
                                                     {!! $errors->default->first(
-                                                        'anexo_pdf_curriculolattes_bati_inscricao',
+                                                        'anexo_pdf_arquivo_bati_inscricao',
                                                         '<span style="color:red" class="form-text">:message</span>',
                                                     ) !!}
 
@@ -371,15 +378,15 @@
                                         <div class="mb-3 col-md-6 col-sm-6">
                                             <label class="form-label fw-normal">Modalidade de Bolsa solicitada </label>
                                             @foreach ($modalidade_bolsas as $modalidade_bolsa)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio"
-                                                    name="modalidade_bolsa_bati_inscricao_2" 
-                                                    value="{{ $modalidade_bolsa->modalidade_id }}" />
-                                                <label class="form-check-label">
-                                                    {{ $modalidade_bolsa->nome }}
-                                                </label>
-                                            </div>
-                                        @endforeach
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="modalidade_bolsa_bati_inscricao_2"
+                                                        value="{{ $modalidade_bolsa->modalidade_id }}" />
+                                                    <label class="form-check-label">
+                                                        {{ $modalidade_bolsa->nome }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                         <div class="alert alert-primary">
 
@@ -390,20 +397,28 @@
                                         <div class="mb-11 col-md-12">
                                             <label class="form-label fw-normal">Título</label>
                                             <div class="input-group">
-                                                <input type="text" name="titulo_bati_inscricao_2" id="titulo_bati_inscricao_2"
+                                                <input type="text" name="titulo_bati_inscricao_2"
+                                                    id="titulo_bati_inscricao_2"
                                                     class="form-control @error('titulo_bati_inscricao_2') is-invalid @enderror"
-                                                    placeholder="Título"  autocomplete="Título"
+                                                    placeholder="Título" autocomplete="Título"
                                                     value="{{ old('titulo_bati_inscricao_2') }}">
                                             </div>
-                                            {!! $errors->default->first('titulo_bati_inscricao_2', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            {!! $errors->default->first(
+                                                'titulo_bati_inscricao_2',
+                                                '<span style="color:red" class="form-text">:message</span>',
+                                            ) !!}
                                         </div>
                                         <br>
                                         <div class="mb-11 col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label fw-normal">Resumo</label>
-                                                <textarea class="form-control" name="resumo_bati_incricao_2" id="resumo_bati_incricao_2" rows="3" placeholder="Resumo" ></textarea>
+                                                <textarea class="form-control" name="resumo_bati_incricao_2" id="resumo_bati_incricao_2" rows="3"
+                                                    placeholder="Resumo"></textarea>
                                             </div>
-                                            {!! $errors->default->first('resumo_bati_incricao_2', '<span style="color:red" class="form-text">:message</span>') !!}
+                                            {!! $errors->default->first(
+                                                'resumo_bati_incricao_2',
+                                                '<span style="color:red" class="form-text">:message</span>',
+                                            ) !!}
                                         </div>
 
                                         <div class="basic-form">
@@ -416,7 +431,7 @@
                                                         <div class="form-file">
                                                             <input type="file"
                                                                 class="form-file-input form-control @if ($errors->first('anexo_pdf_arquivo_bati_inscricao_2')) is-invalid @endif"
-                                                                 name="anexo_pdf_arquivo_bati_inscricao_2">
+                                                                name="anexo_pdf_arquivo_bati_inscricao_2">
                                                         </div>
                                                     </div>
                                                     {!! $errors->default->first(
@@ -448,12 +463,12 @@
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
                                                         <input type="file"
-                                                            class="form-file-input form-control @if ($errors->first('anexo_pdf_bati_inscricao_curriculolattes')) is-invalid @endif"
-                                                            required name="anexo_pdf_bati_inscricao_curriculolattes">
+                                                            class="form-file-input form-control @if ($errors->first('anexo_pdf_curriculolattes_bati_inscricao')) is-invalid @endif"
+                                                            required name="anexo_pdf_curriculolattes_bati_inscricao">
                                                     </div>
                                                 </div>
                                                 {!! $errors->default->first(
-                                                    'anexo_pdf_bati_inscricao_curriculolattes',
+                                                    'anexo_pdf_curriculolattes_bati_inscricao',
                                                     '<span style="color:red" class="form-text">:message</span>',
                                                 ) !!}
 
@@ -477,7 +492,7 @@
             </form>
         </div>
     </div>
-
+    
 @endsection
 
 @section('css')
@@ -498,7 +513,7 @@
     <script src="/js/jquery.maskedinput.js"></script>
     <script type="text/javascript">
         $(function() {
-            $("#cpf_semicinscricao").mask("999.999.999-99", {});
+            $("#cpf_bati_inscricao").mask("999.999.999-99", {});
         })
     </script>
     <script>
@@ -507,5 +522,13 @@
             thumbnail: true,
             exThumbImage: 'data-exthumbimage'
         });
+    </script>
+
+    <script src="/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(function() {
+         
+            $("#telefone_bati_inscricao").mask("(99) 99999-9999", {});
+        })
     </script>
 @endsection
