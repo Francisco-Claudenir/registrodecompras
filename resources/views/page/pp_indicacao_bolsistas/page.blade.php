@@ -181,7 +181,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <a href="{!! url('/page-forgot-password') !!}">Esqueci
+                                                                            <a href="{{route('password.request')}}">Esqueci
                                                                                 minha senha</a>
                                                                         </div>
                                                                     </div>
