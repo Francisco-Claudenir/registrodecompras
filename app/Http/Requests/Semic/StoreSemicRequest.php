@@ -25,9 +25,11 @@ class StoreSemicRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'string', 'min:2', 'max:150'],
+            'visivel' => ['boolean'],
             'descricao' => ['required', 'string', 'min:2', 'max:255'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],
+            'banner' => ['required', 'mimes:jpeg,png,jpg'],
         ];
     }
 }

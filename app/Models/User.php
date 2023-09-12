@@ -49,6 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(PrimeirosPassosInscricao::class, 'user_id','id')->withTrashed();
     }
+    public function user_bati_inscricao()
+    {
+        return $this->hasMany(BatiInscricao::class, 'user_id','id')->withTrashed();
+    }
 
     public function perfil()
     {

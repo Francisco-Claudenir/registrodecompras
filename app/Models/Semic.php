@@ -13,7 +13,7 @@ class Semic extends Model
 
     protected $table = 'semics';
     
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
+    protected $fillable = ['nome', 'banner', 'descricao', 'visivel','data_inicio', 'data_fim', 'status'];
 
     protected $primaryKey = 'semic_id';
 

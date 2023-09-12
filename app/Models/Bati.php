@@ -13,17 +13,16 @@ class Bati extends Model
 
     protected $table = 'batis';
 
-    protected $fillable = ['nome', 'descricao', 'data_inicio', 'data_fim', 'status'];
+    protected $fillable = ['nome', 'banner', 'descricao', 'visivel','data_inicio', 'data_fim', 'status'];
 
     protected $primaryKey = 'bati_id';
 
     protected $dates = ['deleted_at'];
 
     //Relacionamento com a tabela BatiInscrição
-
-    public function bati_batiInscricao()
+    public function bati_bati_inscricao()
     {
-        return $this->hasMany(SemicInscricao::class, 'bati_id')->withTrashed();
+        return $this->hasMany(BatiInscricao::class, 'bati_id')->withTrashed();
     }
 
     public function percentual()

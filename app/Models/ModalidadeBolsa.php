@@ -21,4 +21,9 @@ class ModalidadeBolsa extends Model
     {
         return $this->hasMany(PlanoTrabalho::class,'modalidade_id')->withTrashed();
     }
+
+    public function bati_inscricao()
+    {
+        return $this->hasMany(BatiInscricao::class,'modalidade_id')->withTrashed();
+    }
 }

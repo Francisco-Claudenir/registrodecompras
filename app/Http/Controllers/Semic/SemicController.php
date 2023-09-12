@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Semic\StoreSemicRequest;
 use App\Http\Requests\Semic\UpdateSemicRequest;
 use App\Models\Semic;
+use App\Models\SemicInscricao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SemicController extends Controller
 {
@@ -23,43 +25,60 @@ class SemicController extends Controller
         $this->semic = $semic;
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $programasSemic = $this->semic->paginate(20);
+        $programasSemic = $this->semic->withCount('semic_semicInscricao')->paginate(20);
         return view('admin.semic.index', compact('programasSemic'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function site()
+    {
+        $semics = $this->semic->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);
+        return view('page.semic.site', compact('semics'));
+    }
+
+    public function page($semic_id)
+    {
+        $semic = $this->semic->findOrfail($semic_id);
+
+        if ($semic->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+
+        if (Auth::check()) {
+            $isInscrito = SemicInscricao::where('semic_id', $semic->semic_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
+
+       return view('page.semic.page', compact('semic', 'isInscrito'));
+        //return view('page.semic.page', compact('semic'));
+    }
+
+    
     public function create()
     {
         return view('admin.semic.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(StoreSemicRequest $request)
     {
+     //  dd($request->all(),$request);
         try {
             DB::beginTransaction();
             $semics = $request->validated();
-            $semics['data_fim'] = $semics['data_fim'] . ' 23:59:59';
-            $batis['status'] = 'Aberto';
-            $this->semic->create($semics);
 
+            $extensao = $request['banner']->extension();
+            $path = 'semic/Evento' . '/Banner' . '';
+            $nome = 'bannersemic' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+            $semics['banner'] = $request['banner']->storeAs($path, $nome);
+
+            $semics['data_fim'] = $semics['data_fim'] . ' 23:59:59';
+            $semics['status'] = 'Aberto';
+            $semics['banner'] = $semics['banner'];
+            $this->semic->create($semics);
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('semic.index');
@@ -91,6 +110,7 @@ class SemicController extends Controller
             DB::beginTransaction();
             $semicUp = $this->semic->findOrfail($id);
             $semics = $request->validated();
+            $semics['visivel'] = $request['visivel'] ?? false;
             $semics['data_fim'] = $semics['data_fim'] . ' 23:59:59';
             $semicUp->update($semics);
             DB::commit();
@@ -104,12 +124,7 @@ class SemicController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Semic  $semic
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Semic $semic)
     {
         //

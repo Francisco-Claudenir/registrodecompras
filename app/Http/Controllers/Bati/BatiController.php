@@ -39,19 +39,53 @@ class BatiController extends Controller
         return view('admin.bati.create');
     }
 
+    public function site()
+    {
+        $batis = $this->bati->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);
+        return view('page.bati.site', compact('batis'));
+    }
+
+    public function page($bati_id)
+    {
+        //dd($bati_id);
+        $bati = $this->bati->findOrfail($bati_id);
+
+        if ($bati->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+
+      //  if (Auth::check()) {
+      //      $isInscrito = BatiInscricao::where('bati_id', $bati->bati_id)->where('user_id', Auth::user()->id)->exists();
+      //  } else {
+      //      $isInscrito = false;
+      //  }
+
+      // return view('page.bati.page', compact('bati', 'isInscrito'));
+       return view('page.bati.page', compact('bati'));
+       
+    }
 
     public function store(StoreBatiRequest $request)
     {
+        
         try {
             DB::beginTransaction();
             $batis = $request->validated();
+
+            $extensao = $request['banner']->extension();
+            $path = 'bati/Evento' . '/Banner' . '';
+            $nome = 'bannerbati' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+            $batis['banner'] = $request['banner']->storeAs($path, $nome);
+
             $batis['data_fim'] = $batis['data_fim'] . ' 23:59:59';
             $batis['status'] = 'Aberto';
+            $batis['banner'] = $batis['banner'];
             $this->bati->create($batis);
-
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('bati.index');
+
         } catch (\Throwable $th) {
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
@@ -81,6 +115,7 @@ class BatiController extends Controller
             DB::beginTransaction();
             $batiUp = $this->bati->findOrfail($id);
             $batis = $request->validated();
+            $batis['visivel'] = $request['visivel'] ?? false;
             $batis['data_fim'] = $batis['data_fim'] . ' 23:59:59';
             $batiUp->update($batis);
             DB::commit();

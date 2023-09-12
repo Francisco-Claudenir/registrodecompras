@@ -18,6 +18,7 @@ class UpdateBatiRequest extends FormRequest
         return [
             'nome' => ['required', 'string', 'min:2', 'max:150'],
             'descricao' => ['required', 'string', 'min:2', 'max:255'],
+            'visivel' => ['boolean'],
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date'],
             'status' => ['required','string']

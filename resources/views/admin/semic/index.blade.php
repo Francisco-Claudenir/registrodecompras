@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <div class="d-flex mb-4 align-items-start">
                                 <div class="dz-media me-3">
-                                    <img src="images/logos/pic1.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('../storage/' . $semic->banner)}}" class="img-fluid" alt="">
                                 </div>
                                 <div class="me-auto">
                                     <h4 class="title mb-2 mt-1">{{ $semic->nome }}</h4>
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <br>
-                                    <div>Inscritos<span class="text-black ms-3 font-w600">200</span></div>
+                                    <div>Inscritos:<span class="text-black ms-3 font-w600"><a href="{{ route('semic.inscricao.index',['semic_id' => $semic->semic_id])}}">{{$semic->semic_semic_inscricao_count }}</a></span></div>
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress

@@ -77,6 +77,22 @@
                                     <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($semic->status == "Fechado") checked @endif> Fechado</label>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="mb-4 col-md-12">
+                                    <label class="form-label">Visibilidade do Evento</label>
+                                    <div class="form-check custom-checkbox mb-3 checkbox-info">
+                                        <input type="checkbox"
+                                            class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
+                                            @if ($semic->visivel == true) checked @endif value="{{ true }}"
+                                            id="customCheckBox2" name="visivel">
+
+                                        <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
+                                        @if ($errors->has('visivel'))
+                                            <div class="invalid-feedback">{{ $errors->first('visivel') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
                             <a class="btn btn-danger float-end me-2" type="button" href="{{route('semic.index')}}">Cancelar</a>
                         </form>
@@ -110,7 +126,7 @@
         today = yyyy + '-' + mm + '-' + dd;
 
         // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
-        document.getElementById("data_inicio").setAttribute("min", today);
+        //document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
 @endsection

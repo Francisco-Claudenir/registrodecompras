@@ -34,4 +34,8 @@ class Centro extends Model
     {
         return $this->hasMany(PibicIndicacaoInscricao::class, 'centro_orientador');
     }
+    public function bati_inscricao_centro()
+    {
+        return $this->hasMany(BatiInscricao::class, 'centro_id');
+    }
 }
