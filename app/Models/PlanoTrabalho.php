@@ -18,7 +18,12 @@ class PlanoTrabalho extends Model
 
     public function ppinscricao()
     {
-        return $this->belongsToMany(PrimeirosPassosInscricao::class, 'pp_inscricao__ptrabalhos', 'plano_id', 'passos_inscricao_id');
+        return $this->belongsToMany(PrimeirosPassosInscricao::class, 'pp_inscricao_ptrabalhos', 'plano_id', 'passos_inscricao_id');
+    }
+
+    public function bati_inscricao()
+    {
+        return $this->belongsToMany(BatiInscricao::class, 'bati_inscricao__ptrabalhos', 'plano_id', 'bati_inscricao_id');
     }
 
     public function modalidade()

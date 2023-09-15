@@ -16,8 +16,14 @@
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            </div>
+        @endif
         <div class="card">
-
             <form action="{{ route('bati.inscricao.store', ['bati_id' => $bati]) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
@@ -40,7 +46,7 @@
                                                 <input type="text"
                                                     class="form-control @if ($errors->first('nome_bati_inscricao')) is-invalid @endif"
                                                     placeholder="Nome" required name="nome_bati_inscricao"
-                                                    value="{{ old('nome_bati_inscricao') }}">
+                                                    value="{{ old('nome_bati_inscricao') }}" >
                                                 {!! $errors->default->first('nome_bati_inscricao', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
 
@@ -128,7 +134,7 @@
                                                         <option value={{ $centro->id }}>
                                                             {{ $centro->centros }}</option>
                                                     @endforeach
-                                                    {!! $errors->default->first('centro', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                    {!! $errors->default->first('centro_id', '<span style="color:red" class="form-text">:message</span>') !!}
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-4">
@@ -137,8 +143,7 @@
                                                     <input type="text" name="departamento_bati_inscricao"
                                                         id="departamento_bati_inscricao"
                                                         class="form-control @error('departamento_bati_inscricao') is-invalid @enderror"
-                                                        placeholder="Departamento_bati_inscricao" required
-                                                        autocomplete="matricula"
+                                                        placeholder="Departamento" required autocomplete="matricula"
                                                         value="{{ old('departamento_bati_inscricao') }}">
                                                 </div>
                                                 {!! $errors->default->first(
@@ -152,7 +157,7 @@
                                                     <input type="text" name="laboratório_bati_inscricao"
                                                         id="laboratório_bati_inscricao"
                                                         class="form-control @error('laboratório_bati_inscricao') is-invalid @enderror"
-                                                        placeholder="laboratório_bati_inscricao" required
+                                                        placeholder="Laboratório" required
                                                         autocomplete="laboratório_bati_inscricao"
                                                         value="{{ old('laboratório_bati_inscricao') }}">
                                                 </div>
@@ -196,11 +201,9 @@
                                                 <div class="alert alert-primary">
                                                     <label>Encontra-se vinculado a algum Programa de Pós-Graduação da UEMA
                                                         na qualidade de Docente Permanente?</label><br>
-                                                    <label ><input type="radio" name="opcao_1"
-                                                             value="SIM">
+                                                    <label><input type="radio" name="opcao_1" value="SIM">
                                                         Sim</label><br>
-                                                    <label ><input type="radio" name="opcao_1"
-                                                             value="NAO">
+                                                    <label><input type="radio" name="opcao_1" value="NAO">
                                                         Não</label>
                                                 </div>
                                             </div>
@@ -211,7 +214,7 @@
                                                     como referência para avaliar a produção docente.</h6>
                                                 @foreach (config('ppgraduacao.ppgraduacao') as $item)
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" 
+                                                        <input class="form-check-input" type="checkbox"
                                                             name="ppgraduacao[]" value="{{ $item }}">
                                                         <label class="form-check-label">
                                                             {{ $item }}
@@ -438,7 +441,6 @@
                                                         'anexo_pdf_arquivo_bati_inscricao_2',
                                                         '<span style="color:red" class="form-text">:message</span>',
                                                     ) !!}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -492,7 +494,6 @@
             </form>
         </div>
     </div>
-    
 @endsection
 
 @section('css')
@@ -527,7 +528,7 @@
     <script src="/js/jquery.maskedinput.js"></script>
     <script type="text/javascript">
         $(function() {
-         
+
             $("#telefone_bati_inscricao").mask("(99) 99999-9999", {});
         })
     </script>

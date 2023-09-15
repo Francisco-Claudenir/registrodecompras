@@ -137,7 +137,7 @@ class SemicInscricaoController extends Controller
 
     public function store(StoreSemicInscricaoRequest $request, $semic_id)
     {
-
+        dd($request->all());
         try {
             DB::beginTransaction();
 
