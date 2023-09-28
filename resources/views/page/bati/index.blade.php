@@ -12,13 +12,13 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">{{ $semic_->nome }}</h4>
+                    <h4 class="card-title">{{ $bati_->nome }}</h4>
 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('semic.index') }}">Lista</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('bati.index') }}">Lista</a></li>
                     <li class="breadcrumb-item active"><a href="">Lista Inscritos</a>
                     </li>
                 </ol>
@@ -30,7 +30,8 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
-                        <a href="{{ route('lista.inscritos', $semic_->semic_id) }}"
+                       
+                        <a href="{{ route('lista.inscritos.bati', $bati_->bati_id) }}"
                             class="btn btn-success pull-right">Exportar Excel</a>
                     </div>
                     <div class="card-body">
@@ -39,7 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nª</th>
-                                        <th>Nome Professor(a) Orientador</th>
+                                        <th>Nome Completo</th>
                                         <th>Email</th>
                                         <th>CPF</th>
                                         <th>Matrícula</th>
@@ -51,8 +52,8 @@
                                     @foreach ($listaInscritos as $dados)
                                         <tr>
                                             <th>{{ $dados->numero_inscricao }}</th>
-                                            <th>{{ $dados->nomeorientador }}</th>
-                                            <td>{{ $dados->email }}</td>
+                                            <th>{{ $dados->nome }}</th>
+                                            <td>{{ $dados->email --}}</td>
                                             <td>{{ $dados->cpf }}</td>
                                             <td>{{ $dados->matricula }}</td>
                                             @if (!$dados->status !== 'Em Analise')
@@ -79,7 +80,7 @@
                                                 @endswitch
                                             @else
                                             @endif
-                                            <td><a href="{{  route('semic.inscricao.espelho', ['semic_id' => $dados->semic_id, 'semic_inscricao_id' => $dados->semic_inscricao_id]) }}"
+                                            <td><a href="{{  route('bati.inscricao.espelho', ['bati_id' => $dados->bati_id, 'bati_inscricao_id' => $dados->bati_inscricao_id]) }}"
                                                     class="badge badge-circle badge-dark"><i
                                                         class="flaticon-381-file-2"></i></a></td>
                                         </tr>

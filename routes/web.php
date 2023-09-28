@@ -71,6 +71,20 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SubArea
     Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
+
+
+    //bati Inscricão Execel
+    Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //bati Inscricão Espelho ADMIN
+    Route::get('bati/espelho/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'espelho'])->name('bati.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //Analise bati Inscrição
+    Route::post('bati/analise/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'analise'])->name('bati.inscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+
+
+   
     //PrimeirosPassos Inscricão Execel
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -203,10 +217,10 @@ Route::prefix('bati')->group(function () {
     Route::get('/{bati_id}', [BatiController::class, 'page'])->name('bati.page');
     Route::get('/inscricao/{bati_id}', [BatiInscricaoController::class, 'create'])->name('bati.inscricao.create')->middleware(['auth']);
     Route::post('/inscricao/{bati_id}', [BatiInscricaoController::class, 'store'])->name('bati.inscricao.store')->middleware(['auth']);
-   // Route::get('/lista-inscricao/{semic_id}', [SemicInscricaoController::class, 'index'])->name('semic.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-   // Route::get('/pdf/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'gerarPDF'])->name('semic.inscricao.pdf')->middleware(['auth']);
-   // Route::get('/docshow/{diretorio}', [SemicInscricaoController::class, 'docshow'])->name('semic.inscricao.docshow')->middleware(['auth']);
-   // Route::get('/verinscricao/{semic_id}/{user_id}', [SemicInscricaoController::class, 'show'])->name('semic.inscricao.show')->middleware(['auth']);
+    Route::get('/lista-inscricao/{bati_id}', [BatiInscricaoController::class, 'index'])->name('bati.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
 });
 
 

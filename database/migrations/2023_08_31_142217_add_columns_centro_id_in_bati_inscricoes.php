@@ -17,6 +17,7 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->dropColumn('area_id');
             $table->dropColumn('titulocapitulo');
            
+           
 
             // Criação de colunas
             $table->bigIncrements('bati_inscricao_id')->autoIncrement()->unique();
@@ -27,7 +28,9 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->integer('numero_inscricao');
             $table->string('status');
 
-          
+            $table->softDeletes();
+
+            $table->string('endereco')->nullable();
 
             // Criação de relacionamentos
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -62,6 +65,7 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->dropColumn('numero_inscricao'); 
             $table->dropColumn('status'); 
             $table->string('titulocapitulo');
+            $table->string('endereco');
 
         });
     }

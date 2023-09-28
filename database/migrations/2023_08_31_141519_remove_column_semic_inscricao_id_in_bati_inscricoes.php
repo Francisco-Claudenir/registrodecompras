@@ -11,6 +11,7 @@ class RemoveColumnSemicInscricaoIdInBatiInscricoes extends Migration
     {
         Schema::table('bati_inscricoes', function (Blueprint $table) {
             $table->dropColumn('semic_inscricao_id');
+            $table->dropColumn('endereco');
         });
     }
 
@@ -19,6 +20,7 @@ class RemoveColumnSemicInscricaoIdInBatiInscricoes extends Migration
     {
         Schema::table('bati_inscricoes', function (Blueprint $table) {
             $table->bigIncrements('semic_inscricao_id')->autoIncrement()->unique();
+            $table->json('endereco')->nullable();
         });
     }
 }

@@ -40,14 +40,14 @@ class BatiInscricao extends Model
     //Relacionamento com a tabela Users
     public function bati_inscricao_users()
     {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+        return $this->belongsTo(User::class,'user_id', 'id');
     }
     //Relacionamento com a tabela Centros
     public function bati_inscricao_centros()
     {
-        return $this->belongsTo(Centros::class, 'centro_id')->withTrashed();
+        return $this->belongsTo(Centro::class, 'centro_id')->withTrashed();
     }
-    //Relacionamento com a tabela Centros
+    //Relacionamento com a tabela Modalidade Bolsas
     public function bati_inscricao_modalidade_bolsas()
     {
         return $this->belongsTo(ModalidadeBolsa::class, 'modalidade_id')->withTrashed();
