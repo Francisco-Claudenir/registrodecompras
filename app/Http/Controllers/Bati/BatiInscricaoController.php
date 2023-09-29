@@ -123,7 +123,7 @@ class BatiInscricaoController extends Controller
     {
         //Verificando se o bati_id existe
         $bati = $this->bati->findOrfail($bati_id);
-        // dd($this->batiinscricao);
+
         $dadosInscrito = $this->batiinscricao->where('bati_inscricoes.bati_id', '=', $bati_id)->findOrfail($bati_inscricao_id);
 
         $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
@@ -189,7 +189,7 @@ class BatiInscricaoController extends Controller
 
     public function store(StoreBatiInscricaoRequest $request, $bati_id)
     {
-        // dd($request->all());
+        
         try {
             DB::beginTransaction();
 
@@ -279,7 +279,6 @@ class BatiInscricaoController extends Controller
 
                 ]);
 
-                 //dd($dados_inscricao);
                 $planotrabalho2 = [
                     'modalidade' => $dados_inscricao['modalidade_bolsa_bati_inscricao_2'],
                     'titulobati' => $dados_inscricao['titulo_bati_inscricao_2'],
