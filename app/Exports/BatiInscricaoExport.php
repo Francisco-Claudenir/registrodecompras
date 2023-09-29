@@ -20,6 +20,8 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use Illuminate\Support\Facades\Crypt;
+use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 
 class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
 {
@@ -44,6 +46,8 @@ class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, W
         $listaInscritos = BatiInscricao::with('plano_trabalho')->where('bati_inscricoes.bati_id', '=', $bati_id)
         ->orderby('bati_inscricoes.numero_inscricao', 'asc')
         ->get();
+
+       // dd($listaInscritos);
 
         foreach ($listaInscritos as $key => $dados) {
 
@@ -76,11 +80,14 @@ class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, W
            
             $lista[$key]['titulo'] = implode(', ',$titulosplanotrabalho);
             $lista[$key]['vinculo'] = implode(', ',$vinculo);
+            $lista[$key]['projetospesquisa'] = route('bati.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['projetospesquisa'])]);
+            $lista[$key]['termosoutorga'] = route('bati.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['termosoutorga'])]);
+            $lista[$key]['curriculolattes'] = route('bati.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['curriculolattes'])]);
 
         }
-        dd($lista);
         $colecao = collect($lista);
-
+        
+       // dd($colecao);
        return $colecao;
     }
 
@@ -104,7 +111,10 @@ class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, W
             'Status',
             'Área do Projeto de Pesquisa',
             'Plano(s) de Trabalho do Bolsista',
-            'Programas de Pós-Graduação Vinculado'
+            'Programas de Pós-Graduação Vinculado',
+            'Relação dos Projetos de Pesquisa',
+            'Termo(s) de Outorga',
+            'Currículo Lattes'
         ];
     }
 
@@ -129,6 +139,32 @@ class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, W
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
                 $event->sheet->getStyle('A1:J7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+                
+                
+                foreach ($event->sheet->getColumnIterator('H') as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        // Verifica se a célula não está vazia e contém '://'
+                        if ($cell->getValue() != "" && str_contains($cell->getValue(), '://')) {
+                            // Cria um objeto Hyperlink com a URL e o texto do link
+                            $hyperlink = new Hyperlink($cell->getValue(), "Arquivo");
+
+                            // Define o hyperlink na célula
+                            $event->sheet->getCell($cell->getCoordinate())->setHyperlink($hyperlink);
+
+                            // Define o valor da célula como "Arquivo Teste"
+                            $event->sheet->getCell($cell->getCoordinate())->setValue("Arquivo");
+
+                            // Aplica estilo ao link
+                            $event->sheet->getStyle($cell->getCoordinate())->applyFromArray([
+                                'font' => [
+                                    'color' => ['rgb' => '0000FF'],
+                                    'underline' => 'single'
+                                ]
+                            ]);
+                        }
+                    }
+                }
+            
             },
 
         ];
@@ -188,9 +224,9 @@ class BatiInscricaoExport implements FromCollection, WithHeadings, WithStyles, W
         return [
             'A' => 20,
             'B' => 55,
-            'C' => 55,
+            'C' => 40,
             'D' => 20,
-            'E' => 20,
+            'E' => 55,
 
         ];
     }
