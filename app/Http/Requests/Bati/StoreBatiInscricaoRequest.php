@@ -34,7 +34,7 @@ class StoreBatiInscricaoRequest extends FormRequest
             'anexo_pdf_arquivo_bati_inscricao_2' => 'sometimes|required_with:titulo_bati_inscricao_2,resumo_bati_incricao_2,modalidade_bolsa_bati_inscricao_2',
             'areaconhecimento_id' => ['required'],
             'anexo_pdf_bati_inscricao_projetospesquisa' => ['required', 'mimes:pdf'],
-            'anexo_pdf_bati_inscricao_termooutorga' => ['required', 'mimes:pdf'],
+            'anexo_pdf_bati_inscricao_termooutorga' => ['mimes:pdf'],
             'modalidade_bolsa_bati_inscricao' => ['required'],
             'titulo_bati_inscricao' => ['required', 'string', 'max:255'],
             'resumo_bati_incricao' => ['required', 'string', 'max:600'],

@@ -31,6 +31,8 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
             $table->softDeletes();
 
             $table->string('endereco')->nullable();
+            $table->string('laboratorio')->nullable();
+            $table->string('termosoutorga')->nullable();
 
             // Criação de relacionamentos
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

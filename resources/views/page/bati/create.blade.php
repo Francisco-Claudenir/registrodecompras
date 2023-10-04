@@ -157,7 +157,7 @@
                                                     <input type="text" name="laboratório_bati_inscricao"
                                                         id="laboratório_bati_inscricao"
                                                         class="form-control @error('laboratório_bati_inscricao') is-invalid @enderror"
-                                                        placeholder="Laboratório" required
+                                                        placeholder="Laboratório"
                                                         autocomplete="laboratório_bati_inscricao"
                                                         value="{{ old('laboratório_bati_inscricao') }}">
                                                 </div>
@@ -287,7 +287,7 @@
                                                     <div class="form-file">
                                                         <input type="file"
                                                             class="form-file-input form-control @if ($errors->first('anexo_pdf_bati_inscricao_termooutorga')) is-invalid @endif"
-                                                            required name="anexo_pdf_bati_inscricao_termooutorga">
+                                                            name="anexo_pdf_bati_inscricao_termooutorga">
                                                     </div>
                                                 </div>
                                                 {!! $errors->default->first(
@@ -348,8 +348,9 @@
                                         <div class="mb-11 col-md-12">
                                             <div class="form-group">
                                                 <label class="form-label fw-normal">Resumo*</label>
-                                                <textarea class="form-control" name="resumo_bati_incricao" id="resumo_bati_incricao" rows="3"
-                                                    placeholder="Resumo" required></textarea>
+                                                <textarea class="form-control" @error('resumo_bati_incricao') is-invalid @enderror" name="resumo_bati_incricao" id="resumo_bati_incricao" rows="3"
+                                                    placeholder="Resumo" autocomplete="Resumo" required
+                                                    value="{{ old('resumo_bati_incricao') }}"></textarea>
                                             </div>
                                             {!! $errors->default->first('resumo_bati_incricao', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
