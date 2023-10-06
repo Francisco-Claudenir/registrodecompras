@@ -60,7 +60,7 @@ class BatiInscricaoController extends Controller
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->batiinscricao
-        ->join('users', 'users.id', '=', 'bati_inscricoes.user_id')
+            ->join('users', 'users.id', '=', 'bati_inscricoes.user_id')
             ->where('bati_inscricoes.bati_id', '=', $bati_id)
             ->select([
                 'bati_inscricoes.nome',
@@ -85,7 +85,7 @@ class BatiInscricaoController extends Controller
 
         $dadosInscrito = $this->batiinscricao
 
-        ->where('bati_inscricoes.bati_id', '=', $bati_id)->findOrfail($bati_inscricao_id);
+            ->where('bati_inscricoes.bati_id', '=', $bati_id)->findOrfail($bati_inscricao_id);
 
         $subArea = $this->subarea->with('subArea_grandeArea')->findOrfail($dadosInscrito->areaconhecimento_id);
 
@@ -96,7 +96,7 @@ class BatiInscricaoController extends Controller
         return view('admin.bati.espelho', compact('evento', 'dadosInscrito', 'subArea', 'centro'));
     }
 
-    
+
 
     public function create($bati_id)
     {
@@ -189,7 +189,7 @@ class BatiInscricaoController extends Controller
 
     public function store(StoreBatiInscricaoRequest $request, $bati_id)
     {
-        
+
         try {
             DB::beginTransaction();
 
@@ -211,16 +211,23 @@ class BatiInscricaoController extends Controller
                 //Caminho de arquirvos
 
                 //Documento PDF relação dos projetos de pesquisa 
+
                 $extensao =  $request['anexo_pdf_bati_inscricao_projetospesquisa']->extension();
                 $path = 'BatiIsncricao/' . Carbon::create($bati->created_at)->format('Y') . '/' . $request['bati_id'] . '/anexo_pdf_bati_inscricao_projetospesquisa' . '/' . Auth::user()->cpf . '';
                 $nome = 'anexo_pdf_bati_inscricao_projetospesquisa' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                 $dados_inscricao['anexo_pdf_bati_inscricao_projetospesquisa'] = $request['anexo_pdf_bati_inscricao_projetospesquisa']->storeAs($path, $nome);
 
                 //Documento PDF termo de Outorga
-                $extensao =  $request['anexo_pdf_bati_inscricao_termooutorga']->extension();
-                $path = 'BatiIsncricao/' . Carbon::create($bati->created_at)->format('Y') . '/' . $request['bati_id'] . '/anexo_pdf_bati_inscricao_termooutorga' . '/' . Auth::user()->cpf . '';
-                $nome = 'anexo_pdf_bati_inscricao_termooutorga' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                $dados_inscricao['anexo_pdf_bati_inscricao_termooutorga'] = $request['anexo_pdf_bati_inscricao_termooutorga']->storeAs($path, $nome);
+
+                $extensao =  $request['anexo_pdf_bati_inscricao_termooutorga'] ? $request['anexo_pdf_bati_inscricao_termooutorga']->extension() : null;
+                if ($extensao != null) {
+                    // $extensao =  $request['anexo_pdf_bati_inscricao_termooutorga']->extension();
+                    $path = 'BatiIsncricao/' . Carbon::create($bati->created_at)->format('Y') . '/' . $request['bati_id'] . '/anexo_pdf_bati_inscricao_termooutorga' . '/' . Auth::user()->cpf . '';
+                    $nome = 'anexo_pdf_bati_inscricao_termooutorga' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                    $dados_inscricao['anexo_pdf_bati_inscricao_termooutorga'] = $request['anexo_pdf_bati_inscricao_termooutorga']->storeAs($path, $nome);
+                } else {
+                    $dados_inscricao['anexo_pdf_bati_inscricao_termooutorga'] = null;
+                }
 
                 //Documento PDF Produção Docente
                 $extensao =  $request['anexo_pdf_curriculolattes_bati_inscricao']->extension();
@@ -235,20 +242,22 @@ class BatiInscricaoController extends Controller
                 $dados_inscricao['anexo_pdf_arquivo_bati_inscricao'] = $request['anexo_pdf_arquivo_bati_inscricao']->storeAs($path, $nome);
 
                 //Documento PDF Plano de Trabalho 2
-                $extensao =  $request['anexo_pdf_arquivo_bati_inscricao_2']->extension();
-                $path = 'BatiIsncricao/' . Carbon::create($bati->created_at)->format('Y') . '/' . $request['bati_id'] . '/planotrabalho' . '/' . Auth::user()->cpf . '';
-                $nome = 'anexo_pdf_arquivo_bati_inscricao_2' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                $dados_inscricao['anexo_pdf_arquivo_bati_inscricao_2'] = $request['anexo_pdf_arquivo_bati_inscricao_2']->storeAs($path, $nome);
-
-
+                if (isset($request['anexo_pdf_arquivo_bati_inscricao_2'])) {
+                    $extensao =  $request['anexo_pdf_arquivo_bati_inscricao_2'] ? $request['anexo_pdf_arquivo_bati_inscricao_2']->extension() : null;
+                   // $extensao =  $request['anexo_pdf_arquivo_bati_inscricao_2']->extension();
+                    $path = 'BatiIsncricao/' . Carbon::create($bati->created_at)->format('Y') . '/' . $request['bati_id'] . '/planotrabalho' . '/' . Auth::user()->cpf . '';
+                    $nome = 'anexo_pdf_arquivo_bati_inscricao_2' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                    $dados_inscricao['anexo_pdf_arquivo_bati_inscricao_2'] = $request['anexo_pdf_arquivo_bati_inscricao_2']->storeAs($path, $nome);
+                } else {
+                }
 
                 //Tratamento das informações enviadas de vinculos
                 if ($dados_inscricao['opcao_1'] === "SIM" && isset($dados_inscricao['ppgraduacao'])) {
                     $vinculo_tratado = $dados_inscricao['ppgraduacao'];
                 } elseif ($dados_inscricao['opcao_1'] === "NAO" && isset($dados_inscricao['ppgraduacao'])) {
-                    $vinculo_tratado = "Sem Vínculos";
+                    $vinculo_tratado[] = "Sem Vínculos";
                 } else {
-                    $vinculo_tratado = "Sem Vínculos";
+                    $vinculo_tratado[] = "Sem Vínculos";
                 }
 
                 $inscricao = $this->batiinscricao->create([
@@ -279,12 +288,23 @@ class BatiInscricaoController extends Controller
 
                 ]);
 
-                $planotrabalho2 = [
-                    'modalidade' => $dados_inscricao['modalidade_bolsa_bati_inscricao_2'],
-                    'titulobati' => $dados_inscricao['titulo_bati_inscricao_2'],
-                    'resmumo' => $dados_inscricao['resumo_bati_incricao_2'],
-                    'arquivo' => $dados_inscricao['anexo_pdf_arquivo_bati_inscricao_2']
-                ];
+                if (isset($dados_inscricao['modalidade_bolsa_bati_inscricao_2'])) {
+                    $planotrabalho2 = [
+                        'modalidade' => $dados_inscricao['modalidade_bolsa_bati_inscricao_2'],
+                        'titulobati' => $dados_inscricao['titulo_bati_inscricao_2'],
+                        'resmumo' => $dados_inscricao['resumo_bati_incricao_2'],
+                        'arquivo' => $dados_inscricao['anexo_pdf_arquivo_bati_inscricao_2']
+                    ];
+                }
+
+
+                  //Cadastro plano de trabalho
+                  $plano = $this->planotrabalho->create([
+                    'resumo' => $dados_inscricao['resumo_bati_incricao'],
+                    'modalidade_id' => $dados_inscricao['modalidade_bolsa_bati_inscricao'],
+                    'titulo' => $dados_inscricao['titulo_bati_inscricao'],
+                    'arquivo' => $dados_inscricao['anexo_pdf_arquivo_bati_inscricao'],
+                ]);
 
                 if (!empty($planotrabalho2)) {
                     $plano2 = $this->planotrabalho->create([
@@ -293,17 +313,15 @@ class BatiInscricaoController extends Controller
                         'titulo' => $planotrabalho2['titulobati'],
                         'arquivo' => $planotrabalho2['arquivo'],
                     ]);
+
+                    $result = [$plano['plano_id'], $plano2['plano_id']];
+
+                } else {
+
+                    $result = [$plano['plano_id']];
                 }
 
-                //Cadastro plano de trabalho
-                $plano = $this->planotrabalho->create([
-                    'resumo' => $dados_inscricao['resumo_bati_incricao'],
-                    'modalidade_id' => $dados_inscricao['modalidade_bolsa_bati_inscricao'],
-                    'titulo' => $dados_inscricao['titulo_bati_inscricao'],
-                    'arquivo' => $dados_inscricao['anexo_pdf_arquivo_bati_inscricao'],
-                ]);
 
-                $result = [$plano['plano_id'], $plano2['plano_id']];
 
                 $inscricao->plano_trabalho()->attach($result);
 
@@ -315,7 +333,6 @@ class BatiInscricaoController extends Controller
                 return redirect()->route('bati.page', ['bati_id' => $bati_id]);
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();

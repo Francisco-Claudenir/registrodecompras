@@ -48,10 +48,10 @@ class StoreBatiInscricaoRequest extends FormRequest
         return [
             'nome_bati_inscricao' => 'O nome é obrigatório',
 
-            'titulo_bati_inscricao_2' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'resumo_bati_incricao_2' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'modalidade_bolsa_bati_inscricao_2' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'anexo_pdf_arquivo_bati_inscricao_2' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
+            'titulo_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
+            'resumo_bati_incricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
+            'modalidade_bolsa_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
+            'anexo_pdf_arquivo_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
 
             'opcao_1.required' => 'E obrigátorio responder a perguntar!',
 
