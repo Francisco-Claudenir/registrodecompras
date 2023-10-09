@@ -160,7 +160,7 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
         // Estilizar as demais linhas
         $lastRow = $sheet->getHighestRow();
         for ($row = 2; $row <= $lastRow; $row++) {
-            $statusCell = $sheet->getCell('H' . $row);
+            $statusCell = $sheet->getCell('J' . $row);
             $status = $statusCell->getValue();
 
             // Defina a cor de fundo com base no valor do status
