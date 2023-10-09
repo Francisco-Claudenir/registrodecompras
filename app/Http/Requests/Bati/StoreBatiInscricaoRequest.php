@@ -48,10 +48,14 @@ class StoreBatiInscricaoRequest extends FormRequest
         return [
             'nome_bati_inscricao' => 'O nome é obrigatório',
 
-            'titulo_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'resumo_bati_incricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'modalidade_bolsa_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
-            'anexo_pdf_arquivo_bati_inscricao_2.required_with' => 'Um dos campos do Plano de Trabalho 2, se for adicionar o plano de trabalho 2 é necessário preencher todos os campos se não deixe os campos em branco',
+            'titulo_bati_inscricao_2.required_with' => 'O Plano de Trablaho 2 existe campo sem informação, se você não for adicionar um segundo plano de trabalho deixe em branco os campos se for
+            adicionar complete as informações',
+            'resumo_bati_incricao_2.required_with' => 'O Plano de Trablaho 2 existe campo sem informação, se você não for adicionar um segundo plano de trabalho deixe em branco os campos se for
+            adicionar complete as informações',
+            'modalidade_bolsa_bati_inscricao_2.required_with' => 'O Plano de Trablaho 2 existe campo sem informação, se você não for adicionar um segundo plano de trabalho deixe em branco os campos
+            se for adicionar complete as informações',
+            'anexo_pdf_arquivo_bati_inscricao_2.required_with' => 'O Plano de Trablaho 2 existe campo sem informação, se você não for adicionar um segundo plano de trabalho deixe em branco os campos
+            se for adicionar complete as informações',
 
             'opcao_1.required' => 'E obrigátorio responder a perguntar!',
 

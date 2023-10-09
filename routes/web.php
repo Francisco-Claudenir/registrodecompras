@@ -92,7 +92,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('primeirospassos/espelho/{primeiropasso_id}/{passos_inscricao_id}', [PrimeirosPassosInscricaoController::class, 'espelho'])->name('primeirospassos.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //Semic Inscricão Execel
-    Route::get('/semic/inscritos/{semic_id}', [ExportsController::class, 'semicInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/semic/inscritos/{semic_id}', [ExportsController::class, 'semicInscritos'])->name('lista.inscritos.semic')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //Semic Inscricão Espelho ADMIN
     Route::get('semic/espelho/{semic_id}/{semic_inscricao_id}', [SemicInscricaoController::class, 'espelho'])->name('semic.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
