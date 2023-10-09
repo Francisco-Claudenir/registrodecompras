@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
-                        <a href="{{ route('lista.inscritos', $semic_->semic_id) }}"
+                        <a href="{{ route('lista.inscritos.semic', $semic_->semic_id) }}"
                             class="btn btn-success pull-right">Exportar Excel</a>
                     </div>
                     <div class="card-body">
