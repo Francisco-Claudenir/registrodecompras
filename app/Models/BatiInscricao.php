@@ -14,8 +14,8 @@ class BatiInscricao extends Model
 
     protected $fillable = [
         'bati_id', 'nome', 'cpf', 'identidade', 'endereco', 'telefone', 'email', 'matricula', 'departamento',
-        'laboratorio', 'regimetrabalho', 'titulacao', 'vinculo', 'area_id', 'projetospesquisa', 'termosoutorga', 'titulocapitulo',
-        'curriculolattes', 'user_id', 'areaconhecimento_id', 'centro_id', 'modalidade_id'
+        'laboratorio', 'regimetrabalho', 'titulacao', 'vinculo', 'projetospesquisa', 'termosoutorga', 'status',
+        'curriculolattes', 'user_id', 'areaconhecimento_id', 'centro_id', 'modalidade_id', 'numero_inscricao'
     ];
 
     protected $primaryKey = 'bati_inscricao_id';
@@ -25,7 +25,7 @@ class BatiInscricao extends Model
     //Relacionamento com a tabela planotrabalho
     public function plano_trabalho()
     {
-        return $this->belongsTo(PlanoTrabalho::class, 'bati_inscricao_id')->withTrashed();
+        return $this->belongsToMany(PlanoTrabalho::class, 'bati_inscricao_ptrabalhos', 'bati_inscricao_id', 'plano_id')->withTrashed();
     }
     //Relacionamento com a tabela batis
     public function bati_inscricao_bati()
@@ -37,22 +37,17 @@ class BatiInscricao extends Model
     {
         return $this->belongsTo(SubArea::class, 'areaconhecimento_id')->withTrashed();
     }
-    //Relacionamento com a tabela GrandeArea
-    public function bati_inscricao_grandeArea()
-    {
-        return $this->belongsTo(GrandeArea::class, 'area_id')->withTrashed();
-    }
     //Relacionamento com a tabela Users
     public function bati_inscricao_users()
     {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+        return $this->belongsTo(User::class,'user_id', 'id');
     }
     //Relacionamento com a tabela Centros
     public function bati_inscricao_centros()
     {
-        return $this->belongsTo(Centros::class, 'centro_id')->withTrashed();
+        return $this->belongsTo(Centro::class, 'centro_id')->withTrashed();
     }
-    //Relacionamento com a tabela Centros
+    //Relacionamento com a tabela Modalidade Bolsas
     public function bati_inscricao_modalidade_bolsas()
     {
         return $this->belongsTo(ModalidadeBolsa::class, 'modalidade_id')->withTrashed();

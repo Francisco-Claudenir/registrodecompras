@@ -1,29 +1,23 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Bati;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBatiInscricaoRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+    
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+  
     public function rules()
     {
         return [
+            'status' => ['required',Rule::in(config('status.status'))],
             //
         ];
     }

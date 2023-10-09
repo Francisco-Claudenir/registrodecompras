@@ -83,7 +83,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <br>
-                                    <div>Inscritos<span class="text-black ms-3 font-w600">200</span></div>
+                                    <div>Inscritos:<span class="text-black ms-3 font-w600"><a href="{{ route('bati.inscricao.index',['bati_id' => $bati->bati_id])}}">{{$bati->bati_bati_inscricao_count }}</a></span></div>
                                 </div>
                                 <div class="col-6">
                                     <h6>Progress

@@ -53,15 +53,15 @@
                                                         </div>
                                                     @endif
 
-                                                 {{--   <div class="col-6">
+                                                   <div class="col-6">
 
                                                         @if ($isInscrito)
-                                                            <a href="{{-- route('semic.inscricao.show', ['semic_id' => $semic->semic_id, 'user_id' => Auth::user()->id]) --}}"
-                                                              {{--  class="btn btn-info btn-xs mb-1">Ver Inscrições</a> 
-                                                            @if ($semic->status === 'Aberto')
-                                                                @if (now()->gte($semic->data_inicio) && now()->lte($semic->data_fim))
-                                                                    <a href="{{-- route('semic.inscricao.create', ['semic_id' => $semic->semic_id]) --}}"
-                                                                      {{--  class="btn btn-primary btn-xs mb-1">Realizar
+                                                            <a href="{{ route('bati.inscricao.show', ['bati_id' => $bati->bati_id, 'user_id' => Auth::user()->id]) }}"
+                                                               class="btn btn-info btn-xs mb-1">Ver Inscrições</a> 
+                                                            @if ($bati->status === 'Aberto')
+                                                                @if (now()->gte($bati->data_inicio) && now()->lte($bati->data_fim))
+                                                                    <a href="{{ route('bati.inscricao.create', ['bati_id' => $bati->bati_id]) }}"
+                                                                        class="btn btn-primary btn-xs mb-1">Realizar
                                                                         Inscrição</a>
                                                                 @else
                                                                     <span class="text-danger"> Não é possível realizar a
@@ -74,10 +74,10 @@
                                                             @endif
                                                         @else
                                                             @if (Auth::check())
-                                                                @if ($semic->status === 'Aberto')
-                                                                    @if (now()->gte($semic->data_inicio) && now()->lte($semic->data_fim))
-                                                                        <a href="{{-- route('semic.inscricao.create', ['semic_id' => $semic->semic_id]) --}}"
-                                                                          {{--  class="btn btn-primary btn-xs mb-1">Realizar
+                                                                @if ($bati->status === 'Aberto')
+                                                                    @if (now()->gte($bati->data_inicio) && now()->lte($bati->data_fim))
+                                                                        <a href="{{ route('bati.inscricao.create', ['bati_id' => $bati->bati_id]) }}"
+                                                                            class="btn btn-primary btn-xs mb-1">Realizar
                                                                             Inscrição</a>
                                                                     @else
                                                                         <span class="text-danger"> Não é possível realizar a
@@ -90,13 +90,13 @@
                                                                 @endif
                                                             @endif
                                                         @endif
-                                                    </div> --}}
+                                                    </div> 
                                                     <div class="col-6">
                                                         @auth
                                                             <div class="dropdown custom-dropdown">
                                                                 <button type="button" class="btn btn-xs btn-outline-info"
                                                                     data-bs-toggle="dropdown"
-                                                                    aria-expanded="true">{{-- explode(' ', Auth::user()->nome)[0] --}}
+                                                                    aria-expanded="true">{{ explode(' ', Auth::user()->nome)[0] }}
                                                                     <i class="fa fa-angle-down ms-3"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-end"

@@ -29,7 +29,8 @@ class BatiController extends Controller
     public function index()
     {
         // $Batis = $this->bati->withCount(0)->paginate(20);
-        $Batis = $this->bati->paginate(20);
+       // $programasSemic = $this->semic->withCount('semic_semicInscricao')->paginate(20);
+        $Batis = $this->bati->withCount('bati_bati_inscricao')->paginate(20);
         $totalBatis = Bati::count();
         return view('admin.bati.index', compact('Batis'));
     }
@@ -49,20 +50,21 @@ class BatiController extends Controller
     {
         //dd($bati_id);
         $bati = $this->bati->findOrfail($bati_id);
+        
 
         if ($bati->visivel == 0) {
             alert()->error(config('Evento não encontrado', 'Este evento não existe'));
             return redirect()->back();
         }
+       
+        if (Auth::check()) {
+           
+            $isInscrito = BatiInscricao::where('bati_id', $bati->bati_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
 
-      //  if (Auth::check()) {
-      //      $isInscrito = BatiInscricao::where('bati_id', $bati->bati_id)->where('user_id', Auth::user()->id)->exists();
-      //  } else {
-      //      $isInscrito = false;
-      //  }
-
-      // return view('page.bati.page', compact('bati', 'isInscrito'));
-       return view('page.bati.page', compact('bati'));
+       return view('page.bati.page', compact('bati', 'isInscrito'));
        
     }
 
