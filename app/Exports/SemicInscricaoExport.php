@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Semic;
 use App\Models\SemicInscricao;
+use App\Models\SubArea;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -16,6 +17,8 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use Illuminate\Support\Facades\Crypt;
+use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 
 class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
 {
@@ -34,28 +37,30 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
         //Verificando se o id existe
         Semic::findOrfail($semic_id);
 
-        //Buscando a lista de inscritos atraves de join
-        $listaInscritos = SemicInscricao::join('users', 'users.id', '=', 'semic_inscricaos.user_id')
-            ->join('sub_areas', 'sub_areas.areaconhecimento_id', '=', 'semic_inscricaos.areaconhecimento_id')
-            //->join('pp_inscricao__ptrabalhos', 'pp_inscricao__ptrabalhos.passos_inscricao_id', '=', 'primeiros_passos_inscricaos.passos_inscricao_id')
-           // ->join('plano_trabalhos', 'plano_trabalhos.plano_id', '=', 'pp_inscricao__ptrabalhos.plano_id')
-           // ->join('centros', 'centros.id', '=', 'primeiros_passos_inscricaos.centro_id')
-            ->where('semic_inscricaos.semic_id', '=', $semic_id)
-            ->select([
-                'semic_inscricaos.numero_inscricao',
-                'semic_inscricaos.nomeorientador',
-                'semic_inscricaos.email',
-                'semic_inscricaos.cpf',
-                'semic_inscricaos.matricula',
-                'semic_inscricaos.titulacao',
-                'sub_areas.nome as subarea',
-                'semic_inscricaos.tituloprojetoorient',
-                'semic_inscricaos.titulocapitulo',
-                'semic_inscricaos.status'      
-            ])
-            ->orderby('semic_inscricaos.numero_inscricao', 'asc')->get();
+        $listaInscritos = SemicInscricao::where('semic_inscricaos.user_id', '=', $semic_id)
+        ->orderby('semic_inscricaos.numero_inscricao', 'asc')
+        ->get();
 
-        return $listaInscritos;
+        foreach ($listaInscritos as $key => $dados) {
+
+            $subarea = SubArea::findOrfail($dados['areaconhecimento_id']);
+
+            $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
+            $lista[$key]['nomeorientador'] = $dados['nomeorientador'];
+            $lista[$key]['email'] = $dados['email'];
+            $lista[$key]['cpf'] = $dados['cpf'];
+            $lista[$key]['matricula'] = $dados['matricula'];
+            $lista[$key]['titulacao'] = $dados['titulacao'];
+            $lista[$key]['areaconhecimento_id'] = $subarea['nome'];
+            $lista[$key]['tituloprojetoorient'] = $dados['tituloprojetoorient'];
+            $lista[$key]['titulocapitulo'] = $dados['titulocapitulo'];
+            $lista[$key]['status'] = $dados['status'];
+            $lista[$key]['capitulo'] = route('semic.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['capitulo'])]);
+           
+        }
+        $colecao = collect($lista);
+
+        return $colecao;
     }
 
 
@@ -75,7 +80,8 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
             'Área de Conhecimento',
             'Titulo do projeto do orientador cadastrado no PIBIC ciclo ' . $anoatual . '-' . $anoanterior,  
             'Título do capítulo submetido para a coletânea',
-            'Status'
+            'Status',
+            'Capítulo'
         ];
     }
 
@@ -100,6 +106,30 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
                 $event->sheet->getStyle('A1:J7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+
+                foreach ($event->sheet->getColumnIterator('H') as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        // Verifica se a célula não está vazia e contém '://'
+                        if ($cell->getValue() != "" && str_contains($cell->getValue(), '://')) {
+                            // Cria um objeto Hyperlink com a URL e o texto do link
+                            $hyperlink = new Hyperlink($cell->getValue(), "Arquivo");
+
+                            // Define o hyperlink na célula
+                            $event->sheet->getCell($cell->getCoordinate())->setHyperlink($hyperlink);
+
+                            // Define o valor da célula como "Arquivo Teste"
+                            $event->sheet->getCell($cell->getCoordinate())->setValue("Arquivo");
+
+                            // Aplica estilo ao link
+                            $event->sheet->getStyle($cell->getCoordinate())->applyFromArray([
+                                'font' => [
+                                    'color' => ['rgb' => '0000FF'],
+                                    'underline' => 'single'
+                                ]
+                            ]);
+                        }
+                    }
+                }
             },
 
         ];
