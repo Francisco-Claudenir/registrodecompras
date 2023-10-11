@@ -20,6 +20,7 @@ use App\Http\Controllers\PibicIndicacaoInscricaoController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
+use App\Http\Controllers\SemicEvento\SemicEventoController;
 use App\Http\Controllers\Semic\SemicInscricaoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
@@ -50,6 +51,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 
+    
     //Semic
     Route::resource('semic', SemicController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -71,8 +73,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SubArea
     Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
-
-
     //bati Inscricão Execel
     Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -82,9 +82,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Analise bati Inscrição
     Route::post('bati/analise/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'analise'])->name('bati.inscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
-
-
-   
     //PrimeirosPassos Inscricão Execel
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -105,8 +102,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //PP_IndicacaoBolsistas Inscricão Execel
     Route::get('/pibic-indicacao/inscritos/{pibicindicacao_id}', [ExportsController::class, 'pibicIndicacaoInscricao'])->name('lista.pibicindicacao.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+   
     //User
     Route::resource('users', UserController::class);
+
     Route::put('/user/pass_reset/{id}', [UserController::class, 'resetPass'])->name('user.passreset')->middleware(['check-role:Administrador']);
 
     //ModalidadeBolsa
@@ -117,6 +116,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Cursos
     Route::resource('curso', CursoController::class);
+
+    //SemicEvento
+    Route::resource('semicevento', SemicEventoController::class);
 
     //Centro
     Route::resource('centro', CentroController::class);
@@ -139,6 +141,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Analise Pibic Inscrição
     Route::post('/pibic-indicacao/analise/{pibic_indicacao_id}/{pibic_i_inscricao_id}', [PibicIndicacaoInscricaoController::class, 'analise'])->name('pibicindicacao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 });
 
 
