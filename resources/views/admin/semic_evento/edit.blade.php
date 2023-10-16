@@ -3,23 +3,22 @@
     'plugins' => ['wizard', 'validation_jquery'],
 ])
 
-@section('title', ' - Cadastro de Programa Semic_evento')
+@section('title', ' - Edição Semic_evento')
 
 @section('content')
     <div class="container-fluid">
-        @include('sweet::alert')
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">Cadastro Semic_evento</h4>
+                    <h4 class="card-title">Editar Semic_evento</h4>
 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Semic_evento</a></li>
-                    <li class="breadcrumb-item active"><a href="">Cadastro</a></li>
+                    <li class="breadcrumb-item active"><a href="">Editar</a></li>
                 </ol>
             </div>
         </div>
@@ -27,14 +26,15 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('semicevento.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('semicevento.update', $semic_evento->semic_evento_id) }}" method="post">
                             @csrf
+                            @method('put')
                             <div class="row">
                                 <div class="mb-4 col-md-4">
                                     <label class="form-label">Nome</label>
                                     <input type="text"
                                         class="form-control @if ($errors->first('nome')) is-invalid @endif"
-                                        placeholder="Nome" name="nome" required="" value="{{ old('nome') }}">
+                                        name="nome" required="" value="{{ $semic_evento->nome }}">
                                     @if ($errors->has('nome'))
                                         <div class="invalid-feedback">{{ $errors->first('nome') }}</div>
                                     @endif
@@ -43,7 +43,8 @@
                                     <label class="form-label">Data Inicio</label>
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_inicio')) is-invalid @endif"
-                                        name="data_inicio" required="" value="{{ old('data_inicio') }}" id="data_inicio">
+                                        name="data_inicio" required=""
+                                        value="{{ date('Y-m-d', strtotime($semic_evento->data_inicio)) }}" id="data_inicio">
                                     @if ($errors->has('data_inicio'))
                                         <div class="invalid-feedback">{{ $errors->first('data_inicio') }}</div>
                                     @endif
@@ -52,7 +53,8 @@
                                     <label class="form-label">Data Fim</label>
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_fim')) is-invalid @endif"
-                                        name="data_fim" required="" value="{{ old('data_fim') }}" id="data_fim">
+                                        name="data_fim" required=""
+                                        value="{{ date('Y-m-d', strtotime($semic_evento->data_fim)) }}" id="data_fim">
                                     @if ($errors->has('data_fim'))
                                         <div class="invalid-feedback">{{ $errors->first('data_fim') }}</div>
                                     @endif
@@ -63,35 +65,27 @@
                                     <label class="form-label">Data Certificado</label>
                                     <input type="date"
                                         class="form-control @if ($errors->first('data_certificado')) is-invalid @endif"
-                                        name="data_certificado" required="" value="{{ old('data_certificado') }}" id="data_certificado">
+                                        name="data_certificado" required=""
+                                        value="{{ date('Y-m-d', strtotime($semic_evento->data_certificado)) }}" id="data_certificado">
                                     @if ($errors->has('data_certificado'))
                                         <div class="invalid-feedback">{{ $errors->first('data_certificado') }}</div>
                                     @endif
                                 </div>
-                                <div class="mb-3 col-md-5 col-sm-4">
-                                    <label class="form-label fw-normal">Banner</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text bg-primary text-white">Upload</span>
-                                        <div class="form-file">
-                                            <input type="file"
-                                                   class="form-file-input form-control @if ($errors->first('banner')) is-invalid @endif"
-                                                   name="banner">
-                                        </div>
-                                    </div>
-                                    {!! $errors->default->first('banner', '<span style="color:red" class="form-text">:message</span>') !!}
-                                </div>
-                            </div>
-                            <div class="row">
-                                
-                            
-                                <div class="mb-4 col-md-7">
+                                <div class="mb-4 col-md-12">
                                     <label class="form-label">Descrição</label>
                                     <textarea class="form-control @if ($errors->first('descricao')) is-invalid @endif" cols="30" rows="10"
-                                        id="comment" name="descricao" required="">{{ old('descricao') }}</textarea>
+                                        id="comment" name="descricao" required="">{{ $semic_evento->descricao --}}</textarea>
                                     @if ($errors->has('descricao'))
                                         <div class="invalid-feedback">{{ $errors->first('descricao') }}</div>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="row">
+                                <label for="">Status</label>
+                                <div class="mb-3 mb-0 mt-2">
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Aberto" @if ($semic_evento->status == "Aberto") checked @endif> Aberto</label>
+                                    <label class="radio-inline me-3"><input type="radio" name="status" value="Fechado" @if ($semic_evento->status == "Fechado") checked @endif> Fechado</label>
+                                </div> 
                             </div>
                             <div class="row">
                                 <div class="mb-4 col-md-12">
@@ -99,7 +93,8 @@
                                     <div class="form-check custom-checkbox mb-3 checkbox-info">
                                         <input type="checkbox"
                                             class="form-check-input @if ($errors->first('visivel')) is-invalid @endif"
-                                            checked="" value="1" id="customCheckBox2" name="visivel">
+                                            @if ($semic_evento->visivel == true) checked @endif value="{{ true }}"
+                                            id="customCheckBox2" name="visivel">
 
                                         <label class="form-check-label" for="customCheckBox2">Evento Visível</label>
                                         @if ($errors->has('visivel'))
@@ -109,8 +104,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-success float-end" type="submit">Salvar</button>
-                            <a class="btn btn-primary float-end me-2" type="button"
-                                href="{{ route('semicevento.index') }}">Cancelar</a>
+                            <a class="btn btn-danger float-end me-2" type="button" href="{{route('semicevento.index')}}">Cancelar</a>
                         </form>
                     </div>
                 </div>
@@ -118,36 +112,6 @@
         </div>
     </div>
 @endsection
-
-@section('css')
-    <style>
-        .bootstrap-select .btn {
-            height: 3.5rem !important;
-        }
-
-        @media (max-width: 1402px) {
-            .bootstrap-select .btn {
-                height: 2.5rem !important;
-            }
-        }
-
-        .form-control::-webkit-file-upload-button {
-            height: 55px !important;
-        }
-
-        @media (max-width: 1400px) {
-            .form-control::-webkit-file-upload-button {
-                height: 40px !important;
-            }
-
-            .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
-                height: 2.2rem !important;
-            }
-
-        }
-    </style>
-@endsection
-
 @section('scripts')
     <script>
         // Obtém a data atual
@@ -172,7 +136,8 @@
         today = yyyy + '-' + mm + '-' + dd;
 
         // Define a data mínima nos elementos HTML com os IDs "data_inicio" e "data_fim"
-        document.getElementById("data_inicio").setAttribute("min", today);
+        //document.getElementById("data_inicio").setAttribute("min", today);
         document.getElementById("data_fim").setAttribute("min", today);
     </script>
 @endsection
+
