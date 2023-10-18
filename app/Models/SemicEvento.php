@@ -19,6 +19,10 @@ class SemicEvento extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function semic_evento_semic_eventoinscricao()
+    {
+        return $this->hasMany(SemicEventoInscricao::class, 'semic_evento_id')->withTrashed();
+    }
 
     public function percentual()
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SemicEvento;
 
 use App\Http\Controllers\Controller;
 use App\Models\SemicEvento;
+use App\Models\SemicEventoInscricao;
 use App\Http\Requests\SemicEvento\StoreSemicEventoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoRequest;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,33 @@ class SemicEventoController extends Controller
     {
         $programasSemic_evento = $this->semic_evento->paginate(20);
         return view('admin.semic_evento.index', compact('programasSemic_evento'));
+    }
+
+    public function page($semic_evento_id)
+    {
+       
+        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+        
+
+        if ($semic_evento->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+       
+        if (Auth::check()) {
+            $isInscrito = SemicEventoInscricao::where('semic_evento_id', $semic_evento->semic_evento_id)->where('user_id', Auth::user()->id)->exists();
+        } else {
+            $isInscrito = false;
+        }
+
+       return view('page.semicevento.page', compact('semic_evento', 'isInscrito'));
+       
+    }
+
+    public function site()
+    {
+        $semiceventos = $this->semic_evento->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);
+        return view('page.semicevento.site', compact('semiceventos'));
     }
 
     public function store(StoreSemicEventoRequest $request)
@@ -65,7 +93,6 @@ class SemicEventoController extends Controller
     public function edit($id)
     {
         $semic_evento = $this->semic_evento->findOrfail($id);
-       // dd($semic_evento);
         return view('admin.semic_evento.edit', compact('semic_evento'));
     }
 

@@ -21,6 +21,7 @@ use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
 use App\Http\Controllers\SemicEvento\SemicEventoController;
+use App\Http\Controllers\SemicEvento\SemicEventoInscricaoController;
 use App\Http\Controllers\Semic\SemicInscricaoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
@@ -157,6 +158,9 @@ Route::prefix('site')->group(function () {
     //Semic
     Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
 
+     //SemicEvento
+     Route::get('/semicevento', [SemicEventoController::class, 'site'])->name('site.semicevento');
+
     //Bati
     Route::get('/bati', [BatiController::class, 'site'])->name('site.bati');
 
@@ -224,6 +228,17 @@ Route::prefix('bati')->group(function () {
     Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
     Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
     Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
+});
+
+//Inscrições de Eventos -  VIEW CANDIDATOS SemicEvento
+Route::prefix('semicevento')->group(function () {
+    Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
+    Route::get('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'create'])->name('semic.eventoinscricao.create')->middleware(['auth']);
+    Route::post('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'store'])->name('semic.eventoinscricao.store')->middleware(['auth']);
+  //  Route::get('/lista-inscricao/{bati_id}', [BatiInscricaoController::class, 'index'])->name('bati.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+  //  Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
+  //  Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
+  //  Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
 });
 
 
