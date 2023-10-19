@@ -25,15 +25,14 @@ class AuditoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $auditoria = $this->auditoria->get();
-        $auditoriaCreated = $this->auditoria->where('event', '=', 'CREATED')->get();
-        $auditoriaUpdated = $this->auditoria->where('event', '=', 'UPDATED')->get();
-        $auditoriaDeleted = $this->auditoria->where('event', '=', 'DELETED')->get();
 
-        return view($this->bag['view'] . '.index', compact('auditoria', 'auditoriaCreated', 'auditoriaUpdated', 'auditoriaDeleted'));
+        $auditoria = $this->auditoria->paginate(5);
+        $links = $auditoria->appends($request->except('page'));
+
+        return view($this->bag['view'] . '.index', compact('auditoria', 'links'));
     }
 
     /**
