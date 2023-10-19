@@ -26,6 +26,7 @@ use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CertificadoController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -51,7 +52,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 
-    
+    //Certificado
+    Route::resource('certificado', CertificadoController::class)->middleware(['check-role:Administrador']);
+
     //Semic
     Route::resource('semic', SemicController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -102,7 +105,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //PP_IndicacaoBolsistas Inscricão Execel
     Route::get('/pibic-indicacao/inscritos/{pibicindicacao_id}', [ExportsController::class, 'pibicIndicacaoInscricao'])->name('lista.pibicindicacao.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-   
+
     //User
     Route::resource('users', UserController::class);
 
