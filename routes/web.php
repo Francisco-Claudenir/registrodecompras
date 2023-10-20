@@ -74,6 +74,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SubArea
     Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
+    //SemicEvento Inscricão Espelho ADMIN
+    Route::get('semicevento_/espelho/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'espelho'])->name('semic.eventoinscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
     //bati Inscricão Execel
     Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -235,10 +238,10 @@ Route::prefix('semicevento')->group(function () {
     Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
     Route::get('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'create'])->name('semic.eventoinscricao.create')->middleware(['auth']);
     Route::post('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'store'])->name('semic.eventoinscricao.store')->middleware(['auth']);
-  //  Route::get('/lista-inscricao/{bati_id}', [BatiInscricaoController::class, 'index'])->name('bati.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-  //  Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
-  //  Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
-  //  Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
+    Route::get('/lista-inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'index'])->name('semic.eventoinscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/pdf/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'gerarPDF'])->name('semic.eventoinscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [SemicEventoInscricaoController::class, 'docshow'])->name('semic.eventoinscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{semic_evento_id}/{user_id}', [SemicEventoInscricaoController::class, 'show'])->name('semic.eventoinscricao.show')->middleware(['auth']);
 });
 
 

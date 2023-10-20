@@ -36,6 +36,30 @@ class SemicEventoInscricaoController extends Controller
         $this->user = $user;
     }
 
+    public function index($semic_evento_id, Request $request)
+    {
+        //Verificando se o id existe
+        $semic_evento_ =  $this->semic_evento->findOrfail($semic_evento_id);
+
+        //Buscando a lista de inscritos atraves de join
+        $listaInscritos = $this->semicevento_inscricao
+            ->join('users', 'users.id', '=', 'semic_eventoinscricao.user_id')
+            ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
+            ->select([
+                'semic_eventoinscricao.nome_orientador',
+                'semic_eventoinscricao.titulo_trabalho',
+                'semic_eventoinscricao.cota_bolsa',
+                'semic_eventoinscricao.status',
+                'semic_eventoinscricao.numero_inscricao',
+                'semic_eventoinscricao.semic_evento_id',
+                'semic_eventoinscricao.semic_eventoinscricao_id',
+            ])->orderby('semic_eventoinscricao.numero_inscricao', 'asc')->paginate(20);
+
+        $links = $listaInscritos->appends($request->except('page'));
+
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'semic_evento_', 'links'));
+    }
+
     public function create($semic_evento_id)
     {
         $data_hoje = Carbon::now();
@@ -105,6 +129,86 @@ class SemicEventoInscricaoController extends Controller
             return redirect()->back();
         }
     }
+
+    public function docshow($diretorio)
+    {
+        try {
+
+            $diretorio = Crypt::decrypt($diretorio);
+
+            $path = storage_path('app/public/' . $diretorio);
+
+            if (!File::exists($path)) {
+
+                abort(404);
+            }
+
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+        } catch (\Throwable $th) {
+
+            alert()->error(config($this->bag['msg'] . '.error.diretorio'));
+            return redirect()->back();
+        }
+    }
+
+    public function show($semic_evento_id, $user_id, Request $request)
+    {
+        //Verificando se o semic_evento_id existe
+        $this->semic_evento->findOrfail($semic_evento_id);
+
+        //Verificando se o user_id existe
+        $this->user->findOrfail($user_id);
+
+        $dadosInscrito = $this->semicevento_inscricao->with('semic_eventoinscricao_users', 'semic_eventoinscricao_semic_evento')
+            ->where('semic_eventoinscricao.user_id', '=', $user_id)
+            ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
+            ->orderby('numero_inscricao', 'asc')
+            ->paginate(10);
+
+            if ($dadosInscrito == null) {
+                alert()->error(config('Você não está inscrito nesse Evento'));
+                return redirect()->back();
+            }
+
+        $links = $dadosInscrito->appends($request->except('page'));
+       // dd($dadosInscrito);
+        return view('page.semicevento.show', compact('dadosInscrito', 'links'));
+    }
+
+     //Gera o pdf
+    public function gerarPDF($semic_evento_id, $semic_eventoinscricao_id)
+    {
+        //Verificando se o semic_evento_id existe
+        $semic_eventopdf = $this->semic_evento->findOrfail($semic_evento_id);
+
+        $dadosInscrito = $this->semicevento_inscricao->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
+        ->where('semic_eventoinscricao.semic_eventoinscricao_id', '=', $semic_eventoinscricao_id)
+        ->firstOrfail();
+
+        return view('pdf.semicevento', compact('dadosInscrito', 'semic_eventopdf'));
+    }
+
+     public function espelho($semic_evento_id, $semic_eventoinscricao_id)
+    {
+       
+        //Verificando se o semic_evento_id existe
+        $evento = $this->semic_evento->find($semic_evento_id);
+
+        $dadosInscrito = $this->semicevento_inscricao->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
+        ->where('semic_eventoinscricao.semic_eventoinscricao_id', '=', $semic_eventoinscricao_id)
+        ->firstOrfail();
+
+
+        return view('admin.semic_evento.espelho', compact('evento', 'dadosInscrito'));
+    }
+
+    
 
     
 }

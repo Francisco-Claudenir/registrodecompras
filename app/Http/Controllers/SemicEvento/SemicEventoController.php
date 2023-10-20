@@ -32,7 +32,7 @@ class SemicEventoController extends Controller
 
     public function index()
     {
-        $programasSemic_evento = $this->semic_evento->paginate(20);
+        $programasSemic_evento = $this->semic_evento->withCount('semic_evento_semic_eventoinscricao')->paginate(20);
         return view('admin.semic_evento.index', compact('programasSemic_evento'));
     }
 
