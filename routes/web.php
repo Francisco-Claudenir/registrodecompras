@@ -28,6 +28,7 @@ use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CertificadoController;
+use App\Http\Controllers\CertificadoInscricaoController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -55,6 +56,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Certificado
     Route::resource('certificado', CertificadoController::class)->middleware(['check-role:Administrador']);
+
 
     //Semic
     Route::resource('semic', SemicController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -148,12 +150,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 });
 
+//Certificado Inscrição
+Route::resource('certificado-inscricao', CertificadoInscricaoController::class, ['only' => ['create', 'edit', 'update']])->middleware(['auth']);
+Route::get('/certificado-inscricao/create/{id}', [App\Http\Controllers\CertificadoInscricaoController::class, 'store'])->name('certificado-inscricao.create');
 
- //Profile
-    Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
-    Route::resource('profile', ProfileController::class);
-
-
+//Profile
+Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
+Route::resource('profile', ProfileController::class);
 
 
 Route::prefix('site')->group(function () {
@@ -161,8 +164,8 @@ Route::prefix('site')->group(function () {
     //Semic
     Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
 
-     //SemicEvento
-     Route::get('/semicevento', [SemicEventoController::class, 'site'])->name('site.semicevento');
+    //SemicEvento
+    Route::get('/semicevento', [SemicEventoController::class, 'site'])->name('site.semicevento');
 
     //Bati
     Route::get('/bati', [BatiController::class, 'site'])->name('site.bati');
@@ -238,10 +241,10 @@ Route::prefix('semicevento')->group(function () {
     Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
     Route::get('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'create'])->name('semic.eventoinscricao.create')->middleware(['auth']);
     Route::post('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'store'])->name('semic.eventoinscricao.store')->middleware(['auth']);
-  //  Route::get('/lista-inscricao/{bati_id}', [BatiInscricaoController::class, 'index'])->name('bati.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-  //  Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
-  //  Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
-  //  Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
+    //  Route::get('/lista-inscricao/{bati_id}', [BatiInscricaoController::class, 'index'])->name('bati.inscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    //  Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
+    //  Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
+    //  Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
 });
 
 

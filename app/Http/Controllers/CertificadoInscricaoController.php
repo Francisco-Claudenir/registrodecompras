@@ -14,7 +14,7 @@ class CertificadoInscricaoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -25,6 +25,7 @@ class CertificadoInscricaoController extends Controller
     public function create()
     {
         //
+        dd('dauidhsiuhfasiufh');
     }
 
     /**
