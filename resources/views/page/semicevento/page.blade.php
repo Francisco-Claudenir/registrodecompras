@@ -56,7 +56,7 @@
                                                   <div class="col-6">
 
                                                        @if ($isInscrito)
-                                                          <a href="{{-- route('semicevento.inscricao.show', ['semic_evento_id' => $semic_evento->semic_evento_id, 'user_id' => Auth::user()->id]) --}}"
+                                                          <a href="{{ route('semic.eventoinscricao.show', ['semic_evento_id' => $semic_evento->semic_evento_id, 'user_id' => Auth::user()->id]) }}"
                                                           class="btn btn-info btn-xs mb-1">Ver Inscrições</a> 
                                                             @if ($semic_evento->status === 'Aberto')
                                                                 @if (now()->gte($semic_evento->data_inicio) && now()->lte($semic_evento->data_fim))
