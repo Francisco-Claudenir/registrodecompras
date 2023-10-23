@@ -128,6 +128,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //SemicEvento
     Route::resource('semicevento', SemicEventoController::class);
+    Route::get('/semicevento/minicursos/{semic_evento_id}', [SemicEventoController::class, 'minicursos'])->name('semicevento.minicursos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 
     //Centro
     Route::resource('centro', CentroController::class);
@@ -155,7 +157,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 //Certificado Inscrição
 Route::resource('certificado-inscricao', CertificadoInscricaoController::class, ['only' => ['create', 'edit', 'update']])->middleware(['auth']);
-Route::get('/certificado-inscricao/create/{id}', [App\Http\Controllers\CertificadoInscricaoController::class, 'store'])->name('certificado-inscricao.create');
+//Route::get('/certificado-inscricao/create/{id}', [App\Http\Controllers\CertificadoInscricaoController::class, 'store'])->name('certificado-inscricao.create');
 
 //Profile
 Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
