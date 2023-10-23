@@ -13,7 +13,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{--$dadosInscrito->nomeorientador--}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{$dadosInscrito->nome_orientador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -22,15 +22,15 @@
                         <label class="col-form-label col-sm-3 pt-0">Resultado</label>
                         <div class="col-sm-9">
                             <form
-                                action="{{-- route('semic.inscricao.analise', ['semic_id' => $dadosInscrito->semic_id, 'semic_inscricao_id' => $dadosInscrito->semic_inscricao_id]) --}}"
+                                action="{{ route('semic.eventoinscricao.analise', ['semic_evento_id' => $dadosInscrito->semic_evento_id, 'semic_eventoinscricao_id' => $dadosInscrito->semic_eventoinscricao_id]) }}"
                                 method="post">
                                 @csrf
                                 @foreach (config('status.status') as $item)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="status"
-                                            value="{{-- $item --}}" checked="">
+                                            value="{{ $item }}" checked="">
                                         <label class="form-check-label">
-                                            {{-- $item --}}
+                                            {{ $item }}
                                         </label>
                                     </div>
                                 @endforeach
