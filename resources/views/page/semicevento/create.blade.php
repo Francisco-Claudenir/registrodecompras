@@ -50,7 +50,7 @@
                                             </div>
 
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label fw-normal">Titulo Trabalho *</label>
+                                                <label class="form-label fw-normal">Título Trabalho *</label>
                                                 <input type="text"
                                                     class="form-control @if ($errors->first('titulo_trabalho')) is-invalid @endif"
                                                     placeholder="Titulo Trabalho" required name="titulo_trabalho"

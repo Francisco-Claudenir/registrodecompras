@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="col-6 ">
                                                         <dl>
-                                                            <dt>Titulo Trabalho</dt>
+                                                            <dt>Título Trabalho</dt>
                                                             <dd class="text-justify">{{ $dados->titulo_trabalho}}</dd>
                                                         </dl>
                                                     </div>

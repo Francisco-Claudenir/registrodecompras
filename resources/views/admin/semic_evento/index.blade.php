@@ -11,7 +11,7 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
 
-                    <h4 class="card-title">Lista Semic_Evento</h4>
+                    <h4 class="card-title">Lista Semic_evento</h4>
 
                 </div>
             </div>
