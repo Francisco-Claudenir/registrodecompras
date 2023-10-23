@@ -14,9 +14,9 @@ class CreateCertificadoInscricoesTable extends Migration
     public function up()
     {
         Schema::create('certificado_inscricoes', function (Blueprint $table) {
-            $table->bigIncrements('certificadoinscricao_id')->autoIncrement()->unique();
-            $table->unsignedBigInteger('certificado_id');
-            $table->unsignedBigInteger('semiceventoinscricao_id');
+            $table->uuid('certificadoinscricao_id')->unique();
+            $table->uuid('certificado_id');
+            $table->uuid('semic_eventoinscricao_id');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
@@ -25,6 +25,9 @@ class CreateCertificadoInscricoesTable extends Migration
             ////Relacionando com a tabela certificado
             $table->foreign('certificado_id')->references('certificado_id')->on('certificados')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('semic_eventoinscricao_id')->references('semic_eventoinscricao_id')->on('semic_eventoinscricao')
+                ->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 

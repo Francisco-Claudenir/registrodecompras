@@ -14,12 +14,17 @@ class CreateCertificadosTable extends Migration
     public function up()
     {
         Schema::create('certificados', function (Blueprint $table) {
-            $table->bigIncrements('certificado_id')->autoIncrement()->unique();
+            $table->uuid('certificado_id')->autoIncrement()->unique();
+            $table->unsignedBigInteger('semicevento_id');
             $table->string('nome');
             $table->string('descricao');
             $table->string('img');
+
             $table->timestamps();
             $table->softDeletes();
+
+            ////Relacionando com a tabela semic_eventos
+            $table->foreign('semicevento_id')->references('semic_evento_id')->on('semic_eventos');
         });
     }
 
