@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{-- route('bati.index') --}}">Lista</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('semicevento.index') }}">Lista</a></li>
                     <li class="breadcrumb-item active"><a href="">Lista Inscritos</a>
                     </li>
                 </ol>
@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
                        
-                        <a href="{{-- route('lista.inscritos.bati', $bati_->bati_id) --}}"
+                        <a href="{{ route('lista.inscritos.semicevento', $semic_evento_->semic_evento_id) }}"
                             class="btn btn-success pull-right">Exportar Excel</a>
                     </div>
                     <div class="card-body">
@@ -81,7 +81,7 @@
                                             <td><a href="{{  route('semic.eventoinscricao.espelho', ['semic_evento_id' => $dados->semic_evento_id, 'semic_eventoinscricao_id' => $dados->semic_eventoinscricao_id]) }}"
                                                     class="badge badge-circle badge-dark"><i
                                                         class="flaticon-381-file-2"></i></a></td>
-                                        </tr>
+                                            </tr>
                                     @endforeach
                                 </tbody>
                             </table>

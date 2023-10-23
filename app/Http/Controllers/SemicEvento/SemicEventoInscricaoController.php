@@ -8,6 +8,7 @@ use App\Models\SemicEvento;
 use App\Models\User;
 use App\Models\SemicEventoInscricao;
 use App\Http\Requests\SemicEvento\StoreSemicEventoInscricaoRequest;
+use App\Http\Requests\SemicEvento\UpdateSemicEventoInscricaoRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -209,6 +210,27 @@ class SemicEventoInscricaoController extends Controller
 
 
         return view('admin.semic_evento.espelho', compact('evento', 'dadosInscrito'));
+    }
+
+    public function analise(UpdateSemicEventoInscricaoRequest $request,  $semic_evento_id, $semic_eventoinscricao_id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                $inscricao = $this->semicevento_inscricao->where('semic_evento_id', $semic_evento_id)->find($semic_eventoinscricao_id);
+                if ($inscricao['semic_evento_id'] == $semic_evento_id) {
+                    DB::beginTransaction();
+                    $dados = $request->validated();
+                    $inscricao->update($dados);
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.update'));
+                    return redirect()->back();
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
     }
 
 
