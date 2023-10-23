@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SemicEvento;
 
 use App\Http\Controllers\Controller;
+use App\Models\Minicurso;
 use App\Models\SemicEvento;
 use App\Models\User;
 use App\Models\SemicEventoInscricao;
@@ -21,7 +22,7 @@ class SemicEventoInscricaoController extends Controller
 
     protected $semic_evento;
     protected $semicevento_inscricao;
-    protected $user;
+    protected $user,$minicurso;
 
     protected $bag = [
         'view' => 'page.semicevento',
@@ -29,11 +30,12 @@ class SemicEventoInscricaoController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(SemicEvento $semic_evento, User $user, SemicEventoInscricao $semicevento_inscricao)
+    public function __construct(SemicEvento $semic_evento, User $user, SemicEventoInscricao $semicevento_inscricao, Minicurso $minicurso)
     {
         $this->semic_evento = $semic_evento;
         $this->semicevento_inscricao = $semicevento_inscricao;
         $this->user = $user;
+        $this->minicurso = $minicurso;
     }
 
     public function index($semic_evento_id, Request $request)
@@ -64,7 +66,7 @@ class SemicEventoInscricaoController extends Controller
     {
         $data_hoje = Carbon::now();
 
-        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+        $semic_evento = $this->semic_evento->with('semic_evento_minicursos')->find($semic_evento_id);
 
         if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
 
@@ -79,6 +81,7 @@ class SemicEventoInscricaoController extends Controller
 
     public function store(StoreSemicEventoInscricaoRequest $request, $semic_evento_id)
     {
+        dd($request);
         try {
             DB::beginTransaction();
 

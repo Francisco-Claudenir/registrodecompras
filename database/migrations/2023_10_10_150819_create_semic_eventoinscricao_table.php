@@ -13,10 +13,10 @@ class CreateSemicEventoinscricaoTable extends Migration
             $table->uuid('semic_eventoinscricao_id')->unique();
             $table->unsignedBigInteger('semic_evento_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('nome_orientador');
-            $table->string('titulo_trabalho');
-            $table->string('arquivo');
-            $table->string('cota_bolsa');
+            $table->string('nome_orientador')->nullable();
+            $table->string('titulo_trabalho')->nullable();
+            $table->string('arquivo')->nullable();
+            $table->string('cota_bolsa')->nullable();
             $table->integer('numero_inscricao');
             $table->string('status');
             $table->timestamps();

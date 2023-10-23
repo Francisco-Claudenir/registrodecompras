@@ -12,7 +12,7 @@ class SemicEvento extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'semic_eventos';
-    
+
     protected $fillable = ['nome', 'banner', 'descricao', 'visivel','data_inicio', 'data_fim', 'data_certificado', 'status'];
 
     protected $primaryKey = 'semic_evento_id';
@@ -22,6 +22,10 @@ class SemicEvento extends Model
     public function semic_evento_semic_eventoinscricao()
     {
         return $this->hasMany(SemicEventoInscricao::class, 'semic_evento_id')->withTrashed();
+    }
+    public function semic_evento_minicursos()
+    {
+        return $this->hasMany(Minicurso::class, 'semicevento_id')->withTrashed();
     }
 
     public function percentual()
