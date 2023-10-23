@@ -34,4 +34,8 @@ class Minicurso extends Model
     }
 
 
+    public function minicurso_semicevento()
+    {
+        return $this->belongsTo(SemicEvento::class, 'semicevento_id')->withTrashed();
+    }
 }

@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Semic_evento</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('semicevento.index') }}">Semic_evento</a></li>
                     <li class="breadcrumb-item active"><a href="">Cadastro</a></li>
                 </ol>
             </div>

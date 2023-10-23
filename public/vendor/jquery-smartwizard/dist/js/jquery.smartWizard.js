@@ -63,10 +63,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     // Allows to cycle the navigation of steps
     backButtonSupport: true,
     // Enable the back button support
-    enableURLhash: true,
+    enableURLhash: false,
     // Enable selection of the step based on url hash
     transition: {
-      animation: 'none',
+      animation: 'fade',
       // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
       speed: '400',
       // Transion animation speed
@@ -94,7 +94,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       // Add done state on navigation
       markAllPreviousStepsAsDone: true,
       // When a step selected by url hash, all previous steps are marked done
-      removeDoneStepOnNavigateBack: false,
+      removeDoneStepOnNavigateBack: true,
       // While navigate back done step after active step will be cleared
       enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
 
@@ -109,8 +109,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     lang: {
       // Language variables for button
-      next: 'Next',
-      previous: 'Previous'
+      next: 'Próximo',
+      previous: 'Anterior'
     },
     disabledSteps: [],
     // Array Steps disabled
@@ -132,6 +132,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       this.nav = this._getFirstDescendant('.nav'); // Step anchor elements
 
       this.steps = this.nav.find('.nav-link'); // Content container
+
 
       this.container = this._getFirstDescendant('.tab-content'); // Content pages
 
