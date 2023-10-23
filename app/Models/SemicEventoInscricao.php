@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SemicEventoInscricao extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasUuid;
 
     protected $table = 'semic_eventoinscricao';
 
@@ -16,7 +17,7 @@ class SemicEventoInscricao extends Model
         'semic_evento_id', 'user_id', 'nome_orientador', 'titulo_trabalho', 'arquivo', 'cota_bolsa', 'numero_inscricao', 'status'
     ];
 
-    protected $primaryKey = 'semic_evento_id';
+    protected $primaryKey = 'semic_eventoinscricao_id';
 
     protected $dates = ['deleted_at'];
 
@@ -25,7 +26,7 @@ class SemicEventoInscricao extends Model
     {
         return $this->belongsTo(User::class,'user_id', 'id');
     }
-    
+
     //Relacionamento com a tabela semic_eventos
     public function semic_eventoinscricao_semic_evento()
     {

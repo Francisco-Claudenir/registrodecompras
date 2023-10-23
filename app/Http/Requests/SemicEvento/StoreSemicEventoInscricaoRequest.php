@@ -16,20 +16,20 @@ class StoreSemicEventoInscricaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome_semicevento_inscricao' => ['required', 'string', 'max:255'],
-            'titulotrabalho_semicevento_inscricao' => ['required', 'string', 'max:255'],
-            'semicevento_inscricao_cotabolsa' => ['required'],
-            'Arquivo_pdf_semicevento_inscricao' => ['required', 'mimes:pdf']
+            'nome_orientador' => ['required', 'string', 'max:255'],
+            'titulo_trabalho' => ['required', 'string', 'max:255'],
+            'cota_bolsa' => ['required'],
+            'arquivo' => ['required', 'mimes:pdf']
         ];
     }
 
     public function messages()
     {
         return [
-            'nome_semicevento_inscricao' => 'O nome é obrigatório',
-            'titulotrabalho_semicevento_inscricao' => 'O nome é obrigatório',
-            'semicevento_inscricao_cotabolsa' => 'O nome é obrigatório',
-            'Arquivo_pdf_semicevento_inscricao' => 'O nome é obrigatório',
+            'nome_orientador' => 'O nome do orientador é obrigatório',
+            'titulo_trabalho' => 'O nome é obrigatório',
+            'cota_bolsa' => 'O nome é obrigatório',
+            'arquivo' => 'O nome é obrigatório',
         ];
     }
 }

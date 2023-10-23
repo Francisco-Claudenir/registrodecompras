@@ -69,7 +69,7 @@ class SemicEventoInscricaoController extends Controller
         if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
 
             return view('page.semicevento.create', compact('semic_evento'));
-            
+
         } else {
 
             alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
@@ -97,24 +97,24 @@ class SemicEventoInscricaoController extends Controller
 
                 //Documento PDF Arquivo
 
-                $extensao =  $request['Arquivo_pdf_semicevento_inscricao']->extension();
-                $path = 'SmeicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
+                $extensao =  $request['arquivo']->extension();
+                $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
                 $nome = 'Arquivo_pdf_semicevento_inscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                $dados_inscricao['Arquivo_pdf_semicevento_inscricao'] = $request['Arquivo_pdf_semicevento_inscricao']->storeAs($path, $nome);
+                $dados_inscricao['arquivo'] = $request['arquivo']->storeAs($path, $nome);
 
 
                 $this->semicevento_inscricao->create([
                     'semic_evento_id' => $semic_evento_id,
                     'user_id' => Auth::user()->id,
-                    'nome_orientador' => $dados_inscricao['nome_semicevento_inscricao'],
-                    'titulo_trabalho' => $dados_inscricao['titulotrabalho_semicevento_inscricao'],
-                    'cota_bolsa' => $dados_inscricao['semicevento_inscricao_cotabolsa'],
-                    'arquivo' => $dados_inscricao['Arquivo_pdf_semicevento_inscricao'],
+                    'nome_orientador' => $dados_inscricao['nome_orientador'],
+                    'titulo_trabalho' => $dados_inscricao['titulo_trabalho'],
+                    'cota_bolsa' => $dados_inscricao['cota_bolsa'],
+                    'arquivo' => $dados_inscricao['arquivo'],
                     'numero_inscricao' => $numero_inscricao,
                     'status' => "Em Analise"
                 ]);
 
-           
+
                 DB::commit();
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
@@ -196,7 +196,7 @@ class SemicEventoInscricaoController extends Controller
 
      public function espelho($semic_evento_id, $semic_eventoinscricao_id)
     {
-       
+
         //Verificando se o semic_evento_id existe
         $evento = $this->semic_evento->find($semic_evento_id);
 
@@ -208,7 +208,7 @@ class SemicEventoInscricaoController extends Controller
         return view('admin.semic_evento.espelho', compact('evento', 'dadosInscrito'));
     }
 
-    
 
-    
+
+
 }

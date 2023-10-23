@@ -10,7 +10,7 @@ class CreateSemicEventoinscricaoTable extends Migration
     public function up()
     {
         Schema::create('semic_eventoinscricao', function (Blueprint $table) {
-            $table->uuid('semic_eventoinscricao_id')->autoIncrement()->unique();
+            $table->uuid('semic_eventoinscricao_id')->unique();
             $table->unsignedBigInteger('semic_evento_id');
             $table->unsignedBigInteger('user_id');
             $table->string('nome_orientador');
