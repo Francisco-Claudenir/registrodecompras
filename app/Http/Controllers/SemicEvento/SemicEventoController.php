@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SemicEvento;
 
 use App\Http\Controllers\Controller;
+use App\Models\Minicurso;
 use App\Models\SemicEvento;
 use App\Models\SemicEventoInscricao;
 use App\Http\Requests\SemicEvento\StoreSemicEventoRequest;
@@ -13,16 +14,17 @@ use Illuminate\Support\Facades\DB;
 class SemicEventoController extends Controller
 {
 
-    protected $semic_evento;
+    protected $semic_evento, $minicurso;
     protected $bag = [
         'view' => 'admin.semic_evento',
         'route' => 'semicevento',
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(SemicEvento $semic_evento)
+    public function __construct(SemicEvento $semic_evento, Minicurso $minicurso)
     {
         $this->semic_evento = $semic_evento;
+        $this->minicurso = $minicurso;
     }
 
     public function create()
@@ -38,23 +40,39 @@ class SemicEventoController extends Controller
 
     public function page($semic_evento_id)
     {
-       
+
         $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
-        
+
 
         if ($semic_evento->visivel == 0) {
             alert()->error(config('Evento não encontrado', 'Este evento não existe'));
             return redirect()->back();
         }
-       
+
         if (Auth::check()) {
             $isInscrito = SemicEventoInscricao::where('semic_evento_id', $semic_evento->semic_evento_id)->where('user_id', Auth::user()->id)->exists();
         } else {
             $isInscrito = false;
         }
 
-       return view('page.semicevento.page', compact('semic_evento', 'isInscrito'));
-       
+        return view('page.semicevento.page', compact('semic_evento', 'isInscrito'));
+
+    }public function minicursos($semic_evento_id)
+    {
+
+        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+        $minicursos = $this->minicurso->where('semicevento_id',$semic_evento_id)->get();
+
+
+
+
+        if ($semic_evento->visivel == 0) {
+            alert()->error(config('Evento não encontrado', 'Este evento não existe'));
+            return redirect()->back();
+        }
+
+        return view('admin.semic_evento.minicursos', compact('semic_evento', 'minicursos'));
+
     }
 
     public function site()
@@ -65,7 +83,6 @@ class SemicEventoController extends Controller
 
     public function store(StoreSemicEventoRequest $request)
     {
-     //  dd($request->all());
         try {
             DB::beginTransaction();
             $semicevento = $request->validated();
@@ -79,11 +96,24 @@ class SemicEventoController extends Controller
             $semicevento['data_certificado'] = $semicevento['data_certificado'];
             $semicevento['status'] = 'Aberto';
             $semicevento['banner'] = $semicevento['banner'];
-            $this->semic_evento->create($semicevento);
+            $evento = $this->semic_evento->create($semicevento);
+
+
+            foreach ($request['minicursos'] as $cursos) {
+
+                $this->minicurso->create([
+                    'nome' => $cursos['nome'],
+                    'vagas' => $cursos['vagas'],
+                    'horas' => $cursos['horas'],
+                    'semicevento_id' => $evento->semic_evento_id
+                ]);
+            }
+
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->route('semicevento.index');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();
@@ -96,10 +126,10 @@ class SemicEventoController extends Controller
         return view('admin.semic_evento.edit', compact('semic_evento'));
     }
 
-   
+
     public function update(UpdateSemicEventoRequest $request, $id)
     {
-     //   dd($request);
+        //   dd($request);
         try {
 
             DB::beginTransaction();

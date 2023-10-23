@@ -43,20 +43,20 @@
                                             <div class="mb-3 col-md-12">
                                                 <label class="form-label fw-normal">Nome Orientador *</label>
                                                 <input type="text"
-                                                    class="form-control @if ($errors->first('nome_semicevento_inscricao')) is-invalid @endif"
-                                                    placeholder="Nome Orientador" required name="nome_semicevento_inscricao"
-                                                    value="{{ old('nome_semicevento_inscricao') }}" >
-                                                {!! $errors->default->first('nome_semicevento_inscricao', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                    class="form-control @if ($errors->first('nome_orientador')) is-invalid @endif"
+                                                    placeholder="Nome Orientador" required name="nome_orientador"
+                                                    value="{{ old('nome_orientador') }}" >
+                                                {!! $errors->default->first('nome_orientador', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
 
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label fw-normal">Titulo Trabalho *</label>
                                                 <input type="text"
-                                                    class="form-control @if ($errors->first('titulotrabalho_semicevento_inscricao')) is-invalid @endif"
-                                                    placeholder="Titulo Trabalho" required name="titulotrabalho_semicevento_inscricao"
-                                                    value="{{ old('titulotrabalho_semicevento_inscricao') }}" autocomplete="cpf" autofocus
-                                                    id="titulotrabalho_semicevento_inscricao">
-                                                {!! $errors->default->first('titulotrabalho_semicevento_inscricao', '<span style="color:red" class="form-text">:message</span>') !!}
+                                                    class="form-control @if ($errors->first('titulo_trabalho')) is-invalid @endif"
+                                                    placeholder="Titulo Trabalho" required name="titulo_trabalho"
+                                                    value="{{ old('titulo_trabalho') }}" autocomplete="cpf" autofocus
+                                                    id="titulo_trabalho">
+                                                {!! $errors->default->first('titulo_trabalho', '<span style="color:red" class="form-text">:message</span>') !!}
                                             </div>
                                             <div class="mb-3 col-md-6 col-sm-6">
                                                 <label class="form-label fw-normal">Arquivo *</label>
@@ -64,20 +64,20 @@
                                                     <span class="input-group-text bg-primary text-white">Upload</span>
                                                     <div class="form-file">
                                                         <input type="file"
-                                                            class="form-file-input form-control @if ($errors->first('Arquivo_pdf_semicevento_inscricao')) is-invalid @endif"
-                                                            required name="Arquivo_pdf_semicevento_inscricao">
+                                                            class="form-file-input form-control @if ($errors->first('arquivo')) is-invalid @endif"
+                                                            required name="arquivo">
                                                     </div>
                                                 </div>
                                                 {!! $errors->default->first(
-                                                    'Arquivo_pdf_semicevento_inscricao',
+                                                    'arquivo',
                                                     '<span style="color:red" class="form-text">:message</span>',
                                                 ) !!}
                                             </div>
-                                           
+
                                             <div class="mb-3 col-md-8">
                                                 <label class="form-label fw-normal ">Cota Bolsa *</label>
                                                 <select class="default-select form-control " tabindex="null"
-                                                    name="semicevento_inscricao_cotabolsa" required>
+                                                    name="cota_bolsa" required>
                                                     <option disabled selected value="">
                                                         Selecione
                                                         uma opção</option>

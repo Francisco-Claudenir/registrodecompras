@@ -232,6 +232,24 @@ return [
 
 			],
 		],
+        [
+            'title' => 'Certificado',
+            'icon' => 'flaticon-381-networking-1',
+            'can' => 'Administrador',
+            'submenu' => [
+                [
+                    'title' => 'Lista',
+                    'icon' => 'flaticon-381-list-1',
+                    'route' => 'certificado.index',
+                ],
+                [
+                    'title' => 'Adicionar',
+                    'icon' => 'flaticon-381-plus',
+                    'route' => 'certificado.create'
+                ]
+
+            ],
+        ],
 		[
 			'title' => 'Modalidade',
 			'icon' => 'flaticon-381-networking-1',
@@ -346,11 +364,30 @@ return [
 
 			],
 		],
+        [
+            'title' => 'Semic',
+            'icon' => 'flaticon-381-notepad-1',
+            'submenu' => [
+                [
+                    'title' => 'Lista',
+                    'icon' => 'flaticon-381-list-1',
+                    'route' => 'semic.index'
+
+                ],
+                [
+                    'title' => 'Adicionar',
+                    'icon' => 'flaticon-381-plus',
+                    'route' => 'semic.create'
+
+                ]
+
+            ],
+        ],
 		['header' => 'Sites'],
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-internet',
-			''
+            'route' => 'site.semic'
 		],
 		[
 			'title' => 'Pibic Indicação',

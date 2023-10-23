@@ -29,10 +29,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->user->with('perfil')->get();
-        return view($this->bag['view'] . '.index', compact('users'));
+        $users = $this->user->with('perfil')->paginate(10);
+        $links = $users->appends($request->except('page'));
+
+        return view($this->bag['view'] . '.index', compact('users','links'));
     }
 
     /**
@@ -101,7 +103,7 @@ class UserController extends Controller
         $senhapadrao = '123456789';
 
         DB::beginTransaction();
-        
+
         try {
             $this->user->find($id)->update([
                 'password' => Hash::make($senhapadrao)
