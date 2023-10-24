@@ -86,7 +86,7 @@
                                     <a href="{{ route('semicevento.minicursos', $semic_evento->semic_evento_id) }}" type="button" class="btn btn-xs light btn-primary">Minicursos <span
                                             class="btn-icon-end"><i class="fa fa-book"></i></span>
                                     </a>
-                                    <a type="button" class="btn btn-xs light btn-info">Certificados <span
+                                    <a type="button" href="{{ route('semicevento.certificados', $semic_evento->semic_evento_id) }}" class="btn btn-xs light btn-info">Certificados <span
                                             class="btn-icon-end"><i class="fa fa-newspaper"></i></span>
                                     </a>
                                 </div>
