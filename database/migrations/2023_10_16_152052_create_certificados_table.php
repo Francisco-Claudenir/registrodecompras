@@ -14,10 +14,10 @@ class CreateCertificadosTable extends Migration
     public function up()
     {
         Schema::create('certificados', function (Blueprint $table) {
-            $table->uuid('certificado_id')->autoIncrement()->unique();
+            $table->uuid('certificado_id')->unique();
             $table->unsignedBigInteger('semicevento_id');
             $table->string('nome');
-            $table->string('descricao');
+            $table->text('descricao');
             $table->string('img');
 
             $table->timestamps();
