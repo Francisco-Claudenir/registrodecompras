@@ -18,6 +18,7 @@ class CreateSemicEventoinscricaoTable extends Migration
             $table->string('arquivo')->nullable();
             $table->string('cota_bolsa')->nullable();
             $table->integer('numero_inscricao');
+            $table->json('tipo');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

@@ -12,6 +12,7 @@ use App\Models\SemicEvento;
 use App\Models\SemicEventoInscricao;
 use App\Http\Requests\SemicEvento\StoreSemicEventoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -102,6 +103,29 @@ class SemicEventoController extends Controller
             alert()->success(config($this->bag['msg'] . '.success.create'));
             return redirect()->back();
         } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.create'));
+            return redirect()->back();
+        }
+    }
+    public function storeminicursos(Request $request, $semic_evento_id)
+    {
+        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+
+        $cursos = $request->all();
+        try {
+            $this->minicurso->create([
+                'nome' => $cursos['nome_minicurso'],
+                'vagas' => $cursos['vagas_minicurso'],
+                'horas' => $cursos['horas_minicurso'],
+                'semicevento_id' => $semic_evento->semic_evento_id
+            ]);
+
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.create'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.create'));
             return redirect()->back();

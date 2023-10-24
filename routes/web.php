@@ -56,6 +56,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Certificado
     Route::post('certificado/{semic_evento_id}', [SemicEventoController::class, 'storecertificado'])->name('store.certificado');
+    Route::post('minicursos/{semic_evento_id}', [SemicEventoController::class, 'storeminicursos'])->name('store.minicursos');
 
 
     //Semic

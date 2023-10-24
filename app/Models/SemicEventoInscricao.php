@@ -14,7 +14,7 @@ class SemicEventoInscricao extends Model
     protected $table = 'semic_eventoinscricao';
 
     protected $fillable = [
-        'semic_evento_id', 'user_id', 'nome_orientador', 'titulo_trabalho', 'arquivo', 'cota_bolsa', 'numero_inscricao', 'status'
+        'semic_evento_id', 'user_id', 'nome_orientador', 'titulo_trabalho', 'arquivo', 'cota_bolsa', 'numero_inscricao','tipo', 'status'
     ];
 
     protected $primaryKey = 'semic_eventoinscricao_id';

@@ -36,25 +36,25 @@
                         <h4 for="">Você deseja se inscrever no Minicurso?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
-                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_minicurso" name="radio_minicurso"> Sim</label>
-                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_minicurso" name="radio_minicurso"> Não</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_minicurso" name="radio_minicurso" value="1"> Sim</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_minicurso" name="radio_minicurso" value="0"> Não</label>
                             </div>
                         </div>
                     </div>
                     <div id="campo_minicurso" class="col-lg-8 col-md-12 col-sm-12"></div>
                     <div class="col-lg-8 col-md-12 col-sm-12" id="pergunta_participante">
-                        <h4 for="">Você deseja se inscrever como participante?</h4>
+                        <h4 for="">Você deseja se inscrever como Apresentador ?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
-                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_participante" name="radio_participante"> Sim</label>
-                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_participante" name="radio_participante"> Não</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_participante" name="radio_participante" value="1"> Sim</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_participante" name="radio_participante" value="0"> Não</label>
                             </div>
                         </div>
                     </div>
                     <div id="campo_participante" class="col-lg-8 col-md-12 col-sm-12"></div>
                     <div class="col-lg-8 col-md-12 col-sm-12">
                         <div class="card border shadow-sm">
-                            <div class="card-body">    
+                            <div class="card-body">
                                 <a href="" onclick="history.back()" class="btn btn-dark float-start">Voltar</a>
                                 <button id="button_enviar" type="submit" class="btn btn-primary float-end">Enviar</button>
                             </div>

@@ -28,11 +28,11 @@
                     <div class="me-auto mb-sm-0 mb-3">
                         <h5 class="mb-2">{{$semic_evento->nome}}</h5>
                     </div>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#minicursomodal"
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#certificadosomodal"
                             class="btn btn-xs btn-info">Adicionar<span class="btn-icon-end"><i
                                 class="fa fa-plus"></i></span></button>
 
-                    <div class="modal fade" id="minicursomodal" style="display: none;" aria-hidden="true">
+                    <div class="modal fade" id="certificadosomodal" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
