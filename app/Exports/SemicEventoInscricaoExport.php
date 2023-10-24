@@ -2,9 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Semic;
-use App\Models\SemicInscricao;
-use App\Models\SubArea;
+use App\Models\SemicEvento;
+use App\Models\SemicEventoInscricao;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -20,42 +19,35 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Illuminate\Support\Facades\Crypt;
 use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 
-class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
+class SemicEventoInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    protected $semic_id;
+  
+    protected $semic_evento_id;
 
-    public function __construct($semic_id)
+    public function __construct($semic_evento_id)
     {
-        $this->semic_id = $semic_id;
+        $this->semic_evento_id = $semic_evento_id;
     }
     public function collection()
     {
-        $semic_id = $this->semic_id;
+        $semic_evento_id = $this->semic_evento_id;
         //Verificando se o id existe
-        Semic::findOrfail($semic_id);
+        SemicEvento::findOrfail($semic_evento_id);
 
-        $listaInscritos = SemicInscricao::where('semic_inscricaos.user_id', '=', $semic_id)
-        ->orderby('semic_inscricaos.numero_inscricao', 'asc')
+        $listaInscritos = SemicEventoInscricao::where('semic_eventoinscricao.user_id', '=', $semic_evento_id)
+        ->orderby('semic_eventoinscricao.numero_inscricao', 'asc')
         ->get();
+
+      //  dd($listaInscritos);
 
         foreach ($listaInscritos as $key => $dados) {
 
-            $subarea = SubArea::findOrfail($dados['areaconhecimento_id']);
-
             $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
-            $lista[$key]['nomeorientador'] = $dados['nomeorientador'];
-            $lista[$key]['email'] = $dados['email'];
-            $lista[$key]['cpf'] = $dados['cpf'];
-            $lista[$key]['matricula'] = $dados['matricula'];
-            $lista[$key]['titulacao'] = $dados['titulacao'];
-            $lista[$key]['areaconhecimento_id'] = $subarea['nome'];
-            $lista[$key]['tituloprojetoorient'] = $dados['tituloprojetoorient'];
-            $lista[$key]['titulocapitulo'] = $dados['titulocapitulo'];
+            $lista[$key]['nome_orientador'] = $dados['nome_orientador'];
+            $lista[$key]['titulo_trabalho'] = $dados['titulo_trabalho'];
+            $lista[$key]['cota_bolsa'] = $dados['cota_bolsa'];
             $lista[$key]['status'] = $dados['status'];
-            $lista[$key]['capitulo'] = route('semic.inscricao.docshow', ['diretorio' => Crypt::encrypt($dados['capitulo'])]);
+            $lista[$key]['arquivo'] = route('semic.eventoinscricao.docshow', ['diretorio' => Crypt::encrypt($dados['arquivo'])]);
            
         }
         $colecao = collect($lista);
@@ -68,20 +60,13 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
     {
         // Defina os nomes personalizados para as colunas
 
-        $anoatual = now()->subYear()->format('Y');
-        $anoanterior = now()->format('Y');
         return [
             'N° Inscrição',
-            'Nome Professor(a) Orientador',
-            'Email',
-            'Cpf',
-            'Matrícula',
-            'Titulação',
-            'Área de Conhecimento',
-            'Titulo do projeto do orientador cadastrado no PIBIC ciclo ' . $anoatual . '-' . $anoanterior,  
-            'Título do capítulo submetido para a coletânea',
+            'Nome Orientador',
+            'Título Trabalho',
+            'Cota Bolsa',
             'Status',
-            'Capítulo'
+            'Arquivo'
         ];
     }
 
@@ -100,14 +85,14 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
                 $imagePath = public_path('/images/uema/topo-ppg.png');
                 $drawing = new Drawing();
                 $drawing->setPath($imagePath);
-                $drawing->setCoordinates('C1');
+                $drawing->setCoordinates('B1');
                 $drawing->setWidth($lastColumnIndex * 37);
                 $drawing->setWorksheet($event->sheet->getDelegate());
 
                 // Ajuste o estilo da cor de fundo para as linhas em branco
-                $event->sheet->getStyle('A1:J7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
+                $event->sheet->getStyle('A1:F7')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('FFFFFF');
 
-                foreach ($event->sheet->getColumnIterator('H') as $row) {
+                foreach ($event->sheet->getColumnIterator('F') as $row) {
                     foreach ($row->getCellIterator() as $cell) {
                         // Verifica se a célula não está vazia e contém '://'
                         if ($cell->getValue() != "" && str_contains($cell->getValue(), '://')) {
@@ -160,7 +145,7 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
         // Estilizar as demais linhas
         $lastRow = $sheet->getHighestRow();
         for ($row = 2; $row <= $lastRow; $row++) {
-            $statusCell = $sheet->getCell('J' . $row);
+            $statusCell = $sheet->getCell('E' . $row);
             $status = $statusCell->getValue();
 
             // Defina a cor de fundo com base no valor do status
@@ -192,7 +177,6 @@ class SemicInscricaoExport implements FromCollection, WithHeadings, WithStyles, 
             'C' => 55,
             'D' => 20,
             'E' => 20,
-
         ];
     }
 }

@@ -232,6 +232,7 @@ return [
 
 			],
 		],
+
 		[
 			'title' => 'Modalidade',
 			'icon' => 'flaticon-381-networking-1',
@@ -346,11 +347,30 @@ return [
 
 			],
 		],
+        [
+            'title' => 'Semic Evento',
+            'icon' => 'flaticon-381-notepad-1',
+            'submenu' => [
+                [
+                    'title' => 'Lista',
+                    'icon' => 'flaticon-381-list-1',
+                    'route' => 'semicevento.index'
+
+                ],
+                [
+                    'title' => 'Adicionar',
+                    'icon' => 'flaticon-381-plus',
+                    'route' => 'semicevento.create'
+
+                ]
+
+            ],
+        ],
 		['header' => 'Sites'],
 		[
 			'title' => 'Semic',
 			'icon' => 'flaticon-381-internet',
-			''
+            'route' => 'site.semic'
 		],
 		[
 			'title' => 'Pibic Indicação',

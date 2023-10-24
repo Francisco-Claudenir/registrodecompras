@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Export;
 use App\Exports\PibicIndicacaoExport;
 use App\Exports\PrimeirosPassosInscricaoExport;
 use App\Exports\SemicInscricaoExport;
+use App\Exports\SemicEventoInscricaoExport;
 use App\Exports\BatiInscricaoExport;
 use App\Exports\PP_IndicacaoBolsistasInscricaoExport;
 use App\Http\Controllers\Controller;
@@ -35,5 +36,10 @@ class ExportsController extends Controller
     public function pibicIndicacaoInscricao($pibicindicacao_id)
     {
         return Excel::download(new PibicIndicacaoExport($pibicindicacao_id), 'inscritos.xlsx');
+    }
+
+    public function semicEventoInscritos($semic_evento_id)
+    {
+        return Excel::download(new SemicEventoInscricaoExport($semic_evento_id), 'inscritos.xlsx');
     }
 }

@@ -2,37 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auditoria;
+use App\Models\Minicurso;
 use Illuminate\Http\Request;
 
-class AuditoriaController extends Controller
+class MinicursoController extends Controller
 {
-    protected $auditoria;
-    protected $bag = [
-        'view' => 'admin.auditoria',
-        'route' => 'auditoria',
-        'Title' => 'Auditoria',
-        'subtitle' => '',
-        'msg' => 'temauema.msg.register'
-    ];
-
-    public function __construct(Auditoria $auditoria)
-    {
-        $this->auditoria = $auditoria;
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-
-        $auditoria = $this->auditoria->paginate(5);
-        $links = $auditoria->appends($request->except('page'));
-
-        return view($this->bag['view'] . '.index', compact('auditoria', 'links'));
+        //
     }
 
     /**
@@ -59,10 +41,10 @@ class AuditoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Minicurso  $minicurso
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Minicurso $minicurso)
     {
         //
     }
@@ -70,10 +52,10 @@ class AuditoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Minicurso  $minicurso
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Minicurso $minicurso)
     {
         //
     }
@@ -82,10 +64,10 @@ class AuditoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Minicurso  $minicurso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Minicurso $minicurso)
     {
         //
     }
@@ -93,10 +75,10 @@ class AuditoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Minicurso  $minicurso
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Minicurso $minicurso)
     {
         //
     }

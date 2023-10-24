@@ -47,27 +47,32 @@ class AddColumnsCentroIdInBatiInscricoes extends Migration
     {
         Schema::table('bati_inscricoes', function (Blueprint $table) {
            
-            //Recriação de colunas
-            $table->string('areaconhecimento');
-            $table->string('centro');
-            $table->unsignedBigInteger('area_id');
-            $table->json('vinculo');
-
-            //Exlusão de relacionamentos
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['centro_id']); 
-            $table->dropForeign(['bati_id']);
+             //Exlusão de relacionamentos
+             $table->dropForeign(['user_id']);
+             $table->dropForeign(['areaconhecimento_id']);
+             $table->dropForeign(['centro_id']); 
+             $table->dropForeign(['bati_id']);
 
             //Exclusão de colunas
             $table->dropColumn('bati_inscricao_id');   
             $table->dropColumn('user_id'); 
+            $table->dropColumn('areaconhecimento_id'); 
             $table->dropColumn('centro_id'); 
-            $table->dropColumn('modalidade_id'); 
             $table->dropColumn('numero_inscricao'); 
             $table->dropColumn('status'); 
+
+            $table->dropColumn('endereco'); 
+            $table->dropColumn('laboratorio'); 
+            $table->dropColumn('termosoutorga'); 
+
+            $table->dropColumn('deleted_at');
+         
+             //Recriação de colunas
+            $table->string('areaconhecimento');
+            $table->string('centro');
+            $table->unsignedBigInteger('area_id');
             $table->string('titulocapitulo');
-            $table->string('endereco');
+          
 
         });
     }

@@ -20,11 +20,15 @@ use App\Http\Controllers\PibicIndicacaoInscricaoController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasController;
 use App\Http\Controllers\PP_IndicacaoBolsistas\PP_IndicacaoBolsistasInscricaoController;
 use App\Http\Controllers\Semic\SemicController;
+use App\Http\Controllers\SemicEvento\SemicEventoController;
+use App\Http\Controllers\SemicEvento\SemicEventoInscricaoController;
 use App\Http\Controllers\Semic\SemicInscricaoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CertificadoController;
+use App\Http\Controllers\CertificadoInscricaoController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -50,6 +54,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('admin.home')->middleware(['check-role:Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete']);
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 
+    //Certificado
+    Route::post('certificado/{semic_evento_id}', [SemicEventoController::class, 'storecertificado'])->name('store.certificado');
+    Route::post('minicursos/{semic_evento_id}', [SemicEventoController::class, 'storeminicursos'])->name('store.minicursos');
+
+
     //Semic
     Route::resource('semic', SemicController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -71,7 +80,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SubArea
     Route::resource('subarea', SubAreaController::class)->middleware(['check-role:Administrador']);
 
+    //SemicEvento Inscricão Espelho ADMIN
+    Route::get('semicevento_/espelho/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'espelho'])->name('semic.eventoinscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+    //Semic_evento Inscricão Execel
+    Route::get('/semicevento/inscritos/{semic_evento_id}', [ExportsController::class, 'semiceventoInscritos'])->name('lista.inscritos.semicevento')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
+    //Analise Semic_evento Inscrição
+    Route::post('semicevento/analise/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'analise'])->name('semic.eventoinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //bati Inscricão Execel
     Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -82,9 +98,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Analise bati Inscrição
     Route::post('bati/analise/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'analise'])->name('bati.inscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
-
-
-   
     //PrimeirosPassos Inscricão Execel
     Route::get('/primeirospassos/inscritos/{primeiropasso_id}', [ExportsController::class, 'primeirosPassosInscritos'])->name('lista.inscritos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -105,8 +118,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //PP_IndicacaoBolsistas Inscricão Execel
     Route::get('/pibic-indicacao/inscritos/{pibicindicacao_id}', [ExportsController::class, 'pibicIndicacaoInscricao'])->name('lista.pibicindicacao.excel')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
     //User
     Route::resource('users', UserController::class);
+
     Route::put('/user/pass_reset/{id}', [UserController::class, 'resetPass'])->name('user.passreset')->middleware(['check-role:Administrador']);
 
     //ModalidadeBolsa
@@ -117,6 +132,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Cursos
     Route::resource('curso', CursoController::class);
+
+    //SemicEvento
+    Route::resource('semicevento', SemicEventoController::class);
+    Route::get('/semicevento/minicursos/{semic_evento_id}', [SemicEventoController::class, 'minicursos'])->name('semicevento.minicursos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/semicevento/certificados/{semic_evento_id}', [SemicEventoController::class, 'certificados'])->name('semicevento.certificados')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 
     //Centro
     Route::resource('centro', CentroController::class);
@@ -139,20 +160,25 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Analise Pibic Inscrição
     Route::post('/pibic-indicacao/analise/{pibic_indicacao_id}/{pibic_i_inscricao_id}', [PibicIndicacaoInscricaoController::class, 'analise'])->name('pibicindicacao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 });
 
+//Certificado Inscrição
+Route::resource('certificado-inscricao', CertificadoInscricaoController::class, ['only' => ['create', 'edit', 'update']])->middleware(['auth']);
+//Route::get('/certificado-inscricao/create/{id}', [App\Http\Controllers\CertificadoInscricaoController::class, 'store'])->name('certificado-inscricao.create');
 
- //Profile
-    Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
-    Route::resource('profile', ProfileController::class);
-
-
+//Profile
+Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
+Route::resource('profile', ProfileController::class);
 
 
 Route::prefix('site')->group(function () {
 
     //Semic
     Route::get('/semic', [SemicController::class, 'site'])->name('site.semic');
+
+    //SemicEvento
+    Route::get('/semicevento', [SemicEventoController::class, 'site'])->name('site.semicevento');
 
     //Bati
     Route::get('/bati', [BatiController::class, 'site'])->name('site.bati');
@@ -221,6 +247,17 @@ Route::prefix('bati')->group(function () {
     Route::get('/pdf/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'gerarPDF'])->name('bati.inscricao.pdf')->middleware(['auth']);
     Route::get('/docshow/{diretorio}', [BatiInscricaoController::class, 'docshow'])->name('bati.inscricao.docshow')->middleware(['auth']);
     Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
+});
+
+//Inscrições de Eventos -  VIEW CANDIDATOS SemicEvento
+Route::prefix('semicevento')->group(function () {
+    Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
+    Route::get('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'create'])->name('semic.eventoinscricao.create')->middleware(['auth']);
+    Route::post('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'store'])->name('semic.eventoinscricao.store')->middleware(['auth']);
+    Route::get('/lista-inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'index'])->name('semic.eventoinscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/pdf/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'gerarPDF'])->name('semic.eventoinscricao.pdf')->middleware(['auth']);
+    Route::get('/docshow/{diretorio}', [SemicEventoInscricaoController::class, 'docshow'])->name('semic.eventoinscricao.docshow')->middleware(['auth']);
+    Route::get('/verinscricao/{semic_evento_id}/{user_id}', [SemicEventoInscricaoController::class, 'show'])->name('semic.eventoinscricao.show')->middleware(['auth']);
 });
 
 
