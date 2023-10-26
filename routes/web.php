@@ -55,7 +55,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/areaajax', [App\Http\Controllers\HomeController::class, 'indexajax'])->name('areaajax');
 
     //Certificado
-    Route::resource('certificado', CertificadoController::class)->middleware(['check-role:Administrador']);
+    Route::post('certificado/{semic_evento_id}', [SemicEventoController::class, 'storecertificado'])->name('store.certificado');
+    Route::post('minicursos/{semic_evento_id}', [SemicEventoController::class, 'storeminicursos'])->name('store.minicursos');
 
 
     //Semic
@@ -81,13 +82,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //SemicEvento Inscricão Espelho ADMIN
     Route::get('semicevento_/espelho/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'espelho'])->name('semic.eventoinscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-    
+
     //Semic_evento Inscricão Execel
     Route::get('/semicevento/inscritos/{semic_evento_id}', [ExportsController::class, 'semiceventoInscritos'])->name('lista.inscritos.semicevento')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
     //Analise Semic_evento Inscrição
     Route::post('semicevento/analise/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'analise'])->name('semic.eventoinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-    
+
     //bati Inscricão Execel
     Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
@@ -135,6 +136,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //SemicEvento
     Route::resource('semicevento', SemicEventoController::class);
     Route::get('/semicevento/minicursos/{semic_evento_id}', [SemicEventoController::class, 'minicursos'])->name('semicevento.minicursos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/semicevento/certificados/{semic_evento_id}', [SemicEventoController::class, 'certificados'])->name('semicevento.certificados')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
 
     //Centro

@@ -37,8 +37,8 @@
                         <h4 for="">Você deseja se inscrever no Minicurso?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
-                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_minicurso" name="radio_minicurso"> Sim</label>
-                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_minicurso" name="radio_minicurso"> Não</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_minicurso" name="radio_minicurso" value="1"> Sim</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_minicurso" name="radio_minicurso" value="0"> Não</label>
                             </div>
                         </div>
                     </div>
@@ -47,8 +47,8 @@
                         <h4 for="">Você será um apresentador (Bolsista PIBIC / PIVIC 2022-2023)?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
-                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_participante" name="radio_participante"> Sim</label>
-                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_participante" name="radio_participante"> Não</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_participante" name="radio_participante" value="1"> Sim</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_participante" name="radio_participante" value="0"> Não</label>
                             </div>
                         </div>
                     </div>

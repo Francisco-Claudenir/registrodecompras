@@ -42,7 +42,7 @@ class SemicEventoInscricaoController extends Controller
     public function index($semic_evento_id, Request $request)
     {
         //Verificando se o id existe
-        $semic_evento_ =  $this->semic_evento->findOrfail($semic_evento_id);
+        $semic_evento_ = $this->semic_evento->findOrfail($semic_evento_id);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->semicevento_inscricao
@@ -90,6 +90,13 @@ class SemicEventoInscricaoController extends Controller
 
     public function store(Request $request, $semic_evento_id)
     {
+//        dd($request->all(),$request['radio_participante'] ? 'sim' : 'Nao');
+        $tipoinscricao = ['Ouvinte', 'Apresentador'];
+        if ($request['radio_participante'] == 0) {
+            $tipoinscricao = array_diff($tipoinscricao, ['Apresentador']);
+        }
+
+        dd($request->all());
 
         try {
             DB::beginTransaction();
@@ -110,7 +117,7 @@ class SemicEventoInscricaoController extends Controller
                 //Documento PDF Arquivo
 
                 if ($request->has('arquivo')) {
-                    $extensao =  $request['arquivo']->extension();
+                    $extensao = $request['arquivo']->extension();
                     $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
                     $nome = 'Arquivo_pdf_semicevento_inscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
                     $dados_inscricao['arquivo'] = $request['arquivo']->storeAs($path, $nome);
@@ -122,10 +129,11 @@ class SemicEventoInscricaoController extends Controller
                     'semic_evento_id' => $semic_evento_id,
                     'user_id' => Auth::user()->id,
                     'nome_orientador' => $request->has('nome_orientador') ? $dados_inscricao['nome_orientador'] : null,
-                    'titulo_trabalho' => $request->has('nome_orientador') ? $dados_inscricao['titulo_trabalho'] : null,
-                    'cota_bolsa' => $request->has('nome_orientador') ? $dados_inscricao['cota_bolsa'] : null,
+                    'titulo_trabalho' => $request->has('titulo_trabalho') ? $dados_inscricao['titulo_trabalho'] : null,
+                    'cota_bolsa' => $request->has('cota_bolsa') ? $dados_inscricao['cota_bolsa'] : null,
                     'arquivo' => $dados_inscricao['arquivo'],
                     'numero_inscricao' => $numero_inscricao,
+                    'tipo' => json_encode($tipoinscricao),
                     'status' => "Em Analise"
                 ]);
 
@@ -223,7 +231,7 @@ class SemicEventoInscricaoController extends Controller
         return view('admin.semic_evento.espelho', compact('evento', 'dadosInscrito'));
     }
 
-    public function analise(UpdateSemicEventoInscricaoRequest $request,  $semic_evento_id, $semic_eventoinscricao_id)
+    public function analise(UpdateSemicEventoInscricaoRequest $request, $semic_evento_id, $semic_eventoinscricao_id)
     {
         try {
             if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
