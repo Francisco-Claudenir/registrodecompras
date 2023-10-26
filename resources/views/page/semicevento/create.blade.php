@@ -5,6 +5,7 @@
 
 @section('title', ' - Inscrição')
 @section('content-header')
+@include('sweet::alert')
 <div class="container-fluid ">
     <div class="card">
         <div class="container">
@@ -43,7 +44,7 @@
                     </div>
                     <div id="campo_minicurso" class="col-lg-8 col-md-12 col-sm-12"></div>
                     <div class="col-lg-8 col-md-12 col-sm-12" id="pergunta_participante">
-                        <h4 for="">Você deseja se inscrever como participante?</h4>
+                        <h4 for="">Você será um apresentador (Bolsista PIBIC / PIVIC 2022-2023)?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
                                 <label class="radio-inline me-3"><input type="radio" required id="sim_radio_participante" name="radio_participante"> Sim</label>
@@ -54,7 +55,7 @@
                     <div id="campo_participante" class="col-lg-8 col-md-12 col-sm-12"></div>
                     <div class="col-lg-8 col-md-12 col-sm-12">
                         <div class="card border shadow-sm">
-                            <div class="card-body">    
+                            <div class="card-body">
                                 <a href="" onclick="history.back()" class="btn btn-dark float-start">Voltar</a>
                                 <button id="button_enviar" type="submit" class="btn btn-primary float-end">Enviar</button>
                             </div>
@@ -141,12 +142,12 @@
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label fw-normal">Titulo Trabalho *</label>
+                                            <label class="form-label fw-normal">Título do Trabalho (Igual ao título do plano de trabalho cadastrado) *</label>
                                             <input type="text" class="form-control @if ($errors->first('titulo_trabalho')) is-invalid @endif" placeholder="Titulo Trabalho" required name="titulo_trabalho" value="{{ old('titulo_trabalho') }}" autocomplete="cpf" autofocus id="titulo_trabalho">
                                             {!! $errors->default->first('titulo_trabalho', '<span style="color:red" class="form-text">:message</span>') !!}
                                         </div>
                                         <div class="mb-3 col-md-6 col-sm-6">
-                                            <label class="form-label fw-normal">Arquivo *</label>
+                                            <label class="form-label fw-normal">Resumo (Arquivo tipo docx)*</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text bg-primary text-white">Upload</span>
                                                 <div class="form-file">

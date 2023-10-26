@@ -60,9 +60,7 @@
                                                           class="btn btn-info btn-xs mb-1">Ver Inscrições</a> 
                                                             @if ($semic_evento->status === 'Aberto')
                                                                 @if (now()->gte($semic_evento->data_inicio) && now()->lte($semic_evento->data_fim))
-                                                                    <a href="{{ route('semic.eventoinscricao.create', ['semic_evento_id' => $semic_evento->semic_evento_id]) }}"
-                                                                        class="btn btn-primary btn-xs mb-1">Realizar
-                                                                        Inscrição</a>
+                                                                <!-- aqui -->
                                                                 @else
                                                                     <span class="text-danger"> Não é possível realizar a
                                                                         inscrição !</span>
