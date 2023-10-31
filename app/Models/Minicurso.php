@@ -17,12 +17,15 @@ class Minicurso extends Model
         'nome',
         'vagas',
         'horas',
-        'semicevento_id',
+        'descricao',
+        'data_hora',
+        'descricao_ministrante',
+        'semicevento_id'
             ];
 
     protected $primaryKey = 'minicurso_id';
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','data_hora'];
 
 
 

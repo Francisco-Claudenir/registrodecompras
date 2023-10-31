@@ -12,6 +12,7 @@ use App\Models\SemicEvento;
 use App\Models\SemicEventoInscricao;
 use App\Http\Requests\SemicEvento\StoreSemicEventoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,8 @@ class SemicEventoController extends Controller
     public function page($semic_evento_id)
     {
 
-        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+
+        $semic_evento = $this->semic_evento->with('semic_evento_minicursos')->findOrfail($semic_evento_id);
 
 
         if ($semic_evento->visivel == 0) {
@@ -110,14 +112,20 @@ class SemicEventoController extends Controller
     }
     public function storeminicursos(Request $request, $semic_evento_id)
     {
+
         $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
 
         $cursos = $request->all();
+        $carbonDate = Carbon::createFromFormat('l d F Y - H:i', $cursos['data_hora']);
+        $newFormat = $carbonDate->format('Y-m-d H:i');
         try {
             $this->minicurso->create([
                 'nome' => $cursos['nome_minicurso'],
                 'vagas' => $cursos['vagas_minicurso'],
                 'horas' => $cursos['horas_minicurso'],
+                'data_hora' => $newFormat,
+                'descricao' => $cursos['descricao'],
+                'descricao_ministrante' => $cursos['descricao_ministrante'],
                 'semicevento_id' => $semic_evento->semic_evento_id
             ]);
 

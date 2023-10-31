@@ -16,7 +16,7 @@ class CreateSemicEventosTable extends Migration
         Schema::create('semic_eventos', function (Blueprint $table) {
             $table->bigIncrements('semic_evento_id')->autoIncrement()->unique();
             $table->string('nome');
-            $table->string('descricao');
+            $table->longText('descricao');
             $table->dateTime('data_inicio');
             $table->dateTime('data_fim');
             $table->dateTime('data_certificado');

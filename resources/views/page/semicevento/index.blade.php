@@ -1,6 +1,6 @@
 @extends('layout.page', [
     'layout' => 'admin',
-    'plugins' => ['wizard'],
+    'plugins' => ['lightgallery'],
 ])
 
 @section('title', ' - Lista de Inscritos')
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <div class="card-header">
                         <h4 class="card-title">Lista de Inscritos</h4>
-                       
+
                         <a href="{{ route('lista.inscritos.semicevento', $semic_evento_->semic_evento_id) }}"
                             class="btn btn-success pull-right">Exportar Excel</a>
                     </div>

@@ -87,7 +87,6 @@ class SemicEventoInscricaoController extends Controller
             $tipoinscricao = array_diff($tipoinscricao, ['Apresentador']);
         }
 
-        dd($request->all());
 
         try {
             DB::beginTransaction();

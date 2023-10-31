@@ -19,6 +19,9 @@ class CreateMinicursosTable extends Migration
             $table->string('nome');
             $table->integer('vagas');
             $table->integer('horas');
+            $table->longText('descricao');
+            $table->longText('descricao_ministrante');
+            $table->dateTime('data_hora');
             $table->timestamps();
             $table->softDeletes();
 
