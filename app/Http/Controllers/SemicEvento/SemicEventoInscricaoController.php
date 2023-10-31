@@ -65,6 +65,15 @@ class SemicEventoInscricaoController extends Controller
 
     public function create($semic_evento_id)
     {
+        $user = Auth::User();
+
+        $verificandoInscricao = $this->semicevento_inscricao->where('user_id', '=', $user->id)->first();
+
+        if ($verificandoInscricao != null) {
+            alert()->error('Você já está inscrito nesse evento.');
+            return redirect()->back();
+        }
+
         $data_hoje = Carbon::now();
 
         $semic_evento = $this->semic_evento->with('semic_evento_minicursos')->find($semic_evento_id);

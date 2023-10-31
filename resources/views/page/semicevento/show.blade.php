@@ -22,7 +22,7 @@
         <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Inscrições</h3>
+                    <h3 class="card-title">Inscrição</h3>
                 </div>
                 <div class="card-body pt-2 pb-0">
 
