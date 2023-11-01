@@ -249,6 +249,7 @@ Route::prefix('bati')->group(function () {
     Route::get('/verinscricao/{bati_id}/{user_id}', [BatiInscricaoController::class, 'show'])->name('bati.inscricao.show')->middleware(['auth']);
 });
 
+
 //Inscrições de Eventos -  VIEW CANDIDATOS SemicEvento
 Route::prefix('semicevento')->group(function () {
     Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
@@ -270,3 +271,4 @@ Route::get('teste', function () {
 Route::get('tela', function () {
     return view('tela');
 });
+

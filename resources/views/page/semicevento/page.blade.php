@@ -47,17 +47,17 @@
                                                     @if (!Auth::check())
                                                         <div class="col-8 align-self-center ">
                                                             <a href="javascript:void(0);"
-                                                                class="btn btn-outline-info btn-xs btn-block mb-1"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#sendMessageModal">Login</a>
+                                                               class="btn btn-outline-info btn-xs btn-block mb-1"
+                                                               data-bs-toggle="modal"
+                                                               data-bs-target="#sendMessageModal">Login</a>
                                                         </div>
                                                     @endif
 
-                                                  <div class="col-6">
+                                                    <div class="col-6">
 
-                                                       @if ($isInscrito)
-                                                          <a href="{{ route('semic.eventoinscricao.show', ['semic_evento_id' => $semic_evento->semic_evento_id, 'user_id' => Auth::user()->id]) }}"
-                                                          class="btn btn-info btn-xs mb-1">Ver Inscrições</a> 
+                                                        @if ($isInscrito)
+                                                            <a href="{{ route('semic.eventoinscricao.show', ['semic_evento_id' => $semic_evento->semic_evento_id, 'user_id' => Auth::user()->id]) }}"
+                                                               class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
                                                             @if ($semic_evento->status === 'Aberto')
                                                                 @if (now()->gte($semic_evento->data_inicio) && now()->lte($semic_evento->data_fim))
                                                                 <!-- aqui -->
@@ -75,7 +75,7 @@
                                                                 @if ($semic_evento->status === 'Aberto')
                                                                     @if (now()->gte($semic_evento->data_inicio) && now()->lte($semic_evento->data_fim))
                                                                         <a href="{{ route('semic.eventoinscricao.create', ['semic_evento_id' => $semic_evento->semic_evento_id]) }}"
-                                                                            class="btn btn-primary btn-xs mb-1">Realizar
+                                                                           class="btn btn-primary btn-xs mb-1">Realizar
                                                                             Inscrição</a>
                                                                     @else
                                                                         <span class="text-danger"> Não é possível realizar a
@@ -87,52 +87,58 @@
                                                                         inscrição !</span>
                                                                 @endif
                                                             @endif
-                                                       @endif 
-                                                    </div> 
+                                                        @endif
+                                                    </div>
                                                     <div class="col-6">
-                                                        @auth 
+                                                        @auth
                                                             <div class="dropdown custom-dropdown">
-                                                                <button type="button" class="btn btn-xs btn-outline-info"
-                                                                    data-bs-toggle="dropdown"
-                                                                    aria-expanded="true">{{ explode(' ', Auth::user()->nome)[0] }}
+                                                                <button type="button"
+                                                                        class="btn btn-xs btn-outline-info"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="true">{{ explode(' ', Auth::user()->nome)[0] }}
                                                                     <i class="fa fa-angle-down ms-3"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-end"
-                                                                    data-popper-placement="top-end"
-                                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-31px, -44px);">
+                                                                     data-popper-placement="top-end"
+                                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-31px, -44px);">
                                                                     @if (isset(Auth::user()->perfil) ||
                                                                             auth()->user()->can('check-role', 'Administrador|Coordenação de Pesquisa|Coordenação de Pós Graduação|Gabinete'))
                                                                         <a href="{{ route('admin.home') }}"
-                                                                            class="dropdown-item ai-icon">
+                                                                           class="dropdown-item ai-icon">
                                                                             <i class="flaticon-073-settings text-dark"
-                                                                                aria-hidden="true"></i>
+                                                                               aria-hidden="true"></i>
                                                                             <span class="ms-2">Admin </span>
                                                                         </a>
                                                                     @endif
                                                                     <a href="{{ route('logout.eventos') }}"
-                                                                        class="dropdown-item ai-icon"
-                                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg"
-                                                                            class="text-danger" width="18" height="18"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4">
+                                                                       class="dropdown-item ai-icon"
+                                                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                                        <svg id="icon-logout"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             class="text-danger" width="18" height="18"
+                                                                             viewBox="0 0 24 24" fill="none"
+                                                                             stroke="currentColor" stroke-width="2"
+                                                                             stroke-linecap="round"
+                                                                             stroke-linejoin="round">
+                                                                            <path
+                                                                                d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4">
                                                                             </path>
-                                                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                                                            <polyline
+                                                                                points="16 17 21 12 16 7"></polyline>
                                                                             <line x1="21" y1="12" x2="9"
-                                                                                y2="12"></line>
+                                                                                  y2="12"></line>
                                                                         </svg>
                                                                         <span class="ms-2">Sair</span>
                                                                     </a>
                                                                     <form id="logout-form"
-                                                                        action="{{ route('logout.eventos') }}" method="POST"
-                                                                        class="d-none">
+                                                                          action="{{ route('logout.eventos') }}"
+                                                                          method="POST"
+                                                                          class="d-none">
                                                                         @csrf
                                                                     </form>
                                                                 </div>
                                                             </div>
-                                                       @endauth 
+                                                        @endauth
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,7 +150,8 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="auth-form">
-                                                                <form action="{{ route('login.eventos') }}" method="post">
+                                                                <form action="{{ route('login.eventos') }}"
+                                                                      method="post">
                                                                     @csrf
                                                                     <div class="form-group">
                                                                         <label class="mb-1"><strong>Cpf</strong></label>

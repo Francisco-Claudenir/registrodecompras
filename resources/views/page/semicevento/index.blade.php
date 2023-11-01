@@ -1,6 +1,6 @@
 @extends('layout.page', [
-'layout' => 'admin',
-'plugins' => ['wizard'],
+    'layout' => 'admin',
+    'plugins' => ['lightgallery'],
 ])
 
 @section('title', ' - Lista de Inscritos')
