@@ -39,28 +39,34 @@ class SemicEventoInscricaoController extends Controller
         $this->minicurso = $minicurso;
     }
 
-    public function index($semic_evento_id, Request $request)
+    public function index($semic_evento_id, Request $request, $tipo)
     {
         //Verificando se o id existe
-        $semic_evento_ = $this->semic_evento->findOrfail($semic_evento_id);
+        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->semicevento_inscricao
             ->join('users', 'users.id', '=', 'semic_eventoinscricao.user_id')
-            ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
-            ->select([
-                'semic_eventoinscricao.nome_orientador',
-                'semic_eventoinscricao.titulo_trabalho',
-                'semic_eventoinscricao.cota_bolsa',
-                'semic_eventoinscricao.status',
-                'semic_eventoinscricao.numero_inscricao',
-                'semic_eventoinscricao.semic_evento_id',
-                'semic_eventoinscricao.semic_eventoinscricao_id',
-            ])->orderby('semic_eventoinscricao.numero_inscricao', 'asc')->paginate(20);
+            ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id);
 
+        if ($tipo == 'Ouvinte' || $tipo == 'Apresentador' || $tipo == 'Minicurso') {
+            $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $tipo); 
+        }
+        $listaInscritos = $listaInscritos->select([
+            'users.nome',
+            'users.email',
+            'users.cpf',
+            'semic_eventoinscricao.status',
+            'semic_eventoinscricao.tipo',
+            'semic_eventoinscricao.numero_inscricao',
+            'semic_eventoinscricao.semic_evento_id',
+            'semic_eventoinscricao.semic_eventoinscricao_id',
+        ])->orderby('semic_eventoinscricao.numero_inscricao', 'asc')
+        ->paginate(20);
+       
         $links = $listaInscritos->appends($request->except('page'));
 
-        return view($this->bag['view'] . '.index', compact('listaInscritos', 'semic_evento_', 'links'));
+        return view($this->bag['view'] . '.index', compact('listaInscritos', 'semic_evento', 'links'));
     }
 
     public function create($semic_evento_id)
@@ -90,13 +96,11 @@ class SemicEventoInscricaoController extends Controller
 
     public function store(Request $request, $semic_evento_id)
     {
-//        dd($request->all(),$request['radio_participante'] ? 'sim' : 'Nao');
+        //      dd($request->all(),$request['radio_participante'] ? 'sim' : 'Nao');
         $tipoinscricao = ['Ouvinte', 'Apresentador'];
         if ($request['radio_participante'] == 0) {
             $tipoinscricao = array_diff($tipoinscricao, ['Apresentador']);
         }
-
-        dd($request->all());
 
         try {
             DB::beginTransaction();

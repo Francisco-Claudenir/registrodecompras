@@ -97,7 +97,7 @@
                                 <div class="col-6">
                                     <br>
                                     <div>Inscritos:<span class="text-black ms-3 font-w600"><a
-                                                href="{{ route('semic.eventoinscricao.index',['semic_evento_id' => $semic_evento->semic_evento_id])}}">{{$semic_evento->semic_evento_semic_eventoinscricao_count }}</a></span>
+                                                href="{{ route('semic.eventoinscricao.index',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Todos'])}}">{{$semic_evento->semic_evento_semic_eventoinscricao_count }}</a></span>
                                     </div>
                                 </div>
                                 <div class="col-6">
