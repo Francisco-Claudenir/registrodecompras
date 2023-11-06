@@ -71,7 +71,7 @@ class SemicEventoController extends Controller
     public function minicursos($semic_evento_id)
     {
         $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
-        $minicursos = $this->minicurso->where('semicevento_id', $semic_evento_id)->get();
+        $minicursos = $this->minicurso->with('minicurso_semiceventoinscricao')->where('semicevento_id', $semic_evento_id)->get();
         return view('admin.semic_evento.minicursos', compact('semic_evento', 'minicursos'));
     }
 
@@ -110,36 +110,6 @@ class SemicEventoController extends Controller
             return redirect()->back();
         }
     }
-    public function storeminicursos(Request $request, $semic_evento_id)
-    {
-
-        $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
-
-        $cursos = $request->all();
-        $carbonDate = Carbon::createFromFormat('l d F Y - H:i', $cursos['data_hora']);
-        $newFormat = $carbonDate->format('Y-m-d H:i');
-        try {
-            $this->minicurso->create([
-                'nome' => $cursos['nome_minicurso'],
-                'vagas' => $cursos['vagas_minicurso'],
-                'horas' => $cursos['horas_minicurso'],
-                'data_hora' => $newFormat,
-                'descricao' => $cursos['descricao'],
-                'descricao_ministrante' => $cursos['descricao_ministrante'],
-                'semicevento_id' => $semic_evento->semic_evento_id
-            ]);
-
-            DB::commit();
-            alert()->success(config($this->bag['msg'] . '.success.create'));
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            dd($th);
-            DB::rollBack();
-            alert()->error(config($this->bag['msg'] . '.error.create'));
-            return redirect()->back();
-        }
-    }
-
     public function site()
     {
         $semiceventos = $this->semic_evento->where('visivel', '=', 1)->orderBy('created_at', 'asc')->paginate(10);

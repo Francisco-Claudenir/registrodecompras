@@ -27,6 +27,7 @@ use App\Http\Controllers\PrimeirosPassos\PrimeiroPassoController;
 use App\Http\Controllers\PrimeirosPassos\PrimeirosPassosInscricaoController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MinicursoController;
 use App\Http\Controllers\CertificadoController;
 use App\Http\Controllers\CertificadoInscricaoController;
 
@@ -56,7 +57,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Certificado
     Route::post('certificado/{semic_evento_id}', [SemicEventoController::class, 'storecertificado'])->name('store.certificado');
-    Route::post('minicursos/{semic_evento_id}', [SemicEventoController::class, 'storeminicursos'])->name('store.minicursos');
+
+    //Minicurso
+    Route::post('minicursos/{semic_evento_id}', [MinicursoController::class, 'store'])->name('store.minicursos');
+    Route::any('minicursos/{semic_evento_id}', [MinicursoController::class, 'update'])->name('update.minicursos');
+    Route::delete('minicursos/{semic_evento_id}', [MinicursoController::class, 'destroy'])->name('destroy.minicursos');
 
 
     //Semic

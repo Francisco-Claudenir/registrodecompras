@@ -41,4 +41,9 @@ class Minicurso extends Model
     {
         return $this->belongsTo(SemicEvento::class, 'semicevento_id')->withTrashed();
     }
+
+    public function minicurso_semiceventoinscricao()
+    {
+        return $this->belongsToMany(SemicEventoInscricao::class, 'minicurso_semiceventoinscricao','minicurso_id','semic_eventoinscricao_id');
+    }
 }
