@@ -50,7 +50,7 @@ class SemicEventoInscricaoController extends Controller
             ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id);
 
         if ($tipo == 'Ouvinte' || $tipo == 'Apresentador' || $tipo == 'Minicurso') {
-            $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $tipo); 
+            $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $tipo);
         }
         $listaInscritos = $listaInscritos->select([
             'users.nome',
@@ -62,8 +62,8 @@ class SemicEventoInscricaoController extends Controller
             'semic_eventoinscricao.semic_evento_id',
             'semic_eventoinscricao.semic_eventoinscricao_id',
         ])->orderby('semic_eventoinscricao.numero_inscricao', 'asc')
-        ->paginate(20);
-       
+            ->paginate(20);
+
         $links = $listaInscritos->appends($request->except('page'));
 
         return view($this->bag['view'] . '.index', compact('listaInscritos', 'semic_evento', 'links'));
@@ -73,7 +73,11 @@ class SemicEventoInscricaoController extends Controller
     {
         $user = Auth::User();
 
-        $verificandoInscricao = $this->semicevento_inscricao->where('user_id', '=', $user->id)->first();
+        $verificandoInscricao = $this->semicevento_inscricao
+            ->where('user_id', '=', $user->id)
+            ->where('semic_evento_id', $semic_evento_id)
+            ->first();
+
 
         if ($verificandoInscricao != null) {
             alert()->error('Você já está inscrito nesse evento.');
@@ -96,7 +100,6 @@ class SemicEventoInscricaoController extends Controller
 
     public function store(Request $request, $semic_evento_id)
     {
-        //      dd($request->all(),$request['radio_participante'] ? 'sim' : 'Nao');
         $tipoinscricao = ['Ouvinte', 'Apresentador'];
         if ($request['radio_participante'] == 0) {
             $tipoinscricao = array_diff($tipoinscricao, ['Apresentador']);
@@ -107,55 +110,74 @@ class SemicEventoInscricaoController extends Controller
 
             $data_hoje = Carbon::now();
 
-            $semic_evento = $this->semic_evento->withCount('semic_evento_semic_eventoinscricao')->findOrfail($semic_evento_id);
-
-            if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
-
-                //Calculo para saber o numero de inscricao
-
-                $numero_inscricao = $semic_evento['semic_evento_semic_eventoinscricao_count'] + 1;
-
-                $dados_inscricao = $request->all();
+            $semic_evento = $this->semic_evento
+                ->with('semic_evento_minicursos')
+                ->withCount('semic_evento_semic_eventoinscricao')
+                ->findOrfail($semic_evento_id);
 
 
-                //Documento PDF Arquivo
-
-                if ($request->has('arquivo')) {
-                    $extensao = $request['arquivo']->extension();
-                    $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
-                    $nome = 'Arquivo_pdf_semicevento_inscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
-                    $dados_inscricao['arquivo'] = $request['arquivo']->storeAs($path, $nome);
-                } else {
-                    $dados_inscricao['arquivo'] = null;
+            $idsMinicursos = [];
+            foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
+                for ($i = 0; $i < count($request->minicurso); $i++) {
+                    if ($minicurso->minicurso_id == $request->minicurso[$i]) {
+                        $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
+                    }
                 }
-
-                $this->semicevento_inscricao->create([
-                    'semic_evento_id' => $semic_evento_id,
-                    'user_id' => Auth::user()->id,
-                    'nome_orientador' => $request->has('nome_orientador') ? $dados_inscricao['nome_orientador'] : null,
-                    'titulo_trabalho' => $request->has('titulo_trabalho') ? $dados_inscricao['titulo_trabalho'] : null,
-                    'cota_bolsa' => $request->has('cota_bolsa') ? $dados_inscricao['cota_bolsa'] : null,
-                    'arquivo' => $dados_inscricao['arquivo'],
-                    'numero_inscricao' => $numero_inscricao,
-                    'tipo' => json_encode($tipoinscricao),
-                    'status' => "Em Analise"
-                ]);
-
-
-                DB::commit();
-                alert()->success(config($this->bag['msg'] . '.success.inscricao'));
-                return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
-            } else {
-                alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
-                return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
-        } catch (\Throwable $th) {
-            dd($th);
-            DB::rollBack();
-            alert()->error(config($this->bag['msg'] . '.error.inscricao'));
-            return redirect()->back();
-        }
+
+                if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
+
+                    //Calculo para saber o numero de inscricao
+
+                    $numero_inscricao = $semic_evento['semic_evento_semic_eventoinscricao_count'] + 1;
+
+                    $dados_inscricao = $request->all();
+
+
+                    //Documento PDF Arquivo
+
+                    if ($request->has('arquivo')) {
+                        $extensao = $request['arquivo']->extension();
+                        $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
+                        $nome = 'Arquivo_pdf_semicevento_inscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
+                        $dados_inscricao['arquivo'] = $request['arquivo']->storeAs($path, $nome);
+                    } else {
+                        $dados_inscricao['arquivo'] = null;
+                    }
+
+                    $inscricao = $this->semicevento_inscricao->create([
+                        'semic_evento_id' => $semic_evento_id,
+                        'user_id' => Auth::user()->id,
+                        'nome_orientador' => $request->has('nome_orientador') ? $dados_inscricao['nome_orientador'] : null,
+                        'titulo_trabalho' => $request->has('titulo_trabalho') ? $dados_inscricao['titulo_trabalho'] : null,
+                        'cota_bolsa' => $request->has('cota_bolsa') ? $dados_inscricao['cota_bolsa'] : null,
+                        'arquivo' => $dados_inscricao['arquivo'],
+                        'numero_inscricao' => $numero_inscricao,
+                        'tipo' => json_encode($tipoinscricao),
+                        'status' => "Em Analise"
+                    ]);
+
+                    foreach ($idsMinicursos as $item){
+                        $inscricao->semiceventoinscricao_minicurso()->attach($item);
+                    }
+
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+                    return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
+                } else {
+                    alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
+                    return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
+                }
+            }
+        catch
+            (\Throwable $th) {
+                dd($th);
+                DB::rollBack();
+                alert()->error(config($this->bag['msg'] . '.error.inscricao'));
+                return redirect()->back();
+            }
     }
+
 
     public function docshow($diretorio)
     {

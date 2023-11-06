@@ -111,7 +111,7 @@ class MinicursoController extends Controller
     public function update(Request $request, Minicurso $minicurso)
     {
         //
-        dd($request->all());
+        dd($request->all(),`sdasd`);
     }
 
     /**
