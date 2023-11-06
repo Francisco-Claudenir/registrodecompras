@@ -260,7 +260,7 @@ Route::prefix('semicevento')->group(function () {
     Route::get('/{semic_evento_id}', [SemicEventoController::class, 'page'])->name('semicevento.page');
     Route::get('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'create'])->name('semic.eventoinscricao.create')->middleware(['auth']);
     Route::post('/inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'store'])->name('semic.eventoinscricao.store')->middleware(['auth']);
-    Route::get('/lista-inscricao/{semic_evento_id}', [SemicEventoInscricaoController::class, 'index'])->name('semic.eventoinscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+    Route::get('/lista-inscricao/{semic_evento_id}/{tipo}', [SemicEventoInscricaoController::class, 'index'])->name('semic.eventoinscricao.index')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
     Route::get('/pdf/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'gerarPDF'])->name('semic.eventoinscricao.pdf')->middleware(['auth']);
     Route::get('/docshow/{diretorio}', [SemicEventoInscricaoController::class, 'docshow'])->name('semic.eventoinscricao.docshow')->middleware(['auth']);
     Route::get('/verinscricao/{semic_evento_id}/{user_id}', [SemicEventoInscricaoController::class, 'show'])->name('semic.eventoinscricao.show')->middleware(['auth']);
