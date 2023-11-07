@@ -8,6 +8,7 @@
 @section('content')
 
     <div class="container-fluid">
+    <p><small>Limite de upload: <strong><?= ini_get('upload_max_filesize') ?></strong></small></p>
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
