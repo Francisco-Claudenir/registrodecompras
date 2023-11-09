@@ -7,8 +7,8 @@
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
-                <div class="d-flex flex-column">
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                <div class="d-flex flex-column ">
+                    <img src="{{ asset('images/logosemic.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                     </div>
                 </div>

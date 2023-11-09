@@ -254,7 +254,7 @@
                                                     <div class="project-info">
                                                         <div class="col-xl-6 my-2 col-lg-6 col-sm-6">
                                                             <p class="text-primary mb-1">{{$cursos->minicurso_id}}</p>
-                                                            <h5 class="title font-w600 mb-2"><a href="post-details.html"
+                                                            <h5 class="title font-w600 mb-2"><a
                                                                                                 class="text-black">{{$cursos->nome}}</a>
                                                             </h5>
                                                             <div class="text-dark"><strong>Vagas

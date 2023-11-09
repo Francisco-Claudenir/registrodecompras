@@ -9,7 +9,7 @@
         <div class="card">
             <div class="container">
                 <div class="d-flex flex-column">
-                    <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                    <img src="{{ asset('images/logosemic.png') }}" alt="" srcset="" width="full" height="full">
                     <div class="pt-4 pb-4">
                         <h3 class="mt-4 text-dark"><strong>{{ $semic_evento->nome }}</strong></h3>
                     </div>
@@ -57,10 +57,10 @@
 
                                                         @if ($isInscrito)
                                                             <a href="{{ route('semic.eventoinscricao.show', ['semic_evento_id' => $semic_evento->semic_evento_id, 'user_id' => Auth::user()->id]) }}"
-                                                               class="btn btn-info btn-xs mb-1">Ver Inscrições</a>
+                                                               class="btn btn-info btn-xs mb-1">Ver Inscrição</a>
                                                             @if ($semic_evento->status === 'Aberto')
                                                                 @if (now()->gte($semic_evento->data_inicio) && now()->lte($semic_evento->data_fim))
-                                                                <!-- aqui -->
+                                                                    <!-- aqui -->
                                                                 @else
                                                                     <span class="text-danger"> Não é possível realizar a
                                                                         inscrição !</span>
@@ -157,9 +157,9 @@
                                                                         <label class="mb-1"><strong>Cpf</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="text" name="cpf"
-                                                                                class="form-control @error('cpf') is-invalid @enderror"
-                                                                                value="{{-- old('cpf') --}}"
-                                                                                placeholder="cpf" autofocus>
+                                                                                   class="form-control @error('cpf') is-invalid @enderror"
+                                                                                   value="{{-- old('cpf') --}}"
+                                                                                   placeholder="cpf" autofocus>
                                                                             <div class="input-group-text">
                                                                                 <span class="flaticon-381-user"></span>
                                                                             </div>
@@ -171,8 +171,8 @@
                                                                             class="mb-1"><strong>Senha</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="password" name="password"
-                                                                                class="form-control @error('password') is-invalid @enderror"
-                                                                                placeholder="Senha">
+                                                                                   class="form-control @error('password') is-invalid @enderror"
+                                                                                   placeholder="Senha">
                                                                             <div class="input-group-text">
                                                                                 <span class="flaticon-381-key"></span>
                                                                             </div>
@@ -185,10 +185,10 @@
                                                                             <div
                                                                                 class="custom-control custom-checkbox ms-1">
                                                                                 <input type="checkbox"
-                                                                                    class="form-check-input"
-                                                                                    id="basic_checkbox_1">
+                                                                                       class="form-check-input"
+                                                                                       id="basic_checkbox_1">
                                                                                 <label class="form-check-label"
-                                                                                    for="basic_checkbox_1">Lembrar-me</label>
+                                                                                       for="basic_checkbox_1">Lembrar-me</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -198,15 +198,16 @@
                                                                     </div>
                                                                     <div class="text-center">
                                                                         <button type="submit"
-                                                                            class="btn btn-primary btn-block">Log
-                                                                            In</button>
+                                                                                class="btn btn-primary btn-block">Log
+                                                                            In
+                                                                        </button>
                                                                     </div>
                                                                 </form>
                                                                 <div class="new-account mt-3">
                                                                     <p>
                                                                         Não possui cadastro?
                                                                         <a class="text-primary"
-                                                                            href="{!! url('/register') !!}">Cadastre-se</a>
+                                                                           href="{!! url('/register') !!}">Cadastre-se</a>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -227,13 +228,19 @@
                             <div class="profile-tab">
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab"
-                                                class="nav-link active">Sobre</a>
+                                        <li class="nav-item"><a href="#descricao" data-bs-toggle="tab"
+                                                                class="nav-link active">Descrição</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#programacao" data-bs-toggle="tab"
+                                                                class="nav-link">Programação</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#anaisevento" data-bs-toggle="tab"
+                                                                class="nav-link">Anais do evento</a>
                                         </li>
 
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="about-me" class="tab-pane fade active show">
+                                        <div id="descricao" class="tab-pane fade active show">
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
                                                     <h4 class="text-primary">Descrição</h4>
@@ -241,27 +248,97 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="programacao" class="tab-pane fade">
+                                            <div class="profile-about-me">
+                                                <div class="pt-4 border-bottom-1 pb-4">
+                                                    <h4 class="text-primary">Programação</h4>
+
+{{--                                                    <div id="DZ_W_TimeLine" class="widget-timeline">--}}
+{{--                                                        <ul class="timeline">--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge primary"></div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>10 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">Youtube, a video-sharing website, goes live <strong class="text-primary">$500</strong>.</h6>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge info">--}}
+{{--                                                                </div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>20 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">New order placed <strong class="text-info">#XF-2356.</strong></h6>--}}
+{{--                                                                    <p class="mb-0">Quisque a consequat ante Sit amet magna at volutapt...</p>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge danger">--}}
+{{--                                                                </div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>30 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">john just buy your product <strong class="text-warning">Sell $250</strong></h6>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge success">--}}
+{{--                                                                </div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>15 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">StumbleUpon is acquired by eBay. </h6>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge warning">--}}
+{{--                                                                </div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>20 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                            <li>--}}
+{{--                                                                <div class="timeline-badge dark">--}}
+{{--                                                                </div>--}}
+{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
+{{--                                                                    <span>20 minutes ago</span>--}}
+{{--                                                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>--}}
+{{--                                                                </a>--}}
+{{--                                                            </li>--}}
+{{--                                                        </ul>--}}
+{{--                                                    </div>--}}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="anaisevento" class="tab-pane fade">
+                                            <div class="profile-about-me">
+                                                <div class="pt-4 border-bottom-1 pb-4">
+                                                    <h4 class="text-primary">Anais do Evento</h4>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="replyModal">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Post Reply</h5>
-                                                <button type="button" class="btn-close"
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="replyModal">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Post Reply</h5>
+                                            <button type="button" class="btn-close"
                                                     data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <textarea class="form-control" rows="4">Message</textarea>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Reply</button>
-                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <textarea class="form-control" rows="4">Message</textarea>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Reply</button>
                                         </div>
                                     </div>
                                 </div>
@@ -271,6 +348,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="d-flex flex-column">
-                <img src="{{ asset('images/semic.png') }}" alt="" srcset="" width="full" height="full">
+                <img src="{{ asset('images/logosemic.png') }}" alt="" srcset="" width="full" height="full">
                 <div class="pt-4 pb-4">
                     <span class="mt-4"><strong>{{ $semic_evento->nome }}</strong></span>
                 </div>
@@ -167,7 +167,7 @@
                                                     Selecione
                                                     uma opção
                                                 </option>
-                                                @foreach (config('tipoPibic.tipo') as $item)
+                                                @foreach (config('tipoPibic.cota_bolsa') as $item)
                                                 <option value={{ $item }}>
                                                     {{ $item }}
                                                 </option>
