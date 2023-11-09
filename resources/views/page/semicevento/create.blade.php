@@ -33,6 +33,15 @@
                     <h3 class="text-primary d-inline text-center p-4">Inscrição</h3>
                 </div>
                 <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                        <h4 for="">Você deseja se inscrever como Ouvinte?</h4>
+                        <div class="basic-form">
+                            <div class="mb-3 mb-0">
+                                <label class="radio-inline me-3"><input type="radio" required id="sim_radio_ouvinte" name="radio_ouvinte" value="1"> Sim</label>
+                                <label class="radio-inline me-3"><input type="radio" required id="nao_radio_ouvinte" name="radio_ouvinte" value="0"> Não</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-8 col-md-12 col-sm-12">
                         <h4 for="">Você deseja se inscrever no Minicurso?</h4>
                         <div class="basic-form">
