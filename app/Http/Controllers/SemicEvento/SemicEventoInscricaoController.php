@@ -55,6 +55,7 @@ class SemicEventoInscricaoController extends Controller
         if ($tipo == 'Ouvinte' || $tipo == 'Apresentador' || $tipo == 'Minicurso') {
             $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $tipo);
         }
+        
         $listaInscritos = $listaInscritos->select([
             'users.nome',
             'users.email',
