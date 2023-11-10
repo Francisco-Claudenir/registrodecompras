@@ -7,9 +7,12 @@ use App\Models\Minicurso;
 use App\Models\SemicEvento;
 use App\Models\User;
 use App\Models\SemicEventoInscricao;
+use App\Models\Certificado;
 use App\Http\Requests\SemicEvento\StoreSemicEventoInscricaoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoInscricaoRequest;
+use App\Models\Certificado_Inscricao;
 use Carbon\Carbon;
+use geekcom\ValidatorDocs\Rules\Certidao;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -100,16 +103,12 @@ class SemicEventoInscricaoController extends Controller
 
     public function store(Request $request, $semic_evento_id)
     {
-        $tipoinscricao = ['Ouvinte', 'Minicurso', 'Apresentador'];
-        
+        $tipoinscricao = ['Ouvinte', 'Apresentador'];
+
         if ($request->has('radio_ouvinte') && $request->has('radio_minicurso') && $request->has('radio_participante')) {
 
             if ($request['radio_ouvinte'] == 0) {
                 $tipoinscricao = array_diff($tipoinscricao, ['Ouvinte']);
-            }
-
-            if ($request['radio_minicurso'] == 0) {
-                $tipoinscricao = array_diff($tipoinscricao, ['Minicurso']);
             }
 
             if ($request['radio_participante'] == 0) {
@@ -119,7 +118,7 @@ class SemicEventoInscricaoController extends Controller
             alert()->error('Voçe não respondeu todas as perguntas');
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
         }
-     
+
         try {
             DB::beginTransaction();
 
@@ -133,12 +132,11 @@ class SemicEventoInscricaoController extends Controller
             if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
 
                 //Calculo para saber o numero de inscricao
-
                 $numero_inscricao = $semic_evento['semic_evento_semic_eventoinscricao_count'] + 1;
 
                 $dados_inscricao = $request->all();
-                //Documento PDF Arquivo
 
+                //Documento PDF Arquivo
                 if ($request->has('arquivo')) {
                     $extensao = $request['arquivo']->extension();
                     $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
@@ -147,7 +145,7 @@ class SemicEventoInscricaoController extends Controller
                 } else {
                     $dados_inscricao['arquivo'] = null;
                 }
-                
+
                 $inscricao = $this->semicevento_inscricao->create([
                     'semic_evento_id' => $semic_evento_id,
                     'user_id' => Auth::user()->id,
@@ -160,20 +158,40 @@ class SemicEventoInscricaoController extends Controller
                     'status' => "Em Analise"
                 ]);
 
-                if ($request['radio_minicurso'] != 0) {
-                    $idsMinicursos = [];
-                    foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
-                        for ($i = 0; $i < count($request->minicurso); $i++) {
-                            if ($minicurso->minicurso_id == $request->minicurso[$i]) {
-                                $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
-                            }
-                        }
-                    }
+                foreach ($tipoinscricao as $key => $value) {
 
-                    foreach ($idsMinicursos as $item) {
-                        $inscricao->semiceventoinscricao_minicurso()->attach($item);
+                    // Busca o certificado com base no seminário e tipo de inscrição
+                    $certificado = Certificado::where('semicevento_id', '=', $semic_evento_id)->where('nome', '=', $value)->first();
+
+                    // Verifica se o certificado foi encontrado
+                    if ($certificado) {
+                        // Cria uma nova entrada na tabela Certificado_Inscricao
+                        Certificado_Inscricao::create([
+                            'certificado_id' => $certificado->certificado_id,
+                            'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
+                            'status' => 'Aguarde'
+                        ]);
+                        
+                    } else {
+                        alert()->error('Erro');
+                        return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
                     }
                 }
+
+                // if ($request['radio_minicurso'] != 0) {
+                //     $idsMinicursos = [];
+                //     foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
+                //         for ($i = 0; $i < count($request->minicurso); $i++) {
+                //             if ($minicurso->minicurso_id == $request->minicurso[$i]) {
+                //                 $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
+                //             }
+                //         }
+                //     }
+
+                //     foreach ($idsMinicursos as $item) {
+                //         $inscricao->semiceventoinscricao_minicurso()->attach($item);
+                //     }
+                // }
 
                 DB::commit();
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
