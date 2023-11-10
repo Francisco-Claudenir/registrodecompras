@@ -60,7 +60,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Minicurso
     Route::post('minicursos/{semic_evento_id}', [MinicursoController::class, 'store'])->name('store.minicursos');
-    Route::put('minicursos/{semic_evento_id}', [MinicursoController::class, 'update'])->name('update.minicursos');
+    Route::put('minicursos/editar/{semic_evento_id}', [MinicursoController::class, 'update'])->name('update.minicursos');
     Route::delete('minicursos/{semic_evento_id}', [MinicursoController::class, 'destroy'])->name('destroy.minicursos');
 
 

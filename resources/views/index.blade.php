@@ -17,13 +17,14 @@
                             <div class="d-flex">
                                 <div class="me-4 text-dark">
                                     <p class="fs-12 mb-4 op6">O Programa Primeiros Passos na Ciência é voltado para o
-                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes de
+                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes
+                                        de
                                         graduação do ensino superior</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a href="{{ route('site.primeiropasso') }}"
-                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                                   class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
                             </div>
                         </div>
                     </div>
@@ -35,14 +36,16 @@
                             <h2 class="num-text text-dark mb-2 font-w500">Primeiros Passos Indicação Bolsista</h2>
                             <div class="d-flex">
                                 <div class="me-4 text-dark">
-                                    <p class="fs-12 mb-4 op6">O Programa Primeiros Passos Indicação Bolsista é voltado para o
-                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes de
+                                    <p class="fs-12 mb-4 op6">O Programa Primeiros Passos Indicação Bolsista é voltado
+                                        para o
+                                        desenvolvimento do pensamento científico e da iniciação à pesquisa de estudantes
+                                        de
                                         graduação do ensino superior</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a href="{{ route('site.pp-indicacao-bolsistas') }}"
-                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                                   class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
                             </div>
                         </div>
                     </div>
@@ -54,13 +57,39 @@
                             <h2 class="num-text text-dark mb-2 font-w500">Pibic Indicação</h2>
                             <div class="d-flex">
                                 <div class="me-4 text-dark">
-                                    <p class="fs-12 mb-4 op6">O Programa Institucional de Bolsas de Iniciação Científica (PIBIC)
-                                        visa apoiar a política de Iniciação Científica desenvolvida nas Instituições de Ensino e/ou Pesquisa,
-                                        por meio da concessão de bolsas de Iniciação Científica (IC) a estudantes de graduação integrados na pesquisa científica.</p>
+                                    <p class="fs-12 mb-4 op6">O Programa Institucional de Bolsas de Iniciação Científica
+                                        (PIBIC)
+                                        visa apoiar a política de Iniciação Científica desenvolvida nas Instituições de
+                                        Ensino e/ou Pesquisa,
+                                        por meio da concessão de bolsas de Iniciação Científica (IC) a estudantes de
+                                        graduação integrados na pesquisa científica.</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a href="{{ route('site.pibic-indicacao') }}"
+                                   class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <!--Semic Evento -->
+                    <div class="card-bx stacked card">
+                        <div class="card-info  ">
+                            <h2 class="num-text text-dark mb-2 font-w500">Semic</h2>
+                            <div class="d-flex">
+                                <div class="me-4 text-dark">
+                                    <p class="fs-12 mb-4 op6">O Seminário de Iniciação Científica é uma ação de
+                                        popularização, disseminação e promoção da Ciência promovida pela UEMA que, ao
+                                        divulgar os resultados de pesquisas desenvolvidas por alunos da graduação, sob
+                                        orientação dos docentes da Universidade, valoriza e prioriza a preparação de
+                                        nossos jovens por meio do conhecimento, para que sejam atores de destaque no
+                                        esforço de melhorar os índices de desenvolvimento do Estado, trazendo mais
+                                        qualidade de vida à nossa população..</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('site.semicevento') }}"
                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
                             </div>
                         </div>

@@ -10,8 +10,8 @@
     <div class="card">
         <div class="container">
 
-            <div class="d-flex flex-column">
-                <img src="{{ asset('images/logosemic.png') }}" alt="" srcset="" width="full" height="full">
+            <div class="d-flex justify-content-center pb-4">
+                <img class="img-fluid w-80" src="{{ asset('images/logo_SEMIC.png') }}" alt="" srcset=""  width="350" height="70">
                 <div class="pt-4 pb-4">
                     <span class="mt-4"><strong>{{ $semic_evento->nome }}</strong></span>
                 </div>

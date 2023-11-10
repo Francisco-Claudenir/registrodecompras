@@ -189,6 +189,7 @@
                                                 <form
                                                     action="{{ route('update.minicursos',['semic_evento_id' => $semic_evento->semic_evento_id]) }}"
                                                     method="post">
+                                                    @method('PUT')
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -310,7 +311,7 @@
                                                                         <a class="dropdown-item"
                                                                            href="javascript:void(0);"
                                                                            data-bs-toggle="modal"
-                                                                           data-bs-target="#editminicursomodal-{{$cursos->minicurso_id}}">Editar</a>
+                                                                           data-bs-target="#editminicursomodal-{{$cursos->minicurso_id}}" onclick="definirData(cursos)">Editar</a>
                                                                         <a class="dropdown-item"
                                                                            href="javascript:void(0);">Deletar</a>
                                                                     </div>
@@ -357,11 +358,12 @@
                 console.error(err.stack);
             });
 
-        $('#date-format1').bootstrapMaterialDatePicker({
+       var datepicker =  $('#date-format1').bootstrapMaterialDatePicker({
             format: 'DD MMMM YYYY - HH:mm',
 
 
         });
+
     </script>
 @endsection
 

@@ -110,9 +110,34 @@ class MinicursoController extends Controller
      */
     public function update(Request $request, Minicurso $minicurso)
     {
-        //
-        dd($request->all(),`sdasd`);
-    }
+        $cursos = $request->all();
+
+
+
+//        $newFormat = $carbonDate->format('Y-m-d H:i');
+        try {
+
+
+            $this->minicurso->update([
+                'nome' => $cursos['nome_minicurso'],
+                'vagas' => $cursos['vagas_minicurso'],
+                'horas' => $cursos['horas_minicurso'],
+                'data_hora' => $carbonDate,
+                'descricao' => $cursos['descricao'],
+                'descricao_ministrante' => $cursos['descricao_ministrante'],
+            ]);
+
+            DB::commit();
+            alert()->success(config($this->bag['msg'] . '.success.update'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
+
+}
 
     /**
      * Remove the specified resource from storage.

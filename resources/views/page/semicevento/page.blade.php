@@ -8,11 +8,9 @@
     <div class="container-fluid ">
         <div class="card">
             <div class="container">
-                <div class="d-flex flex-column">
-                    <img src="{{ asset('images/logosemic.png') }}" alt="" srcset="" width="full" height="full">
-                    <div class="pt-4 pb-4">
-                        <h3 class="mt-4 text-dark"><strong>{{ $semic_evento->nome }}</strong></h3>
-                    </div>
+                <div class="d-flex justify-content-center pb-4">
+                    <img class="img-fluid w-80" src="{{ asset('images/logo_SEMIC.png') }}" alt="" srcset="" width="350"
+                         height="70">
                 </div>
             </div>
         </div>
@@ -157,9 +155,9 @@
                                                                         <label class="mb-1"><strong>Cpf</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="text" name="cpf"
-                                                                                class="form-control @error('cpf') is-invalid @enderror"
-                                                                                value="{{-- old('cpf') --}}"
-                                                                                placeholder="cpf" autofocus>
+                                                                                   class="form-control @error('cpf') is-invalid @enderror"
+                                                                                   value="{{-- old('cpf') --}}"
+                                                                                   placeholder="cpf" autofocus>
                                                                             <div class="input-group-text">
                                                                                 <span class="flaticon-381-user"></span>
                                                                             </div>
@@ -171,8 +169,8 @@
                                                                             class="mb-1"><strong>Senha</strong></label>
                                                                         <div class="input-group">
                                                                             <input type="password" name="password"
-                                                                                class="form-control @error('password') is-invalid @enderror"
-                                                                                placeholder="Senha">
+                                                                                   class="form-control @error('password') is-invalid @enderror"
+                                                                                   placeholder="Senha">
                                                                             <div class="input-group-text">
                                                                                 <span class="flaticon-381-key"></span>
                                                                             </div>
@@ -185,10 +183,10 @@
                                                                             <div
                                                                                 class="custom-control custom-checkbox ms-1">
                                                                                 <input type="checkbox"
-                                                                                    class="form-check-input"
-                                                                                    id="basic_checkbox_1">
+                                                                                       class="form-check-input"
+                                                                                       id="basic_checkbox_1">
                                                                                 <label class="form-check-label"
-                                                                                    for="basic_checkbox_1">Lembrar-me</label>
+                                                                                       for="basic_checkbox_1">Lembrar-me</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -198,15 +196,16 @@
                                                                     </div>
                                                                     <div class="text-center">
                                                                         <button type="submit"
-                                                                            class="btn btn-primary btn-block">Log
-                                                                            In</button>
+                                                                                class="btn btn-primary btn-block">Log
+                                                                            In
+                                                                        </button>
                                                                     </div>
                                                                 </form>
                                                                 <div class="new-account mt-3">
                                                                     <p>
                                                                         Não possui cadastro?
                                                                         <a class="text-primary"
-                                                                            href="{!! url('/register') !!}">Cadastre-se</a>
+                                                                           href="{!! url('/register') !!}">Cadastre-se</a>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -231,10 +230,19 @@
                                                                 class="nav-link active">Descrição</a>
                                         </li>
                                         <li class="nav-item"><a href="#programacao" data-bs-toggle="tab"
-                                                                class="nav-link">Programação</a>
+                                                                class="nav-link">Programação Geral</a>
                                         </li>
                                         <li class="nav-item"><a href="#anaisevento" data-bs-toggle="tab"
                                                                 class="nav-link">Anais do evento</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#premiacao" data-bs-toggle="tab"
+                                                                class="nav-link">Premiação </a>
+                                        </li>
+                                        <li class="nav-item"><a href="#listatrabalho" data-bs-toggle="tab"
+                                                                class="nav-link">Lista de trabalhos</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#minicursos" data-bs-toggle="tab"
+                                                                class="nav-link">Minicursos</a>
                                         </li>
 
                                     </ul>
@@ -250,60 +258,188 @@
                                         <div id="programacao" class="tab-pane fade">
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
-                                                    <h4 class="text-primary">Programação</h4>
+                                                    <h4 class="text-primary">Programação Geral</h4>
 
-{{--                                                    <div id="DZ_W_TimeLine" class="widget-timeline">--}}
-{{--                                                        <ul class="timeline">--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge primary"></div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>10 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">Youtube, a video-sharing website, goes live <strong class="text-primary">$500</strong>.</h6>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge info">--}}
-{{--                                                                </div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>20 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">New order placed <strong class="text-info">#XF-2356.</strong></h6>--}}
-{{--                                                                    <p class="mb-0">Quisque a consequat ante Sit amet magna at volutapt...</p>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge danger">--}}
-{{--                                                                </div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>30 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">john just buy your product <strong class="text-warning">Sell $250</strong></h6>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge success">--}}
-{{--                                                                </div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>15 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">StumbleUpon is acquired by eBay. </h6>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge warning">--}}
-{{--                                                                </div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>20 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                <div class="timeline-badge dark">--}}
-{{--                                                                </div>--}}
-{{--                                                                <a class="timeline-panel text-muted" href="#">--}}
-{{--                                                                    <span>20 minutes ago</span>--}}
-{{--                                                                    <h6 class="mb-0">Mashable, a news website and blog, goes live.</h6>--}}
-{{--                                                                </a>--}}
-{{--                                                            </li>--}}
-{{--                                                        </ul>--}}
-{{--                                                    </div>--}}
+                                                    <div class="basic-list-group mt-4">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-xl-2">
+                                                                <div class="list-group mb-4 border border-1 "
+                                                                     id="list-tab" role="tablist">
+                                                                    <a class="list-group-item list-group-item-action text-black active"
+                                                                       id="list-01-list" data-bs-toggle="list"
+                                                                       href="#list-01" role="tab"
+                                                                       aria-selected="true">
+                                                                        <span>Segunda-feira</span>
+                                                                        <small>27/11/2023</small>
+                                                                    </a>
+                                                                    <a class="list-group-item list-group-item-action text-black"
+                                                                       id="list-02-list" data-bs-toggle="list"
+                                                                       href="#list-02" role="tab"
+                                                                       aria-selected="false" tabindex="-1">
+                                                                        <span>Terça-feira</span>
+                                                                        <small>28/11/2023</small>
+                                                                    </a>
+                                                                    <a class="list-group-item list-group-item-action text-black"
+                                                                       id="list-03-list" data-bs-toggle="list"
+                                                                       href="#list-03" role="tab"
+                                                                       aria-selected="false" tabindex="-1">
+                                                                        <span>Quarta-feira</span>
+                                                                        <small>29/11/2023</small>
+                                                                    </a>
+                                                                    <a class="list-group-item list-group-item-action text-black"
+                                                                       id="list-04-list" data-bs-toggle="list"
+                                                                       href="#list-04" role="tab"
+                                                                       aria-selected="false" tabindex="-1">
+                                                                        <span>Quinta-feira</span>
+                                                                        <small>30/11/2023</small>
+                                                                    </a>
+                                                                    <a class="list-group-item list-group-item-action text-black"
+                                                                       id="list-05-list" data-bs-toggle="list"
+                                                                       href="#list-05" role="tab"
+                                                                       aria-selected="false" tabindex="-1">
+                                                                        <span>Sexta-feira</span>
+                                                                        <small>01/12/2023</small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-xl-10">
+                                                                <div class="tab-content" id="nav-tabContent">
+                                                                    <div class="tab-pane fade show active"
+                                                                         id="list-01" role="tabpanel"
+                                                                         aria-labelledby="#list-01-list">
+                                                                        <h5 class="mb-4 text-primary">Manhã
+                                                                            08:00 às
+                                                                            12:00 h</h5>
+                                                                        <p>Minicurso
+                                                                            MEIO AMBIENTE, TURISMO E
+                                                                            (RE)PRODUÇÃO DO ESPAÇO:
+                                                                            PERSPECTIVAS PARA A
+                                                                            GESTÃO E O PLANEJAMENTO</p>
+                                                                        <h5 class="mb-4 text-primary">Tarde
+                                                                            14:00 às
+                                                                            18:00 h</h5>
+                                                                        <p>
+                                                                            Apresentação de
+                                                                            trabalhos em salas online
+                                                                            Sessões de Agronomia,
+                                                                            Veterinária, Biologia, Saúde,
+                                                                            História, Educação, Ciências
+                                                                            Sociais, Arquitetura, Letras,
+                                                                            Eng. Computação, Eng.
+                                                                            Produção, Eng. Mecânica,
+                                                                            PIBITI
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
+                                                                        <p>
+                                                                            Cerimônia de abertura
+                                                                            Palestra de abertura- Canal do
+                                                                            Youtube UEMA
+
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="tab-pane fade" id="list-02"
+                                                                         role="tabpanel"
+                                                                         aria-labelledby="#list-02-list">
+                                                                        <h5 class="mb-4 text-primary">Manhã
+                                                                            08:00 às
+                                                                            12:00 h</h5>
+                                                                        <p>Apresentação de trabalhos 08:00
+                                                                            às 12:00 h
+                                                                            Sessões de Agronomia,
+                                                                            Veterinária, Biologia, Saúde,
+                                                                            História, Educação, Ciências
+                                                                            Sociais, Arquitetura, Letras,
+                                                                            Química, Filosofia, Eng.
+                                                                            Mecânica, PIBITI</p>
+                                                                        <h5 class="mb-4 text-primary">Tarde
+                                                                            14:00 às
+                                                                            18:00 h</h5>
+                                                                        <p>
+                                                                            Apresentação de
+                                                                            trabalhos em salas online
+                                                                            Sessões de Agronomia,
+                                                                            Veterinária, Biologia, Química,
+                                                                            História, Educação, Ciências
+                                                                            Sociais, Arquitetura, Letras,
+                                                                            Filosofia, Geografia, PIBITI
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="tab-pane fade" id="list-03"
+                                                                         role="tabpanel"
+                                                                         aria-labelledby="#list-03-list">
+                                                                        <h5 class="mb-4 text-primary">Manhã
+                                                                            08:00 às
+                                                                            12:00 h</h5>
+                                                                        <p>
+                                                                            Apresentação de trabalhos 08:00
+                                                                            às 12:00 h
+                                                                            Sessões de Agronomia,
+                                                                            Veterinária, Biologia, Zootecnia,
+                                                                            História, Geografia, Ciências
+                                                                            Sociais, Arquitetura, Letras,
+                                                                            Direito, Eng. Pesca, Física,
+                                                                            PIBITI
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Tarde
+                                                                            14:00 às
+                                                                            18:00 h</h5>
+                                                                        <p>
+                                                                            Apresentação de trabalhos em
+                                                                            salas online
+                                                                            Sessões de Agronomia,
+                                                                            Veterinária, Biologia, Zootecnia,
+                                                                            Ciências Sociais/Administração,
+                                                                            Matemática, Letras, Direito,
+                                                                            Eng. Pesca
+
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="tab-pane fade" id="list-04"
+                                                                         role="tabpanel"
+                                                                         aria-labelledby="#list-settings-list">
+                                                                        <h5 class="mb-4 text-primary">Manhã
+                                                                            08:00 às
+                                                                            12:00 h</h5>
+                                                                        <p>Minicurso
+                                                                            ETINOGRAFIA: CRÍTICA
+                                                                            AOS MANUAIS
+                                                                        </p>
+                                                                        <p>
+                                                                            Minicurso
+                                                                            A METDOLOGIA ESTADO
+                                                                            DE CONHECIMENTO:
+                                                                            FUNDAMENTOS E
+                                                                            CONTRIBUIÇÕES PARA A
+                                                                            PESQUISA ACADÊMICA
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Tarde
+                                                                            14:00 às
+                                                                            18:00 h</h5>
+                                                                        <p>17:00 h Lançamentos
+                                                                            Livros-Transmissão pelo
+                                                                            Youtube-UEMA
+                                                                            Lançamento coletânea
+                                                                            XXXIV SEMIC
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="tab-pane fade" id="list-05"
+                                                                         role="tabpanel"
+                                                                         aria-labelledby="#list-settings-list">
+                                                                        <h5 class="mb-4 text-primary">Tarde
+                                                                            14:00 às
+                                                                            18:00 h</h5>
+                                                                        <p>Cerimônia de
+                                                                            encerramento e
+                                                                            premiações Bolsista
+                                                                            Destaque -
+                                                                            Transmissão pelo
+                                                                            Youtube-UEMA
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -313,31 +449,87 @@
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
                                                     <h4 class="text-primary">Anais do Evento</h4>
+
+                                                    <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
+
+                                                    <span >Em construção</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="replyModal">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Post Reply</h5>
-                                            <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
+                                        <div id="premiacao" class="tab-pane fade">
+                                            <div class="profile-about-me">
+                                                <div class="pt-4 border-bottom-1 pb-4">
+                                                    <h4 class="text-primary">Premiação</h4>
+
+                                                    <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
+
+                                                        <span >Em construção</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <textarea class="form-control" rows="4">Message</textarea>
-                                            </form>
+                                        <div id="listatrabalho" class="tab-pane fade">
+                                            <div class="profile-about-me">
+                                                <div class="pt-4 border-bottom-1 pb-4">
+                                                    <h4 class="text-primary">Lista de trabalhos por sala e links de acesso às sessões</h4>
+
+                                                    <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
+
+                                                        <span >Em construção</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close
-                                            </button>
-                                            <button type="button" class="btn btn-primary">Reply</button>
+                                        <div id="minicursos" class="tab-pane fade">
+                                            <div class="profile-about-me">
+                                                <div class="pt-4 border-bottom-1 pb-4">
+                                                    <h4 class="text-primary">Minicursos</h4>
+                                                    <div class="row">
+                                                        @foreach($semic_evento->semic_evento_minicursos as $cursos)
+
+                                                            <div class="col-xl-6 col-xxl-6 col-lg-6 col-sm-6">
+                                                            <div class="widget-stat card">
+                                                                <div class="card-body p-4">
+                                                                    <div class="media ai-icon">
+									                            <span class="me-3 bgl-primary text-primary">
+                                                             <i class="la la-graduation-cap"></i></span>
+                                                                        <div class="media-body">
+                                                                            <p class="mb-1"></p>
+                                                                            <h4 class="mb-0 pb-3">{{$cursos->nome}}</h4>
+                                                                            <br>
+                                                                            <span
+                                                                                class="badge badge-outline-primary">{{$cursos->vagas}} Vagas</span>
+                                                                            <span
+                                                                                class="badge badge-outline-warning">{{$cursos->horas}} Horas</span>
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-12 pt-4 pl-4">
+                                                                        <p>
+                                                                            <small>
+                                                                                {!! $cursos->descricao !!}
+                                                                            </small>
+                                                                        </p>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="col-12 pt-1 pl-4">
+                                                                        <p>
+                                                                            <small>
+                                                                                {!! $cursos->descricao_ministrante !!}
+                                                                            </small>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -351,5 +543,15 @@
     </div>
 @endsection
 
+@section('css')
+
+    <style>
+
+        .list-group-item.active {
+            color: #fff !important;
+        }
+
+    </style>
+@endsection
 @section('scripts')
 @endsection
