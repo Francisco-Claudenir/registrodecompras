@@ -100,7 +100,7 @@
                 <div class="card-body">
                     <div class="basic-form">
                         <div class="row">
-                            @foreach($minicursos as $cursos)
+                            @foreach($minicursos as $key=>$cursos)
                                 <div class="modal fade" id="showminicursomodal-{{$cursos->minicurso_id}}"
                                      style="display: none;z-index: 100;" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -187,7 +187,7 @@
 
                                             <div class="modal-body">
                                                 <form
-                                                    action="{{ route('update.minicursos',['semic_evento_id' => $semic_evento->semic_evento_id]) }}"
+                                                    action="{{ route('update.minicursos',['minicurso' => $cursos->minicurso_id]) }}"
                                                     method="post">
                                                     @method('PUT')
                                                     @csrf
@@ -219,14 +219,14 @@
                                                                 <div class="row mt-4">
                                                                     <h5 class="form-label">Descrição</h5>
                                                                     <div class="col-xl-12 col-xxl-12">
-                                                        <textarea name="descricao" id="ckeditor3"
+                                                        <textarea name="descricao" id="ckeditor-{{$key}}"
                                                         >{!! $cursos->descricao !!} </textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mt-4">
                                                                     <h5 class="form-label">Descrição Ministrante</h5>
                                                                     <div class="col-xl-12 col-xxl-12">
-                                                        <textarea name="descricao_ministrante" id="ckeditor4"
+                                                        <textarea name="descricao_ministrante" id="ckeditor2-{{$key}}"
                                                         >{!! $cursos->descricao_ministrante !!} </textarea>
                                                                     </div>
                                                                 </div>
@@ -333,33 +333,40 @@
             @endsection
             @section('scripts')
                 <script>
-        ClassicEditor
-            .create(document.querySelector('#ckeditor2'), {})
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(err => {
-                console.error(err.stack);
-            });
-        ClassicEditor
-            .create(document.querySelector('#ckeditor3'), {})
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(err => {
-                console.error(err.stack);
-            });
-        ClassicEditor
-            .create(document.querySelector('#ckeditor4'), {})
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(err => {
-                console.error(err.stack);
-            });
+                    ClassicEditor
+                        .create(document.querySelector('#ckeditor2'), {})
+                        .then(editor => {
+                            window.editor = editor;
+                        })
+                        .catch(err => {
+                            console.error(err.stack);
+                        });
+
+
+                    var minicursos = @json($minicursos);
+                    for (let i = 0; i < minicursos.length ; i++) {
+
+                        ClassicEditor
+                            .create(document.querySelector('#ckeditor-'+i), {})
+                            .then(editor => {
+                                window.editor = editor;
+                            })
+                            .catch(err => {
+                                console.error(err.stack);
+                            });
+                        ClassicEditor
+                            .create(document.querySelector('#ckeditor2-'+i), {})
+                            .then(editor => {
+                                window.editor = editor;
+                            })
+                            .catch(err => {
+                                console.error(err.stack);
+                            });
+                    }
+
 
        var datepicker =  $('#date-format1').bootstrapMaterialDatePicker({
-            format: 'DD MMMM YYYY - HH:mm',
+            format: 'DD MMMM YYYY HH:mm',
 
 
         });

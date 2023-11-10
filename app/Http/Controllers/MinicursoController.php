@@ -111,21 +111,33 @@ class MinicursoController extends Controller
     public function update(Request $request, Minicurso $minicurso)
     {
         $cursos = $request->all();
-
-
-
-//        $newFormat = $carbonDate->format('Y-m-d H:i');
         try {
-
-
-            $this->minicurso->update([
+            $carbonDate = Carbon::parse($cursos['data_hora']);
+            if ($carbonDate instanceof Carbon) {
+                $cursos['data_hora'] = $carbonDate->format('Y-m-d H:i:s');
+            }
+        } catch (\Exception $e) {
+            $carbonDate2 = Carbon::createFromFormat('l d F Y - H:i', $cursos['data_hora']);
+            if ($carbonDate2 instanceof Carbon) {
+                $cursos['data_hora'] = $carbonDate2->format('Y-m-d H:i:s');
+            }
+        }
+        try {
+            $minicurso->update([
                 'nome' => $cursos['nome_minicurso'],
                 'vagas' => $cursos['vagas_minicurso'],
                 'horas' => $cursos['horas_minicurso'],
-                'data_hora' => $carbonDate,
+                'data_hora' => $cursos['data_hora'],
                 'descricao' => $cursos['descricao'],
                 'descricao_ministrante' => $cursos['descricao_ministrante'],
             ]);
+//            $this->minicurso->update([
+//                'nome' => $cursos['nome_minicurso'],
+//                'vagas' => $cursos['vagas_minicurso'],
+//                'horas' => $cursos['horas_minicurso'],
+//                'descricao' => $cursos['descricao'],
+//                'descricao_ministrante' => $cursos['descricao_ministrante'],
+//            ]);
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.update'));
