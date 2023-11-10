@@ -34,7 +34,7 @@
                 </div>
                 <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                        <h4 for="">Você deseja se inscrever como Ouvinte?</h4>
+                        <h4 for="">Você deseja se inscrever somente como Ouvinte?</h4>
                         <div class="basic-form">
                             <div class="mb-3 mb-0">
                                 <label class="radio-inline me-3"><input type="radio" required id="sim_radio_ouvinte" name="radio_ouvinte" value="1"> Sim</label>
