@@ -45,7 +45,7 @@
                                         class="fa fa-cog text-primary"
                                         aria-hidden="true"></i></a>
                             </div>
-                            <p class="mb-4">{{ $semic_evento->descricao }}</p>
+                            <p class="mb-4">{{ Str::limit($semic_evento->descricao, 185) }}</p>
                             <div class="row mb-4">
                                 <div class="col-sm-6 mb-sm-0 mb-3 d-flex">
                                     <div class="dt-icon bgl-info me-3">

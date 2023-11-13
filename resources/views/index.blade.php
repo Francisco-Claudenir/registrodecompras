@@ -74,62 +74,73 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <!--Semic Evento -->
-                    <div class="card-bx stacked card">
-                        <div class="card-info  ">
-                            <h2 class="num-text text-dark mb-2 font-w500">Semic</h2>
-                            <div class="d-flex">
-                                <div class="me-4 text-dark">
-                                    <p class="fs-12 mb-4 op6">O Seminário de Iniciação Científica é uma ação de
-                                        popularização, disseminação e promoção da Ciência promovida pela UEMA que, ao
-                                        divulgar os resultados de pesquisas desenvolvidas por alunos da graduação, sob
-                                        orientação dos docentes da Universidade, valoriza e prioriza a preparação de
-                                        nossos jovens por meio do conhecimento, para que sejam atores de destaque no
-                                        esforço de melhorar os índices de desenvolvimento do Estado, trazendo mais
-                                        qualidade de vida à nossa população..</p>
+                    <div class="card ">
+                        <div class="p-2">
+                            <div class="row text-center">
+                                <div class="my-profile">
+                                    <img src="{{asset('images/uema/logo_SEMIC.png')}}" alt="" class="rounded">
                                 </div>
+
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('site.semicevento') }}"
-                                   class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                            <hr>
+                            <h2 class="num-text text-center text-dark mb-2 font-w500">Semic Uema</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="fs-12 mb-4 op6">
+                                O Seminário de Iniciação Científica é uma ação de
+                                popularização, disseminação e promoção da Ciência promovida pela UEMA que, ao
+                                divulgar os resultados de pesquisas desenvolvidas por alunos da graduação, sob
+                                orientação dos docentes da Universidade, valoriza e prioriza a preparação de
+                                nossos jovens por meio do conhecimento, para que sejam atores de destaque no
+                                esforço de melhorar os índices de desenvolvimento do Estado, trazendo mais
+                                qualidade de vida à nossa população</p>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('site.semicevento') }}"
+                               class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+                        </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            {{-- <div class="col-lg-4 col-md-6 col-sm-6">
+                <!--Primeiros Passos -->
+                <div class="card-bx stacked card">
+                    <div class="card-info  ">
+                        <h2 class="num-text text-dark mb-2 font-w500">Semic</h2>
+                        <div class="d-flex">
+                            <div class="me-4 text-dark">
+                                <p class="fs-12 mb-4 op6">O Programa Semic</p>
                             </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('site.semic') }}"
+                                class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-lg-4 col-md-6 col-sm-6">
-                    <!--Primeiros Passos -->
-                    <div class="card-bx stacked card">
-                        <div class="card-info  ">
-                            <h2 class="num-text text-dark mb-2 font-w500">Semic</h2>
-                            <div class="d-flex">
-                                <div class="me-4 text-dark">
-                                    <p class="fs-12 mb-4 op6">O Programa Semic</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('site.semic') }}"
-                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
+            </div> --}}
+            {{-- <div class="col-lg-4 col-md-6 col-sm-6">
+                <!--Primeiros Passos -->
+                <div class="card-bx stacked card">
+                    <div class="card-info  ">
+                        <h2 class="num-text text-dark mb-2 font-w500">Bati</h2>
+                        <div class="d-flex">
+                            <div class="me-4 text-dark">
+                                <p class="fs-12 mb-4 op6">O Programa Bati</p>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-lg-4 col-md-6 col-sm-6">
-                    <!--Primeiros Passos -->
-                    <div class="card-bx stacked card">
-                        <div class="card-info  ">
-                            <h2 class="num-text text-dark mb-2 font-w500">Bati</h2>
-                            <div class="d-flex">
-                                <div class="me-4 text-dark">
-                                    <p class="fs-12 mb-4 op6">O Programa Bati</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="{{ route('site.bati') }}"
-                                    class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('site.bati') }}"
+                                class="btn btn-outline-info btn-xxs pull-right">Ver Eventos</a>
                         </div>
                     </div>
-                </div> --}}
-            </div>
+                </div>
+            </div> --}}
         </div>
+    </div>
     </div>
 @endsection

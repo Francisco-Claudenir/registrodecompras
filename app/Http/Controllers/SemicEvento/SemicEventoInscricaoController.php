@@ -80,6 +80,7 @@ class SemicEventoInscricaoController extends Controller
     {
         //Verificando se o id existe
         $semic_evento = $this->semic_evento->findOrfail($semic_evento_id);
+        $dadosminicurso = $this->minicurso->findOrfail($minicurso);
 
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->minicursoinscricao
@@ -91,7 +92,7 @@ class SemicEventoInscricaoController extends Controller
 
         $links = $listaInscritos->appends($request->except('page'));
 
-        return view($this->bag['view'] . '.minicurso', compact('listaInscritos', 'semic_evento', 'links'));
+        return view($this->bag['view'] . '.minicurso', compact('listaInscritos', 'semic_evento','dadosminicurso', 'links'));
     }
 
     public function create($semic_evento_id)
