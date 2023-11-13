@@ -38,8 +38,8 @@ class ExportsController extends Controller
         return Excel::download(new PibicIndicacaoExport($pibicindicacao_id), 'inscritos.xlsx');
     }
 
-    public function semicEventoInscritos($semic_evento_id)
+    public function semicEventoInscritos($semic_evento_id, $tipo)
     {
-        return Excel::download(new SemicEventoInscricaoExport($semic_evento_id), 'inscritos.xlsx');
+        return Excel::download(new SemicEventoInscricaoExport($semic_evento_id, $tipo), 'inscritos.xlsx');
     }
 }

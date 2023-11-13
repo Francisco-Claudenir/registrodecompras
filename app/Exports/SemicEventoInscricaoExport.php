@@ -21,35 +21,49 @@ use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 
 class SemicEventoInscricaoExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithEvents
 {
-  
-    protected $semic_evento_id;
 
-    public function __construct($semic_evento_id)
+    protected $semic_evento_id;
+    protected $tipo;
+
+    public function __construct($semic_evento_id, $tipo)
     {
         $this->semic_evento_id = $semic_evento_id;
+        $this->tipo = $tipo;
     }
+
     public function collection()
     {
         $semic_evento_id = $this->semic_evento_id;
         //Verificando se o id existe
         SemicEvento::findOrfail($semic_evento_id);
 
-        $listaInscritos = SemicEventoInscricao::where('semic_eventoinscricao.user_id', '=', $semic_evento_id)
-        ->orderby('semic_eventoinscricao.numero_inscricao', 'asc')
-        ->get();
+        $listaInscritos = SemicEventoInscricao::join('users', 'semic_eventoinscricao.user_id', '=', 'users.id')
+            ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id);
 
-      //  dd($listaInscritos);
+        if ($this->tipo == 'Ouvinte' || $this->tipo == 'Apresentador') {
+            $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $this->tipo);
+        }
 
+        $listaInscritos = $listaInscritos->orderby('semic_eventoinscricao.numero_inscricao', 'asc')
+            ->get();
+
+
+        $lista = [];
+        
         foreach ($listaInscritos as $key => $dados) {
-
             $lista[$key]['numero_inscricao'] = $dados['numero_inscricao'];
+            $lista[$key]['nome'] = $dados['nome'];
+            $lista[$key]['email'] = $dados['email'];
+            $lista[$key]['cpf'] = $dados['cpf'];
+            $lista[$key]['telefone'] = $dados['telefone'];
+            $lista[$key]['tipo'] = $dados['tipo'];
+            $lista[$key]['status'] = $dados['status'];
             $lista[$key]['nome_orientador'] = $dados['nome_orientador'];
             $lista[$key]['titulo_trabalho'] = $dados['titulo_trabalho'];
             $lista[$key]['cota_bolsa'] = $dados['cota_bolsa'];
-            $lista[$key]['status'] = $dados['status'];
-            $lista[$key]['arquivo'] = route('semic.eventoinscricao.docshow', ['diretorio' => Crypt::encrypt($dados['arquivo'])]);
-           
+            $lista[$key]['arquivo'] = $dados['arquivo'] != null ? route('semic.eventoinscricao.docshow', ['diretorio' => Crypt::encrypt($dados['arquivo'])]) : null;
         }
+
         $colecao = collect($lista);
 
         return $colecao;
@@ -62,10 +76,15 @@ class SemicEventoInscricaoExport implements FromCollection, WithHeadings, WithSt
 
         return [
             'N° Inscrição',
+            'Nome',
+            'E-mail',
+            'CPF',
+            'Telefone',
+            'Tipo',
+            'Status',
             'Nome Orientador',
             'Título Trabalho',
             'Cota Bolsa',
-            'Status',
             'Arquivo'
         ];
     }

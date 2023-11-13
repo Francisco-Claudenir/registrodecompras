@@ -1,6 +1,6 @@
 @extends('layout.page', [
-    'layout' => 'admin',
-    'plugins' => ['lightgallery'],
+'layout' => 'admin',
+'plugins' => ['lightgallery'],
 ])
 
 @section('title', ' - Lista de Inscritos')
@@ -37,8 +37,8 @@
                                         Ouvinte </a>
                                     <a href="{{ route('semic.eventoinscricao.index',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Apresentador'])}}" class="list-group-item"><span class="icon-warning"><i class="fa fa-circle" aria-hidden="true"></i></span>
                                         Apresentador </a>
-                                    <a href="{{ route('semic.eventoinscricao.index',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Minicurso'])}}" class="list-group-item"><span class="icon-warning"><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                        Minicurso </a>
+                                    <!-- <a href="{{ route('semic.eventoinscricao.index',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Minicurso'])}}" class="list-group-item"><span class="icon-warning"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        Minicurso </a> -->
                                 </div>
                             </div>
                         </div>
@@ -48,8 +48,18 @@
                                     <div class="col-12">
                                         <div class="card-header">
                                             <h4 class="card-title">Lista de Inscritos</h4>
-
-                                            <a href="{{ route('lista.inscritos.semicevento', $semic_evento->semic_evento_id) }}" class="btn btn-success pull-right">Exportar Excel</a>
+                                            <div class="basic-dropdown">
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">
+                                                        Exportar Excel
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a href="{{ route('lista.inscritos.semicevento',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Todos']) }}" class="dropdown-item">Todos</a>
+                                                        <a href="{{ route('lista.inscritos.semicevento',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Ouvinte']) }}" class="dropdown-item">Ouvinte</a>
+                                                        <a href="{{ route('lista.inscritos.semicevento',['semic_evento_id' => $semic_evento->semic_evento_id, 'tipo' => 'Apresentador']) }}" class="dropdown-item">Apresentador</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">

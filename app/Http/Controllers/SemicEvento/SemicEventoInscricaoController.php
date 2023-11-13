@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\SemicEvento;
 
 use App\Http\Controllers\Controller;
-use App\Models\CertificadoMinicurso;
 use App\Models\Minicurso;
 use App\Models\MinicursoSemiceventoinscricao;
 use App\Models\SemicEvento;
 use App\Models\User;
 use App\Models\SemicEventoInscricao;
-use App\Models\Certificado;
 use App\Http\Requests\SemicEvento\StoreSemicEventoInscricaoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoInscricaoRequest;
-use App\Models\Certificado_Inscricao;
 use Carbon\Carbon;
 use geekcom\ValidatorDocs\Rules\Certidao;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +56,7 @@ class SemicEventoInscricaoController extends Controller
         if ($tipo == 'Ouvinte' || $tipo == 'Apresentador' || $tipo == 'Minicurso') {
             $listaInscritos->whereJsonContains('semic_eventoinscricao.tipo', $tipo);
         }
+
         $listaInscritos = $listaInscritos->select([
             'users.nome',
             'users.email',
@@ -85,7 +83,7 @@ class SemicEventoInscricaoController extends Controller
         //Buscando a lista de inscritos atraves de join
         $listaInscritos = $this->minicursoinscricao
             ->join('semic_eventoinscricao', 'minicurso_semiceventoinscricao.semic_eventoinscricao_id', '=', 'semic_eventoinscricao.semic_eventoinscricao_id')
-            ->join('users','users.id','=','semic_eventoinscricao.user_id')
+            ->join('users', 'users.id', '=', 'semic_eventoinscricao.user_id')
             ->where('minicurso_id', '=', $minicurso)
             ->orderby('minicurso_semiceventoinscricao.created_at', 'asc')
             ->paginate(20);
@@ -130,13 +128,26 @@ class SemicEventoInscricaoController extends Controller
 
         if ($request->has('radio_ouvinte') && $request->has('radio_minicurso') && $request->has('radio_participante')) {
 
-            if ($request['radio_ouvinte'] == 0) {
+            $radio_ouvinte = $request['radio_ouvinte'];
+            $radio_participante = $request['radio_participante'];
+            $radio_minicurso = $request['radio_minicurso'];
+
+            if ($radio_ouvinte == 0) {
                 $tipoinscricao = array_diff($tipoinscricao, ['Ouvinte']);
             }
 
-            if ($request['radio_participante'] == 0) {
+            if ($radio_participante == 0) {
                 $tipoinscricao = array_diff($tipoinscricao, ['Apresentador']);
             }
+
+            if (
+                $radio_ouvinte == 0 && $radio_minicurso == 0 && $radio_participante == 0 ||
+                $radio_ouvinte == 0 && $radio_participante == 0
+            ) {
+                alert()->error('É necessário escolher, no mínimo, ouvinte ou participante.');
+                return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
+            }
+            
         } else {
             alert()->error('Voçe não respondeu todas as perguntas');
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
@@ -181,52 +192,24 @@ class SemicEventoInscricaoController extends Controller
                     'status' => "Em Analise"
                 ]);
 
-                foreach ($tipoinscricao as $key => $value) {
+                if ($request['radio_minicurso'] != 0) {
+                    $idsMinicursos = [];
+                    foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
+                        for ($i = 0; $i < count($request->minicurso); $i++) {
+                            if ($minicurso->minicurso_id == $request->minicurso[$i]) {
+                                $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
+                            }
+                        }
+                    }
 
-                    // Busca o certificado com base no seminário e tipo de inscrição
-                    $certificado = Certificado::where('semicevento_id', '=', $semic_evento_id)->where('nome', '=', $value)->first();
-
-                    // Verifica se o certificado foi encontrado
-                    if ($certificado) {
-                        // Cria uma nova entrada na tabela Certificado_Inscricao
-                        Certificado_Inscricao::create([
-                            'certificado_id' => $certificado->certificado_id,
+                    foreach ($idsMinicursos as $item) {
+                        $this->minicursoinscricao->create([
+                            'minicurso_id' => $item,
                             'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
-                            'status' => 'Aguarde'
+                            'status' => 'Em analise'
                         ]);
-
-                    } else {
-                        alert()->error('Erro');
-                        return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
                     }
                 }
-
-                 if ($request['radio_minicurso'] != 0) {
-                     $idsMinicursos = [];
-                     foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
-                         for ($i = 0; $i < count($request->minicurso); $i++) {
-                             if ($minicurso->minicurso_id == $request->minicurso[$i]) {
-                                 $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
-                             }
-                         }
-                     }
-
-                     foreach ($idsMinicursos as $item) {
-                         $curso = $this->minicursoinscricao->create([
-                             'minicurso_id'=> $item,
-                             'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id ,
-                             'status' => 'Em analise'
-                         ]);
-
-                         $certif = Certificado::where('semicevento_id', '=', $semic_evento_id)->where('nome', '=', 'Minicurso')->first();
-                         CertificadoMinicurso::create([
-                             'certificado_id' => $certif->certificado_id,
-                             'minicursosemiceventoinscricao_id' => $curso->minicursosemiceventoinscricao_id,
-                             'status' => 'Em analise'
-                         ]);
-
-                     }
-                 }
 
                 DB::commit();
                 alert()->success(config($this->bag['msg'] . '.success.inscricao'));
@@ -279,7 +262,7 @@ class SemicEventoInscricaoController extends Controller
         //Verificando se o user_id existe
         $this->user->findOrfail($user_id);
 
-        $dadosInscrito = $this->semicevento_inscricao->with('semic_eventoinscricao_users', 'semic_eventoinscricao_semic_evento','semiceventoinscricao_minicurso','semiceventoinscricao_minicurso.minicurso_eventoinscricao')
+        $dadosInscrito = $this->semicevento_inscricao->with('semic_eventoinscricao_users', 'semic_eventoinscricao_semic_evento', 'semiceventoinscricao_minicurso', 'semiceventoinscricao_minicurso.minicurso_eventoinscricao')
             ->where('semic_eventoinscricao.user_id', '=', $user_id)
             ->where('semic_eventoinscricao.semic_evento_id', '=', $semic_evento_id)
             ->orderby('numero_inscricao', 'asc')
@@ -291,7 +274,7 @@ class SemicEventoInscricaoController extends Controller
         }
 
         $links = $dadosInscrito->appends($request->except('page'));
-//         dd($dadosInscrito);
+        //         dd($dadosInscrito);
         return view('page.semicevento.show', compact('dadosInscrito', 'links'));
     }
 
