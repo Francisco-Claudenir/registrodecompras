@@ -510,7 +510,13 @@
                                                                     <div class="col-12 pt-4 pl-4">
                                                                         <p>
                                                                             <small>
-                                                                                {!! Str::limit($cursos->descricao, 185) !!} <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
+                                                                                {!! Str::limit($cursos->descricao, 185) !!}
+
+                                                                                @if(strlen($cursos->descricao) < 185)
+                                                                                    {!! $cursos->descricao !!}
+                                                                                @else
+                                                                                <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
+                                                                                @endif
                                                                             </small>
                                                                         </p>
                                                                     </div>
@@ -519,6 +525,12 @@
                                                                         <p>
                                                                             <small>
                                                                                 {!! Str::limit($cursos->descricao_ministrante, 185) !!}
+
+                                                                                @if(strlen($cursos->descricao_ministrante) < 185)
+                                                                                    {!! $cursos->descricao_ministrante !!}
+                                                                                @else
+                                                                                    <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
+                                                                                @endif
                                                                             </small>
                                                                         </p>
                                                                     </div>
