@@ -172,6 +172,11 @@ class SemicEventoInscricaoController extends Controller
 
                 //Documento PDF Arquivo
                 if ($request->has('arquivo')) {
+
+                    $request->validate([
+                        'arquivo' => 'required|mimes:docx',
+                    ]);
+
                     $extensao = $request['arquivo']->extension();
                     $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
                     $nome = 'Arquivo_pdf_semicevento_inscricao' . '_' . uniqid(date('HisYmd')) . '.' . $extensao;
@@ -197,7 +202,7 @@ class SemicEventoInscricaoController extends Controller
                     foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
                         for ($i = 0; $i < count($request->minicurso); $i++) {
                             if ($minicurso->minicurso_id == $request->minicurso[$i]) {
-                                $idsMinicursos[] = $request->minicurso[$i]; // Adicione o ID do minicurso correspondente ao array
+                                $idsMinicursos[] = $request->minicurso[$i]; 
                             }
                         }
                     }
@@ -219,7 +224,6 @@ class SemicEventoInscricaoController extends Controller
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
