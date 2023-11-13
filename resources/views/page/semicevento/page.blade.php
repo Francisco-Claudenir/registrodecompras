@@ -488,7 +488,7 @@
                                                     <div class="row">
                                                         @foreach($semic_evento->semic_evento_minicursos as $cursos)
 
-                                                            <div class="col-xl-6 col-xxl-6 col-lg-6 col-sm-6">
+                                                            <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-4">
                                                             <div class="widget-stat card">
                                                                 <div class="card-body p-4">
                                                                     <div class="media ai-icon">
@@ -496,7 +496,7 @@
                                                              <i class="la la-graduation-cap"></i></span>
                                                                         <div class="media-body">
                                                                             <p class="mb-1"></p>
-                                                                            <h4 class="mb-0 pb-3">{{$cursos->nome}}</h4>
+                                                                            <h6 class="mb-0 pb-3">{{$cursos->nome}}</h6>
                                                                             <br>
                                                                             <span
                                                                                 class="badge badge-outline-primary">{{$cursos->vagas}} Vagas</span>
@@ -510,7 +510,7 @@
                                                                     <div class="col-12 pt-4 pl-4">
                                                                         <p>
                                                                             <small>
-                                                                                {!! $cursos->descricao !!}
+                                                                                {!! Str::limit($cursos->descricao, 185) !!} <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
                                                                             </small>
                                                                         </p>
                                                                     </div>
@@ -518,12 +518,41 @@
                                                                     <div class="col-12 pt-1 pl-4">
                                                                         <p>
                                                                             <small>
-                                                                                {!! $cursos->descricao_ministrante !!}
+                                                                                {!! Str::limit($cursos->descricao_ministrante, 185) !!}
                                                                             </small>
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            </div>
+
+
+                                                            <div class="modal fade" id="minicursoModal-{{$cursos->minicurso_id}}" style="display: none;" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">{{$cursos->nome}}</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="media-body">
+                                                                                <span
+                                                                                    class="badge badge-outline-primary">{{$cursos->vagas}} Vagas</span>
+                                                                                <span
+                                                                                    class="badge badge-outline-warning">{{$cursos->horas}} Horas</span>
+                                                                            </div>
+                                                                            <hr>
+                                                                            {!! $cursos->descricao!!}
+                                                                            <hr>
+                                                                            {!! $cursos->descricao_ministrante !!}
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Fechar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         @endforeach
                                                     </div>
