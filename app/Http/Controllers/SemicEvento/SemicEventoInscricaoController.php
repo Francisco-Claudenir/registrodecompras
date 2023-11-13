@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\SemicEvento;
 
 use App\Http\Controllers\Controller;
-use App\Models\CertificadoMinicurso;
 use App\Models\Minicurso;
 use App\Models\MinicursoSemiceventoinscricao;
 use App\Models\SemicEvento;
 use App\Models\User;
 use App\Models\SemicEventoInscricao;
-use App\Models\Certificado;
 use App\Http\Requests\SemicEvento\StoreSemicEventoInscricaoRequest;
 use App\Http\Requests\SemicEvento\UpdateSemicEventoInscricaoRequest;
-use App\Models\Certificado_Inscricao;
 use Carbon\Carbon;
 use geekcom\ValidatorDocs\Rules\Certidao;
 use Illuminate\Support\Facades\DB;
@@ -194,25 +191,6 @@ class SemicEventoInscricaoController extends Controller
                     'status' => "Em Analise"
                 ]);
 
-                foreach ($tipoinscricao as $key => $value) {
-
-                    // Busca o certificado com base no seminário e tipo de inscrição
-                    $certificado = Certificado::where('semicevento_id', '=', $semic_evento_id)->where('nome', '=', $value)->first();
-
-                    // Verifica se o certificado foi encontrado
-                    if ($certificado) {
-                        // Cria uma nova entrada na tabela Certificado_Inscricao
-                        Certificado_Inscricao::create([
-                            'certificado_id' => $certificado->certificado_id,
-                            'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
-                            'status' => 'Aguarde'
-                        ]);
-                    } else {
-                        alert()->error('Erro');
-                        return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
-                    }
-                }
-
                 if ($request['radio_minicurso'] != 0) {
                     $idsMinicursos = [];
                     foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
@@ -224,16 +202,9 @@ class SemicEventoInscricaoController extends Controller
                     }
 
                     foreach ($idsMinicursos as $item) {
-                        $curso = $this->minicursoinscricao->create([
+                        $this->minicursoinscricao->create([
                             'minicurso_id' => $item,
                             'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
-                            'status' => 'Em analise'
-                        ]);
-
-                        $certif = Certificado::where('semicevento_id', '=', $semic_evento_id)->where('nome', '=', 'Minicurso')->first();
-                        CertificadoMinicurso::create([
-                            'certificado_id' => $certif->certificado_id,
-                            'minicursosemiceventoinscricao_id' => $curso->minicursosemiceventoinscricao_id,
                             'status' => 'Em analise'
                         ]);
                     }
