@@ -34,7 +34,7 @@ class SemicEventoInscricaoController extends Controller
         'msg' => 'temauema.msg.register'
     ];
 
-    public function __construct(SemicEvento $semic_evento, User $user, SemicEventoInscricao $semicevento_inscricao, Minicurso $minicurso, MinicursoSemiceventoinscricao  $minicursoinscricao)
+    public function __construct(SemicEvento $semic_evento, User $user, SemicEventoInscricao $semicevento_inscricao, Minicurso $minicurso, MinicursoSemiceventoinscricao $minicursoinscricao)
     {
         $this->semic_evento = $semic_evento;
         $this->semicevento_inscricao = $semicevento_inscricao;
@@ -90,7 +90,7 @@ class SemicEventoInscricaoController extends Controller
 
         $links = $listaInscritos->appends($request->except('page'));
 
-        return view($this->bag['view'] . '.minicurso', compact('listaInscritos', 'semic_evento','dadosminicurso', 'links'));
+        return view($this->bag['view'] . '.minicurso', compact('listaInscritos', 'semic_evento', 'dadosminicurso', 'links'));
     }
 
     public function create($semic_evento_id)
@@ -147,7 +147,7 @@ class SemicEventoInscricaoController extends Controller
                 alert()->error('É necessário escolher, no mínimo, ouvinte ou participante.');
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
-            
+
         } else {
             alert()->error('Voçe não respondeu todas as perguntas');
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
@@ -202,7 +202,7 @@ class SemicEventoInscricaoController extends Controller
                     foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
                         for ($i = 0; $i < count($request->minicurso); $i++) {
                             if ($minicurso->minicurso_id == $request->minicurso[$i]) {
-                                $idsMinicursos[] = $request->minicurso[$i]; 
+                                $idsMinicursos[] = $request->minicurso[$i];
                             }
                         }
                     }
@@ -328,5 +328,18 @@ class SemicEventoInscricaoController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.update'));
             return redirect()->back();
         }
+    }
+
+
+    public function destroy($semic_eventoinscricao_id)
+    {
+        $inscricao = $this->semicevento_inscricao->findOrfail($semic_eventoinscricao_id);
+        if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+            $inscricao->delete();
+            alert()->success('Inscrição cancelada com sucesso !');
+            return redirect()->back();
+
+        }
+
     }
 }

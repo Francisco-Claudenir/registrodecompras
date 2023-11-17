@@ -94,8 +94,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Analise Semic_evento Inscrição
     Route::post('semicevento/analise/{semic_evento_id}/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'analise'])->name('semic.eventoinscricao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
 
+    //Delete Semic_evento Inscrição
+    Route::get('semicevento/cancelar/{semic_eventoinscricao_id}', [SemicEventoInscricaoController::class, 'destroy'])->name('semic.eventoinscricao.destroy')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
     //bati Inscricão Execel
     Route::get('/bati/inscritos/{bati_id}', [ExportsController::class, 'batiInscritos'])->name('lista.inscritos.bati')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 
     //bati Inscricão Espelho ADMIN
     Route::get('bati/espelho/{bati_id}/{bati_inscricao_id}', [BatiInscricaoController::class, 'espelho'])->name('bati.inscricao.espelho')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
