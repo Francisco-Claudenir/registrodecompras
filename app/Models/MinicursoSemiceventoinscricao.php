@@ -39,6 +39,6 @@ class MinicursoSemiceventoinscricao extends Model
 
     public function minicurso_semiceventoinscricao()
     {
-        return $this->belongsTo(SemicEventoInscricao::class, 'semic_eventoinscricao_id')->withTrashed();
+        return $this->belongsTo(SemicEventoInscricao::class, 'semic_eventoinscricao_id');
     }
 }

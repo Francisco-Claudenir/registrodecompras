@@ -21,11 +21,11 @@ class SemicEvento extends Model
 
     public function semic_evento_semic_eventoinscricao()
     {
-        return $this->hasMany(SemicEventoInscricao::class, 'semic_evento_id')->withTrashed();
+        return $this->hasMany(SemicEventoInscricao::class, 'semic_evento_id');
     }
     public function semic_evento_minicursos()
     {
-        return $this->hasMany(Minicurso::class, 'semicevento_id')->withTrashed();
+        return $this->hasMany(Minicurso::class, 'semicevento_id');
     }
 
     public function percentual()

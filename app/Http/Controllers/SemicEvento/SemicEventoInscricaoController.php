@@ -333,8 +333,14 @@ class SemicEventoInscricaoController extends Controller
 
     public function destroy($semic_eventoinscricao_id)
     {
-        $inscricao = $this->semicevento_inscricao->findOrfail($semic_eventoinscricao_id);
+        $inscricao = $this->semicevento_inscricao->with('semiceventoinscricao_minicurso')->findOrfail($semic_eventoinscricao_id);
         if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+
+            if ($inscricao->semiceventoinscricao_minicurso->isNotEmpty()) {
+                foreach ($inscricao->semiceventoinscricao_minicurso as $inscricaoMinicurso) {
+                    $inscricaoMinicurso->delete();
+                }
+            }
             $inscricao->delete();
             alert()->success('Inscrição cancelada com sucesso !');
             return redirect()->back();
