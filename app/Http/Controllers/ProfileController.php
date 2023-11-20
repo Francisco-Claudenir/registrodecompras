@@ -42,8 +42,16 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try {
             $user = $this->user->findOrfail($profile);
-            $request['endereco'] = json_encode($request['endereco']);    
-            $user->update($request->all());
+
+            $userUpdate = $request->all();
+
+            //tratamento das mascaras
+            $userUpdate['telefone'] = str_replace(['(', ')', '.', '-', ' '], '', $userUpdate['telefone']);
+            $userUpdate['endereco']['cep'] = str_replace(['.', '-'], '', $userUpdate['endereco']['cep']);
+            
+            $userUpdate['endereco'] = json_encode($userUpdate['endereco']);    
+
+            $user->update($userUpdate);
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.update'));
             return redirect()->route('profile.index');

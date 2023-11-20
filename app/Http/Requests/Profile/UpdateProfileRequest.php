@@ -18,7 +18,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'string', 'max:255'],
-            'telefone' => ['required', 'string', 'min:2', 'max:45'],
+            'telefone' => ['required'],
             'endereco' => ['required', 'array'],
             'endereco.cep' => ['required', 'size:9'],
             'endereco.endereco' => ['required'],
