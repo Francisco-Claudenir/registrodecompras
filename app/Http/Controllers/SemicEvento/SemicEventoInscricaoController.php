@@ -197,34 +197,46 @@ class SemicEventoInscricaoController extends Controller
                     'status' => "Em Analise"
                 ]);
 
-                if ($request['radio_minicurso'] != 0) {
-                    $idsMinicursos = [];
-                    foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
-                        for ($i = 0; $i < count($request->minicurso); $i++) {
-                            if ($minicurso->minicurso_id == $request->minicurso[$i]) {
-                                $idsMinicursos[] = $request->minicurso[$i];
+
+                if (!empty($request->minicurso)) {
+                    if ($request['radio_minicurso'] != 0) {
+                        $idsMinicursos = [];
+                        foreach ($semic_evento->semic_evento_minicursos as $minicurso) {
+
+
+                            for ($i = 0; $i < count($request->minicurso); $i++) {
+                                if ($minicurso->minicurso_id == $request->minicurso[$i]) {
+                                    $idsMinicursos[] = $request->minicurso[$i];
+                                }
                             }
                         }
-                    }
 
-                    foreach ($idsMinicursos as $item) {
-                        $this->minicursoinscricao->create([
-                            'minicurso_id' => $item,
-                            'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
-                            'status' => 'Em analise'
-                        ]);
+                        foreach ($idsMinicursos as $item) {
+                            $this->minicursoinscricao->create([
+                                'minicurso_id' => $item,
+                                'semic_eventoinscricao_id' => $inscricao->semic_eventoinscricao_id,
+                                'status' => 'Em analise'
+                            ]);
+                        }
+
+                        DB::commit();
+                        alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+                        return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
                     }
+                }else{
+                    DB::commit();
+                    alert()->success(config($this->bag['msg'] . '.success.inscricao'));
+                    return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
                 }
 
-                DB::commit();
-                alert()->success(config($this->bag['msg'] . '.success.inscricao'));
-                return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
+
             } else {
                 alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th);
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
         }
