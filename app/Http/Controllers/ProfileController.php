@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-   
+
      protected $user;
 
     protected $bag = [
@@ -32,7 +32,7 @@ class ProfileController extends Controller
     {
         $dadosUser = Auth::User();
 
-        $endereco = json_decode($dadosUser->endereco, true);
+        $endereco = json_decode($dadosUser['endereco'], true);
 
         return view( 'profile.index', compact('dadosUser', 'endereco'));
     }
@@ -48,8 +48,8 @@ class ProfileController extends Controller
             //tratamento das mascaras
             $userUpdate['telefone'] = str_replace(['(', ')', '.', '-', ' '], '', $userUpdate['telefone']);
             $userUpdate['endereco']['cep'] = str_replace(['.', '-'], '', $userUpdate['endereco']['cep']);
-            
-            $userUpdate['endereco'] = json_encode($userUpdate['endereco']);    
+
+            $userUpdate['endereco'] = json_encode($userUpdate['endereco']);
 
             $user->update($userUpdate);
             DB::commit();
@@ -90,5 +90,5 @@ class ProfileController extends Controller
 
     }
 
-    
+
 }

@@ -52,11 +52,13 @@
 
                                                     @endif
 
-                                                    <h6>Novos Valores</h6>
-                                                    @foreach (json_decode($item->new_values) as $index => $value)
+                                                    @if($item->new_values)
+                                                        <h6>Novos Valores</h6>
+                                                        @foreach (json_decode($item->new_values) as $index => $value)
                                                             <strong>{{ $index }} : </strong>
                                                             <small>{{ $value }}</small><br>
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif
                                                 </small><br>
                                             </div>
 
@@ -75,7 +77,7 @@
                                     <small class="text-gray"><strong>Operação:</strong> {{$item->event}}</small>
                                     <div class="card-options">
                                         <p class="text-gray text-right"><small><strong>Audit :</strong></small><span
-                                                    class="text-uppercase"><strong> {{ $item->id }}</strong></span>
+                                                class="text-uppercase"><strong> {{ $item->id }}</strong></span>
                                             <a type="button" class="p-2" data-bs-toggle="modal"
                                                data-bs-target="#exampleModal-{{$item->id}}"><i class="fas fa-eye"
                                                                                                style="color: #1366c7;"></i></a>
