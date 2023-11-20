@@ -160,6 +160,16 @@ class UserController extends Controller
         }
     }
 
+    public function search(Request $request)
+    {
+        $users = User::where('nome', 'iLIKE', "%{$request->search}%")
+        ->paginate();
+
+        $links = $users->appends($request->except('page'));
+
+        return view('admin.users.index', compact('users', 'links'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
