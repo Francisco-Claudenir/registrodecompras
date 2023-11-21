@@ -26,9 +26,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <label>Pesquisar:
-                        <input type="Search" class placeholder aria-controls="example">
-                    </label>
+                    <form action="{{ route('posts.search')}}" method="post">
+                        @csrf
+                        <input type="text" name="search" placeholder="Pesquisar:">
+                        <button type="submit">Pesquisar</button>
+                    </form>
 
                     <div class="card-body">
                         <div class="table-responsive">

@@ -131,6 +131,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //User
     Route::resource('users', UserController::class);
 
+    //User Seach
+    Route::post('/posts/search', [UserController::class, 'search'])->name('posts.search');
+
     Route::put('/user/pass_reset/{id}', [UserController::class, 'resetPass'])->name('user.passreset')->middleware(['check-role:Administrador']);
 
     //ModalidadeBolsa
@@ -170,8 +173,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Analise Pibic Inscrição
     Route::post('/pibic-indicacao/analise/{pibic_indicacao_id}/{pibic_i_inscricao_id}', [PibicIndicacaoInscricaoController::class, 'analise'])->name('pibicindicacao.analise')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
-
 });
+
+
 
 //Certificado Inscrição
 Route::resource('certificado-inscricao', CertificadoInscricaoController::class, ['only' => ['create', 'edit', 'update']])->middleware(['auth']);
@@ -281,4 +285,3 @@ Route::get('teste', function () {
 Route::get('tela', function () {
     return view('tela');
 });
-
