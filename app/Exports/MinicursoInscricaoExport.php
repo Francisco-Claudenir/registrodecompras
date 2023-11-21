@@ -40,7 +40,6 @@ class MinicursoInscricaoExport implements FromCollection, WithHeadings, WithStyl
             ->join('users', 'users.id', '=', 'semic_eventoinscricao.user_id')
             ->where('minicurso_id', '=', $minicurso)
             ->get();
-        dd($listaInscritos);
 
 
         $lista = [];
