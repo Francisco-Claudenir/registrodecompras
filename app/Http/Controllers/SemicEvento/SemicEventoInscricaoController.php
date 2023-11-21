@@ -236,7 +236,6 @@ class SemicEventoInscricaoController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             alert()->error(config($this->bag['msg'] . '.error.inscricao'));
             return redirect()->back();
         }
