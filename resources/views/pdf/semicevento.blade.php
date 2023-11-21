@@ -108,8 +108,8 @@
                                     </dd>
                                 </small>
                             </th>
-                           
-                          
+
+
                         </tr>
                     </thead>
                     <thead>
@@ -129,7 +129,7 @@
                             <th colspan="">
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Capítulo</dt>
+                                        <dt style="font-size: 14px">Arquivo</dt>
                                     </h6>
                                 </strong>
                                 <small>
@@ -146,31 +146,25 @@
                             <th>
                                 <strong>
                                     <h6>
-                                        <dt style="font-size: 14px">Vigência - Início</dt>
+                                        <dt style="font-size: 14px">Tipo Inscrição</dt>
                                     </h6>
                                 </strong>
                                 <small>
                                     <dd class="text-justify">
                                         <p style="font-size: 14px">
-                                            {{ date('d/m/Y', strtotime($semic_eventopdf->data_inicio)) }}
+                                        <ul>
+
+
+                                            @foreach($tipos = json_decode($dadosInscrito->tipo,true) as $tipo)
+
+                                                <li>{{$tipo}}</li>
+                                            @endforeach
+                                        </ul>
                                         </p>
                                     </dd>
                                 </small>
                             </th>
-                            <th>
-                                <strong>
-                                    <h6>
-                                        <dt style="font-size: 14px">Vigência - Fim</dt>
-                                    </h6>
-                                </strong>
-                                <small>
-                                    <dd class="text-justify">
-                                        <p style="font-size: 14px">
-                                            {{ date('d/m/Y', strtotime($semic_eventopdf->data_fim)) }}
-                                        </p>
-                                    </dd>
-                                </small>
-                            </th>
+
                         </tr>
                     </thead>
 

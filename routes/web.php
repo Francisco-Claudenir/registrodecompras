@@ -62,6 +62,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('minicursos/{semic_evento_id}', [MinicursoController::class, 'store'])->name('store.minicursos');
     Route::put('minicursos/editar/{minicurso}', [MinicursoController::class, 'update'])->name('update.minicursos');
     Route::delete('minicursos/{semic_evento_id}', [MinicursoController::class, 'destroy'])->name('destroy.minicursos');
+    Route::get('/minicursos/inscritos/{minicurso}', [ExportsController::class, 'minicursoInscritos'])->name('lista.inscritos.minicurso')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 
 
     //Semic
@@ -150,6 +152,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/semicevento/minicursos/{semic_evento_id}', [SemicEventoController::class, 'minicursos'])->name('semicevento.minicursos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
     Route::get('/semicevento/certificados/{semic_evento_id}', [SemicEventoController::class, 'certificados'])->name('semicevento.certificados')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
     Route::get('/semicevento/minicursos/{semic_evento_id}/{minicurso_id}', [SemicEventoInscricaoController::class, 'indexminicurso'])->name('listaminicurso.semicevento')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
+
 
 
     //Centro

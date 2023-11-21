@@ -85,7 +85,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card-body pt-2 pb-0">
                     <h5>Identificação do Candidato</h5>
                     <div class="col-sm-12">
@@ -113,15 +112,8 @@
 
                     <div class="col-sm-12">
                         <dl>
-                            <dt>Vigência - Início</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($evento->data_inicio)) }}
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-sm-12">
-                        <dl>
-                            <dt>Vigência - Fim</dt>
-                            <dd class="text-justify">{{ date('d/m/Y', strtotime($evento->data_fim)) }}
+                            <dt>Tipo</dt>
+                            <dd class="text-justify">{{ $dadosInscrito->tipo }}
                             </dd>
                         </dl>
                     </div>
