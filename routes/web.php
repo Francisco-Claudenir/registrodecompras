@@ -179,7 +179,7 @@ Route::resource('certificado-inscricao', CertificadoInscricaoController::class, 
 
 //Profile
 Route::post('profile/senha', [ProfileController::class, 'updateSenha'])->name('profile.updateSenha');
-Route::resource('profile', ProfileController::class);
+Route::resource('profile', ProfileController::class)->middleware(['auth']);
 
 
 Route::prefix('site')->group(function () {
