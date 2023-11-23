@@ -34,7 +34,9 @@ class UserController extends Controller
         $users = $this->user->with('perfil')->paginate(10);
         $links = $users->appends($request->except('page'));
 
-        return view($this->bag['view'] . '.index', compact('users','links'));
+        $valor = '';
+
+        return view($this->bag['view'] . '.index', compact('users','links', 'valor'));
     }
 
     /**
@@ -165,9 +167,11 @@ class UserController extends Controller
         $users = User::where('nome', 'iLIKE', "%{$request->search}%")
         ->paginate();
 
+        $valor = $request->search;
+
         $links = $users->appends($request->except('page'));
 
-        return view('admin.users.index', compact('users', 'links'));
+        return view('admin.users.index', compact('users', 'links', 'valor'));
     }
 
     /**

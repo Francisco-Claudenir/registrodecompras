@@ -30,10 +30,14 @@ class CursoController extends Controller
         $this->curso = $curso;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $cursos = $this->curso->with('centros','modalidades')->orderby('id')->get();
-        return view('admin.curso.index', compact('cursos'));
+        $cursos = $this->curso->with('centros','modalidades')->orderby('id')->paginate(10);
+        $links = $cursos->appends($request->except('page'));
+
+        $valor = '';
+
+        return view('admin.curso.index', compact('cursos', 'links', 'valor'));
     }
 
     public function create()
@@ -90,5 +94,16 @@ class CursoController extends Controller
         return Response::json($cursos);
     }
 
+    public function search(Request $request)
+    {
+        $cursos = Curso::where('cursos', 'iLIKE', "%{$request->search}%")
+        ->paginate();
+
+        $valor = $request->search;
+
+        $links = $cursos->appends($request->except('page'));
+
+        return view('admin.curso.index', compact('cursos', 'links', 'valor'));
+    }
 
 }

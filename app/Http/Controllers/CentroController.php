@@ -7,6 +7,7 @@ use App\Http\Requests\Centro\StoreCentroRequest;
 use App\Http\Requests\Centro\UpdateCentroRequest;
 use App\Models\Centro;
 use App\Models\Cidade;
+use Illuminate\Http\Request;
 
 class CentroController extends Controller
 {
@@ -25,10 +26,14 @@ class CentroController extends Controller
         $this->centro = $centro;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $centros = $this->centro->with('cidades')->orderby('id')->get();
-        return view('admin.centro.index', compact('centros'));
+        $centros = $this->centro->with('cidades')->orderby('id')->paginate(10);
+        $links = $centros->appends($request->except('page'));
+
+        $valor = '';
+
+        return view('admin.centro.index', compact('centros', 'links', 'valor'));
     }
 
     public function create()
@@ -74,6 +79,18 @@ class CentroController extends Controller
             alert()->error(config($this->bag['msg'] . '.error.update'));
             return redirect()->back();
         }
+    }
+
+    public function search(Request $request)
+    {
+        $centros = Centro::where('centros', 'iLIKE', "%{$request->search}%")
+        ->paginate();
+
+        $valor = $request->search;
+
+        $links = $centros->appends($request->except('page'));
+
+        return view('admin.centro.index', compact('centros', 'links', 'valor'));
     }
 
 

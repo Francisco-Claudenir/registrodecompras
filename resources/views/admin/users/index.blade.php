@@ -26,13 +26,20 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="{{ route('posts.search')}}" method="post">
-                        @csrf
-                        <input type="text" name="search" placeholder="Pesquisar:">
-                        <button type="submit">Pesquisar</button>
-                    </form>
-
                     <div class="card-body">
+                        <div class="pull-right">
+                            <form  action="{{ route('user.posts.search') }}" method="post">
+                                @csrf
+                                <div class="input-group search-area d-lg-inline-flex">
+                                    <input type="text" class="form-control" name="search"
+                                        @if ($valor) value="{{ $valor }}" @endif
+                                        placeholder="Pesquisar">
+                                    <button class="input-group-text" type="submit"> <i
+                                            class="flaticon-381-search-2"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <br><br><br>
                         <div class="table-responsive">
                             <table id="example5"
                                 class="table table-striped table-bordered table-hover table-responsive-sm mb-0"

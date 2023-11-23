@@ -29,6 +29,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="pull-right">
+                        <form  action="{{ route('curso.posts.search') }}" method="post">
+                            @csrf
+                            <div class="input-group search-area d-lg-inline-flex">
+                                <input type="text" class="form-control" name="search"
+                                    @if ($valor) value="{{ $valor }}" @endif
+                                    placeholder="Pesquisar">
+                                <button class="input-group-text" type="submit"> <i
+                                        class="flaticon-381-search-2"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <br><br><br>
                     <div class="table-responsive">
                         <table id="example5" class="table table-striped table-bordered table-hover table-responsive-sm mb-0" style="min-width: 845px">
                             <thead>
@@ -56,6 +69,19 @@
                                 @endforeach                                
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-md-5">
+                        <div class="dataTables_info" id="responsive-datatable_info" role="status" aria-live="polite">
+                            Exibindo {{ $cursos->firstItem() }} a {{ $cursos->lastItem() }} de
+                            {{ $cursos->total() }}.
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="responsive-datatable_paginate">
+                            {{ $links->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
