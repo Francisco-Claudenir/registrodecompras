@@ -153,6 +153,12 @@ class SemicEventoInscricaoController extends Controller
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
         }
 
+        $request->validate(
+            [
+                'arquivo' => 'required|mimes:docx|max:3072',
+            ],
+            ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']);
+
         try {
             DB::beginTransaction();
 
@@ -163,6 +169,7 @@ class SemicEventoInscricaoController extends Controller
                 ->withCount('semic_evento_semic_eventoinscricao')
                 ->findOrfail($semic_evento_id);
 
+
             if (($data_hoje->gte($semic_evento->data_inicio) && $data_hoje->lte($semic_evento->data_fim))) {
 
                 //Calculo para saber o numero de inscricao
@@ -170,12 +177,10 @@ class SemicEventoInscricaoController extends Controller
 
                 $dados_inscricao = $request->all();
 
+
                 //Documento PDF Arquivo
                 if ($request->has('arquivo')) {
 
-                    $request->validate([
-                        'arquivo' => 'required|mimes:docx',
-                    ]);
 
                     $extensao = $request['arquivo']->extension();
                     $path = 'SemicEventoIsncricao/' . Carbon::create($semic_evento->created_at)->format('Y') . '/' . $request['semic_evento_id'] . '/Arquivo_pdf_semicevento_inscricao' . '/' . Auth::user()->cpf . '';
@@ -223,7 +228,7 @@ class SemicEventoInscricaoController extends Controller
                         alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                         return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
                     }
-                }else{
+                } else {
                     DB::commit();
                     alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                     return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
@@ -231,6 +236,7 @@ class SemicEventoInscricaoController extends Controller
 
 
             } else {
+                dd('Aculá');
                 alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
