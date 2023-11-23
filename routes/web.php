@@ -134,7 +134,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
 
     //User Seach
-    Route::post('/posts/search', [UserController::class, 'search'])->name('posts.search');
+    Route::post('/posts/search/users', [UserController::class, 'search'])->name('user.posts.search');
 
     Route::put('/user/pass_reset/{id}', [UserController::class, 'resetPass'])->name('user.passreset')->middleware(['check-role:Administrador']);
 
@@ -147,6 +147,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Cursos
     Route::resource('curso', CursoController::class);
 
+     //Cursos Seach
+     Route::post('/posts/search/cursos', [CursoController::class, 'search'])->name('curso.posts.search');
+
     //SemicEvento
     Route::resource('semicevento', SemicEventoController::class);
     Route::get('/semicevento/minicursos/{semic_evento_id}', [SemicEventoController::class, 'minicursos'])->name('semicevento.minicursos')->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
@@ -157,6 +160,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     //Centro
     Route::resource('centro', CentroController::class);
+
+     //Centro Seach
+     Route::post('/posts/search/centros', [CentroController::class, 'search'])->name('centro.posts.search');
 
     //PrimeirosPassos Indicacao Bolsistas
     Route::resource('pp-indicacao-bolsistas', PP_IndicacaoBolsistasController::class)->middleware(['check-role:Administrador|Coordenação de Pesquisa']);
