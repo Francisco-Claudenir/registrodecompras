@@ -329,12 +329,64 @@
                                                                             Produção, Eng. Mecânica,
                                                                             PIBITI
                                                                         </p>
+
+                                                                        <p><strong>Apresentação de trabalhos
+                                                                                sessões</strong>
+                                                                        <ul>
+                                                                            <li>Agronomia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/ure-fkzw-avi">https://meet.google.com/ure-fkzw-avi</a>
+                                                                            </li>
+                                                                            <li>Veterinária - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/eok-qedj-myp">https://meet.google.com/eok-qedj-myp</a>
+                                                                            </li>
+                                                                            <li>Biologia 1 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/fzs-zpjn-pvg">https://meet.google.com/fzs-zpjn-pvg</a>
+                                                                            </li>
+                                                                            <li>Biologia 2 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/hko-zmkf-sau">https://meet.google.com/hko-zmkf-sau</a>
+                                                                            </li>
+                                                                            <li>Saúde - <a class="text-primary"
+                                                                                           href="https://meet.google.com/pvz-qnsd-yhk">https://meet.google.com/pvz-qnsd-yhk</a>
+                                                                            </li>
+                                                                            <li>História - <a class="text-primary"
+                                                                                              href="https://meet.google.com/vru-tbhj-tzp">https://meet.google.com/vru-tbhj-tzp</a>
+                                                                            </li>
+                                                                            <li>Educação - <a class="text-primary"
+                                                                                              href="https://meet.google.com/mom-unqx-mxf">https://meet.google.com/mom-unqx-mxf</a>
+                                                                            </li>
+                                                                            <li>Ciências Sociais - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/vvg-iinm-jkp">https://meet.google.com/vvg-iinm-jkp</a>
+                                                                            </li>
+                                                                            <li>Arquitetura - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/kgy-jrqn-ydj">https://meet.google.com/kgy-jrqn-ydj</a>
+                                                                            </li>
+                                                                            <li>Letras - <a class="text-primary"
+                                                                                            href="https://meet.google.com/wkv-osxm-trt">https://meet.google.com/wkv-osxm-trt</a>
+                                                                            </li>
+                                                                            <li>Eng. Computação - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/ynu-ishc-crg">https://meet.google.com/ynu-ishc-crg</a>
+                                                                            </li>
+                                                                            <li>Eng. Produção - <a class="text-primary"
+                                                                                                   href="https://meet.google.com/uei-ydyr-otb">https://meet.google.com/uei-ydyr-otb</a>
+                                                                            </li>
+                                                                            <li>Eng. Mecânica - <a class="text-primary"
+                                                                                                   href="https://meet.google.com/dqg-wuwx-cgy">https://meet.google.com/dqg-wuwx-cgy</a>
+                                                                            </li>
+                                                                            <li>PIBIT - <a class="text-primary"
+                                                                                           href="https://meet.google.com/atr-xkdv-mxc">https://meet.google.com/atr-xkdv-mxc</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        </p>
                                                                         <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
                                                                         <p>
                                                                             Cerimônia de abertura
-                                                                            Palestra de abertura- Canal do
-                                                                            Youtube UEMA
-
+                                                                            Palestra de abertura- CIDADANIA ATIVA E O
+                                                                            DIREITO A JUSTIÇA 
+                                                                            Ministrante: Dr. Flávio Dino – Ministro da
+                                                                            Justiça e Segurança Pública 
+                                                                            Transmissão Canal do Youtube UEMA.
                                                                         </p>
                                                                     </div>
                                                                     <div class="tab-pane fade" id="list-02"
@@ -349,8 +401,53 @@
                                                                             Veterinária, Biologia, Saúde,
                                                                             História, Educação, Ciências
                                                                             Sociais, Arquitetura, Letras,
-                                                                            Química, Filosofia, Eng.
-                                                                            Mecânica, PIBITI</p>
+                                                                            Química, Filosofia e Eng. Mecânica
+                                                                        </p>
+                                                                        <p><strong>Apresentação de trabalhos
+                                                                                sessões</strong>
+                                                                        <ul>
+                                                                            <li>Agronomia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/ure-fkzw-avi">https://meet.google.com/ure-fkzw-avi</a>
+                                                                            </li>
+                                                                            <li>Veterinária - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/eok-qedj-myp">https://meet.google.com/eok-qedj-myp</a>
+                                                                            </li>
+                                                                            <li>Biologia - <a class="text-primary"
+                                                                                              href="https://meet.google.com/fzs-zpjn-pvg">https://meet.google.com/fzs-zpjn-pvg</a>
+                                                                            </li>
+                                                                            <li>Saúde - <a class="text-primary"
+                                                                                           href="https://meet.google.com/hko-zmkf-sau">https://meet.google.com/hko-zmkf-sau</a>
+                                                                            </li>
+                                                                            <li>História - <a class="text-primary"
+                                                                                              href="https://meet.google.com/vru-tbhj-tzp">https://meet.google.com/vru-tbhj-tzp</a>
+                                                                            </li>
+                                                                            <li>Educação - <a class="text-primary"
+                                                                                              href="https://meet.google.com/mom-unqx-mxf">https://meet.google.com/mom-unqx-mxf</a>
+                                                                            </li>
+                                                                            <li>Ciências Sociais - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/vvg-iinm-jkp">https://meet.google.com/vvg-iinm-jkp</a>
+                                                                            </li>
+                                                                            <li>Arquitetura - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/kgy-jrqn-ydj">https://meet.google.com/kgy-jrqn-ydj</a>
+                                                                            </li>
+                                                                            <li>Letras 1 - <a class="text-primary"
+                                                                                              href="https://meet.google.com/wkv-osxm-trt">https://meet.google.com/wkv-osxm-trt</a>
+                                                                            </li>
+                                                                            <li>Letras 2 - <a class="text-primary"
+                                                                                              href="https://meet.google.com/ynu-ishc-crg">https://meet.google.com/ynu-ishc-crg</a>
+                                                                            </li>
+                                                                            <li>Química - <a class="text-primary"
+                                                                                             href="https://meet.google.com/pvz-qnsd-yhk">https://meet.google.com/pvz-qnsd-yhk</a>
+                                                                            </li>
+                                                                            <li>Filosofia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/uei-ydyr-otb">https://meet.google.com/uei-ydyr-otb</a>
+                                                                            </li>
+                                                                            <li>Eng. Mecânica - <a class="text-primary"
+                                                                                                   href="https://meet.google.com/dqg-wuwx-cgy">https://meet.google.com/dqg-wuwx-cgy</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        </p>
                                                                         <h5 class="mb-4 text-primary">Tarde
                                                                             14:00 às
                                                                             18:00 h</h5>
@@ -362,6 +459,61 @@
                                                                             História, Educação, Ciências
                                                                             Sociais, Arquitetura, Letras,
                                                                             Filosofia, Geografia, PIBITI
+                                                                        </p>
+                                                                        <p><strong>Apresentação de trabalhos
+                                                                                sessões</strong>
+                                                                        <ul>
+                                                                            <li>Agronomia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/yoi-ecyp-svy">https://meet.google.com/yoi-ecyp-svy</a>
+                                                                            </li>
+                                                                            <li>Veterinária - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/qzo-baxr-cya">https://meet.google.com/qzo-baxr-cya</a>
+                                                                            </li>
+                                                                            <li>Biologia 1 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/fkz-eqvx-yqe">https://meet.google.com/fkz-eqvx-yqe</a>
+                                                                            </li>
+                                                                            <li>Biologia 2 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/jrn-cvcj-jpa">https://meet.google.com/jrn-cvcj-jpa</a>
+                                                                            </li>
+                                                                            <li>Química - <a class="text-primary"
+                                                                                             href="https://meet.google.com/cgj-xasp-evi">https://meet.google.com/cgj-xasp-evi</a>
+                                                                            </li>
+                                                                            <li>História - <a class="text-primary"
+                                                                                              href="https://meet.google.com/moa-smvr-wrw">https://meet.google.com/moa-smvr-wrw</a>
+                                                                            </li>
+                                                                            <li>Educação - <a class="text-primary"
+                                                                                              href="https://meet.google.com/wqm-myix-wwz">https://meet.google.com/wqm-myix-wwz</a>
+                                                                            </li>
+                                                                            <li>Ciências Sociais - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/fmw-wzuz-pfw">https://meet.google.com/fmw-wzuz-pfw</a>
+                                                                            </li>
+                                                                            <li>Arquitetura - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/gmn-mafc-ufv">https://meet.google.com/gmn-mafc-ufv</a>
+                                                                            </li>
+                                                                            <li>Letras 1 - <a class="text-primary"
+                                                                                              href="https://meet.google.com/yed-djww-sfx">https://meet.google.com/yed-djww-sfx</a>
+                                                                            </li>
+                                                                            <li>Letras 2 - <a class="text-primary"
+                                                                                              href="https://meet.google.com/her-ziqe-rvr">https://meet.google.com/her-ziqe-rvr</a>
+                                                                            </li>
+                                                                            <li>Filosofia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/gga-otti-ykn">https://meet.google.com/gga-otti-ykn</a>
+                                                                            </li>
+                                                                            <li>Geografia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/amy-ocnd-vnt">https://meet.google.com/amy-ocnd-vnt</a>
+                                                                            </li>
+                                                                            <li>PIBITI - <a class="text-primary"
+                                                                                            href="https://meet.google.com/osq-etqb-quv">https://meet.google.com/osq-etqb-quv</a>
+                                                                            </li>
+                                                                            <li>Eng. Civil - <a class="text-primary"
+                                                                                                href="https://meet.google.com/kcp-mmvg-keo">https://meet.google.com/kcp-mmvg-keo</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
+                                                                        <p>
+                                                                            Demais atividades da Semana Acadêmica
                                                                         </p>
                                                                     </div>
                                                                     <div class="tab-pane fade" id="list-03"
@@ -380,6 +532,52 @@
                                                                             Direito, Eng. Pesca, Física,
                                                                             PIBITI
                                                                         </p>
+                                                                        <p>
+                                                                            <strong>Apresentação de trabalhos
+                                                                                sessões</strong>
+                                                                        <ul>
+                                                                            <li>Agronomia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/ure-fkzw-avi">https://meet.google.com/ure-fkzw-avi</a>
+                                                                            </li>
+                                                                            <li>Veterinária - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/eok-qedj-myp">https://meet.google.com/eok-qedj-myp</a>
+                                                                            </li>
+                                                                            <li>Biologia 1 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/fzs-zpjn-pvg">https://meet.google.com/fzs-zpjn-pvg</a>
+                                                                            </li>
+                                                                            <li>Biologia 2 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/hko-zmkf-sau">https://meet.google.com/hko-zmkf-sau</a>
+                                                                            </li>
+                                                                            <li>Zootecnia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/pvz-qnsd-yhk">https://meet.google.com/pvz-qnsd-yhk</a>
+                                                                            </li>
+                                                                            <li>História - <a class="text-primary"
+                                                                                              href="https://meet.google.com/vru-tbhj-tzp">https://meet.google.com/vru-tbhj-tzp</a>
+                                                                            </li>
+                                                                            <li>Geografia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/mom-unqx-mxf">https://meet.google.com/mom-unqx-mxf</a>
+                                                                            </li>
+                                                                            <li>Ciências Sociais - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/vvg-iinm-jkp">https://meet.google.com/vvg-iinm-jkp</a>
+                                                                            </li>
+                                                                            <li>Arquitetura - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/kgy-jrqn-ydj">https://meet.google.com/kgy-jrqn-ydj</a>
+                                                                            </li>
+                                                                            <li>Letras - <a class="text-primary"
+                                                                                            href="https://meet.google.com/wkv-osxm-trt">https://meet.google.com/wkv-osxm-trt</a>
+                                                                            </li>
+                                                                            <li>Direito - <a class="text-primary"
+                                                                                             href="https://meet.google.com/ynu-ishc-crg">https://meet.google.com/ynu-ishc-crg</a>
+                                                                            </li>
+                                                                            <li>Eng. Pesca - <a class="text-primary"
+                                                                                                href="https://meet.google.com/uei-ydyr-otb">https://meet.google.com/uei-ydyr-otb</a>
+                                                                            </li>
+                                                                            <li>Física - <a class="text-primary"
+                                                                                            href="https://meet.google.com/dqg-wuwx-cgy">https://meet.google.com/dqg-wuwx-cgy</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        </p>
                                                                         <h5 class="mb-4 text-primary">Tarde
                                                                             14:00 às
                                                                             18:00 h</h5>
@@ -393,6 +591,58 @@
                                                                             Eng. Pesca
 
                                                                         </p>
+                                                                        <p>
+                                                                            <strong>Apresentação de trabalhos
+                                                                                sessões</strong>
+                                                                        <ul>
+                                                                            <li>Agronomia 1 - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/yoi-ecyp-svy">https://meet.google.com/yoi-ecyp-svy</a>
+                                                                            </li>
+                                                                            <li>Agronomia 2 - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/moa-smvr-wrw">https://meet.google.com/moa-smvr-wrw</a>
+                                                                            </li>
+                                                                            <li>Veterinária - <a class="text-primary"
+                                                                                                 href="https://meet.google.com/qzo-baxr-cya">https://meet.google.com/qzo-baxr-cya</a>
+                                                                            </li>
+                                                                            <li>Biologia 1 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/fkz-eqvx-yqe">https://meet.google.com/fkz-eqvx-yqe</a>
+                                                                            </li>
+                                                                            <li>Biologia 2 - <a class="text-primary"
+                                                                                                href="https://meet.google.com/fkz-eqvx-yqe">https://meet.google.com/fkz-eqvx-yqe</a>
+                                                                            </li>
+                                                                            <li>Zootecnia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/cgj-xasp-evi">https://meet.google.com/cgj-xasp-evi</a>
+                                                                            </li>
+                                                                            <li>Geografia - <a class="text-primary"
+                                                                                               href="https://meet.google.com/wqm-myix-wwz">https://meet.google.com/wqm-myix-wwz</a>
+                                                                            </li>
+                                                                            <li>Ciências Sociais - <a
+                                                                                    class="text-primary"
+                                                                                    href="https://meet.google.com/fmw-wzuz-pfw">https://meet.google.com/fmw-wzuz-pfw</a>
+                                                                            </li>
+                                                                            <li>Matemática - <a class="text-primary"
+                                                                                                href="https://meet.google.com/gmn-mafc-ufv">https://meet.google.com/gmn-mafc-ufv</a>
+                                                                            </li>
+                                                                            <li>Letras - <a class="text-primary"
+                                                                                            href="https://meet.google.com/yed-djww-sfx">https://meet.google.com/yed-djww-sfx</a>
+                                                                            </li>
+                                                                            <li>Direito - <a class="text-primary"
+                                                                                             href="https://meet.google.com/her-ziqe-rvr">https://meet.google.com/her-ziqe-rvr</a>
+                                                                            </li>
+                                                                            <li>Eng. Pesca - <a class="text-primary"
+                                                                                                href="https://meet.google.com/gga-otti-ykn">https://meet.google.com/gga-otti-ykn</a>
+                                                                            </li>
+                                                                            <li>Física - <a class="text-primary"
+                                                                                            href="https://meet.google.com/osq-etqb-quv">https://meet.google.com/osq-etqb-quv</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
+                                                                        <p>
+                                                                            Demais atividades da Semana Acadêmica
+                                                                        </p>
+
+
                                                                     </div>
                                                                     <div class="tab-pane fade" id="list-04"
                                                                          role="tabpanel"
@@ -415,25 +665,40 @@
                                                                         <h5 class="mb-4 text-primary">Tarde
                                                                             14:00 às
                                                                             18:00 h</h5>
+                                                                        <p>Apresentação de trabalhos Sessão PIBITI
+                                                                            (https://meet.google.com/atr-xkdv-mxc  
+                                                                        </p>
                                                                         <p>17:00 h Lançamentos
                                                                             Livros-Transmissão pelo
                                                                             Youtube-UEMA
                                                                             Lançamento coletânea
                                                                             XXXIV SEMIC
                                                                         </p>
+                                                                        <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
+                                                                        <p>
+                                                                            Demais atividades da Semana Acadêmica
+                                                                        </p>
                                                                     </div>
                                                                     <div class="tab-pane fade" id="list-05"
                                                                          role="tabpanel"
                                                                          aria-labelledby="#list-settings-list">
+                                                                        <h5 class="mb-4 text-primary">Manhã
+                                                                            08:00 às
+                                                                            12:00 h</h5>
+                                                                        <p>Demais atividades da Semana Acadêmica
+                                                                        </p>
+
                                                                         <h5 class="mb-4 text-primary">Tarde
                                                                             14:00 às
                                                                             18:00 h</h5>
-                                                                        <p>Cerimônia de
-                                                                            encerramento e
-                                                                            premiações Bolsista
-                                                                            Destaque -
-                                                                            Transmissão pelo
-                                                                            Youtube-UEMA
+                                                                        <p>
+                                                                            Cerimônia de encerramento
+                                                                            E premiações Bolsista Destaque-Transmissão
+                                                                            pelo Youtube-UEMA
+                                                                        </p>
+                                                                        <h5 class="mb-4 text-primary">Noite 19:30 h</h5>
+                                                                        <p>
+                                                                            Demais atividades da Semana Acadêmica
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -452,7 +717,7 @@
 
                                                     <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
 
-                                                    <span >Em construção</span>
+                                                        <span>Em construção</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -464,7 +729,7 @@
 
                                                     <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
 
-                                                        <span >Em construção</span>
+                                                        <span>Em construção</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -472,11 +737,12 @@
                                         <div id="listatrabalho" class="tab-pane fade">
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
-                                                    <h4 class="text-primary">Lista de trabalhos por sala e links de acesso às sessões</h4>
+                                                    <h4 class="text-primary">Lista de trabalhos por sala e links de
+                                                        acesso às sessões</h4>
 
-                                                    <div class="p-3  mt-3 bg-opacity-10 bg-danger rounded-2">
+                                                    <div class="p-3  mt-3 rounded-2">
 
-                                                        <span >Em construção</span>
+                                                        <embed src="{{asset('PROGRAMAÇÃO_OFICIAL_XXXV_SEMIC.pdf')}}"  style="width:100%; height:700px;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -489,62 +755,75 @@
                                                         @foreach($semic_evento->semic_evento_minicursos as $cursos)
 
                                                             <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-4">
-                                                            <div class="widget-stat card">
-                                                                <div class="card-body p-4">
-                                                                    <div class="media ai-icon">
+                                                                <div class="widget-stat card">
+                                                                    <div class="card-body p-4">
+                                                                        <div class="media ai-icon">
 									                            <span class="me-3 bgl-primary text-primary">
                                                              <i class="la la-graduation-cap"></i></span>
-                                                                        <div class="media-body">
-                                                                            <p class="mb-1"></p>
-                                                                            <h6 class="mb-0 pb-3">{{$cursos->nome}}</h6>
-                                                                            <br>
-                                                                            <span
-                                                                                class="badge badge-outline-primary">{{$cursos->vagas}} Vagas</span>
-                                                                            <span
-                                                                                class="badge badge-outline-warning">{{$cursos->horas}} Horas</span>
+                                                                            <div class="media-body">
+                                                                                <p class="mb-1"></p>
+                                                                                <h6 class="mb-0 pb-3">{{$cursos->nome}}</h6>
+                                                                                <br>
+                                                                                <span
+                                                                                    class="badge badge-outline-primary">{{$cursos->vagas}} Vagas</span>
+                                                                                <span
+                                                                                    class="badge badge-outline-warning">{{$cursos->horas}} Horas</span>
 
+
+                                                                            </div>
 
                                                                         </div>
+                                                                        <div class="col-12 pt-4 pl-4">
+                                                                            <p>
+                                                                                <small>
+                                                                                    {!! Str::limit($cursos->descricao, 185) !!}
 
-                                                                    </div>
-                                                                    <div class="col-12 pt-4 pl-4">
-                                                                        <p>
-                                                                            <small>
-                                                                                {!! Str::limit($cursos->descricao, 185) !!}
+                                                                                    @if(strlen($cursos->descricao) < 185)
+                                                                                        {!! $cursos->descricao !!}
+                                                                                    @else
+                                                                                        <a class="text-primary"
+                                                                                           type="button"
+                                                                                           class="btn btn-primary mb-2"
+                                                                                           data-bs-toggle="modal"
+                                                                                           data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver
+                                                                                            mais</a>
+                                                                                    @endif
+                                                                                </small>
+                                                                            </p>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="col-12 pt-1 pl-4">
+                                                                            <p>
+                                                                                <small>
+                                                                                    {!! Str::limit($cursos->descricao_ministrante, 185) !!}
 
-                                                                                @if(strlen($cursos->descricao) < 185)
-                                                                                    {!! $cursos->descricao !!}
-                                                                                @else
-                                                                                <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
-                                                                                @endif
-                                                                            </small>
-                                                                        </p>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="col-12 pt-1 pl-4">
-                                                                        <p>
-                                                                            <small>
-                                                                                {!! Str::limit($cursos->descricao_ministrante, 185) !!}
-
-                                                                                @if(strlen($cursos->descricao_ministrante) < 185)
-                                                                                    {!! $cursos->descricao_ministrante !!}
-                                                                                @else
-                                                                                    <a class="text-primary" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver mais</a>
-                                                                                @endif
-                                                                            </small>
-                                                                        </p>
+                                                                                    @if(strlen($cursos->descricao_ministrante) < 185)
+                                                                                        {!! $cursos->descricao_ministrante !!}
+                                                                                    @else
+                                                                                        <a class="text-primary"
+                                                                                           type="button"
+                                                                                           class="btn btn-primary mb-2"
+                                                                                           data-bs-toggle="modal"
+                                                                                           data-bs-target="#minicursoModal-{{$cursos->minicurso_id}}">Ver
+                                                                                            mais</a>
+                                                                                    @endif
+                                                                                </small>
+                                                                            </p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            </div>
 
 
-                                                            <div class="modal fade" id="minicursoModal-{{$cursos->minicurso_id}}" style="display: none;" aria-hidden="true">
+                                                            <div class="modal fade"
+                                                                 id="minicursoModal-{{$cursos->minicurso_id}}"
+                                                                 style="display: none;" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title">{{$cursos->nome}}</h5>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                            <button type="button" class="btn-close"
+                                                                                    data-bs-dismiss="modal">
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
@@ -561,7 +840,10 @@
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Fechar</button>
+                                                                            <button type="button"
+                                                                                    class="btn btn-danger light"
+                                                                                    data-bs-dismiss="modal">Fechar
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>

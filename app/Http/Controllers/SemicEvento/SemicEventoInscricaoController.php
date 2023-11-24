@@ -153,11 +153,12 @@ class SemicEventoInscricaoController extends Controller
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
         }
 
-        $request->validate(
-            [
-                'arquivo' => 'required|mimes:docx|max:3072',
-            ],
-            ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']);
+            $request->validate(
+                [
+                    'arquivo' => 'required_if:radio_participante,true|mimes:docx|max:3072',
+                ],
+                ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']);
+
 
         try {
             DB::beginTransaction();
@@ -236,7 +237,6 @@ class SemicEventoInscricaoController extends Controller
 
 
             } else {
-                dd('Aculá');
                 alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
