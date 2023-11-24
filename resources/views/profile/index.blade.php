@@ -168,10 +168,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-success float-end mt-3" ; type="submit">Salvar</button>
+                                    <button class="btn btn-success float-end mt-3" ; type="submit" id="bsalvar" disabled>Salvar</button>
 
                                     <a class="btn btn-info float-end mt-3 me-2"type="button" id="habilitarDesabilitar"
-                                        onclick="alternarHabilitacaoElementos(['nome', 'cep', 'bairro', 'numero', 'endereco', 'telefone1', 'pesquisarcep'])">Habilitar
+                                        onclick="alternarHabilitacaoElementos(['nome', 'cep', 'bairro', 'numero', 'endereco', 'telefone1', 'pesquisarcep', 'bsalvar'])">Habilitar
                                         Campos</a>
 
                                     <button type="button" class="btn btn-warning float-end mt-3 me-2"
