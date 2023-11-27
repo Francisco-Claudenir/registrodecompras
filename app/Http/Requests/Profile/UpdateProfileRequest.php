@@ -16,9 +16,10 @@ class UpdateProfileRequest extends FormRequest
 
     public function rules()
     {
+       
         return [
             'nome' => ['required', 'string', 'max:255'],
-            'telefone' => ['required'],
+            'telefone' => ['required', 'numeric', 'digits:11'],
             'endereco' => ['required', 'array'],
             'endereco.cep' => ['required', 'size:9'],
             'endereco.endereco' => ['required'],
@@ -41,5 +42,13 @@ class UpdateProfileRequest extends FormRequest
             'endereco.bairro.required' => 'O bairro é obrigatório',
 
         ];
+    }
+
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'telefone' => preg_replace("/[^0-9]/", "", $this->telefone)
+        ]);
     }
 }

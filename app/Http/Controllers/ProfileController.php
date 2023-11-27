@@ -45,8 +45,6 @@ class ProfileController extends Controller
 
             $userUpdate = $request->all();
 
-            //tratamento das mascaras
-            $userUpdate['telefone'] = str_replace(['(', ')', '.', '-', ' '], '', $userUpdate['telefone']);
             $userUpdate['endereco']['cep'] = str_replace(['.', '-'], '', $userUpdate['endereco']['cep']);
 
             $userUpdate['endereco'] = json_encode($userUpdate['endereco']);
