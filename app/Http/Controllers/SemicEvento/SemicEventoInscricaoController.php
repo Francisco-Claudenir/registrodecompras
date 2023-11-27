@@ -85,10 +85,21 @@ class SemicEventoInscricaoController extends Controller
             ->join('semic_eventoinscricao', 'minicurso_semiceventoinscricao.semic_eventoinscricao_id', '=', 'semic_eventoinscricao.semic_eventoinscricao_id')
             ->join('users', 'users.id', '=', 'semic_eventoinscricao.user_id')
             ->where('minicurso_id', '=', $minicurso)
+            ->select([
+                'semic_eventoinscricao.numero_inscricao',
+                'users.nome',
+                'users.cpf',
+                'users.email',
+                'semic_eventoinscricao.tipo',
+                'minicurso_semiceventoinscricao.status',
+                'minicurso_semiceventoinscricao.minicursosemiceventoinscricao_id'
+
+            ])
             ->orderby('minicurso_semiceventoinscricao.created_at', 'asc')
             ->paginate(20);
-
+        
         $links = $listaInscritos->appends($request->except('page'));
+
 
         return view($this->bag['view'] . '.minicurso', compact('listaInscritos', 'semic_evento', 'dadosminicurso', 'links'));
     }
@@ -147,7 +158,6 @@ class SemicEventoInscricaoController extends Controller
                 alert()->error('É necessário escolher, no mínimo, ouvinte ou participante.');
                 return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
             }
-
         } else {
             alert()->error('Voçe não respondeu todas as perguntas');
             return redirect()->route('semicevento.page', ['semic_evento_id' => $semic_evento_id]);
@@ -157,7 +167,8 @@ class SemicEventoInscricaoController extends Controller
             [
                 'arquivo' => 'required|mimes:docx|max:3072',
             ],
-            ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']);
+            ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']
+        );
 
         try {
             DB::beginTransaction();
@@ -233,8 +244,6 @@ class SemicEventoInscricaoController extends Controller
                     alert()->success(config($this->bag['msg'] . '.success.inscricao'));
                     return redirect()->route('semicevento.page', ['semic_evento_id' => $request['semic_evento_id']]);
                 }
-
-
             } else {
                 dd('Aculá');
                 alert()->error(config($this->bag['msg'] . '.error.data_inscricao'));
@@ -361,8 +370,6 @@ class SemicEventoInscricaoController extends Controller
             $inscricao->delete();
             alert()->success('Inscrição cancelada com sucesso !');
             return redirect()->back();
-
         }
-
     }
 }

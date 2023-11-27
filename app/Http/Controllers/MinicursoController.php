@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Minicurso;
+use App\Models\MinicursoSemiceventoinscricao;
 use App\Models\SemicEvento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MinicursoController extends Controller
 {
@@ -131,25 +133,65 @@ class MinicursoController extends Controller
                 'descricao' => $cursos['descricao'],
                 'descricao_ministrante' => $cursos['descricao_ministrante'],
             ]);
-//            $this->minicurso->update([
-//                'nome' => $cursos['nome_minicurso'],
-//                'vagas' => $cursos['vagas_minicurso'],
-//                'horas' => $cursos['horas_minicurso'],
-//                'descricao' => $cursos['descricao'],
-//                'descricao_ministrante' => $cursos['descricao_ministrante'],
-//            ]);
+            //            $this->minicurso->update([
+            //                'nome' => $cursos['nome_minicurso'],
+            //                'vagas' => $cursos['vagas_minicurso'],
+            //                'horas' => $cursos['horas_minicurso'],
+            //                'descricao' => $cursos['descricao'],
+            //                'descricao_ministrante' => $cursos['descricao_ministrante'],
+            //            ]);
 
             DB::commit();
             alert()->success(config($this->bag['msg'] . '.success.update'));
             return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            alert()->error(config($this->bag['msg'] . '.error.update'));
+            return redirect()->back();
+        }
+    }
+
+    public function analiseMinicursoEspelho($id)
+    {
+
+        $dadosInscrito = MinicursoSemiceventoinscricao::join('minicursos', 'minicurso_semiceventoinscricao.minicurso_id', '=', 'minicursos.minicurso_id')
+            ->join('semic_eventoinscricao', 'minicurso_semiceventoinscricao.semic_eventoinscricao_id', '=', 'semic_eventoinscricao.semic_eventoinscricao_id')
+            ->join('users', 'semic_eventoinscricao.user_id', '=', 'users.id')
+            ->select([
+                'minicursos.nome as nome_minicurso',
+                'users.nome',
+                'users.cpf',
+                'users.email',
+                'minicurso_semiceventoinscricao.minicursosemiceventoinscricao_id',
+                'semic_eventoinscricao.semic_evento_id',
+                'semic_eventoinscricao.numero_inscricao',
+                'semic_eventoinscricao.tipo'
+            ])
+            ->find($id);
+
+        $semicEvento = SemicEvento::find($dadosInscrito->semic_evento_id);
+
+        return view('admin.semic_evento.espelhominicurso', compact('dadosInscrito', 'semicEvento'));
+    }
+
+    public function analise(Request $request, $id)
+    {
+        try {
+            if (auth::user()->can('check-role', 'Administrador|Coordenação de Pesquisa')) {
+                DB::beginTransaction();
+                $inscricaoMinicurso = MinicursoSemiceventoinscricao::findOrfail($id);
+                $inscricaoMinicurso->update(['status' => $request['status']]);
+                DB::commit();
+                alert()->success(config($this->bag['msg'] . '.success.update'));
+                return redirect()->back();
+            }
         } catch (\Throwable $th) {
             dd($th);
             DB::rollBack();
             alert()->error(config($this->bag['msg'] . '.error.update'));
             return redirect()->back();
         }
-
-}
+    }
 
     /**
      * Remove the specified resource from storage.
