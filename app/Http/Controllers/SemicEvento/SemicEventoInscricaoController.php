@@ -97,7 +97,7 @@ class SemicEventoInscricaoController extends Controller
             ])
             ->orderby('minicurso_semiceventoinscricao.created_at', 'asc')
             ->paginate(20);
-        
+
         $links = $listaInscritos->appends($request->except('page'));
 
 
@@ -166,7 +166,7 @@ class SemicEventoInscricaoController extends Controller
             $request->validate(
                 [
                     'arquivo' => 'required_if:radio_participante,true|mimes:docx|max:3072',
-                    'titulo_trabalho' => 'required_if:radio_participante,true|size:255'
+                    'titulo_trabalho' => 'required_if:radio_participante,true|max:500'
                 ],
                 ['arquivo.max' => 'O arquivo não pode ser superior a 3mb']);
 
