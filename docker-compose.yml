@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: laravel/app
-    container_name: uema-app
+    container_name: registros-app
     tty: true
     environment:
       SERVICE_NAME: app
@@ -18,12 +18,12 @@ services:
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini:delegated
       - ~/.composer/docker-cache/:/root/.composer:cached
     networks:
-      - uema-networks
+      - registros-networks
 
   #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: uema-webserver
+    container_name: registros-webserver
     tty: true
     ports:
       - "80:80"
@@ -32,14 +32,14 @@ services:
       - ./:/var/www:delegated
       - ./nginx/conf.d/:/etc/nginx/conf.d/:delegated
     networks:
-      - uema-networks
+      - registros-networks
     depends_on:
       - postgres
       - app
 
   #Postgres Service
   postgres:
-    container_name: uema-postgres
+    container_name: registros-postgres
     image: postgres
     environment:
       POSTGRES_USER: ${DB_USERNAME}
@@ -50,53 +50,53 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - uema-networks
+      - registros-networks
 
   #PgAdmin
   pgadmin:
-    container_name: uema-pgadmin
+    container_name: registros-pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@uema.br
+      PGADMIN_DEFAULT_EMAIL: admin@registros.br
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
         - pgadmin:/root/.pgadmin
     ports:
       - "8080:80"
     networks:
-      - uema-networks
+      - registros-networks
 
     #composer
   composer:
     build:
       context: .
       dockerfile: Dockerfile-composer
-    container_name: uema-composer
+    container_name: registros-composer
     volumes:
       - ./:/var/www/
     working_dir: /var/www/
     depends_on:
       - app
     networks:
-      - uema-networks
+      - registros-networks
 
   #npm
   npm:
     image: node:13.7
-    container_name: uema-npm
+    container_name: registros-npm
     volumes:
       - ./:/var/www/
     working_dir: /var/www/
     entrypoint: ['npm']
     networks:
-      - uema-networks
+      - registros-networks
 
   #artisan
   artisan:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: uema-artisan
+    container_name: registros-artisan
     volumes:
       - ./:/var/www
     depends_on:
@@ -104,11 +104,11 @@ services:
     working_dir: /var/www/
     entrypoint: ['php', '/var/www/artisan']
     networks:
-      - uema-networks
+      - registros-networks
 
 #Docker Networks
 networks:
-  uema-networks:
+  registros-networks:
     driver: bridge
 
 #Volumes
