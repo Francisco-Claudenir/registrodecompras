@@ -1,8 +1,8 @@
-<p align="center"><img src="public/images/ctic_logo.png" width="400"></a></p>
+<p align="center">Descrição projeto registros</p>
 
 ---
 
-# Base CTIC - 2023
+# Base Claudenir - 2024
 
 
 ## Configurações Iniciais para rodar com Docker + Postgres + Nginx
@@ -29,12 +29,13 @@ DB_HOST=postgres
 
 - `docker exec -it registros-app chown -R www-data:www-data /var/www/storage`
 
+- `docker exec -it registros-app chmod -R 775 bootstrap storage`
+
 > Obs: Por padrão o container da aplicação será "registros-app", caso mude no docker-compose.yml mude no comando acima também. 
 
 
 
 ---
 
-Se ocorrer tudo certo a aplicação irá rodar em [http://localhost](http://localhost)
+Se ocorrer tudo certo a aplicação irá rodar em http://127.0.0.1:80
 
-Acessar o PGAdmin [http://localhost:8080](http://localhost:8080)
