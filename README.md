@@ -27,9 +27,9 @@ DB_HOST=postgres
 
 - `docker-compose run --rm artisan migrate` 
 
-- `docker exec -it uema-app chown -R www-data:www-data /var/www/storage`
+- `docker exec -it registros-app chown -R www-data:www-data /var/www/storage`
 
-> Obs: Por padrão o container da aplicação será "uema-app", caso mude no docker-compose.yml mude no comando acima também. 
+> Obs: Por padrão o container da aplicação será "registros-app", caso mude no docker-compose.yml mude no comando acima também. 
 
 
 
