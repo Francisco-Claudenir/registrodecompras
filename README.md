@@ -33,7 +33,19 @@ DB_HOST=postgres
 
 > Obs: Por padrão o container da aplicação será "registros-app", caso mude no docker-compose.yml mude no comando acima também. 
 
+<h3>Instalação do AdminLTE</h3>
 
+- `composer require jeroennoten/laravel-adminlte`
+
+- `php artisan adminlte:install --only=config`
+
+- `php artisan vendor:publish --provider="JeroenNoten\LaravelAdminLte\AdminLteServiceProvider" --tag=views`
+
+- `php artisan adminlte:install --only=auth_views`
+
+- `php artisan adminlte:install --only=translations`
+
+- `php artisan adminlte:install --only=main_views`
 
 ---
 
